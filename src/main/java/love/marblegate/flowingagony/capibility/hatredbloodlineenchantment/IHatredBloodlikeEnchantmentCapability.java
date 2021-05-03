@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.capibility;
+package love.marblegate.flowingagony.capibility.hatredbloodlineenchantment;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;

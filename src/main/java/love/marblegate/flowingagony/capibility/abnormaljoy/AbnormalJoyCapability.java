@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.capibility;
+package love.marblegate.flowingagony.capibility.abnormaljoy;
 
 import net.minecraft.nbt.CompoundNBT;
 

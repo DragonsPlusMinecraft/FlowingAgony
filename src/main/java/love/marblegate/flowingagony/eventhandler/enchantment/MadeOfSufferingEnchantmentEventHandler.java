@@ -1,12 +1,9 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.IHatredBloodlikeEnchantmentCapability;
-import love.marblegate.flowingagony.damagesource.FlowingAgonyMobtoMobDamageSource;
+import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.registry.ModCapability;
+import love.marblegate.flowingagony.capibility.ModCapability;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
@@ -14,13 +11,10 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ToolItem;
-import net.minecraft.loot.functions.EnchantRandomly;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -1,17 +1,16 @@
-package love.marblegate.flowingagony.capibility;
+package love.marblegate.flowingagony.capibility.abnormaljoy;
 
-import love.marblegate.flowingagony.registry.ModCapability;
+import love.marblegate.flowingagony.capibility.ModCapability;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class AbnormalJoyCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
+public class AbnormalJoyCapabilityProvider implements ICapabilitySerializable<CompoundNBT> {
     private IAbnormalJoyCapability abnormalJoyCapability;
     @Nonnull
     @Override

@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony.eventhandler;
 
 
-import love.marblegate.flowingagony.capibility.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.registry.ModCapability;
+import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.ModCapability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;

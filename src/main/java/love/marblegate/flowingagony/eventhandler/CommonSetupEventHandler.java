@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.eventhandler;
 
-import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.HatredBloodlineEnchantmentCapability;
+import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlikeEnchantmentCapability;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -17,17 +17,17 @@ public class CommonSetupEventHandler {
     @SubscribeEvent
     public static void onSetUpEvent(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            CapabilityManager.INSTANCE.register(
-                    HatredBloodlineEnchantmentCapability.class,
-                    new Capability.IStorage<HatredBloodlineEnchantmentCapability>() {
+                CapabilityManager.INSTANCE.register(
+                    IHatredBloodlikeEnchantmentCapability.class,
+                    new Capability.IStorage<IHatredBloodlikeEnchantmentCapability>() {
                         @Nullable
                         @Override
-                        public INBT writeNBT(Capability<HatredBloodlineEnchantmentCapability> capability, HatredBloodlineEnchantmentCapability instance, Direction side) {
+                        public INBT writeNBT(Capability<IHatredBloodlikeEnchantmentCapability> capability, IHatredBloodlikeEnchantmentCapability instance, Direction side) {
                             return null;
                         }
 
                         @Override
-                        public void readNBT(Capability<HatredBloodlineEnchantmentCapability> capability, HatredBloodlineEnchantmentCapability instance, Direction side, INBT nbt) {
+                        public void readNBT(Capability<IHatredBloodlikeEnchantmentCapability> capability, IHatredBloodlikeEnchantmentCapability instance, Direction side, INBT nbt) {
 
                         }
                     },
@@ -36,16 +36,16 @@ public class CommonSetupEventHandler {
         });
         event.enqueueWork(() -> {
             CapabilityManager.INSTANCE.register(
-                    AbnormalJoyCapability.class,
-                    new Capability.IStorage<AbnormalJoyCapability>() {
+                    IAbnormalJoyCapability.class,
+                    new Capability.IStorage<IAbnormalJoyCapability>() {
                         @Nullable
                         @Override
-                        public INBT writeNBT(Capability<AbnormalJoyCapability> capability, AbnormalJoyCapability instance, Direction side) {
+                        public INBT writeNBT(Capability<IAbnormalJoyCapability> capability, IAbnormalJoyCapability instance, Direction side) {
                             return null;
                         }
 
                         @Override
-                        public void readNBT(Capability<AbnormalJoyCapability> capability, AbnormalJoyCapability instance, Direction side, INBT nbt) {
+                        public void readNBT(Capability<IAbnormalJoyCapability> capability, IAbnormalJoyCapability instance, Direction side, INBT nbt) {
 
                         }
                     },

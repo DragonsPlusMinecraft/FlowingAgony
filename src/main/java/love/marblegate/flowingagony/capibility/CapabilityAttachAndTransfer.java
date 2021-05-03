@@ -1,10 +1,9 @@
-package love.marblegate.flowingagony.eventhandler;
+package love.marblegate.flowingagony.capibility;
 
-import love.marblegate.flowingagony.capibility.AbnormalJoyCapabilityProvider;
-import love.marblegate.flowingagony.capibility.HatredBloodloneEnchantmentCapabilityProvider;
-import love.marblegate.flowingagony.capibility.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.IHatredBloodlikeEnchantmentCapability;
-import love.marblegate.flowingagony.registry.ModCapability;
+import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapabilityProvider;
+import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodloneEnchantmentCapabilityProvider;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlikeEnchantmentCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber()
-public class CommonEventHandler {
+public class CapabilityAttachAndTransfer {
     //I really want to move cap attach to relative EnchantmentEventHandler!!!!!
     //This categorizing method makes me uncomfortable.
 
