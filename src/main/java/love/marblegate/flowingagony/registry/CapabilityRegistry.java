@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.eventhandler;
+package love.marblegate.flowingagony.registry;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlikeEnchantmentCapability;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CommonSetupEventHandler {
+public class CapabilityRegistry {
     @SubscribeEvent
     public static void onSetUpEvent(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
