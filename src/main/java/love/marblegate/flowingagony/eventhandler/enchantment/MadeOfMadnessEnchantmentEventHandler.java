@@ -88,6 +88,8 @@ public class MadeOfMadnessEnchantmentEventHandler {
                     List<LivingEntity> targets = PlayerUtil.getTargetList(event.getPlayer(),12,2,LivingEntity->
                             LivingEntity instanceof MonsterEntity || LivingEntity instanceof SlimeEntity
                                     || LivingEntity instanceof WitherEntity);
+                    if(event.getPlayer().world.getDayTime()%24000>13000) damage *= (4+event.getPlayer().getRNG().nextDouble()*2);
+                    else damage *= (2+event.getPlayer().getRNG().nextDouble());
                     for(LivingEntity target: targets) {
                         target.attackEntityFrom(DamageSource.MAGIC, damage);
                     }

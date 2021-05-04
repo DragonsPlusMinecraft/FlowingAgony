@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlikeEnchantmentCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.capibility.ModCapability;
@@ -92,7 +92,7 @@ public class RootedInHatredEnchantmentEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity){
                 int enchantLvl = PlayerUtil.getTotalLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.hatred_bloodline_enchantment.get());
                 if(enchantLvl!=0){
-                    LazyOptional<IHatredBloodlikeEnchantmentCapability> statusCap = event.getEntityLiving().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
+                    LazyOptional<IHatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
                     statusCap.ifPresent(
                             cap-> {
                                 cap.setActiveLevel(enchantLvl);
@@ -107,7 +107,7 @@ public class RootedInHatredEnchantmentEventHandler {
     public static void doHatredBloodlikeEnchantmentEvent_activeEnchantmentEffectWhenRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (!event.getPlayer().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                LazyOptional<IHatredBloodlikeEnchantmentCapability> statusCap = event.getEntityLiving().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
+                LazyOptional<IHatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
                 statusCap.ifPresent(
                         cap -> {
                             if (cap.getActiveLevel() != 0) {

@@ -2,10 +2,10 @@ package love.marblegate.flowingagony.capibility.hatredbloodlineenchantment;
 
 import net.minecraft.nbt.CompoundNBT;
 
-public class HatredBloodlineEnchantmentCapability implements IHatredBloodlikeEnchantmentCapability {
+public class HatredBloodlineStatusCapabilityStardardImpl implements IHatredBloodlineStatusCapability {
     private int hatredBloodlineLevel;
 
-    public HatredBloodlineEnchantmentCapability(){
+    public HatredBloodlineStatusCapabilityStardardImpl(){
         this.hatredBloodlineLevel = 0;
     }
 

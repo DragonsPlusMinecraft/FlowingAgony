@@ -21,7 +21,7 @@ public class AbnormalJoyCapabilityProvider implements ICapabilitySerializable<Co
     @Nonnull
     IAbnormalJoyCapability getOrCreateCapability() {
         if (abnormalJoyCapability == null) {
-            this.abnormalJoyCapability = new AbnormalJoyCapability();
+            this.abnormalJoyCapability = new AbnormalJoyCapabilityStandardImpl();
         }
         return this.abnormalJoyCapability;
     }

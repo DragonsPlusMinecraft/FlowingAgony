@@ -1,7 +1,9 @@
 package love.marblegate.flowingagony.registry;
 
+import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapabilityStandardImpl;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlikeEnchantmentCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodlineStatusCapabilityStardardImpl;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlineStatusCapability;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -18,20 +20,20 @@ public class CapabilityRegistry {
     public static void onSetUpEvent(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
                 CapabilityManager.INSTANCE.register(
-                    IHatredBloodlikeEnchantmentCapability.class,
-                    new Capability.IStorage<IHatredBloodlikeEnchantmentCapability>() {
+                    IHatredBloodlineStatusCapability.class,
+                    new Capability.IStorage<IHatredBloodlineStatusCapability>() {
                         @Nullable
                         @Override
-                        public INBT writeNBT(Capability<IHatredBloodlikeEnchantmentCapability> capability, IHatredBloodlikeEnchantmentCapability instance, Direction side) {
+                        public INBT writeNBT(Capability<IHatredBloodlineStatusCapability> capability, IHatredBloodlineStatusCapability instance, Direction side) {
                             return null;
                         }
 
                         @Override
-                        public void readNBT(Capability<IHatredBloodlikeEnchantmentCapability> capability, IHatredBloodlikeEnchantmentCapability instance, Direction side, INBT nbt) {
+                        public void readNBT(Capability<IHatredBloodlineStatusCapability> capability, IHatredBloodlineStatusCapability instance, Direction side, INBT nbt) {
 
                         }
                     },
-                    () -> null
+                    HatredBloodlineStatusCapabilityStardardImpl::new
             );
         });
         event.enqueueWork(() -> {
@@ -49,7 +51,7 @@ public class CapabilityRegistry {
 
                         }
                     },
-                    () -> null
+                    AbnormalJoyCapabilityStandardImpl::new
             );
         });
     }

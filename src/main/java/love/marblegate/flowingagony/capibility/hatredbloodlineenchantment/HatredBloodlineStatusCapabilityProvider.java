@@ -10,8 +10,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class HatredBloodloneEnchantmentCapabilityProvider implements ICapabilitySerializable<CompoundNBT> {
-    private IHatredBloodlikeEnchantmentCapability hatredBloodlineEnchantmentCapability;
+public class HatredBloodlineStatusCapabilityProvider implements ICapabilitySerializable<CompoundNBT> {
+    private IHatredBloodlineStatusCapability hatredBloodlineStatusCapability;
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
@@ -19,11 +19,11 @@ public class HatredBloodloneEnchantmentCapabilityProvider implements ICapability
     }
 
     @Nonnull
-    IHatredBloodlikeEnchantmentCapability getOrCreateCapability() {
-        if (hatredBloodlineEnchantmentCapability == null) {
-            this.hatredBloodlineEnchantmentCapability = new HatredBloodlineEnchantmentCapability();
+    IHatredBloodlineStatusCapability getOrCreateCapability() {
+        if (hatredBloodlineStatusCapability == null) {
+            this.hatredBloodlineStatusCapability = new HatredBloodlineStatusCapabilityStardardImpl();
         }
-        return this.hatredBloodlineEnchantmentCapability;
+        return this.hatredBloodlineStatusCapability;
     }
 
     @Override

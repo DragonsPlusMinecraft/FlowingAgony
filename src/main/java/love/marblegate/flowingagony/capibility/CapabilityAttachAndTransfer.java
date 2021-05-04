@@ -2,8 +2,8 @@ package love.marblegate.flowingagony.capibility;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapabilityProvider;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodloneEnchantmentCapabilityProvider;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlikeEnchantmentCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodlineStatusCapabilityProvider;
+import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlineStatusCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -22,15 +22,15 @@ public class CapabilityAttachAndTransfer {
     public static void attachCap(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation("flowingagony", "hatred_bloodline_level"), new HatredBloodloneEnchantmentCapabilityProvider());
+            event.addCapability(new ResourceLocation("flowingagony", "hatred_bloodline_level"), new HatredBloodlineStatusCapabilityProvider());
             event.addCapability(new ResourceLocation("flowingagony","abnormal_joy_point"),new AbnormalJoyCapabilityProvider());
         }
     }
 
     @SubscribeEvent
     public static void migrateCapDataWhenPlayerRespawn(PlayerEvent.Clone event) {
-        LazyOptional<IHatredBloodlikeEnchantmentCapability> oldHatredBloodStatus = event.getOriginal().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
-        LazyOptional<IHatredBloodlikeEnchantmentCapability> newHatredBloodStatus = event.getPlayer().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
+        LazyOptional<IHatredBloodlineStatusCapability> oldHatredBloodStatus = event.getOriginal().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
+        LazyOptional<IHatredBloodlineStatusCapability> newHatredBloodStatus = event.getPlayer().getCapability(ModCapability.HATRED_BLOODLINE_CAPABILITY);
         if (oldHatredBloodStatus.isPresent() && newHatredBloodStatus.isPresent()) {
             newHatredBloodStatus.ifPresent((newCap) -> {
                 oldHatredBloodStatus.ifPresent((oldCap) -> {
