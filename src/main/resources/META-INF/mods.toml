@@ -17,7 +17,7 @@ displayName="MarbleGate's Exotic Enchantment: Flowing Agony" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 logoFile="flowingagony.png" #optional
-credits="MarbleGateKeeper" #optional
+credits="MarbleGateKeeper 白门守望者" #optional
 authors="MarbleGate 纯白之门" #optional
 description='''
 在无尽世界的无数种技艺中，有关于痛苦的技艺总是出自于最黑暗的时代。
