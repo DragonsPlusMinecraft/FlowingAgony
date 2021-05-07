@@ -22,8 +22,7 @@ public class MonsterIndicatorRenderer {
     @SubscribeEvent
     public static void render(RenderLivingEvent.Post event){
         ClientPlayerEntity player = Minecraft.getInstance().player;
-        if (PlayerUtil.isPlayerSpecificSlotEnchanted(player,EnchantmentRegistry.i_see_you_now_enchantment.get(), EquipmentSlotType.HEAD)
-                ||PlayerUtil.isPlayerSpecificSlotEnchanted(player,EnchantmentRegistry.perceived_malice_enchantment.get(), EquipmentSlotType.HEAD)) {
+        if (PlayerUtil.isPlayerSpecificSlotEnchanted(player,EnchantmentRegistry.perceived_malice_enchantment.get(), EquipmentSlotType.HEAD)) {
             if(event.getEntity() instanceof MonsterEntity)
                 highlight(event.getMatrixStack(), event.getBuffers(), event.getEntity());
         }
