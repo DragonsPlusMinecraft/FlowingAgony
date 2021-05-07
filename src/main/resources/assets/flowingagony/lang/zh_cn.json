@@ -66,7 +66,7 @@
   "enchantment.flowingagony.potential_burst.desc": "血量降低至8/10点以下时巨幅跳跃高度，步行速度提升30%/50%，不会提升奔跑，游泳和飞行速度。",
   "enchantment.flowingagony.stubborn_step.desc": "当你受到攻击时，你身上漂浮效果会被自动取消，对你的击退效果恒定削弱50%/70%。",
   "enchantment.flowingagony.infectious_malice.desc": "每当你有一件护甲上有此附魔，你每次受到攻击时，攻击者会将携带的随机一种负面效果传播给周围的同类型生物。如果攻击者是玩家，那么他将会受到“10 x 携带该附魔装备数量”时长的“ 仇恨诅咒 Ⅲ”负面效果。",
-  "enchantment.flowingagony.i_see_you_now.desc": "你能感知到附近的怪物，所有以你为目标的怪物将会被高亮标记。",
+  "enchantment.flowingagony.i_see_you_now.desc": "所有以你为目标的怪物将会被高亮标记。",
   "enchantment.flowingagony.malice_outbreak.desc": "任何攻击你的生物将会被击飞，击飞方向等于你看向的方向。",
   "enchantment.flowingagony.perceived_malice.desc": "你能感知到附近的怪物，所有以你为目标的怪物会拥有“憎恶诅咒”负面效果，负面效果强度将随附魔等级变化。（憎恶诅咒：承受持续伤害，每2/1/0.5s将承受1点伤害）",
   "enchantment.flowingagony.vengeance.desc": "任何攻击你的生物都会获得 30s“仇恨诅咒”负面效果，负面效果强度将随附魔等级变化。（仇恨诅咒：承受的下一次伤害将提高50%/80%/110%）",
