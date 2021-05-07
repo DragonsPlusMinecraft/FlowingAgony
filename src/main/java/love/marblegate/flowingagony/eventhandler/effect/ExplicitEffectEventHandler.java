@@ -1,10 +1,8 @@
 package love.marblegate.flowingagony.eventhandler.effect;
 
-import love.marblegate.flowingagony.registry.CustomDamageSource;
+import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.registry.EffectRegistry;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
-import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;

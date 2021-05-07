@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.registry;
+package love.marblegate.flowingagony.enchantment;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentType;

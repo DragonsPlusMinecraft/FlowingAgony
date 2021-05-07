@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.registry;
+package love.marblegate.flowingagony.damagesource;
 
 import love.marblegate.flowingagony.damagesource.FlowingAgonyMobtoMobDamageSource;
 import net.minecraft.entity.LivingEntity;
