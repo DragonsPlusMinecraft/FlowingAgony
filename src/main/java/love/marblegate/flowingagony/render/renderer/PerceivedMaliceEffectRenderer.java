@@ -12,12 +12,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber()
-public class MonsterIndicatorRenderer {
+@Mod.EventBusSubscriber(Dist.CLIENT)
+public class PerceivedMaliceEffectRenderer {
 
     @SubscribeEvent
     public static void render(RenderLivingEvent.Post event){
@@ -51,14 +52,10 @@ public class MonsterIndicatorRenderer {
 
     private static void popFrame(IVertexBuilder builder, Matrix4f matrix,float boxHeight, float redGrade, float alphaGrade){
         popLine(builder, matrix, -0.5f, 0, -0.5f, 0.5f, 0, -0.5f,redGrade,alphaGrade);
-        popLine(builder, matrix, -0.5f, boxHeight, -0.5f, 0.5f, boxHeight, -0.5f,redGrade,alphaGrade);
         popLine(builder, matrix, -0.5f, 0, 0.5f, 0.5f, 0, 0.5f,redGrade,alphaGrade);
-        popLine(builder, matrix, -0.5f, boxHeight, 0.5f, 0.5f, boxHeight, 0.5f,redGrade,alphaGrade);
 
         popLine(builder, matrix, -0.5f, 0, -0.5f, -0.5f, 0, 0.5f,redGrade,alphaGrade);
         popLine(builder, matrix, 0.5f, 0, -0.5f, 0.5f, 0, 0.5f,redGrade,alphaGrade);
-        popLine(builder, matrix, -0.5f, boxHeight, -0.5f, 0, boxHeight, 0.5f,redGrade,alphaGrade);
-        popLine(builder, matrix, 0.5f, boxHeight, -0.5f, 0.5f, boxHeight, 0.5f,redGrade,alphaGrade);
 
         popLine(builder, matrix, -0.5f, 0, -0.5f, -0.5f, boxHeight, -0.5f,redGrade,alphaGrade);
         popLine(builder, matrix, 0.5f, 0, -0.5f, 0.5f, boxHeight, -0.5f,redGrade,alphaGrade);
