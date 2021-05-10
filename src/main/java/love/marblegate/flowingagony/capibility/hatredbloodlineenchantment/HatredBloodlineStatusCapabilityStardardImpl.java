@@ -19,17 +19,4 @@ public class HatredBloodlineStatusCapabilityStardardImpl implements IHatredBlood
         this.hatredBloodlineLevel = level;
     }
 
-    @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT compoundNBT = new CompoundNBT();
-        compoundNBT.putInt("hatred_bloodline_level", this.hatredBloodlineLevel);
-        return compoundNBT;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-        this.hatredBloodlineLevel = nbt.getInt("hatred_bloodline_level");
-    }
-
-
 }

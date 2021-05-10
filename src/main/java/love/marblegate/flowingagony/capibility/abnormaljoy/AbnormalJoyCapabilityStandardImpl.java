@@ -14,6 +14,11 @@ public class AbnormalJoyCapabilityStandardImpl implements IAbnormalJoyCapability
     }
 
     @Override
+    public void set(float level) {
+        this.abnormalJoyPoint = level;
+    }
+
+    @Override
     public void add(float point) {
         if(abnormalJoyPoint+point>100) abnormalJoyPoint=100;
         else abnormalJoyPoint+=point;
@@ -23,17 +28,5 @@ public class AbnormalJoyCapabilityStandardImpl implements IAbnormalJoyCapability
     public void decrease(float point) {
         if(abnormalJoyPoint-point<0) abnormalJoyPoint=0;
         else abnormalJoyPoint-=point;
-    }
-
-    @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT compoundNBT = new CompoundNBT();
-        compoundNBT.putFloat("abnormal_joy",abnormalJoyPoint);
-        return compoundNBT;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-        abnormalJoyPoint = nbt.getFloat("abnormal_joy");
     }
 }

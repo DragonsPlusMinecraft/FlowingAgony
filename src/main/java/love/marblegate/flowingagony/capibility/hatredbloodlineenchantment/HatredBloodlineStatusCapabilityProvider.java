@@ -1,6 +1,5 @@
 package love.marblegate.flowingagony.capibility.hatredbloodlineenchantment;
 
-import love.marblegate.flowingagony.capibility.ModCapability;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,28 +10,31 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HatredBloodlineStatusCapabilityProvider implements ICapabilitySerializable<CompoundNBT> {
-    private IHatredBloodlineStatusCapability hatredBloodlineStatusCapability;
+    private final IHatredBloodlineStatusCapability imp = new HatredBloodlineStatusCapabilityStardardImpl();
+    private final LazyOptional<IHatredBloodlineStatusCapability> impOptional = LazyOptional.of(() -> imp);
+
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return cap == ModCapability.HATRED_BLOODLINE_CAPABILITY ? LazyOptional.of(this::getOrCreateCapability).cast() : LazyOptional.empty();
-    }
-
-    @Nonnull
-    IHatredBloodlineStatusCapability getOrCreateCapability() {
-        if (hatredBloodlineStatusCapability == null) {
-            this.hatredBloodlineStatusCapability = new HatredBloodlineStatusCapabilityStardardImpl();
+        if(cap == HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY){
+            return impOptional.cast();
         }
-        return this.hatredBloodlineStatusCapability;
+        else return LazyOptional.empty();
     }
 
     @Override
     public CompoundNBT serializeNBT() {
-        return getOrCreateCapability().serializeNBT();
+        if (HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY == null) {
+            return new CompoundNBT();
+        } else {
+            return (CompoundNBT) HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY.writeNBT(imp, null);
+        }
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        getOrCreateCapability().deserializeNBT(nbt);
+        if (HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY != null) {
+            HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY.readNBT(imp, null, nbt);
+        }
     }
 }

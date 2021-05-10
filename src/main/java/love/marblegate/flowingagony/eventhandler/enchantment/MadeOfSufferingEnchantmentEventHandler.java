@@ -1,9 +1,9 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.capibility.ModCapability;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
@@ -99,7 +99,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
                             event.getSource().getDamageType().equals("cramming")||event.getSource().getDamageType().equals("fall")||
                             event.getSource().getDamageType().equals("flyIntoWall")||event.getSource().getDamageType().equals("wither")||
                             (event.getSource().getDamageType().equals("magic")&&event.getEntityLiving().isPotionActive(Effects.POISON))){
-                        LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(ModCapability.ABNORMALJOY_CAPABILITY);
+                        LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
                                 cap-> {
                                     cap.add(event.getAmount());
@@ -118,7 +118,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
                 if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.piercing_fever_enchantment.get(), EquipmentSlotType.CHEST)) {
                     if(event.getSource().getDamageType().equals("mob")||event.getSource().getDamageType().equals("player")||
                             event.getSource().getDamageType().equals("cactus")){
-                        LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(ModCapability.ABNORMALJOY_CAPABILITY);
+                        LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
                                 cap-> {
                                     cap.add(event.getAmount());

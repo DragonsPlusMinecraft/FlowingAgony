@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony.eventhandler;
 
 
+import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.ModCapability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
@@ -17,7 +17,7 @@ public class CapabilityEventHandler {
     @SubscribeEvent
     public static void AbnormalJoyCapEvent(LivingDamageEvent event){
         if(event.getSource().getTrueSource() instanceof PlayerEntity){
-            LazyOptional<IAbnormalJoyCapability> pointCap = event.getSource().getTrueSource().getCapability(ModCapability.ABNORMALJOY_CAPABILITY);
+            LazyOptional<IAbnormalJoyCapability> pointCap = event.getSource().getTrueSource().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
             pointCap.ifPresent(
                     cap-> {
                         if(cap.get()>=1){
