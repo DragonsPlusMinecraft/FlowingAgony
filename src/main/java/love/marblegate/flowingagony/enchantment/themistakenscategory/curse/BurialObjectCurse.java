@@ -1,5 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory.curse;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -29,6 +30,14 @@ public class BurialObjectCurse extends Enchantment {
 
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         return false;
+    }
+
+    public boolean canVillagerTrade() { return Config.BURIAL_OBJECT.get(); }
+
+    public boolean canGenerateInLoot() { return Config.BURIAL_OBJECT.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.BURIAL_OBJECT.get();
     }
 
 }

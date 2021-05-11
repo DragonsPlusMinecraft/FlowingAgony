@@ -1,6 +1,4 @@
-package love.marblegate.flowingagony.capibility.hatredbloodlineenchantment;
-
-import net.minecraft.nbt.CompoundNBT;
+package love.marblegate.flowingagony.capibility.hatredbloodlinestatus;
 
 public class HatredBloodlineStatusCapabilityStardardImpl implements IHatredBloodlineStatusCapability {
     private int hatredBloodlineLevel;

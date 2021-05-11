@@ -1,10 +1,12 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class TooResentfulToDieEnchantment extends Enchantment{
     public TooResentfulToDieEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -29,6 +31,21 @@ public class TooResentfulToDieEnchantment extends Enchantment{
 
     public boolean isTreasureEnchantment() {
         return true;
+    }
+
+    public boolean canVillagerTrade() { return Config.TOO_RESENTFUL_TO_DIE.get(); }
+
+    public boolean canGenerateInLoot() { return Config.TOO_RESENTFUL_TO_DIE.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.TOO_RESENTFUL_TO_DIE.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.TOO_RESENTFUL_TO_DIE.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 
 }

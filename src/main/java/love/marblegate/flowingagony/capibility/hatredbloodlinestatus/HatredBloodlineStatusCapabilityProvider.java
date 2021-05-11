@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.capibility.hatredbloodlineenchantment;
+package love.marblegate.flowingagony.capibility.hatredbloodlinestatus;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;

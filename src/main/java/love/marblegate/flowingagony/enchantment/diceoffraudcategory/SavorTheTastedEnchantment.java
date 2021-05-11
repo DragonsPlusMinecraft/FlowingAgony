@@ -1,10 +1,12 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
 public class SavorTheTastedEnchantment extends Enchantment{
@@ -22,6 +24,21 @@ public class SavorTheTastedEnchantment extends Enchantment{
 
     public int getMaxLevel() {
         return 3;
+    }
+
+    public boolean canVillagerTrade() { return Config.SAVOR_THE_TASTED.get(); }
+
+    public boolean canGenerateInLoot() { return Config.SAVOR_THE_TASTED.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.SAVOR_THE_TASTED.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.SAVOR_THE_TASTED.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 
 }

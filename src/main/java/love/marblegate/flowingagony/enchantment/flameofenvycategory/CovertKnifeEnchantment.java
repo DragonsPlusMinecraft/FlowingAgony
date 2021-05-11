@@ -1,11 +1,13 @@
 package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class CovertKnifeEnchantment extends Enchantment {
     public CovertKnifeEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -22,6 +24,21 @@ public class CovertKnifeEnchantment extends Enchantment {
 
     public int getMaxLevel() {
         return 1;
+    }
+
+    public boolean canVillagerTrade() { return Config.COVERT_KNIFE.get(); }
+
+    public boolean canGenerateInLoot() { return Config.COVERT_KNIFE.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.COVERT_KNIFE.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.COVERT_KNIFE.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 
 }

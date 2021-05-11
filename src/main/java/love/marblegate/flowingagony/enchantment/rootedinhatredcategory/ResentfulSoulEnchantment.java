@@ -1,10 +1,12 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class ResentfulSoulEnchantment extends Enchantment{
     public ResentfulSoulEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -29,5 +31,20 @@ public class ResentfulSoulEnchantment extends Enchantment{
 
     public boolean isTreasureEnchantment() {
         return true;
+    }
+
+    public boolean canVillagerTrade() { return Config.RESENTFUL_SOUL.get(); }
+
+    public boolean canGenerateInLoot() { return Config.RESENTFUL_SOUL.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.RESENTFUL_SOUL.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.RESENTFUL_SOUL.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 }

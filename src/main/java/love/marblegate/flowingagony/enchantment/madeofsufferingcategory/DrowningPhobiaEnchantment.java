@@ -1,10 +1,12 @@
 package love.marblegate.flowingagony.enchantment.madeofsufferingcategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class DrowningPhobiaEnchantment extends Enchantment {
     public DrowningPhobiaEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -27,6 +29,21 @@ public class DrowningPhobiaEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_
                 != EnchantmentRegistry.burning_phobia_enchantment.get() && p_77326_1_
                 != EnchantmentRegistry.prayer_of_pain_enchantment.get();
+    }
+
+    public boolean canVillagerTrade() { return Config.DROWNING_PHOBIA.get(); }
+
+    public boolean canGenerateInLoot() { return Config.DROWNING_PHOBIA.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.DROWNING_PHOBIA.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.DROWNING_PHOBIA.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 
 }

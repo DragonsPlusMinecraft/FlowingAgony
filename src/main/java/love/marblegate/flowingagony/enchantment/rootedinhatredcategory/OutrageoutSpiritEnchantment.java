@@ -1,10 +1,12 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class OutrageoutSpiritEnchantment extends Enchantment{
     public OutrageoutSpiritEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -21,6 +23,21 @@ public class OutrageoutSpiritEnchantment extends Enchantment{
 
     public int getMaxLevel() {
         return 3;
+    }
+
+    public boolean canVillagerTrade() { return Config.OUTRAGEOUS_SPIRIT.get(); }
+
+    public boolean canGenerateInLoot() { return Config.OUTRAGEOUS_SPIRIT.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.OUTRAGEOUS_SPIRIT.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.OUTRAGEOUS_SPIRIT.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 
 }

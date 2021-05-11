@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodlineStatusCapability;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;

@@ -1,11 +1,13 @@
 package love.marblegate.flowingagony.enchantment.survivaltrickscategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class MorirsLifeboundEnchantment extends Enchantment {
     public MorirsLifeboundEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -30,5 +32,20 @@ public class MorirsLifeboundEnchantment extends Enchantment {
 
     public boolean isTreasureEnchantment() {
         return true;
+    }
+
+    public boolean canVillagerTrade() { return Config.MORIRS_LIFEBOUND.get(); }
+
+    public boolean canGenerateInLoot() { return Config.MORIRS_LIFEBOUND.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.MORIRS_LIFEBOUND.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.MORIRS_LIFEBOUND.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
 }

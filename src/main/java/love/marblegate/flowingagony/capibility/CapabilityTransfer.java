@@ -2,8 +2,8 @@ package love.marblegate.flowingagony.capibility;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodlineStatusCapability;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.IHatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

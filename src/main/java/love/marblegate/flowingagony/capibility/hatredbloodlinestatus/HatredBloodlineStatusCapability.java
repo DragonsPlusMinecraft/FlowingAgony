@@ -1,7 +1,5 @@
-package love.marblegate.flowingagony.capibility.hatredbloodlineenchantment;
+package love.marblegate.flowingagony.capibility.hatredbloodlinestatus;
 
-import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapabilityStandardImpl;
-import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;

@@ -1,9 +1,11 @@
 package love.marblegate.flowingagony.enchantment.innerpotentialcategory;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class ArmorUpEnchantment extends Enchantment {
     public ArmorUpEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
@@ -20,6 +22,21 @@ public class ArmorUpEnchantment extends Enchantment {
 
     public int getMaxLevel() {
         return 3;
+    }
+
+    public boolean canVillagerTrade() { return Config.ARMOR_UP.get(); }
+
+    public boolean canGenerateInLoot() { return Config.ARMOR_UP.get(); }
+
+    public boolean isAllowedOnBooks() {
+        return Config.ARMOR_UP.get();
+    }
+
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        if(Config.ARMOR_UP.get())
+            return super.canApplyAtEnchantingTable(stack);
+        else
+            return false;
     }
     
 }

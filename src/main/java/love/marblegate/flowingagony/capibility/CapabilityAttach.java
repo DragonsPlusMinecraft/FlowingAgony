@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.capibility;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapabilityProvider;
-import love.marblegate.flowingagony.capibility.hatredbloodlineenchantment.HatredBloodlineStatusCapabilityProvider;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapabilityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;

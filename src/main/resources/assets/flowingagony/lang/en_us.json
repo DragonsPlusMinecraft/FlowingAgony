@@ -45,7 +45,7 @@
   "enchantment.flowingagony.prototype_chaotic_type_beta": "Prototype Chaotic Type β",
   "enchantment.flowingagony.shadowborn": "Shadowborn",
   "enchantment.flowingagony.burial_object": "Burial Object",
-  "enchantment.flowingagony.encious_kind": "Encious Kind",
+  "enchantment.flowingagony.encious_kind": "Envious Kind",
   "enchantment.flowingagony.eyesore": "Eyesore",
   "enchantment.flowingagony.thorn_in_flesh": "Thorn in Flesh",
   "enchantment.flowingagony.covert_knife": "Covert Knife",
@@ -61,7 +61,7 @@
   "effect.flowingagony.listen_to_me_singing": "Listen to Me Singing!",
   "effect.flowingagony.curse_of_undead": "Curse of Undead",
   "effect.flowingagony.lightburn_fungal_infection": "Lightburn Fungal Infection",
-  "effect.flowingagony.encious_being": "Encious Being",
+  "effect.flowingagony.encious_being": "Envious Being",
 
   "death.attack.flowingagony.burial_object_curse":"%1$s died as burial object of %2$s .",
   "death.attack.flowingagony.cursed_antipathy":"%1$s died as antipathy burned him from inside.",
