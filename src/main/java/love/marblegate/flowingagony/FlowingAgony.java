@@ -4,9 +4,14 @@ import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
+import love.marblegate.flowingagony.render.renderer.CursedHatredEffectRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,5 +27,13 @@ public class FlowingAgony {
         EffectRegistry.EFFECT.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         CustomEnchantmentType.addToItemGourp();
+    }
+
+    @Mod.EventBusSubscriber(modid = "flowingagony", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static final class ClientSetup {
+        @SubscribeEvent
+        public static void modelLoad(final ModelRegistryEvent event) {
+            CursedHatredEffectRenderer.loadShader();
+        }
     }
 }
