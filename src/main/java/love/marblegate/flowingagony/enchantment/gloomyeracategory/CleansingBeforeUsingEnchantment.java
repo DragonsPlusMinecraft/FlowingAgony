@@ -29,18 +29,28 @@ public class CleansingBeforeUsingEnchantment extends Enchantment {
         return true;
     }
 
-    public boolean canVillagerTrade() { return Config.CLEANSING_BEFORE_USING.get(); }
+    public boolean canVillagerTrade() {
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        else return Config.CLEANSING_BEFORE_USING.get();
+    }
 
-    public boolean canGenerateInLoot() { return Config.CLEANSING_BEFORE_USING.get(); }
+    public boolean canGenerateInLoot() {
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        else return Config.CLEANSING_BEFORE_USING.get();
+    }
 
     public boolean isAllowedOnBooks() {
-        return Config.CLEANSING_BEFORE_USING.get();
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        else return Config.CLEANSING_BEFORE_USING.get();
     }
 
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.CLEANSING_BEFORE_USING.get())
-            return super.canApplyAtEnchantingTable(stack);
-        else
-            return false;
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        else{
+            if(Config.CLEANSING_BEFORE_USING.get())
+                return super.canApplyAtEnchantingTable(stack);
+            else
+                return false;
+        }
     }
 }

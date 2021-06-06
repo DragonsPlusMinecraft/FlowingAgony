@@ -1,5 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.GodRollingDiceUtil;
 import love.marblegate.flowingagony.util.ItemUtil;
@@ -64,38 +65,40 @@ public class GloomyEraEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doCleansingBeforeUsingEnchantmentEvent_updateResult(AnvilUpdateEvent event) {
-        if (!event.getPlayer().world.isRemote()) {
-            if (ItemUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.cleansing_before_using_enchantment.get())
-                    && event.getLeft().getDamage() == 0 && event.getLeft().getItem().equals(event.getRight().getItem())) {
-                event.setCost(1);
-                ItemStack result = event.getLeft().copy();
-                Map<Enchantment, Integer> left = EnchantmentHelper.getEnchantments(result);
-                left.remove(EnchantmentRegistry.cleansing_before_using_enchantment.get());
-                Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight().copy());
-                boolean goVanillaForConflict = false;
-                for (Enchantment lEnchantment : left.keySet()) {
-                    for (Enchantment rEnchantment : right.keySet()) {
-                        if (!lEnchantment.isCompatibleWith(rEnchantment)) {
-                            if (!lEnchantment.equals(rEnchantment)) {
-                                goVanillaForConflict = true;
-                                break;
+        if(!Config.HYBRID_SERVER_USER.get()){
+            if (!event.getPlayer().world.isRemote()) {
+                if (ItemUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.cleansing_before_using_enchantment.get())
+                        && event.getLeft().getDamage() == 0 && event.getLeft().getItem().equals(event.getRight().getItem())) {
+                    event.setCost(1);
+                    ItemStack result = event.getLeft().copy();
+                    Map<Enchantment, Integer> left = EnchantmentHelper.getEnchantments(result);
+                    left.remove(EnchantmentRegistry.cleansing_before_using_enchantment.get());
+                    Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight().copy());
+                    boolean goVanillaForConflict = false;
+                    for (Enchantment lEnchantment : left.keySet()) {
+                        for (Enchantment rEnchantment : right.keySet()) {
+                            if (!lEnchantment.isCompatibleWith(rEnchantment)) {
+                                if (!lEnchantment.equals(rEnchantment)) {
+                                    goVanillaForConflict = true;
+                                    break;
+                                }
                             }
                         }
+                        if (goVanillaForConflict) break;
                     }
-                    if (goVanillaForConflict) break;
-                }
-                if (!goVanillaForConflict) {
-                    right.forEach(((enchantment, integer) -> {
-                        left.merge(enchantment, integer, (oldV, newV) -> {
-                            if (oldV < newV) return newV;
-                            else if (oldV == newV) {
-                                if (oldV < enchantment.getMaxLevel()) return oldV + 1;
-                            }
-                            return oldV;
-                        });
-                    }));
-                    EnchantmentHelper.setEnchantments(left, result);
-                    event.setOutput(result);
+                    if (!goVanillaForConflict) {
+                        right.forEach(((enchantment, integer) -> {
+                            left.merge(enchantment, integer, (oldV, newV) -> {
+                                if (oldV < newV) return newV;
+                                else if (oldV == newV) {
+                                    if (oldV < enchantment.getMaxLevel()) return oldV + 1;
+                                }
+                                return oldV;
+                            });
+                        }));
+                        EnchantmentHelper.setEnchantments(left, result);
+                        event.setOutput(result);
+                    }
                 }
             }
         }

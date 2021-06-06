@@ -4,6 +4,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Config {
     public static ForgeConfigSpec ACT_CONFIG;
+    public static ForgeConfigSpec.BooleanValue HYBRID_SERVER_USER;
     public static ForgeConfigSpec.BooleanValue AN_ENCHANTED_GOLDEN_APPLE_A_DAY;
     public static ForgeConfigSpec.BooleanValue DEATH_PUNK;
     public static ForgeConfigSpec.BooleanValue EXOTIC_HEALER;
@@ -58,8 +59,17 @@ public class Config {
 
     static{
         ForgeConfigSpec.Builder ACT_BUILDER = new ForgeConfigSpec.Builder();
-        ACT_BUILDER.comment("Enchantment Acquirable Setting").push("general");
+        ACT_BUILDER.comment("Compatibility Setting").push("compatibility");
+        HYBRID_SERVER_USER = ACT_BUILDER.comment(
+                "-------------IMPORTANT!-------------",
+                "If you are using hybrid server (such as arclight), please set this config option to \"true\".",
+                "Enchantment \"Cleansing Before Using\" will be complete disabled,",
+                "which means it cannot be obtained and applied on survival mode and it won't function.",
+                "It is because hybrid server are changing forge's event hook and it does cause serious bugs sometimes.",
+                "We are not responsible to fixing bug caused hybrid server, but here we still offer a temporary solution.").define("HYBRID_SERVER_USER",false);
+        ACT_BUILDER.pop();
 
+        ACT_BUILDER.comment("Enchantment Acquirable Setting").push("general");
         AN_ENCHANTED_GOLDEN_APPLE_A_DAY = ACT_BUILDER.comment("Is \"An Enchanted Golden Apple A Day\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("AN_ENCHANTED_GOLDEN_APPLE_A_DAY",true);
         DEATH_PUNK = ACT_BUILDER.comment("Is \"Deathpunk\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("DEATH_PUNK",true);
         EXOTIC_HEALER = ACT_BUILDER.comment("Is \"Exotic Healer\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("EXOTIC_HEALER",true);
