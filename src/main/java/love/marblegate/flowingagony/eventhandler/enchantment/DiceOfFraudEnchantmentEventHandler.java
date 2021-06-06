@@ -169,11 +169,11 @@ public class DiceOfFraudEnchantmentEventHandler {
     @SubscribeEvent
     public static void doSavorTheTastedEnchantmentEvent(LivingAttackEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                if(((PlayerEntity)(event.getSource().getImmediateSource())).getHeldItemMainhand().getItem() instanceof SwordItem ){
-                    int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)(event.getSource().getImmediateSource())), EnchantmentRegistry.savor_the_taste_enchantment.get(),EquipmentSlotType.MAINHAND);
+            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                if(((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getItem() instanceof SwordItem ){
+                    int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)(event.getSource().getTrueSource())), EnchantmentRegistry.savor_the_taste_enchantment.get(),EquipmentSlotType.MAINHAND);
                     if(enchantLvl!=0){
-                        CompoundNBT weaponNBT = ((PlayerEntity)(event.getSource().getImmediateSource())).getHeldItemMainhand().getTag();
+                        CompoundNBT weaponNBT = ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
                         if(!weaponNBT.contains("savor_the_tasted_target")){
                             weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
                         }
@@ -199,7 +199,7 @@ public class DiceOfFraudEnchantmentEventHandler {
                                 weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
                             }
                         }
-                        ((PlayerEntity)(event.getSource().getImmediateSource())).getHeldItemMainhand().setTag(weaponNBT);
+                        ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
                     }
                 }
             }

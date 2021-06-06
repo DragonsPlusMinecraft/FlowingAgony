@@ -34,10 +34,10 @@ public class GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
     public static void doRegularCustomerProgramEnchanemtnetEvent(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getSource().getImmediateSource() instanceof PlayerEntity) {
-                if (((PlayerEntity) (event.getSource().getImmediateSource())).getHeldItemMainhand().getItem() instanceof SwordItem || ((PlayerEntity) (event.getSource().getImmediateSource())).getHeldItemMainhand().getItem() instanceof AxeItem) {
-                    if (PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity) (event.getSource().getImmediateSource())), EnchantmentRegistry.regular_customer_program_enchantment.get(), EquipmentSlotType.MAINHAND)) {
-                        CompoundNBT weaponNBT = ((PlayerEntity) (event.getSource().getImmediateSource())).getHeldItemMainhand().getTag();
+            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+                if (((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().getItem() instanceof SwordItem || ((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().getItem() instanceof AxeItem) {
+                    if (PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity) (event.getSource().getTrueSource())), EnchantmentRegistry.regular_customer_program_enchantment.get(), EquipmentSlotType.MAINHAND)) {
+                        CompoundNBT weaponNBT = ((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
                         if (!weaponNBT.contains("regular_customer_program_target")) {
                             weaponNBT.putString("regular_customer_program_target", event.getEntityLiving().getEntityString());
                         } else {
@@ -54,7 +54,7 @@ public class GloomyEraEnchantmentEventHandler {
                                 weaponNBT.putString("regular_customer_program_target", event.getEntityLiving().getEntityString());
                             }
                         }
-                        ((PlayerEntity) (event.getSource().getImmediateSource())).getHeldItemMainhand().setTag(weaponNBT);
+                        ((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
                     }
                 }
             }
@@ -135,8 +135,8 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doDirtyMoneyEnchantmentEvent_preventHOTVEffect(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof VillagerEntity) {
-                if (event.getSource().getImmediateSource() instanceof PlayerEntity) {
-                    int enchantLvl = PlayerUtil.getHighestLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getSource().getImmediateSource(), EnchantmentRegistry.dirty_money_enchantment.get());
+                if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+                    int enchantLvl = PlayerUtil.getHighestLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.dirty_money_enchantment.get());
                     if (enchantLvl != 0) {
                         ItemStack reward_emerald = new ItemStack(Items.EMERALD);
                         ItemStack reward_gold = new ItemStack(Items.GOLD_INGOT);

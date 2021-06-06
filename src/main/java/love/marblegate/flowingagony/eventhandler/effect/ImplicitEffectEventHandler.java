@@ -21,9 +21,9 @@ public class ImplicitEffectEventHandler {
     @SubscribeEvent
     public static void doHatredBloodlineEnchantmentActiveEffectEvent(LivingHurtEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                if(((PlayerEntity )event.getSource().getImmediateSource()).isPotionActive(EffectRegistry.hatred_bloodline_enchantment_active_effect.get())){
-                    int effectLvl = ((PlayerEntity )event.getSource().getImmediateSource()).getActivePotionEffect(EffectRegistry.hatred_bloodline_enchantment_active_effect.get()).getAmplifier()+1;
+            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                if(((PlayerEntity )event.getSource().getTrueSource()).isPotionActive(EffectRegistry.hatred_bloodline_enchantment_active_effect.get())){
+                    int effectLvl = ((PlayerEntity )event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.hatred_bloodline_enchantment_active_effect.get()).getAmplifier()+1;
                     event.setAmount((float)(event.getAmount()*(1+effectLvl*0.25)));
                 }
             }

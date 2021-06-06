@@ -117,17 +117,17 @@ public class TheMistakensEnchantmentEventHandler {
                     int enchantLvl = PlayerUtil.isPlayerArmorEnchantedWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.corrupted_kindred_enchantment.get());
                     if(enchantLvl!=0){
                         Random temp = event.getEntityLiving().getRNG();
-                        if(event.getSource().getImmediateSource() instanceof ZombieEntity || event.getSource().getImmediateSource() instanceof SkeletonEntity){
+                        if(event.getSource().getTrueSource() instanceof ZombieEntity || event.getSource().getTrueSource() instanceof SkeletonEntity){
                             if(temp.nextInt(100)<(4-enchantLvl)){
                                 ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.curse_of_undead_effect.get(),144000));
                             }
                             event.setCanceled(true);
-                        }else if(event.getSource().getImmediateSource() instanceof PhantomEntity || event.getSource().getImmediateSource() instanceof WitherSkeletonEntity){
+                        }else if(event.getSource().getTrueSource() instanceof PhantomEntity || event.getSource().getTrueSource() instanceof WitherSkeletonEntity){
                             if(temp.nextInt(100)<(4-enchantLvl)){
                                 ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.curse_of_undead_effect.get(),144000));
                             }
                             event.setAmount(event.getAmount()*(1f-(0.2f+0.1f*enchantLvl)));
-                        }else if(event.getSource().getImmediateSource() instanceof WitherEntity){
+                        }else if(event.getSource().getTrueSource() instanceof WitherEntity){
                             if(temp.nextInt(100)<(4-enchantLvl)){
                                 ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.curse_of_undead_effect.get(),144000));
                             }
@@ -158,7 +158,7 @@ public class TheMistakensEnchantmentEventHandler {
                         }
                     }
                 }
-                if(event.getSource().getImmediateSource() instanceof LivingEntity){
+                if(event.getSource().getTrueSource() instanceof LivingEntity){
                     if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.lightburn_fungal_parasitic_enchantment.get(),EquipmentSlotType.CHEST)) {
                         List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(), 8, 2, x -> true);
                         if (!targets.isEmpty()) {

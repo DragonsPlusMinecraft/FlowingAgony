@@ -38,11 +38,11 @@ public class ExplicitEffectEventHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void doExtremeHatredEffectEvent(LivingHurtEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                if(((PlayerEntity)(event.getSource().getImmediateSource())).isPotionActive(EffectRegistry.extreme_hatred_effect.get())){
+            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                if(((PlayerEntity)(event.getSource().getTrueSource())).isPotionActive(EffectRegistry.extreme_hatred_effect.get())){
                     int potionLvl = event.getEntityLiving().getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier()+1;
                     if(event.getAmount()*(1+potionLvl)>=event.getEntityLiving().getHealth()){
-                        ((PlayerEntity)(event.getSource().getImmediateSource())).removePotionEffect(EffectRegistry.extreme_hatred_effect.get());
+                        ((PlayerEntity)(event.getSource().getTrueSource())).removePotionEffect(EffectRegistry.extreme_hatred_effect.get());
                     }
                     event.setAmount(event.getAmount()*(1+potionLvl));
                 }

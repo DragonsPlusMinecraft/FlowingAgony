@@ -72,12 +72,12 @@ public class RootedInHatredEnchantmentEventHandler {
     @SubscribeEvent
     public static void doOutrageousSpiritEnchantmentEvent(LivingHurtEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getImmediateSource()), EnchantmentRegistry.outrageous_spirit_enchantment.get(),EquipmentSlotType.MAINHAND);
+            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.outrageous_spirit_enchantment.get(),EquipmentSlotType.MAINHAND);
                 if(enchantmentLvl!=0){
                     int negativeEffectCount = 0;
-                    if(((PlayerEntity) event.getSource().getImmediateSource()).isBurning()) negativeEffectCount++;
-                    negativeEffectCount += ((PlayerEntity) event.getSource().getImmediateSource()).getActivePotionEffects().stream().filter(
+                    if(((PlayerEntity) event.getSource().getTrueSource()).isBurning()) negativeEffectCount++;
+                    negativeEffectCount += ((PlayerEntity) event.getSource().getTrueSource()).getActivePotionEffects().stream().filter(
                             EffectInstance -> EffectInstance.getPotion().getEffectType()== EffectType.HARMFUL
                     ).count();
                     event.setAmount(event.getAmount()*(1+((0.2f+(0.1f*enchantmentLvl))*negativeEffectCount)));
@@ -124,11 +124,11 @@ public class RootedInHatredEnchantmentEventHandler {
     @SubscribeEvent
     public static void doFreshRevengeEnchantmentEvent_applyBuff(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getImmediateSource()), EnchantmentRegistry.fresh_revenge_enchantment.get(),EquipmentSlotType.MAINHAND);
+            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.fresh_revenge_enchantment.get(),EquipmentSlotType.MAINHAND);
                 if(enchantmentLvl!=0){
                     if(event.getEntityLiving().getLastAttackedEntityTime()<=(12+enchantmentLvl*4)){
-                        ((PlayerEntity)event.getSource().getImmediateSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active_effect.get(),100 * enchantmentLvl));
+                        ((PlayerEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active_effect.get(),100 * enchantmentLvl));
                     }
                 }
             }
@@ -138,8 +138,8 @@ public class RootedInHatredEnchantmentEventHandler {
     @SubscribeEvent
     public static void doFreshRevengeEnchantmentEvent_appleMultiplierToAttack(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                if(((PlayerEntity)event.getSource().getImmediateSource()).isPotionActive(EffectRegistry.fresh_revenge_enchantment_active_effect.get()))
+            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                if(((PlayerEntity)event.getSource().getTrueSource()).isPotionActive(EffectRegistry.fresh_revenge_enchantment_active_effect.get()))
                     event.setAmount(event.getAmount()*(1+((event.getEntityLiving().getRNG().nextFloat())*1.5f)));
             }
         }

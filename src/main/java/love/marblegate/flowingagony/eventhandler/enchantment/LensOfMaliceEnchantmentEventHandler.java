@@ -27,8 +27,8 @@ public class LensOfMaliceEnchantmentEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity){
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()), EnchantmentRegistry.vengeance_enchantment.get(),EquipmentSlotType.HEAD);
                 if(enchantmentLvl != 0){
-                    if(event.getSource().getImmediateSource() instanceof LivingEntity)
-                        ((LivingEntity)event.getSource().getImmediateSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),6000,enchantmentLvl-1));
+                    if(event.getSource().getTrueSource() instanceof LivingEntity)
+                        ((LivingEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),6000,enchantmentLvl-1));
                 }
             }
         }
@@ -51,8 +51,8 @@ public class LensOfMaliceEnchantmentEventHandler {
     public static void doMaliceOutbreakEnchantmentEvent(LivingAttackEvent event){
         if(event.getEntityLiving() instanceof PlayerEntity){
             if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.malice_outbreak_enchantment.get(),EquipmentSlotType.HEAD)){
-                if(event.getSource().getImmediateSource() instanceof LivingEntity){
-                    ((LivingEntity) event.getSource().getImmediateSource()).applyKnockback(1.5f,-event.getEntityLiving().getLookVec().x,-event.getEntityLiving().getLookVec().z);
+                if(event.getSource().getTrueSource() instanceof LivingEntity){
+                    ((LivingEntity) event.getSource().getTrueSource()).applyKnockback(1.5f,-event.getEntityLiving().getLookVec().x,-event.getEntityLiving().getLookVec().z);
                 }
             }
         }
@@ -64,14 +64,14 @@ public class LensOfMaliceEnchantmentEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity){
                 int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.infectious_malice_enchantment.get());
                 if(enchantNum!=0){
-                    if(event.getSource().getImmediateSource() instanceof PlayerEntity){
-                        ((PlayerEntity) event.getSource().getImmediateSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),200*enchantNum));
+                    if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),200*enchantNum));
                     }
-                    else if(event.getSource().getImmediateSource() instanceof LivingEntity){
-                        List<EffectInstance> effects = ((LivingEntity) event.getSource().getImmediateSource()).getActivePotionEffects().stream().filter(EffectInstance ->
+                    else if(event.getSource().getTrueSource() instanceof LivingEntity){
+                        List<EffectInstance> effects = ((LivingEntity) event.getSource().getTrueSource()).getActivePotionEffects().stream().filter(EffectInstance ->
                                 EffectInstance.getPotion().getEffectType()== EffectType.HARMFUL).collect(Collectors.toList());
                         if(!effects.isEmpty()){
-                            List<LivingEntity> targets = PlayerUtil.getTargetListUnderSameType((PlayerEntity) event.getEntityLiving(),8,2, (LivingEntity) event.getSource().getImmediateSource());
+                            List<LivingEntity> targets = PlayerUtil.getTargetListUnderSameType((PlayerEntity) event.getEntityLiving(),8,2, (LivingEntity) event.getSource().getTrueSource());
                             int effectCount = effects.size();
                             if (effectCount <= enchantNum){
                                 for (EffectInstance effect : effects){
