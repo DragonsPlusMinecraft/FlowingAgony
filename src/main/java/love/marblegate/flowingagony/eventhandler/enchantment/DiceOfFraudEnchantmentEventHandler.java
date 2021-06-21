@@ -127,7 +127,7 @@ public class DiceOfFraudEnchantmentEventHandler {
                                         if (foodLevel > maxHealth) foodLevel = maxHealth;
                                         event.getEntityLiving().setHealth(foodLevel);
                                         ((PlayerEntity) event.getEntityLiving()).getFoodStats().setFoodLevel(health);
-                                        ((PlayerEntity) event.getEntityLiving()).getFoodStats().setFoodSaturationLevel(0);
+                                        ((PlayerEntity) event.getEntityLiving()).getFoodStats().addExhaustion(((PlayerEntity) event.getEntityLiving()).getFoodStats().getSaturationLevel()*4);
                                     }
                                     break;
                                 case 1:

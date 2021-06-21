@@ -62,7 +62,8 @@ public class Config {
         ACT_BUILDER.comment("Compatibility Setting").push("compatibility");
         HYBRID_SERVER_USER = ACT_BUILDER.comment(
                 "-------------IMPORTANT!-------------",
-                "If you are using hybrid server (such as arclight), please set this config option to \"true\".",
+                "If you are using hybrid server and encountered problem with anvil, please set this config option to \"true\".",
+                "NOTICEW: If you are using ARCLIGHT server version below 1.0.19, you must set this to \"true\"",
                 "Enchantment \"Cleansing Before Using\" will be complete disabled,",
                 "which means it cannot be obtained and applied on survival mode and it won't function.",
                 "It is because hybrid server are changing forge's event hook and it does cause serious bugs sometimes.",
