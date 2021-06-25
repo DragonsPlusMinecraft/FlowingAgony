@@ -13,30 +13,38 @@ public class StubbornStepEnchantment extends Enchantment {
         super(p_i46731_1_, EnchantmentType.ARMOR_FEET, p_i46731_3_);
     }
 
+    @Override
     public int getMinEnchantability(int p_77321_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_77321_1_,true);
     }
 
+    @Override
     public int getMaxEnchantability(int p_223551_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_223551_1_,false);
     }
 
+    @Override
     public int getMaxLevel() {
         return 2;
     }
 
+    @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.frivolous_step_enchantment.get();
     }
 
+    @Override
     public boolean canVillagerTrade() { return Config.STUBBORN_STEP.get(); }
 
+    @Override
     public boolean canGenerateInLoot() { return Config.STUBBORN_STEP.get(); }
 
+    @Override
     public boolean isAllowedOnBooks() {
         return Config.STUBBORN_STEP.get();
     }
 
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         if(Config.STUBBORN_STEP.get())
             return super.canApplyAtEnchantingTable(stack);

@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
 public class HatredBloodlineStatusCapability {
     @CapabilityInject(IHatredBloodlineStatusCapability.class)
-    public static Capability<IHatredBloodlineStatusCapability> HATRED_BLOODLINE_STATUS_CAPABILITY = null;
+    public static final Capability<IHatredBloodlineStatusCapability> HATRED_BLOODLINE_STATUS_CAPABILITY = null;
 
     public static void register() {
         CapabilityManager.INSTANCE.register(IHatredBloodlineStatusCapability.class, new Storage(), HatredBloodlineStatusCapabilityStardardImpl::new);

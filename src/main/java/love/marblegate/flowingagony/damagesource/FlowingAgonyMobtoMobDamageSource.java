@@ -7,7 +7,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 
 public class FlowingAgonyMobtoMobDamageSource extends DamageSource {
-    LivingEntity damageSourceEntity;
+    final LivingEntity damageSourceEntity;
 
     public FlowingAgonyMobtoMobDamageSource(String damageTypeIn, LivingEntity damageSourceEntity) {
         super(damageTypeIn);
@@ -17,6 +17,7 @@ public class FlowingAgonyMobtoMobDamageSource extends DamageSource {
     /**
      * Gets the death message that is displayed when the player dies
      */
+    @Override
     public ITextComponent getDeathMessage(LivingEntity entityLivingBaseIn) {
         String s = "death.attack." + this.damageType;
         return new TranslationTextComponent(s, entityLivingBaseIn.getDisplayName(),damageSourceEntity.getDisplayName());

@@ -8,7 +8,8 @@ public class FrivolousStepImplicitEffect extends ImplicitBaseEffect {
         super(EffectType.BENEFICIAL, 0);
     }
 
+    @Override
     public double getAttributeModifierAmount(int amplifier, AttributeModifier modifier) {
-        return modifier.getAmount() + (double)(0.02D * amplifier);
+        return modifier.getAmount() + (0.02D * amplifier);
     }
 }

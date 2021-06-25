@@ -87,15 +87,13 @@ public class GloomyEraEnchantmentEventHandler {
                         if (goVanillaForConflict) break;
                     }
                     if (!goVanillaForConflict) {
-                        right.forEach(((enchantment, integer) -> {
-                            left.merge(enchantment, integer, (oldV, newV) -> {
-                                if (oldV < newV) return newV;
-                                else if (oldV == newV) {
-                                    if (oldV < enchantment.getMaxLevel()) return oldV + 1;
-                                }
-                                return oldV;
-                            });
-                        }));
+                        right.forEach(((enchantment, integer) -> left.merge(enchantment, integer, (oldV, newV) -> {
+                            if (oldV < newV) return newV;
+                            else if (oldV.equals(newV)) {
+                                if (oldV < enchantment.getMaxLevel()) return oldV + 1;
+                            }
+                            return oldV;
+                        })));
                         EnchantmentHelper.setEnchantments(left, result);
                         event.setOutput(result);
                     }
@@ -168,12 +166,10 @@ public class GloomyEraEnchantmentEventHandler {
                             targets.forEach(LivingEntity -> {
                                 List<MerchantOffer> offers = ((VillagerEntity) LivingEntity).getOffers();
                                 if (!offers.isEmpty()) {
-                                    List<ItemStack> outcome = GodRollingDiceUtil.rollDiceForPilferage(((PlayerEntity)event.getEntityLiving()).getItemStackFromSlot(EquipmentSlotType.FEET),(VillagerEntity) LivingEntity, offers, event.getEntityLiving().getRNG(), event.getDistance());
-                                    outcome.forEach(ItemStack -> {
-                                        LivingEntity.world.addEntity(new ItemEntity(LivingEntity.world,
-                                                LivingEntity.getPosX(), LivingEntity.getPosY(),
-                                                LivingEntity.getPosZ(), ItemStack));
-                                    });
+                                    List<ItemStack> outcome = GodRollingDiceUtil.rollDiceForPilferage(event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET),(VillagerEntity) LivingEntity, offers, event.getEntityLiving().getRNG(), event.getDistance());
+                                    outcome.forEach(ItemStack -> LivingEntity.world.addEntity(new ItemEntity(LivingEntity.world,
+                                            LivingEntity.getPosX(), LivingEntity.getPosY(),
+                                            LivingEntity.getPosZ(), ItemStack)));
                                 }
                             });
                         }

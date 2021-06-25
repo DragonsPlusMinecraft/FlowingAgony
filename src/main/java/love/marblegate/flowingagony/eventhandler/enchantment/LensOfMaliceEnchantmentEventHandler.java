@@ -1,5 +1,8 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.network.EffectPacket;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.PlaySoundWIthLocationPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;
@@ -13,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +57,17 @@ public class LensOfMaliceEnchantmentEventHandler {
             if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.malice_outbreak_enchantment.get(),EquipmentSlotType.HEAD)){
                 if(event.getSource().getTrueSource() instanceof LivingEntity){
                     ((LivingEntity) event.getSource().getTrueSource()).applyKnockback(1.5f,-event.getEntityLiving().getLookVec().x,-event.getEntityLiving().getLookVec().z);
+                    if (!event.getSource().getTrueSource().world.isRemote) {
+                        Networking.INSTANCE.send(
+                                PacketDistributor.NEAR.with(
+                                        () -> new PacketDistributor.TargetPoint(event.getSource().getTrueSource().getPosX(),event.getSource().getTrueSource().getPosY(),event.getSource().getTrueSource().getPosZ(),
+                                                192,event.getSource().getTrueSource().world.getDimensionKey())
+                                ),
+                                new PlaySoundWIthLocationPacket(PlaySoundWIthLocationPacket.ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND,true,
+                                        event.getSource().getTrueSource().getPosX(),
+                                        event.getSource().getTrueSource().getPosY()+event.getSource().getTrueSource().getEyeHeight(),
+                                        event.getSource().getTrueSource().getPosZ()));
+                    }
                 }
             }
         }
@@ -81,7 +96,7 @@ public class LensOfMaliceEnchantmentEventHandler {
                                 }
                             }
                             else{
-                                List<EffectInstance> selectedEffect = new ArrayList<EffectInstance>();
+                                List<EffectInstance> selectedEffect = new ArrayList<>();
                                 while(enchantNum>0){
                                     EffectInstance effect = effects.get(event.getEntityLiving().getRNG().nextInt(effectCount));
                                     if(!selectedEffect.contains(effect)){

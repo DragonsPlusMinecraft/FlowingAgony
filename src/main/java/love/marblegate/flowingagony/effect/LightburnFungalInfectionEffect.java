@@ -11,12 +11,14 @@ public class LightburnFungalInfectionEffect extends Effect {
         super(EffectType.HARMFUL, 16777196);
     }
 
+    @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.lightburn_fungal_infection_effect.get()) {
             entityLivingBaseIn.attackEntityFrom((new DamageSource("flowingagony.lightburn_fungal_infection")).setDamageBypassesArmor(), 3.0F);
         }
     }
 
+    @Override
     public boolean isReady(int duration, int amplifier) {
         int k = 40;
         if(amplifier>0){

@@ -12,38 +12,46 @@ public class CleansingBeforeUsingEnchantment extends Enchantment {
         super(p_i46731_1_, CustomEnchantmentType.ALMOST_EVERYTHING , p_i46731_3_);
     }
 
+    @Override
     public int getMinEnchantability(int p_77321_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_77321_1_,true);
     }
 
+    @Override
     public int getMaxEnchantability(int p_223551_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_223551_1_,false);
     }
 
+    @Override
     public int getMaxLevel() {
         return 1;
     }
 
 
+    @Override
     public boolean isTreasureEnchantment() {
         return true;
     }
 
+    @Override
     public boolean canVillagerTrade() {
         if(Config.HYBRID_SERVER_USER.get()) return false;
         else return Config.CLEANSING_BEFORE_USING.get();
     }
 
+    @Override
     public boolean canGenerateInLoot() {
         if(Config.HYBRID_SERVER_USER.get()) return false;
         else return Config.CLEANSING_BEFORE_USING.get();
     }
 
+    @Override
     public boolean isAllowedOnBooks() {
         if(Config.HYBRID_SERVER_USER.get()) return false;
         else return Config.CLEANSING_BEFORE_USING.get();
     }
 
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         if(Config.HYBRID_SERVER_USER.get()) return false;
         else{

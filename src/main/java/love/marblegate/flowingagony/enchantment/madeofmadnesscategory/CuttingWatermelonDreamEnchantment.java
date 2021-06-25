@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
 import love.marblegate.flowingagony.config.Config;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -13,30 +12,38 @@ public class CuttingWatermelonDreamEnchantment extends Enchantment {
         super(p_i46731_1_, EnchantmentType.DIGGER, p_i46731_3_);
     }
 
+    @Override
     public int getMinEnchantability(int p_77321_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_77321_1_,true);
     }
 
+    @Override
     public int getMaxEnchantability(int p_223551_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_223551_1_,false);
     }
 
+    @Override
     public int getMaxLevel() {
         return 1;
     }
 
+    @Override
     public boolean isTreasureEnchantment() {
         return true;
     }
 
+    @Override
     public boolean canVillagerTrade() { return Config.CUTTING_WATERMELON_DREAM.get(); }
 
+    @Override
     public boolean canGenerateInLoot() { return Config.CUTTING_WATERMELON_DREAM.get(); }
 
+    @Override
     public boolean isAllowedOnBooks() {
         return Config.CUTTING_WATERMELON_DREAM.get();
     }
 
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         if(Config.CUTTING_WATERMELON_DREAM.get())
             return super.canApplyAtEnchantingTable(stack);

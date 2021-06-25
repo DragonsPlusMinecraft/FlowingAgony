@@ -17,20 +17,12 @@ public class CapabilityTransfer {
         LazyOptional<IHatredBloodlineStatusCapability> oldHatredBloodStatus = event.getOriginal().getCapability(HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY);
         LazyOptional<IHatredBloodlineStatusCapability> newHatredBloodStatus = event.getPlayer().getCapability(HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY);
         if (oldHatredBloodStatus.isPresent() && newHatredBloodStatus.isPresent()) {
-            newHatredBloodStatus.ifPresent((newCap) -> {
-                oldHatredBloodStatus.ifPresent((oldCap) -> {
-                    newCap.setActiveLevel(oldCap.getActiveLevel());
-                });
-            });
+            newHatredBloodStatus.ifPresent((newCap) -> oldHatredBloodStatus.ifPresent((oldCap) -> newCap.setActiveLevel(oldCap.getActiveLevel())));
         }
         LazyOptional<IAbnormalJoyCapability> oldAbnormalJoyPoint = event.getOriginal().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
         LazyOptional<IAbnormalJoyCapability> newAbnormalJoyPoint = event.getPlayer().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
         if (oldAbnormalJoyPoint.isPresent() && newAbnormalJoyPoint.isPresent()) {
-            newAbnormalJoyPoint.ifPresent((newCap) -> {
-                oldAbnormalJoyPoint.ifPresent((oldCap) -> {
-                    newCap.set(oldCap.get());
-                });
-            });
+            newAbnormalJoyPoint.ifPresent((newCap) -> oldAbnormalJoyPoint.ifPresent((oldCap) -> newCap.set(oldCap.get())));
         }
     }
 }

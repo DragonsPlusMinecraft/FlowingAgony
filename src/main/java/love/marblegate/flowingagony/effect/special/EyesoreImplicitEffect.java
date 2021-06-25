@@ -14,6 +14,7 @@ public class EyesoreImplicitEffect extends ImplicitBaseEffect {
     }
 
 
+    @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.eyesore_enchantment_active_effect.get()) {
             entityLivingBaseIn.world.createExplosion(entityLivingBaseIn, entityLivingBaseIn.getPosX(), entityLivingBaseIn.getPosY(), entityLivingBaseIn.getPosZ(), 1, Explosion.Mode.NONE);
@@ -22,8 +23,8 @@ public class EyesoreImplicitEffect extends ImplicitBaseEffect {
         }
     }
 
+    @Override
     public boolean isReady(int duration, int amplifier) {
-        if(duration==1) return true;
-        else return false;
+        return duration == 1;
     }
 }

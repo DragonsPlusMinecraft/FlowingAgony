@@ -1,7 +1,5 @@
 package love.marblegate.flowingagony.capibility.abnormaljoy;
 
-import net.minecraft.nbt.CompoundNBT;
-
 public class AbnormalJoyCapabilityStandardImpl implements IAbnormalJoyCapability {
     private float abnormalJoyPoint;
 

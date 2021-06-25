@@ -8,6 +8,7 @@ public class HatredBloodlineImplicitEffect extends ImplicitBaseEffect {
         super(EffectType.BENEFICIAL, 0);
     }
 
+    @Override
     public double getAttributeModifierAmount(int amplifier, AttributeModifier modifier) {
         return modifier.getAmount() * (double)(amplifier + 1);
     }

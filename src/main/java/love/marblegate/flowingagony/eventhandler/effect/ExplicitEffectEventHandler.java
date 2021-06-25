@@ -1,10 +1,13 @@
 package love.marblegate.flowingagony.eventhandler.effect;
 
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
@@ -18,6 +21,7 @@ import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +47,24 @@ public class ExplicitEffectEventHandler {
                     int potionLvl = event.getEntityLiving().getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier()+1;
                     if(event.getAmount()*(1+potionLvl)>=event.getEntityLiving().getHealth()){
                         ((PlayerEntity)(event.getSource().getTrueSource())).removePotionEffect(EffectRegistry.extreme_hatred_effect.get());
+                        //Remove Sound Effect If Killing Action Is Confirmed
+                        if (!event.getSource().getTrueSource().world.isRemote) {
+                            Networking.INSTANCE.send(
+                                    PacketDistributor.PLAYER.with(
+                                            () -> (ServerPlayerEntity) event.getSource().getTrueSource()
+                                    ),
+                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE,false));
+                            Networking.INSTANCE.send(
+                                    PacketDistributor.PLAYER.with(
+                                            () -> (ServerPlayerEntity) event.getSource().getTrueSource()
+                                    ),
+                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE,false));
+                            Networking.INSTANCE.send(
+                                    PacketDistributor.PLAYER.with(
+                                            () -> (ServerPlayerEntity) event.getSource().getTrueSource()
+                                    ),
+                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE,false));
+                        }
                     }
                     event.setAmount(event.getAmount()*(1+potionLvl));
                 }
@@ -108,13 +130,11 @@ public class ExplicitEffectEventHandler {
                 if(event.getEntityLiving().isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
                     if(event.getSource().getDamageType().equals("inFire")||event.getSource().getDamageType().equals("onFire")||event.getSource().getDamageType().equals("lava")){
                         event.setAmount(event.getAmount()*2);
-                        Iterator<ItemStack> armor = ((PlayerEntity)event.getEntityLiving()).getArmorInventoryList().iterator();
-                        while(armor.hasNext()){
-                            ItemStack itemStack = armor.next();
-                            if(itemStack.getItem() instanceof ArmorItem){
-                                if(((ArmorItem) itemStack.getItem()).getEquipmentSlot().equals(EquipmentSlotType.HEAD)){
-                                    if(itemStack.getDamage()>1){
-                                        itemStack.setDamage(itemStack.getDamage()-1);
+                        for (ItemStack itemStack : event.getEntityLiving().getArmorInventoryList()) {
+                            if (itemStack.getItem() instanceof ArmorItem) {
+                                if (((ArmorItem) itemStack.getItem()).getEquipmentSlot().equals(EquipmentSlotType.HEAD)) {
+                                    if (itemStack.getDamage() > 1) {
+                                        itemStack.setDamage(itemStack.getDamage() - 1);
                                     }
                                 }
                             }
@@ -145,9 +165,7 @@ public class ExplicitEffectEventHandler {
             if(event.getEntityLiving().isPotionActive(EffectRegistry.been_resonated_effect.get())){
                 List<LivingEntity> entities = EntityUtil.getTargetListExceptOneself(event.getEntityLiving(),8,2, LivingEntity->
                     LivingEntity.isPotionActive(EffectRegistry.agony_resonance_effect.get()));
-                entities.forEach(LivingEntity->{
-                    LivingEntity.attackEntityFrom(new DamageSource("agony_resonance"),event.getAmount());
-                });
+                entities.forEach(LivingEntity-> LivingEntity.attackEntityFrom(new DamageSource("agony_resonance"),event.getAmount()));
             }
         }
     }

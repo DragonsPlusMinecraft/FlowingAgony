@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
 public class AbnormalJoyCapability {
     @CapabilityInject(IAbnormalJoyCapability.class)
-    public static Capability<IAbnormalJoyCapability> ABNORMALJOY_CAPABILITY = null;
+    public static final Capability<IAbnormalJoyCapability> ABNORMALJOY_CAPABILITY = null;
 
     public static void register() {
         CapabilityManager.INSTANCE.register(IAbnormalJoyCapability.class, new Storage(), AbnormalJoyCapabilityStandardImpl::new);

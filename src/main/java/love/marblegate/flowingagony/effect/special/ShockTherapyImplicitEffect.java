@@ -3,12 +3,9 @@ package love.marblegate.flowingagony.effect.special;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.server.ServerWorld;
 
 public class ShockTherapyImplicitEffect extends ImplicitBaseEffect {
     public ShockTherapyImplicitEffect() {
@@ -16,6 +13,7 @@ public class ShockTherapyImplicitEffect extends ImplicitBaseEffect {
     }
 
 
+    @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.shock_therapy_enchantment_active_effect.get()) {
             int rate = 9;
@@ -31,6 +29,7 @@ public class ShockTherapyImplicitEffect extends ImplicitBaseEffect {
         }
     }
 
+    @Override
     public boolean isReady(int duration, int amplifier) {
         int k = 5;
         if (k > 0) {

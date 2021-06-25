@@ -30,7 +30,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getEntityLiving().isSwimming()){
                     if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.drowning_phobia_enchantment.get(), EquipmentSlotType.HEAD)){
-                        dealPhobiaEffectDamage(event,Effects.BLINDNESS,Effects.NAUSEA);
+                        dealPhobiaEffectDamage(event,Effects.BLINDNESS);
                     }
                 }
             }
@@ -44,7 +44,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
                 if(event.getEntityLiving().isInLava()||event.getEntityLiving().getFireTimer()>0){
                     if(!(event.getSource().getDamageType().equals("inFire")||event.getSource().getDamageType().equals("onFire")||event.getSource().getDamageType().equals("lava"))){
                         if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.burning_phobia_enchantment.get(), EquipmentSlotType.HEAD)){
-                            dealPhobiaEffectDamage(event,Effects.SLOWNESS,Effects.NAUSEA);
+                            dealPhobiaEffectDamage(event,Effects.SLOWNESS);
                         }
                     }
                 }
@@ -52,9 +52,9 @@ public class MadeOfSufferingEnchantmentEventHandler {
         }
     }
 
-    private static void dealPhobiaEffectDamage(LivingDamageEvent event,Effect effect_1, Effect effect_2) {
+    private static void dealPhobiaEffectDamage(LivingDamageEvent event, Effect effect_1) {
         event.getEntityLiving().addPotionEffect(new EffectInstance(effect_1,600));
-        event.getEntityLiving().addPotionEffect(new EffectInstance(effect_2,600));
+        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.NAUSEA,600));
         List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(),12,2, LivingEntity->
                 LivingEntity instanceof MonsterEntity || LivingEntity instanceof SlimeEntity
                         || LivingEntity instanceof WitherEntity);
@@ -101,9 +101,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
                             (event.getSource().getDamageType().equals("magic")&&event.getEntityLiving().isPotionActive(Effects.POISON))){
                         LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
-                                cap-> {
-                                    cap.add(event.getAmount());
-                                }
+                                cap-> cap.add(event.getAmount())
                         );
                     }
                 }
@@ -120,9 +118,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
                             event.getSource().getDamageType().equals("cactus")){
                         LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
-                                cap-> {
-                                    cap.add(event.getAmount());
-                                }
+                                cap-> cap.add(event.getAmount())
                         );
                     }
                 }

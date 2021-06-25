@@ -20,12 +20,13 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class PerceivedMaliceEffectRenderer {
 
+    @SuppressWarnings("rawtypes")
     @SubscribeEvent
     public static void render(RenderLivingEvent.Post event){
         ClientPlayerEntity player = Minecraft.getInstance().player;
         if (PlayerUtil.isPlayerSpecificSlotEnchanted(player,EnchantmentRegistry.perceived_malice_enchantment.get(), EquipmentSlotType.HEAD)) {
             if(event.getEntity() instanceof MonsterEntity) {
-                if (player.getPositionVec().distanceTo(event.getEntity().getPositionVec())<=32)
+                if (player.getPositionVec().distanceTo(event.getEntity().getPositionVec())<=24)
                     highlight(event.getMatrixStack(), event.getBuffers(), event.getEntity());
             }
         }

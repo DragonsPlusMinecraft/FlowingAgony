@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.effect.special;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
@@ -14,13 +13,14 @@ public class ImplicitBaseEffect extends Effect {
         super(EffectType.NEUTRAL, 0);
     }
 
+    @Override
     public boolean shouldRender(EffectInstance effect) { return false; }
 
+    @Override
     public boolean shouldRenderHUD(EffectInstance effect) { return false; }
 
     @Override
     public List<ItemStack> getCurativeItems() {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        return ret;
+        return new ArrayList<>();
     }
 }

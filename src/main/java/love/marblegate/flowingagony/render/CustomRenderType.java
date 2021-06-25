@@ -15,7 +15,7 @@ public class CustomRenderType extends RenderType {
 
     private static final LineState TARGET_INDICATOR_LINE = new LineState(OptionalDouble.of(5.0D));
 
-    public static RenderType PERCEIVED_MALICE_INDICATOR = makeType("flowingagony.perceived_malice_indicator",
+    public static final RenderType PERCEIVED_MALICE_INDICATOR = makeType("flowingagony.perceived_malice_indicator",
             DefaultVertexFormats.POSITION_COLOR, GL11.GL_QUADS, 256,
             RenderType.State.getBuilder()
                     .transparency(TRANSLUCENT_TRANSPARENCY)

@@ -40,9 +40,9 @@ public class GodRollingDiceUtil {
 
     public static List<ItemStack> rollDiceForPilferage(ItemStack armorFeet,VillagerEntity villagerEntity, List<MerchantOffer> offers, Random random, double fallingHeight){
         int extraluck = MathHelper.floor(fallingHeight);
-        extraluck= extraluck>15?15:extraluck;
+        extraluck= Math.min(extraluck, 15);
         extraluck -=5;
-        List<ItemStack> itemStacks = new ArrayList<ItemStack>();
+        List<ItemStack> itemStacks = new ArrayList<>();
         boolean success = false;
         if(random.nextInt(100) < 30 + 5*extraluck){
             int temp = random.nextInt(offers.size());

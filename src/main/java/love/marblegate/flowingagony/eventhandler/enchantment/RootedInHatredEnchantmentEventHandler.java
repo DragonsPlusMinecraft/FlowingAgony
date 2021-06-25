@@ -2,10 +2,13 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
@@ -16,6 +19,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 @Mod.EventBusSubscriber()
 public class RootedInHatredEnchantmentEventHandler {
@@ -45,22 +49,48 @@ public class RootedInHatredEnchantmentEventHandler {
                 if(event.getEntityLiving() instanceof PlayerEntity) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth()) {
                         int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.too_resentful_to_die_enchantment.get(), EquipmentSlotType.HEAD);
-                        if (!event.getEntityLiving().isPotionActive(EffectRegistry.extreme_hatred_effect.get())) {
+                        if (!((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.extreme_hatred_effect.get())){
                             if (enchantmentLvl != 0) {
                                 event.getEntityLiving().heal(1 + enchantmentLvl * 3);
                                 event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200));
                                 event.setCanceled(true);
+                                //Play Sound Effect - Stage 1
+                                if (!event.getEntityLiving().world.isRemote) {
+                                    Networking.INSTANCE.send(
+                                            PacketDistributor.PLAYER.with(
+                                                    () -> (ServerPlayerEntity) event.getEntityLiving()
+                                            ),
+                                            new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE,true));
+                                }
                             }
                         } else {
-                            int potionLvl = event.getEntityLiving().getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier() + 1;
-                            if (potionLvl == 1) {
-                                event.getEntityLiving().heal(1 + enchantmentLvl * 2);
-                                event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200, 1));
-                                event.setCanceled(true);
-                            } else if (potionLvl == 2) {
-                                event.getEntityLiving().heal(1 + enchantmentLvl);
-                                event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200, 2));
-                                event.setCanceled(true);
+                            if (enchantmentLvl != 0){
+                                int potionLvl = ((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier() + 1;
+                                if (potionLvl == 1) {
+                                    event.getEntityLiving().heal(1 + enchantmentLvl * 2);
+                                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200, 1));
+                                    event.setCanceled(true);
+                                    //Play Sound Effect - Stage 2
+                                    if (!event.getEntityLiving().world.isRemote) {
+                                        Networking.INSTANCE.send(
+                                                PacketDistributor.PLAYER.with(
+                                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                                ),
+                                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE,true));
+                                    }
+                                } else if (potionLvl == 2) {
+                                    event.getEntityLiving().heal(1 + enchantmentLvl);
+                                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200, 2));
+                                    event.setCanceled(true);
+                                    //Play Sound Effect - Stage 3
+                                    if (!event.getEntityLiving().world.isRemote) {
+                                        Networking.INSTANCE.send(
+                                                PacketDistributor.PLAYER.with(
+                                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                                ),
+                                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE,true));
+                                    }
+                                }
                             }
                         }
                     }
@@ -94,9 +124,7 @@ public class RootedInHatredEnchantmentEventHandler {
                 if(enchantLvl!=0){
                     LazyOptional<IHatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY);
                     statusCap.ifPresent(
-                            cap-> {
-                                cap.setActiveLevel(enchantLvl);
-                            }
+                            cap-> cap.setActiveLevel(enchantLvl)
                     );
                 }
             }

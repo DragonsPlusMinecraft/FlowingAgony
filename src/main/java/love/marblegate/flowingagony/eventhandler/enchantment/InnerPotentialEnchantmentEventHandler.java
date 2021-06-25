@@ -90,8 +90,8 @@ public class InnerPotentialEnchantmentEventHandler {
         if (event.getEntityLiving() instanceof PlayerEntity) {
             int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.potential_burst_enchantment.get(),EquipmentSlotType.FEET);
             if (enchantLvl != 0) {
-                if(event.getEntityLiving() .getHealth()<=(6+2*enchantLvl)){
-                    event.getEntityLiving().setMotion(event.getEntityLiving().getMotion().add(0d,0.5d*enchantLvl,0d));
+                if(((PlayerEntity)(event.getEntityLiving())) .getHealth()<=(6+2*enchantLvl)){
+                    ((PlayerEntity)(event.getEntityLiving())).setMotion(((PlayerEntity)(event.getEntityLiving())).getMotion().add(0d,0.5d*enchantLvl,0d));
                 }
             }
         }
@@ -102,9 +102,9 @@ public class InnerPotentialEnchantmentEventHandler {
         if (event.getEntityLiving() instanceof PlayerEntity) {
             if (event.getEntityLiving().getHealth() < 4f) {
                 if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.miraculous_escape_enchantment.get(), EquipmentSlotType.FEET)) {
-                    if(!event.getEntityLiving().isPotionActive(EffectRegistry.miraculous_escape_encahntment_active_effect.get())){
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_encahntment_force_escape_effect.get(),40));
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_encahntment_active_effect.get(),200));
+                    if(!((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())){
+                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_force_escape_effect.get(),40));
+                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_active_effect.get(),200));
                     }
                 }
             }
@@ -117,7 +117,7 @@ public class InnerPotentialEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getSource().getDamageType().equals("fall")||event.getSource().getDamageType().equals("cramming")||event.getSource().getDamageType().equals("inWall")) {
-                    if(event.getEntityLiving().isPotionActive(EffectRegistry.miraculous_escape_encahntment_active_effect.get())){
+                    if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())){
                         event.setCanceled(true);
                     }
                 }
@@ -132,12 +132,12 @@ public class InnerPotentialEnchantmentEventHandler {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
                     int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.armor_up_enchantment.get(), EquipmentSlotType.CHEST);
                     if (enchantLvl != 0) {
-                        if (event.getEntityLiving().getHealth() < (5 + enchantLvl)) {
-                            float existYellowHeart = event.getEntityLiving().getAbsorptionAmount();
+                        if (((PlayerEntity)(event.getEntityLiving())).getHealth() < (5 + enchantLvl)) {
+                            float existYellowHeart = ((PlayerEntity)(event.getEntityLiving())).getAbsorptionAmount();
                             if (existYellowHeart + 1 > (5 + enchantLvl * 5)) {
-                                event.getEntityLiving().setAbsorptionAmount(5 + enchantLvl * 5);
+                                ((PlayerEntity)(event.getEntityLiving())).setAbsorptionAmount(5 + enchantLvl * 5);
                             } else {
-                                event.getEntityLiving().setAbsorptionAmount(existYellowHeart + 1);
+                                ((PlayerEntity)(event.getEntityLiving())).setAbsorptionAmount(existYellowHeart + 1);
                             }
                         }
                     }

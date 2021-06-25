@@ -71,7 +71,7 @@
   "enchantment.flowingagony.perceived_malice.desc": "Applies 30 seconds of the debuff \"Cursed Antipathy\" to the creatures attacking you. Enables you to perceive nearby monsters. (Cursed Antipathy: Causes 1 point damage to you every 2/1/0.5 second(s))",
   "enchantment.flowingagony.vengeance.desc": "Applies 30 seconds of the debuff \"Cursed Hatred\" to the creatures attacking you. (Cursed Hatred: Greatly strengthens the damage inflicted on one by 50%/80%/110.)",
   "enchantment.flowingagony.agony_screamer.desc": "Imposes the debuff \"Agony Resonance\" for 20 seconds on the attacked target. (Agony Resonance: Imposes the buff \"Been Resonated\" for 20 seconds on all the nearby mobs) (Been Resonated: Causes the same damage as you to all the nearby mobs who is in the debuff \"Agony Resonance\")",
-  "enchantment.flowingagony.insane_poet.desc": "Reduces the attack damage of bow to 10% by default and imposes the buff \"Listen to Me Singing\" for 20 seconds on the attacked target. (Listen to Me Singing: The victim will be repeatedly forcibly lifted and then smashed towards the ground every 2s. Causes certain damage that is calculated by: max health value x 0.1 + current health value x 0.4.)",
+  "enchantment.flowingagony.insane_poet.desc": "Reduces the attack damage of bow to 10% by default and imposes the buff \"Listen to Me Singing\" for 20 seconds on the attacked target. (Listen to Me Singing: The victim will be repeatedly forcibly lifted and then smashed towards the ground every 2s. Causes certain damage that is calculated by: max health value x 0.1 + current health value x 0.3.  The maximum damage point a single smashing can deal is 20 and the minimum is 2.)",
   "enchantment.flowingagony.paper_brain.desc": "Reduces the attack damage of sword to 10% by default and makes all the attacked mobs not able to follow almost any target within 3/5/7s and receive damage of 1 point by a probability of 30%/40%/50% every 0.25 second during this period. This damage ignores any armor.",
   "enchantment.flowingagony.shock_therapy.desc": "Reduces the attack damage of sword to 10% by default. Makes all the attacked mobs not able to follow almost any target within 3/5/7s. Gives them at the same time lightning strike and also lightning damage of 2 point by a probability of 9%/16%/23% every 0.25 second during this period. This damage ignores any armor.",
   "enchantment.flowingagony.cutting_watermelon_dream.desc": "When you use a tool without the enchantment \"Silk Touch\" to destroy watermalons, all nearby monsters will receive damage that equals 2 to 3 times the damage the tool can deal. Doubles the effect during night.",
@@ -113,6 +113,8 @@
   "effect.flowingagony.curse_of_undead": "Curse of Undead",
   "effect.flowingagony.lightburn_fungal_infection": "Lightburn Fungal Infection",
   "effect.flowingagony.encious_being": "Envious Being",
+
+  "sound.flowingagony.miraculous_escape_heartbeat": "Sound of Strong And Strange Heartbeat",
 
   "death.attack.flowingagony.burial_object_curse":"%1$s died as burial object of %2$s .",
   "death.attack.flowingagony.cursed_antipathy":"%1$s died as antipathy burned him from inside.",

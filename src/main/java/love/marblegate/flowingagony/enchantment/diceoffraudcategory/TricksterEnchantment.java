@@ -12,26 +12,33 @@ public class TricksterEnchantment extends Enchantment {
         super(p_i46731_1_, EnchantmentType.WEAPON, p_i46731_3_);
     }
 
+    @Override
     public int getMinEnchantability(int p_77321_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_77321_1_,true);
     }
 
+    @Override
     public int getMaxEnchantability(int p_223551_1_) {
         return EnchantmentLevelUtil.get(this.getRarity(),this.getMaxLevel(),p_223551_1_,false);
     }
 
+    @Override
     public int getMaxLevel() {
         return 2;
     }
 
+    @Override
     public boolean canVillagerTrade() { return Config.TRICKSTER.get(); }
 
+    @Override
     public boolean canGenerateInLoot() { return Config.TRICKSTER.get(); }
 
+    @Override
     public boolean isAllowedOnBooks() {
         return Config.TRICKSTER.get();
     }
 
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         if(Config.TRICKSTER.get())
             return super.canApplyAtEnchantingTable(stack);

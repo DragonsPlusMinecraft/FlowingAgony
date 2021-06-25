@@ -11,9 +11,8 @@ import static net.minecraft.enchantment.EnchantmentType.BREAKABLE;
 import static net.minecraft.enchantment.EnchantmentType.WEARABLE;
 
 public class CustomEnchantmentType {
-    public static EnchantmentType AXE_AND_SWORD = EnchantmentType.create("flowingagony:AXE_AND_SWORD", Item->{ return Item instanceof SwordItem || Item instanceof AxeItem;});
-    public static EnchantmentType ALMOST_EVERYTHING = EnchantmentType.create("flowingagony:ALMOST_EVERYTHING",Item ->{
-        return Item instanceof IVanishable || Block.getBlockFromItem(Item) instanceof IVanishable || BREAKABLE.canEnchantItem(Item) || WEARABLE.canEnchantItem(Item); });
+    public static final EnchantmentType AXE_AND_SWORD = EnchantmentType.create("flowingagony:AXE_AND_SWORD", Item-> Item instanceof SwordItem || Item instanceof AxeItem);
+    public static final EnchantmentType ALMOST_EVERYTHING = EnchantmentType.create("flowingagony:ALMOST_EVERYTHING", Item -> Item instanceof IVanishable || Block.getBlockFromItem(Item) instanceof IVanishable || BREAKABLE.canEnchantItem(Item) || WEARABLE.canEnchantItem(Item));
 
     public static void addToItemGourp() {
         EnchantmentType[] TOOL_TYPES = new EnchantmentType[ItemGroup.TOOLS.getRelevantEnchantmentTypes().length + 2];

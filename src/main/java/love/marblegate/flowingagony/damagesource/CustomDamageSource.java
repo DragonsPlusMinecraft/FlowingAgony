@@ -3,7 +3,6 @@ package love.marblegate.flowingagony.damagesource;
 import love.marblegate.flowingagony.damagesource.FlowingAgonyMobtoMobDamageSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
 
 public class CustomDamageSource {
     public static DamageSource causeLetMeSavorItDamage(LivingEntity livingEntity) {

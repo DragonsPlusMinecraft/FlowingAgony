@@ -12,6 +12,7 @@ public class ExtremeHatredEffect extends Effect {
         super(EffectType.HARMFUL, 16711680);
     }
 
+    @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.extreme_hatred_effect.get()) {
             if(entityLivingBaseIn instanceof PlayerEntity){
@@ -20,6 +21,7 @@ public class ExtremeHatredEffect extends Effect {
         }
     }
 
+    @Override
     public boolean isReady(int duration, int amplifier) {
         int k = (15/(amplifier+1));
         if (k > 0) {

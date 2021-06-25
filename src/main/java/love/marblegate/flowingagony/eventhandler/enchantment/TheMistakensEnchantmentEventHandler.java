@@ -18,7 +18,6 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
-import net.minecraft.potion.Potions;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.TickEvent;
@@ -89,12 +88,12 @@ public class TheMistakensEnchantmentEventHandler {
                             if(!event.getEntityLiving().world.isRemote()){
                                 event.getPotionEffect().combine(new EffectInstance(event.getPotionEffect().getPotion(),event.getPotionEffect().getDuration()*3));
                             }
-                            List<EffectInstance> negativeEffects= event.getEntityLiving().getActivePotionEffects().stream().filter(EffectInstance->
+                            List<EffectInstance> negativeEffects= ((PlayerEntity)event.getEntityLiving()).getActivePotionEffects().stream().filter(EffectInstance->
                                     EffectInstance.getPotion().getEffectType() == EffectType.HARMFUL).filter(EffectInstance->
                                     EffectInstance.isCurativeItem(new ItemStack(Items.MILK_BUCKET))).collect(Collectors.toList());
                             if(!negativeEffects.isEmpty()){
                                 for(EffectInstance effect : negativeEffects){
-                                    event.getEntityLiving().removePotionEffect(effect.getPotion());
+                                    ((PlayerEntity)event.getEntityLiving()).removePotionEffect(effect.getPotion());
                                 }
                             }
                         }
@@ -177,7 +176,7 @@ public class TheMistakensEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.lightburn_fungal_parasitic_enchantment.get(),EquipmentSlotType.CHEST)){
-                    if(event.getPotionEffect().getPotion().equals(Potions.POISON)){
+                    if(event.getPotionEffect().getPotion().equals(Effects.POISON)){
                         event.setResult(Event.Result.DENY);
                     }
                     if(event.getPotionEffect().getPotion().equals(EffectRegistry.lightburn_fungal_infection_effect.get())){
@@ -197,7 +196,7 @@ public class TheMistakensEnchantmentEventHandler {
                 List<PlayerEntity> players = event.getEntityLiving().world.getEntitiesWithinAABB(PlayerEntity.class,scanningArea);
                 for(PlayerEntity player : players){
                     if(PlayerUtil.isPlayerArmorEnchanted(player, EnchantmentRegistry.burial_object_curse.get())){
-                        player.attackEntityFrom(CustomDamageSource.causeBurialObjectDamage(event.getEntityLiving()),120);
+                        player.attackEntityFrom(CustomDamageSource.causeBurialObjectDamage(((PlayerEntity)event.getEntityLiving())),120);
                     }
                 }
             }

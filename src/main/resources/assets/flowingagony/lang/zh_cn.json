@@ -71,7 +71,7 @@
   "enchantment.flowingagony.perceived_malice.desc": "你能感知到附近的怪物，所有以你为目标的怪物会拥有“憎恶诅咒”负面效果，负面效果强度将随附魔等级变化。（憎恶诅咒：承受持续伤害，每2/1/0.5s将承受1点伤害）",
   "enchantment.flowingagony.vengeance.desc": "任何攻击你的生物都会获得 30s“仇恨诅咒”负面效果，负面效果强度将随附魔等级变化。（仇恨诅咒：承受的下一次伤害将提高50%/80%/110%）",
   "enchantment.flowingagony.agony_screamer.desc": "对被攻击目标施加20s“苦痛共鸣”负面效果。（苦痛共鸣：为附近所有生物施加20s“被共鸣”增益效果）（被共鸣：每当你承受一次伤害，附近拥有“苦痛共鸣”负面效果的生物会承受同样的伤害。）",
-  "enchantment.flowingagony.insane_poet.desc": "弓箭攻击力降低至默认的10%，对被攻击目标施加20s“听我歌唱”负面效果。（听我歌唱：受害者将被反复强制提起再朝着空气墙砸下，每2s砸一次，造成伤害为：最高血量 x 0.1 + 当前血量 x 0.4）",
+  "enchantment.flowingagony.insane_poet.desc": "弓箭攻击力降低至默认的10%，对被攻击目标施加20s“听我歌唱”负面效果。（听我歌唱：受害者将被反复强制提起再朝着空气墙砸下，每2s砸一次，造成伤害为：最高血量 x 0.1 + 当前血量 x 0.3。单次砸击能造成的最高伤害为20点，最低伤害为2点）",
   "enchantment.flowingagony.paper_brain.desc": "剑攻击力降低至默认的10%，你攻击的任何生物将在3/5/7s内几乎无法正常跟随任何目标，且在此期间每0.25s有30%/40%/50%的概率受到1点无视护甲的魔法伤害。",
   "enchantment.flowingagony.shock_therapy.desc": "剑攻击力降低至默认的10%，你攻击的任何生物将在3/5/7s内几乎无法正常跟随任何目标，且在此期间每0.25s有9%/16%/23%的概率受到1次雷击，每次雷击将造成2点无视护甲的伤害。",
   "enchantment.flowingagony.cutting_watermelon_dream.desc": "当你使用没有精准采集附魔的工具破坏西瓜时，周围所有的怪物都将承受该工具攻击力2~3倍的伤害。如果你在夜晚触发附魔效果，造成伤害将提升至4~6倍。",
@@ -103,7 +103,6 @@
   "enchantment.flowingagony.covert_knife.desc": "末影人无法成功躲避拥有该附魔的弓射出的箭矢。",
   "enchantment.flowingagony.source_of_envy.desc": "攻击你的生物会成为附近同类生物攻击的目标。",
 
-
   "effect.flowingagony.cursed_hatred": "仇恨诅咒",
   "effect.flowingagony.cursed_antipathy": "憎恶诅咒",
   "effect.flowingagony.extreme_hatred": "极端憎恨",
@@ -114,6 +113,8 @@
   "effect.flowingagony.curse_of_undead": "亡灵诅咒",
   "effect.flowingagony.lightburn_fungal_infection": "光蚀真菌感染",
   "effect.flowingagony.encious_being": "残暴妒者",
+
+  "sound.flowingagony.miraculous_escape_heartbeat": "沉重的心跳声",
 
   "death.attack.flowingagony.burial_object_curse":"%1$s 随着 %2$s 一同死去了。",
   "death.attack.flowingagony.cursed_antipathy":"%1$s 被难以消解的憎恶从里到外彻底烧焦了。",

@@ -78,13 +78,11 @@ public class DiceOfFraudEnchantmentEventHandler {
                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
                 } else if(enchantNum < 4){
-                    Set<Integer> temp = new HashSet<Integer>();
+                    Set<Integer> temp = new HashSet<>();
                     int tempCount = enchantNum;
                     while(tempCount>0){
                         int tempInt = event.getPlayer().getRNG().nextInt(4);
-                        if(temp.contains(tempInt)){
-                            continue;
-                        } else {
+                        if(!temp.contains(tempInt)){
                             switch (tempInt){
                                 case 0:
                                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
@@ -116,8 +114,8 @@ public class DiceOfFraudEnchantmentEventHandler {
                     if (event.getAmount() >= event.getEntityLiving().getHealth() && (!event.getSource().getDamageType().equals("outOfWorld"))) {
                         if (PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.deathpunk_enchantment.get(), EquipmentSlotType.CHEST)) {
                             int solution = event.getEntityLiving().getRNG().nextInt(4);
-                            int health = MathHelper.floor(((PlayerEntity) event.getEntityLiving()).getHealth());
-                            int maxHealth = MathHelper.floor(event.getEntityLiving().getMaxHealth());
+                            int health = MathHelper.floor((((PlayerEntity) event.getEntityLiving()).getHealth()));
+                            int maxHealth = MathHelper.floor((((PlayerEntity) event.getEntityLiving()).getMaxHealth()));
                             boolean damageEnchantment = false;
                             switch (solution) {
                                 case 0:
@@ -125,7 +123,7 @@ public class DiceOfFraudEnchantmentEventHandler {
                                     if (foodLevel <= health) damageEnchantment = true;
                                     else {
                                         if (foodLevel > maxHealth) foodLevel = maxHealth;
-                                        event.getEntityLiving().setHealth(foodLevel);
+                                        ((PlayerEntity) event.getEntityLiving()).setHealth(foodLevel);
                                         ((PlayerEntity) event.getEntityLiving()).getFoodStats().setFoodLevel(health);
                                         ((PlayerEntity) event.getEntityLiving()).getFoodStats().addExhaustion(((PlayerEntity) event.getEntityLiving()).getFoodStats().getSaturationLevel()*4);
                                     }
@@ -136,12 +134,12 @@ public class DiceOfFraudEnchantmentEventHandler {
                                     else {
                                         if (oxygenLevel > maxHealth) oxygenLevel = maxHealth;
                                         event.getEntityLiving().setHealth(oxygenLevel);
-                                        ((PlayerEntity) event.getEntityLiving()).setAir(health * (((PlayerEntity) event.getEntityLiving()).getMaxAir() / maxHealth));
+                                        event.getEntityLiving().setAir(health * (event.getEntityLiving().getMaxAir() / maxHealth));
                                     }
                                     break;
                                 case 2:
                                     int expPoint = ((PlayerEntity) event.getEntityLiving()).experienceTotal;
-                                    int exchangeCost = (MathHelper.floor(event.getEntityLiving().getMaxHealth()) - health) * 30;
+                                    int exchangeCost = (MathHelper.floor(((PlayerEntity) event.getEntityLiving()).getMaxHealth()) - health) * 30;
                                     if (expPoint <= exchangeCost) damageEnchantment = true;
                                     else {
                                         event.getEntityLiving().setHealth(event.getEntityLiving().getMaxHealth());
@@ -153,8 +151,8 @@ public class DiceOfFraudEnchantmentEventHandler {
                                     break;
                             }
                             if (damageEnchantment) {
-                                event.getEntityLiving().setHealth(event.getEntityLiving().getMaxHealth());
-                                Map<Enchantment, Integer> enchantmentList = EnchantmentHelper.getEnchantments(((PlayerEntity) event.getEntityLiving()).getItemStackFromSlot(EquipmentSlotType.CHEST));
+                                event.getEntityLiving().setHealth(((PlayerEntity) event.getEntityLiving()).getMaxHealth());
+                                Map<Enchantment, Integer> enchantmentList = EnchantmentHelper.getEnchantments(event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.CHEST));
                                 enchantmentList.remove(EnchantmentRegistry.deathpunk_enchantment.get());
                                 EnchantmentHelper.setEnchantments(enchantmentList, ((PlayerEntity) event.getEntityLiving()).getItemStackFromSlot(EquipmentSlotType.CHEST));
                             }
