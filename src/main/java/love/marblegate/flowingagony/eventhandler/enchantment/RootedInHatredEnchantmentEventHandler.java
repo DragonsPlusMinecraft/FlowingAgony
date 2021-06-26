@@ -46,7 +46,7 @@ public class RootedInHatredEnchantmentEventHandler {
     public static void doTooResentfulToDieEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if (!event.isCanceled()) {
-                if(event.getEntityLiving() instanceof PlayerEntity) {
+                if(event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().equals(event.getSource().getTrueSource())) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth()) {
                         int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.too_resentful_to_die_enchantment.get(), EquipmentSlotType.HEAD);
                         if (!((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.extreme_hatred_effect.get())){

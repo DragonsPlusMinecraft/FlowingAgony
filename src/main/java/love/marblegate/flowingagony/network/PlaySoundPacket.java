@@ -1,6 +1,5 @@
 package love.marblegate.flowingagony.network;
 
-import love.marblegate.flowingagony.util.client.ClientUtil;
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
@@ -32,7 +31,7 @@ public class PlaySoundPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
             proxy = new ClientProxy();
             ctx.get().enqueueWork(() -> {
                 proxy.handleISound(type,onOrOff);

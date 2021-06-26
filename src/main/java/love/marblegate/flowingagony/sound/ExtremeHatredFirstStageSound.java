@@ -1,8 +1,6 @@
 package love.marblegate.flowingagony.sound;
 
-import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.SoundRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.SoundCategory;

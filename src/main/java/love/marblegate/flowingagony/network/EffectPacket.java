@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.network;
 
 import love.marblegate.flowingagony.particle.cursedantipathyparticle.CursedAntipathyParticleData;
-import love.marblegate.flowingagony.util.client.ClientUtil;
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
@@ -52,7 +51,7 @@ public class EffectPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
             ctx.get().enqueueWork(() -> {
                 proxy = new ClientProxy();
                 if(type== EffectType.CURSED_ANTIPATHY_EFFECT){

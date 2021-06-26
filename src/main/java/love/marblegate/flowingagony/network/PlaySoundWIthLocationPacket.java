@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.network;
 
 import love.marblegate.flowingagony.registry.SoundRegistry;
-import love.marblegate.flowingagony.util.client.ClientUtil;
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
@@ -47,11 +46,11 @@ public class PlaySoundWIthLocationPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
             proxy = new ClientProxy();
             ctx.get().enqueueWork(() -> {
                 if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                    proxy.playSoundWithLocation(SoundRegistry.malice_outbreak_knockback_sound.get(), SoundCategory.PLAYERS, 10, 0.5F,x,y,z,true);
+                    proxy.playSoundWithLocation(SoundRegistry.malice_outbreak_knockback_sound.get(), SoundCategory.PLAYERS, 5, 0.5F,x,y,z,true);
                 }
             });
             ctx.get().setPacketHandled(true);
