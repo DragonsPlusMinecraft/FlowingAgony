@@ -13,7 +13,8 @@ public class ExtremeHatredFinalStageSound extends TickableSound {
         this.player = player;
         this.repeat = true;
         this.repeatDelay = 0;
-        this.volume = 12.0F;
+        this.volume = 18.0F;
+        this.pitch = 2F;
         this.isGlobal();
     }
 

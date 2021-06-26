@@ -1,11 +1,11 @@
 package love.marblegate.flowingagony.network;
 
-import love.marblegate.flowingagony.sound.ExtremeHatredFinalStageSound;
-import love.marblegate.flowingagony.sound.ExtremeHatredFirstStageSound;
-import love.marblegate.flowingagony.sound.ExtremeHatredMediumStageSound;
-import love.marblegate.flowingagony.sound.MiraculousEscapeHeartbeatSound;
-import net.minecraft.client.Minecraft;
+import love.marblegate.flowingagony.util.client.ClientUtil;
+import love.marblegate.flowingagony.util.proxy.ClientProxy;
+import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 public class PlaySoundPacket {
     private final ModSoundType type;
     private final boolean onOrOff;
+    public static IProxy proxy = new IProxy() {};
 
     public PlaySoundPacket(PacketBuffer buffer) {
         this.type = buffer.readEnumValue(ModSoundType.class);
@@ -31,48 +32,14 @@ public class PlaySoundPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            if(type==ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT){
-                Minecraft.getInstance().getSoundHandler().play(new MiraculousEscapeHeartbeatSound(Minecraft.getInstance().player));
-            }
-            if(type==ModSoundType.EXTREME_HATRED_FIRST_STAGE){
-                if(this.onOrOff){
-                    Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player));
-                } else {
-                    if(Minecraft.getInstance().getSoundHandler().isPlaying(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player))){
-                        Minecraft.getInstance().getSoundHandler().stop(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player));
-                    }
-                }
-
-            }
-            if(type==ModSoundType.EXTREME_HATRED_MEDIUM_STAGE){
-                if(this.onOrOff){
-                    if(Minecraft.getInstance().getSoundHandler().isPlaying(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player))){
-                        Minecraft.getInstance().getSoundHandler().stop(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player));
-                    }
-                    Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player));
-                } else {
-                    if(Minecraft.getInstance().getSoundHandler().isPlaying(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player))){
-                        Minecraft.getInstance().getSoundHandler().stop(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player));
-                    }
-                }
-
-            }
-            if(type==ModSoundType.EXTREME_HATRED_FINAL_STAGE){
-                if(this.onOrOff) {
-                    if(Minecraft.getInstance().getSoundHandler().isPlaying(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player))){
-                        Minecraft.getInstance().getSoundHandler().stop(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player));
-                    }
-                    Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredFinalStageSound(Minecraft.getInstance().player));
-                }
-                else{
-                    if(Minecraft.getInstance().getSoundHandler().isPlaying(new ExtremeHatredFinalStageSound(Minecraft.getInstance().player))){
-                        Minecraft.getInstance().getSoundHandler().stop(new ExtremeHatredFinalStageSound(Minecraft.getInstance().player));
-                    }
-                }
-            }
+        DistExecutor.safeRunWhenOn(Dist.CLIENT,()-> () -> {
+            proxy = new ClientProxy();
+            ctx.get().enqueueWork(() -> {
+                proxy.handleISound(type,onOrOff);
+            });
+            ctx.get().setPacketHandled(true);
         });
-        ctx.get().setPacketHandled(true);
+
     }
 
     public enum ModSoundType {

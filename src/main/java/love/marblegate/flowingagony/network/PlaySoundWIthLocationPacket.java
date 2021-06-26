@@ -1,10 +1,13 @@
 package love.marblegate.flowingagony.network;
 
 import love.marblegate.flowingagony.registry.SoundRegistry;
-import love.marblegate.flowingagony.sound.MiraculousEscapeHeartbeatSound;
-import net.minecraft.client.Minecraft;
+import love.marblegate.flowingagony.util.client.ClientUtil;
+import love.marblegate.flowingagony.util.proxy.ClientProxy;
+import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -15,6 +18,7 @@ public class PlaySoundWIthLocationPacket {
     private final double x;
     private final double y;
     private final double z;
+    public static IProxy proxy = new IProxy() {};
 
 
     public PlaySoundWIthLocationPacket(PacketBuffer buffer) {
@@ -43,12 +47,15 @@ public class PlaySoundWIthLocationPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            if(type== ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND){
-                Minecraft.getInstance().world.playSound(x,y,z, SoundRegistry.malice_outbreak_knockback_sound.get(), SoundCategory.PLAYERS,10,1,true);
-            }
+        DistExecutor.safeRunWhenOn(Dist.CLIENT,()-> () -> {
+            proxy = new ClientProxy();
+            ctx.get().enqueueWork(() -> {
+                if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
+                    proxy.playSoundWithLocation(SoundRegistry.malice_outbreak_knockback_sound.get(), SoundCategory.PLAYERS, 10, 0.5F,x,y,z,true);
+                }
+            });
+            ctx.get().setPacketHandled(true);
         });
-        ctx.get().setPacketHandled(true);
     }
 
     public enum ModSoundType {

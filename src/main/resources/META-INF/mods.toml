@@ -15,7 +15,7 @@ version="${file.jarVersion}" #mandatory
 displayName="MarbleGate's Exotic Enchantment: Flowing Agony" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL="https://marblegate.love/" #optional
 logoFile="flowingagony.png" #optional
 credits="MarbleGateKeeper 白门守望者 & KadokawaR 鹿角烈" #optional
 authors="MarbleGate 纯白之门" #optional
