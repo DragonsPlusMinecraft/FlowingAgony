@@ -11,7 +11,7 @@ public class MiraculousEscapeHeartbeatSound extends TickableSound {
     public MiraculousEscapeHeartbeatSound(ClientPlayerEntity player) {
         super(SoundRegistry.miraculous_escape_heartbeat.get(), SoundCategory.PLAYERS);
         this.player = player;
-        this.repeat = false;
+        this.repeat = true;
         this.repeatDelay = 0;
         this.volume = 5.0F;
         this.isGlobal();

@@ -26,8 +26,13 @@ public class ClientProxy implements IProxy{
     @Override
     public void handleISound(PlaySoundPacket.ModSoundType type, boolean onOrOff) {
         if(type== PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT){
-            Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.miraculous_escape_heartbeat.getId(), SoundCategory.PLAYERS);
-            Minecraft.getInstance().getSoundHandler().play(new MiraculousEscapeHeartbeatSound(Minecraft.getInstance().player));
+            if(onOrOff){
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.miraculous_escape_heartbeat.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().play(new MiraculousEscapeHeartbeatSound(Minecraft.getInstance().player));
+            } else {
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.miraculous_escape_heartbeat.getId(), SoundCategory.PLAYERS);
+            }
+
         }
         if(type== PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE){
             if(onOrOff){
