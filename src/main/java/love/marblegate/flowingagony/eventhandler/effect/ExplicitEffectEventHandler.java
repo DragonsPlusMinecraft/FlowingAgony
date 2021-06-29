@@ -2,7 +2,7 @@ package love.marblegate.flowingagony.eventhandler.effect;
 
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.PlaySoundPacket;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;

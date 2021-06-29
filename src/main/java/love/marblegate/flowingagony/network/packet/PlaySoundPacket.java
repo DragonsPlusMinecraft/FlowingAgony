@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.network;
+package love.marblegate.flowingagony.network.packet;
 
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;

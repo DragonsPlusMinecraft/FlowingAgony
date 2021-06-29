@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.PlaySoundWIthLocationPacket;
+import love.marblegate.flowingagony.network.packet.PlaySoundWIthLocationPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;

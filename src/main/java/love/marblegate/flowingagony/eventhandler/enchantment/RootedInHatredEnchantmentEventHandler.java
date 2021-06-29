@@ -3,7 +3,7 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.PlaySoundPacket;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;

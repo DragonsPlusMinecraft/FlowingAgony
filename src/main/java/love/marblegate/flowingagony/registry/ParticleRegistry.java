@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.registry;
 
-import love.marblegate.flowingagony.particle.cursedantipathyparticle.CursedAntipathyParticleData;
-import love.marblegate.flowingagony.particle.cursedantipathyparticle.CursedAntipathyParticleType;
+import love.marblegate.flowingagony.fx.particle.cursedantipathyparticle.CursedAntipathyParticleData;
+import love.marblegate.flowingagony.fx.particle.cursedantipathyparticle.CursedAntipathyParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

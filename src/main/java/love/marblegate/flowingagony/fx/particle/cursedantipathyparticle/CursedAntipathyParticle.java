@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.particle.cursedantipathyparticle;
+package love.marblegate.flowingagony.fx.particle.cursedantipathyparticle;
 
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;

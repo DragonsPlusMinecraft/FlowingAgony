@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.util.proxy;
 
-import love.marblegate.flowingagony.network.PlaySoundPacket;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;

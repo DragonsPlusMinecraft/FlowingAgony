@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.effect;
 
-import love.marblegate.flowingagony.network.EffectPacket;
+import love.marblegate.flowingagony.network.packet.EffectPacket;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;

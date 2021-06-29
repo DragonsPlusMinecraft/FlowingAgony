@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.particle.cursedantipathyparticle;
+package love.marblegate.flowingagony.fx.particle.cursedantipathyparticle;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

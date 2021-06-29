@@ -1,9 +1,12 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -14,6 +17,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 @Mod.EventBusSubscriber()
 public class InnerPotentialEnchantmentEventHandler {
@@ -103,6 +107,14 @@ public class InnerPotentialEnchantmentEventHandler {
             if (event.getEntityLiving().getHealth() < 4f) {
                 if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.miraculous_escape_enchantment.get(), EquipmentSlotType.FEET)) {
                     if(!((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())){
+                        //Play Sound Effect
+                        if (!((PlayerEntity)(event.getEntityLiving())).world.isRemote) {
+                            Networking.INSTANCE.send(
+                                    PacketDistributor.PLAYER.with(
+                                            () -> (ServerPlayerEntity) ((PlayerEntity)(event.getEntityLiving()))
+                                    ),
+                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT,true));
+                        }
                         ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_force_escape_effect.get(),40));
                         ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_active_effect.get(),200));
                     }

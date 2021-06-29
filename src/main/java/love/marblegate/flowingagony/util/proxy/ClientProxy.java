@@ -1,11 +1,11 @@
 package love.marblegate.flowingagony.util.proxy;
 
-import love.marblegate.flowingagony.network.PlaySoundPacket;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.SoundRegistry;
-import love.marblegate.flowingagony.sound.ExtremeHatredFinalStageSound;
-import love.marblegate.flowingagony.sound.ExtremeHatredFirstStageSound;
-import love.marblegate.flowingagony.sound.ExtremeHatredMediumStageSound;
-import love.marblegate.flowingagony.sound.MiraculousEscapeHeartbeatSound;
+import love.marblegate.flowingagony.fx.sound.ExtremeHatredFinalStageSound;
+import love.marblegate.flowingagony.fx.sound.ExtremeHatredFirstStageSound;
+import love.marblegate.flowingagony.fx.sound.ExtremeHatredMediumStageSound;
+import love.marblegate.flowingagony.fx.sound.MiraculousEscapeHeartbeatSound;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.particles.IParticleData;
