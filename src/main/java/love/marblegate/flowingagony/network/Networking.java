@@ -1,8 +1,6 @@
 package love.marblegate.flowingagony.network;
 
-import love.marblegate.flowingagony.network.packet.EffectPacket;
-import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
-import love.marblegate.flowingagony.network.packet.PlaySoundWIthLocationPacket;
+import love.marblegate.flowingagony.network.packet.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -33,10 +31,10 @@ public class Networking {
         );
         INSTANCE.registerMessage(
                 nextID(),
-                EffectPacket.class,
-                EffectPacket::toBytes,
-                EffectPacket::new,
-                EffectPacket::handle
+                ParticleEffectPacket.class,
+                ParticleEffectPacket::toBytes,
+                ParticleEffectPacket::new,
+                ParticleEffectPacket::handle
         );
         INSTANCE.registerMessage(
                 nextID(),
@@ -44,6 +42,20 @@ public class Networking {
                 PlaySoundWIthLocationPacket::toBytes,
                 PlaySoundWIthLocationPacket::new,
                 PlaySoundWIthLocationPacket::handle
+        );
+        INSTANCE.registerMessage(
+                nextID(),
+                AbnormalJoySyncPacket.class,
+                AbnormalJoySyncPacket::toBytes,
+                AbnormalJoySyncPacket::new,
+                AbnormalJoySyncPacket::handle
+        );
+        INSTANCE.registerMessage(
+                nextID(),
+                RemoveEffectSyncToClientPacket.class,
+                RemoveEffectSyncToClientPacket::toBytes,
+                RemoveEffectSyncToClientPacket::new,
+                RemoveEffectSyncToClientPacket::handle
         );
     }
 }

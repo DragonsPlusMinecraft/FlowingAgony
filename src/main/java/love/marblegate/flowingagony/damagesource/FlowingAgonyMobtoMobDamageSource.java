@@ -1,9 +1,12 @@
 package love.marblegate.flowingagony.damagesource;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+
+import javax.annotation.Nullable;
 
 
 public class FlowingAgonyMobtoMobDamageSource extends DamageSource {
@@ -12,6 +15,12 @@ public class FlowingAgonyMobtoMobDamageSource extends DamageSource {
     public FlowingAgonyMobtoMobDamageSource(String damageTypeIn, LivingEntity damageSourceEntity) {
         super(damageTypeIn);
         this.damageSourceEntity = damageSourceEntity;
+    }
+
+    @Override
+    @Nullable
+    public Entity getTrueSource() {
+        return damageSourceEntity;
     }
 
     /**

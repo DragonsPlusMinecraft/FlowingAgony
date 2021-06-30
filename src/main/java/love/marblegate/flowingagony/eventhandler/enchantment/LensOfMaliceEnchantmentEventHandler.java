@@ -12,6 +12,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,7 +52,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doMaliceOutbreakEnchantmentEvent(LivingAttackEvent event){
+    public static void doMaliceOutbreakEnchantmentEvent(LivingDamageEvent event){
         if(event.getEntityLiving() instanceof PlayerEntity){
             if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.malice_outbreak_enchantment.get(),EquipmentSlotType.HEAD)){
                 if(event.getSource().getTrueSource() instanceof LivingEntity){
@@ -73,7 +74,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doInfectiousMaliceEnchantmentEvent(LivingAttackEvent event){
+    public static void doInfectiousMaliceEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.infectious_malice_enchantment.get());

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.effect;
 
-import love.marblegate.flowingagony.network.packet.EffectPacket;
+import love.marblegate.flowingagony.network.packet.ParticleEffectPacket;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
@@ -25,7 +25,7 @@ public class CursedAntipathyEffect extends Effect {
                                 () -> new PacketDistributor.TargetPoint(entityLivingBaseIn.getPosX(),entityLivingBaseIn.getPosY(),entityLivingBaseIn.getPosZ(),
                                         192,entityLivingBaseIn.world.getDimensionKey())
                         ),
-                        new EffectPacket(EffectPacket.EffectType.CURSED_ANTIPATHY_EFFECT,entityLivingBaseIn.getPosX(),entityLivingBaseIn.getPosY()+1,entityLivingBaseIn.getPosZ(),
+                        new ParticleEffectPacket(ParticleEffectPacket.EffectType.CURSED_ANTIPATHY_EFFECT,entityLivingBaseIn.getPosX(),entityLivingBaseIn.getPosY()+1,entityLivingBaseIn.getPosZ(),
                                 (amplifier+1)*0.5,(amplifier+1)*2));
             }
         }

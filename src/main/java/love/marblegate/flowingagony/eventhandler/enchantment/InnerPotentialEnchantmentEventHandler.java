@@ -111,7 +111,7 @@ public class InnerPotentialEnchantmentEventHandler {
                         if (!((PlayerEntity)(event.getEntityLiving())).world.isRemote) {
                             Networking.INSTANCE.send(
                                     PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) ((PlayerEntity)(event.getEntityLiving()))
+                                            () -> (ServerPlayerEntity) (event.getEntityLiving())
                                     ),
                                     new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT,true));
                         }

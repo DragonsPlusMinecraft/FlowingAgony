@@ -2,6 +2,8 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;
@@ -10,6 +12,7 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
@@ -19,6 +22,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.List;
 
@@ -56,8 +60,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
         event.getEntityLiving().addPotionEffect(new EffectInstance(effect_1,600));
         event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.NAUSEA,600));
         List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(),12,2, LivingEntity->
-                LivingEntity instanceof MonsterEntity || LivingEntity instanceof SlimeEntity
-                        || LivingEntity instanceof WitherEntity);
+                LivingEntity instanceof MonsterEntity || LivingEntity instanceof SlimeEntity);
         for(LivingEntity target: targets) {
             target.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) event.getEntityLiving()), event.getAmount()*3);
         }
@@ -101,7 +104,15 @@ public class MadeOfSufferingEnchantmentEventHandler {
                             (event.getSource().getDamageType().equals("magic")&&event.getEntityLiving().isPotionActive(Effects.POISON))){
                         LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
-                                cap-> cap.add(event.getAmount())
+                                cap-> {
+                                    cap.add(event.getAmount());
+                                    //Sync to Client
+                                    Networking.INSTANCE.send(
+                                            PacketDistributor.PLAYER.with(
+                                                    () -> (ServerPlayerEntity) (event.getEntityLiving())
+                                            ),
+                                            new AbnormalJoySyncPacket(cap.get()));
+                                }
                         );
                     }
                 }
@@ -114,11 +125,18 @@ public class MadeOfSufferingEnchantmentEventHandler {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.piercing_fever_enchantment.get(), EquipmentSlotType.CHEST)) {
-                    if(event.getSource().getDamageType().equals("mob")||event.getSource().getDamageType().equals("player")||
-                            event.getSource().getDamageType().equals("cactus")){
+                    if(event.getSource().getTrueSource() instanceof LivingEntity || event.getSource().getDamageType().equals("cactus")){
                         LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
-                                cap-> cap.add(event.getAmount())
+                                cap-> {
+                                    cap.add(event.getAmount());
+                                    //Sync to Client
+                                    Networking.INSTANCE.send(
+                                            PacketDistributor.PLAYER.with(
+                                                    () -> (ServerPlayerEntity) (event.getEntityLiving())
+                                            ),
+                                            new AbnormalJoySyncPacket(cap.get()));
+                                }
                         );
                     }
                 }

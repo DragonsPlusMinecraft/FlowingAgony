@@ -16,22 +16,17 @@ public class ShockTherapyImplicitEffect extends ImplicitBaseEffect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.shock_therapy_enchantment_active_effect.get()) {
-            int rate = 9;
-            if(amplifier==1) rate = 16;
-            else if(amplifier==2) rate = 23;
-            if(entityLivingBaseIn.getRNG().nextInt(100)<rate){
-                LightningBoltEntity lightningboltentity = EntityType.LIGHTNING_BOLT.create(entityLivingBaseIn.world);
-                lightningboltentity.setPosition(entityLivingBaseIn.getPosX(),entityLivingBaseIn.getPosY(),entityLivingBaseIn.getPosZ());
-                lightningboltentity.setEffectOnly(true);
-                entityLivingBaseIn.world.addEntity(lightningboltentity);
-                entityLivingBaseIn.attackEntityFrom(DamageSource.LIGHTNING_BOLT.setDamageBypassesArmor(),2);
-            }
+            LightningBoltEntity lightningboltentity = EntityType.LIGHTNING_BOLT.create(entityLivingBaseIn.world);
+            lightningboltentity.setPosition(entityLivingBaseIn.getPosX(),entityLivingBaseIn.getPosY(),entityLivingBaseIn.getPosZ());
+            lightningboltentity.setEffectOnly(true);
+            entityLivingBaseIn.world.addEntity(lightningboltentity);
+            entityLivingBaseIn.attackEntityFrom(DamageSource.LIGHTNING_BOLT.setDamageBypassesArmor(),entityLivingBaseIn.getRNG().nextInt(3)+2);
         }
     }
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        int k = 5;
+        int k = 10;
         if (k > 0) {
             return duration % k == 0;
         }

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class EffectPacket {
+public class ParticleEffectPacket {
     private final EffectType type;
     private final double x;
     private final double y;
@@ -18,7 +18,7 @@ public class EffectPacket {
     private final double[] args;
     public static IProxy proxy = new IProxy() {};
 
-    public EffectPacket(EffectType type, double x, double y, double z, double... args) {
+    public ParticleEffectPacket(EffectType type, double x, double y, double z, double... args) {
         this.type = type;
         this.x = x;
         this.y = y;
@@ -26,7 +26,7 @@ public class EffectPacket {
         this.args = args;
     }
 
-    public EffectPacket(PacketBuffer buffer) {
+    public ParticleEffectPacket(PacketBuffer buffer) {
         this.type = buffer.readEnumValue(EffectType.class);
         this.x = buffer.readDouble();
         this.y = buffer.readDouble();

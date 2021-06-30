@@ -14,18 +14,13 @@ public class PaperBrainImplicitEffect extends ImplicitBaseEffect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.paper_brain_enchantment_active_effect.get()) {
-            int rate = 30;
-            if(amplifier==1) rate = 40;
-            else if(amplifier==2) rate = 50;
-            if(entityLivingBaseIn.getRNG().nextInt(100)<rate){
-                entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC.setDamageBypassesArmor(),1);
-            }
+                entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC.setDamageBypassesArmor(),entityLivingBaseIn.getRNG().nextInt(4)+5);
         }
     }
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        int k = 5;
+        int k = 20;
         if (k > 0) {
             return duration % k == 0;
         }

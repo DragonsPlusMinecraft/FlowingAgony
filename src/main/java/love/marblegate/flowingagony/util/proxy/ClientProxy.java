@@ -9,6 +9,7 @@ import love.marblegate.flowingagony.fx.sound.MiraculousEscapeHeartbeatSound;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -65,5 +66,10 @@ public class ClientProxy implements IProxy{
     @Override
     public void playSoundWithLocation(SoundEvent soundEvent, SoundCategory category, float volume, float pitch, double x, double y, double z, boolean distanceDelay) {
         Minecraft.getInstance().world.playSound(x, y, z, soundEvent, category, volume, pitch, distanceDelay);
+    }
+
+    @Override
+    public void removeEffect(Effect effect){
+        Minecraft.getInstance().player.removeActivePotionEffect(effect.getEffect());
     }
 }

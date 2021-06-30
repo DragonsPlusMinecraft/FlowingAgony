@@ -3,8 +3,11 @@ package love.marblegate.flowingagony.eventhandler.effect;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
+import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
+import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
+import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -18,6 +21,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -73,7 +77,7 @@ public class ExplicitEffectEventHandler {
     }
 
     @SubscribeEvent
-    public static void doCurseOfUndeadEffectEvent_applyBurningInSunlightEffect(TickEvent.PlayerTickEvent event){
+    public static void doCurseOfUndeadEffectEvent_applyBurning_removeCurrentImmuningEffect(TickEvent.PlayerTickEvent event){
         if(event.phase == TickEvent.Phase.START){
             if(!event.player.world.isRemote()){
                 if(event.player.isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
@@ -99,6 +103,25 @@ public class ExplicitEffectEventHandler {
                     }
                     if(event.player.isPotionActive(Effects.HUNGER)){
                         event.player.removeActivePotionEffect(Effects.HUNGER);
+                        //Sync to Client
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.player
+                                ),
+                                new RemoveEffectSyncToClientPacket(RemoveEffectSyncToClientPacket.EffectType.HUNGER));
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void doCurseOfUndeadEffectEvent_addImmunity(PotionEvent.PotionApplicableEvent event){
+        if(!event.getEntityLiving().world.isRemote()){
+            if(event.getEntityLiving() instanceof PlayerEntity){
+                if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
+                    if(event.getPotionEffect().getPotion().equals(Effects.HUNGER)){
+                        event.setResult(Event.Result.DENY);
                     }
                 }
             }

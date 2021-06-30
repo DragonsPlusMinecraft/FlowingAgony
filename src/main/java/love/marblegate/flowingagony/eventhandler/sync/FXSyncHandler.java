@@ -1,9 +1,8 @@
-package love.marblegate.flowingagony.eventhandler;
+package love.marblegate.flowingagony.eventhandler.sync;
 
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -12,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 @Mod.EventBusSubscriber()
-public class FXEventHandler {
+public class FXSyncHandler {
 
     //Fix FX disappearing when switch dimension
     @SubscribeEvent
@@ -34,7 +33,8 @@ public class FXEventHandler {
                                 () -> (ServerPlayerEntity) player
                         ),
                         new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true));
-            } else if (player.isPotionActive(EffectRegistry.extreme_hatred_effect.get())) {
+            }
+            if (player.isPotionActive(EffectRegistry.extreme_hatred_effect.get())) {
                 int temp = player.getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier();
                 switch (temp) {
                     case 0:

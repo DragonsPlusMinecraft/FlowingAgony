@@ -1,7 +1,10 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.effect.LightburnFungalInfectionEffect;
 import love.marblegate.flowingagony.effect.special.ImplicitBaseEffect;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;
@@ -12,6 +15,7 @@ import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -28,6 +32,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.List;
 import java.util.Random;
@@ -38,15 +43,21 @@ public class TheMistakensEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doShadowbornEnchantmentEvent(TickEvent.PlayerTickEvent event){
-        if(event.phase== TickEvent.Phase.START){
-            if (event.player.isPotionActive(Effects.BLINDNESS)) {
-                if (event.player.world.getLight(new BlockPos(event.player.getPosition())) >= 5) {
-                    if (PlayerUtil.isPlayerSpecificSlotEnchanted(event.player, EnchantmentRegistry.shadowborn_enchantment.get(), EquipmentSlotType.HEAD)) {
-                        event.player.removeActivePotionEffect(Effects.BLINDNESS);
+        if(event.phase == TickEvent.Phase.START){
+            if(!event.player.world.isRemote()){
+                if (event.player.isPotionActive(Effects.BLINDNESS)) {
+                    if (event.player.world.getLight(new BlockPos(event.player.getPosition())) >= 5) {
+                        if (PlayerUtil.isPlayerSpecificSlotEnchanted(event.player, EnchantmentRegistry.shadowborn_enchantment.get(), EquipmentSlotType.HEAD)) {
+                            event.player.removeActivePotionEffect(Effects.BLINDNESS);
+                            //Sync to Client
+                            Networking.INSTANCE.send(
+                                    PacketDistributor.PLAYER.with(
+                                            () -> (ServerPlayerEntity) event.player
+                                    ),
+                                    new RemoveEffectSyncToClientPacket(RemoveEffectSyncToClientPacket.EffectType.BLINDNESS));
+                        }
                     }
                 }
-            }
-            if(!event.player.world.isRemote()){
                 if(event.player.world.getLight(new BlockPos(event.player.getPosition()))<=5){
                     if(PlayerUtil.isPlayerSpecificSlotEnchanted(event.player,EnchantmentRegistry.shadowborn_enchantment.get(), EquipmentSlotType.HEAD)){
                         if(!event.player.isPotionActive(Effects.NIGHT_VISION)){
@@ -166,6 +177,32 @@ public class TheMistakensEnchantmentEventHandler {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void doLightburnFungalParasiticEnchantmentEvent_removeCurrentImmuningEffect(TickEvent.PlayerTickEvent event){
+        if(!event.player.world.isRemote()){
+            if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.player,EnchantmentRegistry.lightburn_fungal_parasitic_enchantment.get(),EquipmentSlotType.CHEST)){
+                if(event.player.isPotionActive(Effects.POISON)){
+                    event.player.removeActivePotionEffect(Effects.POISON);
+                    //Sync to Client
+                    Networking.INSTANCE.send(
+                            PacketDistributor.PLAYER.with(
+                                    () -> (ServerPlayerEntity) event.player
+                            ),
+                            new RemoveEffectSyncToClientPacket(RemoveEffectSyncToClientPacket.EffectType.POISON));
+                }
+                if(event.player.isPotionActive(EffectRegistry.lightburn_fungal_infection_effect.get())){
+                    event.player.removeActivePotionEffect(EffectRegistry.lightburn_fungal_infection_effect.get());
+                    //Sync to Client
+                    Networking.INSTANCE.send(
+                            PacketDistributor.PLAYER.with(
+                                    () -> (ServerPlayerEntity) event.player
+                            ),
+                            new RemoveEffectSyncToClientPacket(RemoveEffectSyncToClientPacket.EffectType.LIGHTBURN_FUNGAL_INFECTION));
                 }
             }
         }
