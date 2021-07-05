@@ -5,170 +5,37 @@ import net.minecraft.enchantment.Enchantment;
 public class EnchantmentLevelUtil {
     public static int get(Enchantment.Rarity rarity, int highestEnchantmentLevel, int currentLevel, boolean isMin) {
         switch (rarity.getWeight()) {
+            //Rarity is VERY RARE
+
+            //We define "StandardMin" as "When currentLevel reaches maximum, the minimal enchantability should be".
+            //StandardMin is 30,
+
+            //We define "StandardMax" as "When currentLevel reaches maximum, the maximal enchantability should be".
+            //StandardMax is 80,
             case 1:
-                if (highestEnchantmentLevel == 1) {
-                    if (isMin) {
-                        return 25;
-                    } else {
-                        return 50;
-                    }
-                } else if (highestEnchantmentLevel == 2) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 21;
-                        } else {
-                            return 25;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 30;
-                        } else {
-                            return 50;
-                        }
-                    }
-                } else if (highestEnchantmentLevel == 3) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 21;
-                        } else if (currentLevel == 2) {
-                            return 23;
-                        } else {
-                            return 25;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 30;
-                        } else if (currentLevel == 2) {
-                            return 35;
-                        } else {
-                            return 50;
-                        }
-                    }
-                }
-                break;
+                if(isMin) return 30 - 4 * (highestEnchantmentLevel - currentLevel);
+                else return 80 - 10 * (highestEnchantmentLevel - currentLevel);
+
+            //Rarity is RARE
+
+            //We define "StandardMin" as "When currentLevel reaches maximum, the minimal enchantability should be".
+            //StandardMin is 20,
+
+            //We define "StandardMax" as "When currentLevel reaches maximum, the maximal enchantability should be".
+            //StandardMax is 70,
             case 2:
-                if (highestEnchantmentLevel == 1) {
-                    if (isMin) {
-                        return 23;
-                    } else {
-                        return 50;
-                    }
-                } else if (highestEnchantmentLevel == 2) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 19;
-                        } else {
-                            return 23;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 30;
-                        } else {
-                            return 50;
-                        }
-                    }
-                } else if (highestEnchantmentLevel == 3) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 19;
-                        } else if (currentLevel == 2) {
-                            return 21;
-                        } else {
-                            return 23;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 27;
-                        } else if (currentLevel == 2) {
-                            return 32;
-                        } else {
-                            return 50;
-                        }
-                    }
-                }
-                break;
+                if(isMin) return 20 - 3 * (highestEnchantmentLevel - currentLevel);
+                else return 70 - 9 * (highestEnchantmentLevel - currentLevel);
+
+            //Rarity is UNCOMMON
             case 5:
-                if (highestEnchantmentLevel == 1) {
-                    if (isMin) {
-                        return 19;
-                    } else {
-                        return 50;
-                    }
-                } else if (highestEnchantmentLevel == 2) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 15;
-                        } else {
-                            return 19;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 27;
-                        } else {
-                            return 50;
-                        }
-                    }
-                } else if (highestEnchantmentLevel == 3) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 15;
-                        } else if (currentLevel == 2) {
-                            return 17;
-                        } else {
-                            return 19;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 23;
-                        } else if (currentLevel == 2) {
-                            return 28;
-                        } else {
-                            return 50;
-                        }
-                    }
-                }
-                break;
+                if(isMin) return 10 - (highestEnchantmentLevel - currentLevel);
+                else return 60 - 8 * (highestEnchantmentLevel - currentLevel);
+
+            //Rarity is COMMON
             case 10:
-                if (highestEnchantmentLevel == 1) {
-                    if (isMin) {
-                        return 14;
-                    } else {
-                        return 50;
-                    }
-                } else if (highestEnchantmentLevel == 2) {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 10;
-                        } else {
-                            return 14;
-                        }
-                    } else {
-                        if (currentLevel == 1) {
-                            return 22;
-                        } else {
-                            return 50;
-                        }
-                    }
-                } else {
-                    if (isMin) {
-                        if (currentLevel == 1) {
-                            return 10;
-                        } else if (currentLevel == 2) {
-                            return 12;
-                        } else {
-                            return 14;
-                        }
-                    } else if (highestEnchantmentLevel == 3) {
-                        if (currentLevel == 1) {
-                            return 18;
-                        } else if (currentLevel == 2) {
-                            return 23;
-                        } else {
-                            return 50;
-                        }
-                    }
-                }
-                break;
+                if(isMin) return 1 + currentLevel;
+                else return 51 - 6 * (highestEnchantmentLevel - currentLevel);
         }
         return 1;
     }
