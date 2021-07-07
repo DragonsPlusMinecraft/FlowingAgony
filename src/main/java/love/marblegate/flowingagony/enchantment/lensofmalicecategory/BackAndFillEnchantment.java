@@ -1,16 +1,17 @@
-package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
+package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
+import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
-public class OutrageoutSpiritEnchantment extends Enchantment{
-    public OutrageoutSpiritEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, CustomEnchantmentType.AXE_AND_SWORD, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+public class BackAndFillEnchantment extends Enchantment{
+    public BackAndFillEnchantment() {
+        super(Rarity.VERY_RARE, CustomEnchantmentType.BOW_AND_CROSSBOW, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
     }
 
     @Override
@@ -25,26 +26,26 @@ public class OutrageoutSpiritEnchantment extends Enchantment{
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 3;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.OUTRAGEOUS_SPIRIT.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.OUTRAGEOUS_SPIRIT.get(); }
+    public boolean canVillagerTrade() { return Config.BACK_AND_FILL.get(); }
+
+    @Override
+    public boolean canGenerateInLoot() { return Config.BACK_AND_FILL.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.OUTRAGEOUS_SPIRIT.get();
+        return Config.BACK_AND_FILL.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.OUTRAGEOUS_SPIRIT.get())
+        if(Config.I_SEE_YOU_NOW.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;
     }
-
 }

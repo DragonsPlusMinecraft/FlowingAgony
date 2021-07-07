@@ -8,8 +8,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class HatredBloodlineEnchantment extends Enchantment{
-    public HatredBloodlineEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR, p_i46731_3_);
+    public HatredBloodlineEnchantment() {
+        super(Enchantment.Rarity.UNCOMMON, EnchantmentType.ARMOR, new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET});
     }
 
     @Override

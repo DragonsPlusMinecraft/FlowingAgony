@@ -24,14 +24,17 @@ public class EffectRegistry {
             .addAttributesModifier(Attributes.ATTACK_DAMAGE,"444E310D-DE08-4D8D-A4B1-33B06CFB8703",1D, AttributeModifier.Operation.ADDITION));
 
     //Hidden Effect
+    public static final RegistryObject<Effect> back_and_fill_enchantment_active_effect = EFFECT.register("back_and_fill_enchantment_active_effect", () -> new BackAndFillImplicitEffect()
+            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"D6984A53-7DD1-4093-9878-345958E2E92A",-0.1D, AttributeModifier.Operation.MULTIPLY_TOTAL));
     public static final RegistryObject<Effect> potential_burst_enchantment_active_effect = EFFECT.register("potential_burst_enchantment_active", () -> new PotentialBurstImplicitEffect()
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"B22509E7-3596-430F-8F88-66A3EAFC99F7",0.03D, AttributeModifier.Operation.ADDITION));
     public static final RegistryObject<Effect> frivolous_step_enchantment_active_effect = EFFECT.register("frivolous_step_enchantment_active", () -> new FrivolousStepImplicitEffect()
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"412C831F-22EA-43B8-B74B-D172019AD3D2",0.07D, AttributeModifier.Operation.ADDITION));
     public static final RegistryObject<Effect> hatred_bloodline_enchantment_active_effect = EFFECT.register("hatred_bloodline_enchantment_active", () -> new HatredBloodlineImplicitEffect()
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"C164A28C-4A60-4957-B414-1DF28bb56C74",0.0083D, AttributeModifier.Operation.ADDITION)
-            .addAttributesModifier(Attributes.ATTACK_SPEED,"253AED79-661D-468C-B30F-BB2A82DD93E1",0.33D, AttributeModifier.Operation.ADDITION));
-    public static final RegistryObject<Effect> fresh_revenge_enchantment_active_effect = EFFECT.register("fresh_revenge_enchantment_active", BeneficialBlankImplicitEffect::new);
+            .addAttributesModifier(Attributes.ATTACK_SPEED,"F07D977E-F516-4D16-9088-11B70D847FFA",0.33D, AttributeModifier.Operation.ADDITION));
+    public static final RegistryObject<Effect> fresh_revenge_enchantment_active_effect = EFFECT.register("fresh_revenge_enchantment_active", () -> new FreshRevengeImplicitEffect()
+            .addAttributesModifier(Attributes.ATTACK_DAMAGE,"f07d977e-f516-4d16-9088-11b70d847ffa",2D, AttributeModifier.Operation.ADDITION));
     public static final RegistryObject<Effect> miraculous_escape_enchantment_active_effect = EFFECT.register("miraculous_escape_encahntment_active", BeneficialBlankImplicitEffect::new);
     public static final RegistryObject<Effect> miraculous_escape_enchantment_force_escape_effect = EFFECT.register("miraculous_escape_encahntment_force_escape", MiraculousEscapeForceEscapeEffect::new);
     public static final RegistryObject<Effect> paper_brain_enchantment_active_effect = EFFECT.register("paper_brain_enchantment_active", () -> new PaperBrainImplicitEffect()
@@ -40,8 +43,8 @@ public class EffectRegistry {
     public static final RegistryObject<Effect> shock_therapy_enchantment_active_effect = EFFECT.register("shock_therapy_enchantment_active", () -> new ShockTherapyImplicitEffect()
             .addAttributesModifier(Attributes.FOLLOW_RANGE,"BA46BF78-B706-4FB0-9EA0-98978BB648B1",-0.96d, AttributeModifier.Operation.MULTIPLY_TOTAL)
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"058D9210-1B26-4578-85C9-2CF67698F1E1",-0.67D, AttributeModifier.Operation.MULTIPLY_TOTAL));
-    public static final RegistryObject<Effect> thron_in_flesh_active_effect = EFFECT.register("thron_in_flesh_active", () -> new ShockTherapyImplicitEffect()
-            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"081F9BE2-F716-49B4-A579-62582F2A9DA8",-0.5d, AttributeModifier.Operation.MULTIPLY_TOTAL));
+    public static final RegistryObject<Effect> thron_in_flesh_active_effect = EFFECT.register("thron_in_flesh_active", () -> new ThornInFleshImplicitEffect()
+            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"081F9BE2-F716-49B4-A579-62582F2A9DA8",-0.5D, AttributeModifier.Operation.MULTIPLY_TOTAL));
     public static final RegistryObject<Effect> eyesore_enchantment_active_effect = EFFECT.register("eyesore_enchantment_active", EyesoreImplicitEffect::new);
 
 

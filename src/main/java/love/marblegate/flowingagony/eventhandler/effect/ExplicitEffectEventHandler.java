@@ -37,8 +37,8 @@ public class ExplicitEffectEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving().isPotionActive(EffectRegistry.cursed_hatred_effect.get())){
                 int potionLvl = event.getEntityLiving().getActivePotionEffect(EffectRegistry.cursed_hatred_effect.get()).getAmplifier()+1;
-                event.setAmount((float)(event.getAmount()*(1.5+potionLvl*0.3)));
                 event.getEntityLiving().removePotionEffect(EffectRegistry.cursed_hatred_effect.get());
+                event.getEntityLiving().attackEntityFrom(CustomDamageSource.CURSED_HATRED, (float) (potionLvl * 2 * (((event.getEntityLiving() instanceof PlayerEntity)?(0.9 - 0.1 * Math.random()):1))));
             }
         }
     }

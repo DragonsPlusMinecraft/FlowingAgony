@@ -9,8 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImplicitBaseEffect extends Effect {
-    public ImplicitBaseEffect(EffectType typeIn, int liquidColorIn) {
+    public ImplicitBaseEffect() {
         super(EffectType.NEUTRAL, 0);
+    }
+
+    public ImplicitBaseEffect(EffectType typeIn) {
+        super(typeIn, 0);
     }
 
     @Override

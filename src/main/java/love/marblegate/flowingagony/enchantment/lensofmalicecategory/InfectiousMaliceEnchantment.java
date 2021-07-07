@@ -9,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class InfectiousMaliceEnchantment extends Enchantment{
-    public InfectiousMaliceEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR, p_i46731_3_);
+    public InfectiousMaliceEnchantment() {
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR, new EquipmentSlotType[]{EquipmentSlotType.LEGS,EquipmentSlotType.HEAD,EquipmentSlotType.CHEST,EquipmentSlotType.FEET});
     }
 
     @Override
@@ -30,7 +30,7 @@ public class InfectiousMaliceEnchantment extends Enchantment{
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.vengeance_enchantment.get();
+        return super.canApplyTogether(p_77326_1_);
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraft.world.Explosion;
 
 public class EyesoreImplicitEffect extends ImplicitBaseEffect {
     public EyesoreImplicitEffect() {
-        super(EffectType.HARMFUL, 0);
+        super();
     }
 
 

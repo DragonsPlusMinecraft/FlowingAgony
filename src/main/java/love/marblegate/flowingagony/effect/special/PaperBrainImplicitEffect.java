@@ -5,9 +5,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.DamageSource;
 
-public class PaperBrainImplicitEffect extends ImplicitBaseEffect {
+public class PaperBrainImplicitEffect extends HarmfulBlankImplicitEffect {
     public PaperBrainImplicitEffect() {
-        super(EffectType.HARMFUL, 0);
+        super();
     }
 
 

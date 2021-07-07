@@ -22,17 +22,18 @@ public class EnchantmentRegistry {
 
     public static final DeferredRegister<Enchantment> ENCHANTMENT = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, "flowingagony");
 
-    public static final RegistryObject<Enchantment> vengeance_enchantment = ENCHANTMENT.register("vengeance", () -> new VengeanceEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> perceived_malice_enchantment = ENCHANTMENT.register("perceived_malice", () -> new PerceivedMaliceEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> malice_outbreak_enchantment = ENCHANTMENT.register("malice_outbreak", () -> new MaliceOutbreakEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> infectious_malice_enchantment = ENCHANTMENT.register("infectious_malice", () -> new InfectiousMaliceEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.LEGS,EquipmentSlotType.HEAD,EquipmentSlotType.CHEST,EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> i_see_you_now_enchantment = ENCHANTMENT.register("i_see_you_now", () -> new ISeeYouNowEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
+    public static final RegistryObject<Enchantment> vengeance_enchantment = ENCHANTMENT.register("vengeance", VengeanceEnchantment::new);
+    public static final RegistryObject<Enchantment> perceived_malice_enchantment = ENCHANTMENT.register("perceived_malice", PerceivedMaliceEnchantment::new);
+    public static final RegistryObject<Enchantment> malice_outbreak_enchantment = ENCHANTMENT.register("malice_outbreak", MaliceOutbreakEnchantment::new);
+    public static final RegistryObject<Enchantment> infectious_malice_enchantment = ENCHANTMENT.register("infectious_malice", InfectiousMaliceEnchantment::new);
+    public static final RegistryObject<Enchantment> i_see_you_now_enchantment = ENCHANTMENT.register("i_see_you_now", ISeeYouNowEnchantment::new);
+    public static final RegistryObject<Enchantment> back_and_fill = ENCHANTMENT.register("back_and_fill", BackAndFillEnchantment::new);
 
-    public static final RegistryObject<Enchantment> resentful_soul_enchantment = ENCHANTMENT.register("resentful_soul", () -> new ResentfulSoulEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> too_resentful_to_die_enchantment = ENCHANTMENT.register("too_resentful_to_die", () -> new TooResentfulToDieEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> outrageous_spirit_enchantment = ENCHANTMENT.register("outrageous_spirit", () -> new OutrageoutSpiritEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> hatred_bloodline_enchantment = ENCHANTMENT.register("hatred_bloodline", () -> new HatredBloodlineEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> fresh_revenge_enchantment = ENCHANTMENT.register("fresh_revenge", () -> new FreshRevengeEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
+    public static final RegistryObject<Enchantment> resentful_soul_enchantment = ENCHANTMENT.register("resentful_soul", ResentfulSoulEnchantment::new);
+    public static final RegistryObject<Enchantment> too_resentful_to_die_enchantment = ENCHANTMENT.register("too_resentful_to_die", TooResentfulToDieEnchantment::new);
+    public static final RegistryObject<Enchantment> outrageous_spirit_enchantment = ENCHANTMENT.register("outrageous_spirit", OutrageoutSpiritEnchantment::new);
+    public static final RegistryObject<Enchantment> hatred_bloodline_enchantment = ENCHANTMENT.register("hatred_bloodline", HatredBloodlineEnchantment::new);
+    public static final RegistryObject<Enchantment> fresh_revenge_enchantment = ENCHANTMENT.register("fresh_revenge", FreshRevengeEnchantment::new);
 
     public static final RegistryObject<Enchantment> shadowborn_enchantment = ENCHANTMENT.register("shadowborn", () -> new ShadowbornEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
     public static final RegistryObject<Enchantment> prototype_chaotic_enchantment = ENCHANTMENT.register("prototype_chaotic", () -> new PrototypeChaoticEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));

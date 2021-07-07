@@ -1,15 +1,14 @@
 package love.marblegate.flowingagony.effect.special;
 
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.potion.EffectType;
 
-public class HatredBloodlineImplicitEffect extends BeneficialBlankImplicitEffect {
-    public HatredBloodlineImplicitEffect() {
+public class FreshRevengeImplicitEffect extends BeneficialBlankImplicitEffect {
+    public FreshRevengeImplicitEffect() {
         super();
     }
 
     @Override
     public double getAttributeModifierAmount(int amplifier, AttributeModifier modifier) {
-        return modifier.getAmount() * (double)(amplifier + 1);
+        return modifier.getAmount() + amplifier + 1;
     }
 }

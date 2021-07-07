@@ -9,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class ISeeYouNowEnchantment extends Enchantment{
-    public ISeeYouNowEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR_HEAD, p_i46731_3_);
+    public ISeeYouNowEnchantment() {
+        super(Enchantment.Rarity.UNCOMMON, EnchantmentType.ARMOR_HEAD, new EquipmentSlotType[]{EquipmentSlotType.HEAD});
     }
 
     @Override
@@ -26,11 +26,6 @@ public class ISeeYouNowEnchantment extends Enchantment{
     @Override
     public int getMaxLevel() {
         return 1;
-    }
-
-    @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.vengeance_enchantment.get();
     }
 
     @Override

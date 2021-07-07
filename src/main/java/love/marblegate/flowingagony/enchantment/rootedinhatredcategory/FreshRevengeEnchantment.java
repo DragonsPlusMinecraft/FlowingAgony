@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -8,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class FreshRevengeEnchantment extends Enchantment{
-    public FreshRevengeEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.WEAPON, p_i46731_3_);
+    public FreshRevengeEnchantment() {
+        super(Enchantment.Rarity.UNCOMMON, CustomEnchantmentType.AXE_AND_SWORD, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
     }
 
     @Override

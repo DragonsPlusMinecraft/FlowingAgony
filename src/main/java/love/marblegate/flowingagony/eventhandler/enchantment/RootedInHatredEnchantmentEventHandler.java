@@ -110,7 +110,7 @@ public class RootedInHatredEnchantmentEventHandler {
                     negativeEffectCount += ((PlayerEntity) event.getSource().getTrueSource()).getActivePotionEffects().stream().filter(
                             EffectInstance -> EffectInstance.getPotion().getEffectType()== EffectType.HARMFUL
                     ).count();
-                    event.setAmount(event.getAmount()*(1+((0.2f+(0.1f*enchantmentLvl))*negativeEffectCount)));
+                    event.setAmount( event.getAmount() + negativeEffectCount * enchantmentLvl );
                 }
             }
         }
@@ -155,20 +155,10 @@ public class RootedInHatredEnchantmentEventHandler {
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.fresh_revenge_enchantment.get(),EquipmentSlotType.MAINHAND);
                 if(enchantmentLvl!=0){
-                    if(event.getEntityLiving().getLastAttackedEntityTime()<=(12+enchantmentLvl*4)){
-                        ((PlayerEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active_effect.get(),100 * enchantmentLvl));
+                    if(event.getEntityLiving().getLastAttackedEntityTime()<=(20+enchantmentLvl*4)){
+                        ((PlayerEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active_effect.get(),200,enchantmentLvl-1));
                     }
                 }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void doFreshRevengeEnchantmentEvent_appleMultiplierToAttack(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(((PlayerEntity)event.getSource().getTrueSource()).isPotionActive(EffectRegistry.fresh_revenge_enchantment_active_effect.get()))
-                    event.setAmount(event.getAmount()*(1+((event.getEntityLiving().getRNG().nextFloat())*1.5f)));
             }
         }
     }

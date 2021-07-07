@@ -4,9 +4,9 @@ import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectType;
 
-public class ThornInFleshImplicitEffect extends ImplicitBaseEffect {
+public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
     public ThornInFleshImplicitEffect() {
-        super(EffectType.HARMFUL, 0);
+        super();
     }
 
 

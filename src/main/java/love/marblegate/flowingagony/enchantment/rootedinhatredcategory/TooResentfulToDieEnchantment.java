@@ -9,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class TooResentfulToDieEnchantment extends Enchantment{
-    public TooResentfulToDieEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR_HEAD, p_i46731_3_);
+    public TooResentfulToDieEnchantment() {
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR_HEAD, new EquipmentSlotType[]{EquipmentSlotType.HEAD});
     }
 
     @Override

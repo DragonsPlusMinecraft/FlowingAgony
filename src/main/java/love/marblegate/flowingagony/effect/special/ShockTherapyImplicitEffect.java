@@ -7,9 +7,9 @@ import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.DamageSource;
 
-public class ShockTherapyImplicitEffect extends ImplicitBaseEffect {
+public class ShockTherapyImplicitEffect extends HarmfulBlankImplicitEffect {
     public ShockTherapyImplicitEffect() {
-        super(EffectType.HARMFUL, 0);
+        super();
     }
 
 

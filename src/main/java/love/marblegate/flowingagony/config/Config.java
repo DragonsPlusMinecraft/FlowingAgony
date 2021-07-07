@@ -56,6 +56,7 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue PROTOTYPE_CHAOTIC_TYPE_BETA;
     public static final ForgeConfigSpec.BooleanValue SHADOWBORN;
     public static final ForgeConfigSpec.BooleanValue BURIAL_OBJECT;
+    public static final ForgeConfigSpec.BooleanValue BACK_AND_FILL;
 
     static{
         ForgeConfigSpec.Builder ACT_BUILDER = new ForgeConfigSpec.Builder();
@@ -96,6 +97,7 @@ public class Config {
         MALICE_OUTBREAK = ACT_BUILDER.comment("Is \"Malice OutBreak\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("MALICE_OUTBREAK",true);
         PERCEIVED_MALICE = ACT_BUILDER.comment("Is \"Perceived Malice\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("PERCEIVED_MALICE",true);
         VENGEANCE = ACT_BUILDER.comment("Is \"Vengeance\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("VENGEANCE",true);
+        BACK_AND_FILL = ACT_BUILDER.comment("Is \"Back and Fill\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("BACK_AND_FILL",true);
         AGONY_SCREAMER = ACT_BUILDER.comment("Is \"Agony Screamer\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("AGONY_SCREAMER",true);
         CUTTING_WATERMELON_DREAM = ACT_BUILDER.comment("Is \"Cutting Watermelon Dream\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("CUTTING_WATERMELON_DREAM",true);
         INSANE_POET = ACT_BUILDER.comment("Is \"Insane Poet\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("INSANE_POET",true);
