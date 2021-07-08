@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.enchantment.survivaltrickscategory;
+package love.marblegate.flowingagony.enchantment.lastwish;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;

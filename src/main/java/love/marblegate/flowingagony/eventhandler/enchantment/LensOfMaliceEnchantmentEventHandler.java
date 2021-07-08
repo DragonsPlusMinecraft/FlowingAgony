@@ -138,7 +138,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     @SubscribeEvent
     public static void doBackAndFillEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getTrueSource() instanceof PlayerEntity && EntityUtil.isMonster(event.getEntityLiving())){
+            if(event.getSource().getTrueSource() instanceof PlayerEntity && (EntityUtil.isHostile(event.getEntityLiving(),false) && EntityUtil.isNeutral(event.getEntityLiving(),false))){
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.back_and_fill.get(),EquipmentSlotType.MAINHAND);
                 if(enchantmentLvl!=0){
                     if(event.getEntityLiving().getAttackingEntity() == event.getSource().getTrueSource()){

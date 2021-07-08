@@ -16,6 +16,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.*;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.TickEvent;
@@ -234,11 +235,11 @@ public class TheMistakensEnchantmentEventHandler {
     @SubscribeEvent
     public static void doScholarOfOriginalSinEnchantmentEvent_addWeakness(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity && !event.isCanceled() && !event.getSource().getDamageType().equals("outOfWorld")){
+            if(event.getEntityLiving() instanceof PlayerEntity && !event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD){
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.scholar_of_original_sin.get(),EquipmentSlotType.CHEST);
                 if(enchantmentLvl!=0){
-                    float damageModified = Math.min(event.getAmount() * (2.1F - 0.1F * enchantmentLvl),10);
-                    event.setAmount(damageModified);
+                    float extraDamage = Math.min(event.getAmount() * (1.1F - 0.1F * enchantmentLvl),10);
+                    event.setAmount(event.getAmount()+extraDamage);
                 }
             }
         }

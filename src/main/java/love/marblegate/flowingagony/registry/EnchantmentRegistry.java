@@ -4,6 +4,8 @@ import love.marblegate.flowingagony.enchantment.diceoffraudcategory.*;
 import love.marblegate.flowingagony.enchantment.flameofenvycategory.*;
 import love.marblegate.flowingagony.enchantment.gloomyeracategory.*;
 import love.marblegate.flowingagony.enchantment.innerpotentialcategory.*;
+import love.marblegate.flowingagony.enchantment.lastwish.MorirsDeathwishEnchantment;
+import love.marblegate.flowingagony.enchantment.lastwish.MorirsLifeboundEnchantment;
 import love.marblegate.flowingagony.enchantment.lensofmalicecategory.*;
 import love.marblegate.flowingagony.enchantment.madeofmadnesscategory.*;
 import love.marblegate.flowingagony.enchantment.madeofsufferingcategory.*;
@@ -50,9 +52,10 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> savor_the_taste = ENCHANTMENT.register("savor_the_tasted", SavorTheTastedEnchantment::new);
     public static final RegistryObject<Enchantment> exotic_healer = ENCHANTMENT.register("exotic_healer", ExoticHealerEnchantment::new);
 
-    public static final RegistryObject<Enchantment> survival_shortcut_enchantment = ENCHANTMENT.register("survival_shortcut", () -> new SurvivalShortcutEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
-    public static final RegistryObject<Enchantment> survival_ruse_enchantment = ENCHANTMENT.register("survival_ruse", () -> new SurvivalRuseEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
-    public static final RegistryObject<Enchantment> necessary_evil_enchantment = ENCHANTMENT.register("necessary_evil", () -> new NecessaryEvilEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
+    public static final RegistryObject<Enchantment> survival_shortcut = ENCHANTMENT.register("survival_shortcut", SurvivalShortcutEnchantment::new);
+    public static final RegistryObject<Enchantment> survival_ruse = ENCHANTMENT.register("survival_ruse", SurvivalRuseEnchantment::new);
+    public static final RegistryObject<Enchantment> necessary_evil = ENCHANTMENT.register("necessary_evil", NecessaryEvilEnchantment::new);
+
     public static final RegistryObject<Enchantment> morirs_deathwish_enchantment = ENCHANTMENT.register("morirs_deathwish", () -> new MorirsDeathwishEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.values()));
     public static final RegistryObject<Enchantment> morirs_lifebound_enchantment = ENCHANTMENT.register("morirs_lifebound", () -> new MorirsLifeboundEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.values()));
 
