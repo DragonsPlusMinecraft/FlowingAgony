@@ -105,14 +105,18 @@ public class PlayerUtil {
     public static List<LivingEntity> getTargetListUnderSameType(PlayerEntity player, float radius, float height, LivingEntity sourceEntity){
         AxisAlignedBB aabb = new AxisAlignedBB(player.getPosition().getX()-radius,player.getPosition().getY()-height,player.getPosition().getZ()-radius,player.getPosition().getX()+radius,player.getPosition().getY()+height,player.getPosition().getZ()+radius);
         List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class,aabb);
-        List<LivingEntity> qualifiedEntity = new ArrayList<>();
+        List<LivingEntity> qualifiedEntities = new ArrayList<>();
         for (LivingEntity entity : entities){
             if((entity.getClass() == sourceEntity.getClass())){
-                qualifiedEntity.add(entity);
+                qualifiedEntities.add(entity);
             }
         }
         entities.remove(player);
-        return qualifiedEntity;
+        return qualifiedEntities;
+    }
+
+    public static boolean hasHelmet(PlayerEntity player){
+        return !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
     }
 
 }

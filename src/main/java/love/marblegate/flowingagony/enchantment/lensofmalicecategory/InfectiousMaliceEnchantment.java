@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
@@ -10,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class InfectiousMaliceEnchantment extends Enchantment{
     public InfectiousMaliceEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR, new EquipmentSlotType[]{EquipmentSlotType.LEGS,EquipmentSlotType.HEAD,EquipmentSlotType.CHEST,EquipmentSlotType.FEET});
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR, EquipmentSlotTypeSet.ARMORS);
     }
 
     @Override

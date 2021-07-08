@@ -1,5 +1,6 @@
 package love.marblegate.flowingagony.effect;
 
+import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
@@ -14,7 +15,7 @@ public class LightburnFungalInfectionEffect extends Effect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.lightburn_fungal_infection_effect.get()) {
-            entityLivingBaseIn.attackEntityFrom((new DamageSource("flowingagony.lightburn_fungal_infection")).setDamageBypassesArmor(), 3.0F);
+            entityLivingBaseIn.attackEntityFrom(CustomDamageSource.LIGHTBURN_FUNGAL_INFECTION, 3.0F);
         }
     }
 

@@ -1,16 +1,16 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class ResentfulSoulEnchantment extends Enchantment{
     public ResentfulSoulEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR_HEAD, new EquipmentSlotType[]{EquipmentSlotType.HEAD});
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ResentfulSoulEnchantment extends Enchantment{
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.too_resentful_to_die_enchantment.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.too_resentful_to_die.get();
     }
 
     @Override

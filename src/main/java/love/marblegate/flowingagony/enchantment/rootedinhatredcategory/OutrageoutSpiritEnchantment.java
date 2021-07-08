@@ -2,6 +2,7 @@ package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -10,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class OutrageoutSpiritEnchantment extends Enchantment{
     public OutrageoutSpiritEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, CustomEnchantmentType.AXE_AND_SWORD, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Enchantment.Rarity.UNCOMMON, CustomEnchantmentType.AXE_AND_SWORD, EquipmentSlotTypeSet.MAINHAND);
     }
 
     @Override

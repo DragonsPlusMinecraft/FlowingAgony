@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.capibility;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapabilityProvider;
+import love.marblegate.flowingagony.capibility.cooldown.CoolDownProvider;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapabilityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,7 @@ public class CapabilityAttach {
         if (entity instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation("flowingagony", "hatred_bloodline_level"), new HatredBloodlineStatusCapabilityProvider());
             event.addCapability(new ResourceLocation("flowingagony","abnormal_joy_point"),new AbnormalJoyCapabilityProvider());
+            event.addCapability(new ResourceLocation("flowingagony","cool_down"),new CoolDownProvider());
         }
     }
 }

@@ -1,15 +1,15 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class HatredBloodlineEnchantment extends Enchantment{
     public HatredBloodlineEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentType.ARMOR, new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET});
+        super(Enchantment.Rarity.UNCOMMON, EnchantmentType.ARMOR, EquipmentSlotTypeSet.ARMORS);
     }
 
     @Override

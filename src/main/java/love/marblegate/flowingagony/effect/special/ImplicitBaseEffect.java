@@ -21,6 +21,9 @@ public class ImplicitBaseEffect extends Effect {
     public boolean shouldRender(EffectInstance effect) { return false; }
 
     @Override
+    public boolean shouldRenderInvText(EffectInstance effect) { return false; }
+
+    @Override
     public boolean shouldRenderHUD(EffectInstance effect) { return false; }
 
     @Override

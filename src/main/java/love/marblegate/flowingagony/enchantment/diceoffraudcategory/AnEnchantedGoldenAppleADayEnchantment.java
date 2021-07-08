@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -8,9 +9,9 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class AnEnchantedGoldenAppleADayEnchantment extends Enchantment{
-    public AnEnchantedGoldenAppleADayEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_,EnchantmentType.ARMOR, p_i46731_3_);
-}
+    public AnEnchantedGoldenAppleADayEnchantment() {
+        super(Enchantment.Rarity.VERY_RARE,EnchantmentType.ARMOR, EquipmentSlotTypeSet.ARMORS);
+    }
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {

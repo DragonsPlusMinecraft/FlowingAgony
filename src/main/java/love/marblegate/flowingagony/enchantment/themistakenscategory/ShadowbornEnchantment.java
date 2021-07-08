@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -8,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class ShadowbornEnchantment extends Enchantment {
-    public ShadowbornEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR_HEAD, p_i46731_3_);
+    public ShadowbornEnchantment() {
+        super(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD);
     }
 
     @Override

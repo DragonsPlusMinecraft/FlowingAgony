@@ -1,5 +1,10 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.capibility.cooldown.CoolDown;
+import love.marblegate.flowingagony.capibility.cooldown.CoolDownType;
+import love.marblegate.flowingagony.capibility.cooldown.ICoolDown;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.GodRollingDiceUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
@@ -14,6 +19,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -34,7 +40,7 @@ public class DiceOfFraudEnchantmentEventHandler {
     public static void doTricksterEnchantmentEvent(AttackEntityEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getTarget() instanceof LivingEntity){
-                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(event.getPlayer(),EnchantmentRegistry.trickster_enchantment.get(),EquipmentSlotType.MAINHAND);
+                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(event.getPlayer(),EnchantmentRegistry.trickster.get(),EquipmentSlotType.MAINHAND);
                 if(enchantLvl==1){
                     GodRollingDiceUtil.appendixEffectForTrickster((LivingEntity) event.getTarget(),((LivingEntity) event.getTarget()).getRNG().nextInt(5)+1);
                 }
@@ -52,57 +58,65 @@ public class DiceOfFraudEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doAnEnchantedAppleADayEnchantmentEvent(PlayerEvent.PlayerChangedDimensionEvent event) {
+    public static void doAnEnchantedGoldenAppleADayEnchantmentEvent(PlayerEvent.PlayerChangedDimensionEvent event) {
         if(!event.getPlayer().world.isRemote()){
-            int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment(event.getPlayer(),EnchantmentRegistry.an_enchanted_apple_a_day.get());
-            if(enchantNum!=0){
-                if(enchantNum == 1){
-                    int tempInt = event.getPlayer().getRNG().nextInt(4);
-                    switch (tempInt){
-                        case 0:
-                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
-                            break;
-                        case 1:
-                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
-                            break;
-                        case 2:
-                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
-                            break;
-                        case 3:
-                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
-                            break;
-                    }
-                } else if(enchantNum == 4){
-                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
-                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
-                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
-                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
-                } else if(enchantNum < 4){
-                    Set<Integer> temp = new HashSet<>();
-                    int tempCount = enchantNum;
-                    while(tempCount>0){
-                        int tempInt = event.getPlayer().getRNG().nextInt(4);
-                        if(!temp.contains(tempInt)){
-                            switch (tempInt){
-                                case 0:
+            LazyOptional<ICoolDown> coolDownCap = event.getEntityLiving().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
+            coolDownCap.ifPresent(
+                    cap -> {
+                        if(cap.isReady(CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)){
+                            int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment(event.getPlayer(),EnchantmentRegistry.an_enchanted_apple_a_day.get());
+                            if(enchantNum!=0){
+                                if(enchantNum == 1){
+                                    int tempInt = event.getPlayer().getRNG().nextInt(4);
+                                    switch (tempInt){
+                                        case 0:
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
+                                            break;
+                                        case 1:
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
+                                            break;
+                                        case 2:
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
+                                            break;
+                                        case 3:
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
+                                            break;
+                                    }
+                                } else if(enchantNum == 4){
                                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
-                                    break;
-                                case 1:
                                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
-                                    break;
-                                case 2:
                                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
-                                    break;
-                                case 3:
                                     event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
-                                    break;
+                                } else if(enchantNum < 4){
+                                    Set<Integer> temp = new HashSet<>();
+                                    int tempCount = enchantNum;
+                                    while(tempCount>0){
+                                        int tempInt = event.getPlayer().getRNG().nextInt(4);
+                                        if(!temp.contains(tempInt)){
+                                            switch (tempInt){
+                                                case 0:
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
+                                                    break;
+                                                case 1:
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
+                                                    break;
+                                                case 2:
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
+                                                    break;
+                                                case 3:
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
+                                                    break;
+                                            }
+                                            temp.add(tempInt);
+                                            tempCount--;
+                                        }
+                                    }
+                                }
+                                cap.set(CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY,18000);
                             }
-                            temp.add(tempInt);
-                            tempCount--;
                         }
                     }
-                }
-            }
+            );
         }
     }
 
@@ -112,7 +126,7 @@ public class DiceOfFraudEnchantmentEventHandler {
             if(!event.isCanceled()){
                 if(event.getEntityLiving() instanceof PlayerEntity) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth() && (!event.getSource().getDamageType().equals("outOfWorld"))) {
-                        if (PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.deathpunk_enchantment.get(), EquipmentSlotType.CHEST)) {
+                        if (PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.deathpunk.get(), EquipmentSlotType.CHEST)) {
                             int solution = event.getEntityLiving().getRNG().nextInt(4);
                             int health = MathHelper.floor((((PlayerEntity) event.getEntityLiving()).getHealth()));
                             int maxHealth = MathHelper.floor((((PlayerEntity) event.getEntityLiving()).getMaxHealth()));
@@ -153,7 +167,7 @@ public class DiceOfFraudEnchantmentEventHandler {
                             if (damageEnchantment) {
                                 event.getEntityLiving().setHealth(((PlayerEntity) event.getEntityLiving()).getMaxHealth());
                                 Map<Enchantment, Integer> enchantmentList = EnchantmentHelper.getEnchantments(event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.CHEST));
-                                enchantmentList.remove(EnchantmentRegistry.deathpunk_enchantment.get());
+                                enchantmentList.remove(EnchantmentRegistry.deathpunk.get());
                                 EnchantmentHelper.setEnchantments(enchantmentList, ((PlayerEntity) event.getEntityLiving()).getItemStackFromSlot(EquipmentSlotType.CHEST));
                             }
                             event.setCanceled(true);
@@ -165,40 +179,26 @@ public class DiceOfFraudEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doSavorTheTastedEnchantmentEvent(LivingAttackEvent event){
+    public static void doSavorTheTastedEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getItem() instanceof SwordItem ){
-                    int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)(event.getSource().getTrueSource())), EnchantmentRegistry.savor_the_taste_enchantment.get(),EquipmentSlotType.MAINHAND);
-                    if(enchantLvl!=0){
-                        CompoundNBT weaponNBT = ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
-                        if(!weaponNBT.contains("savor_the_tasted_target")){
-                            weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
+                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)(event.getSource().getTrueSource())), EnchantmentRegistry.savor_the_taste.get(),EquipmentSlotType.MAINHAND);
+                if(enchantLvl!=0){
+                    CompoundNBT weaponNBT = ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
+                    if(!weaponNBT.contains("savor_the_tasted_target")){
+                        weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
+                    }
+                    else{
+                        String recordedTarget = weaponNBT.getString("savor_the_tasted_target");
+                        if(recordedTarget.equals(event.getEntityLiving().getEntityString())){
+                            float modifiedDamage = event.getAmount() + event.getEntityLiving().getRNG().nextInt(5) + enchantLvl * 4 - 1;
+                            event.setAmount(modifiedDamage);
                         }
                         else{
-                            String recordedTarget = weaponNBT.getString("savor_the_tasted_target");
-                            if(recordedTarget.equals(event.getEntityLiving().getEntityString())){
-                                float damage = event.getAmount();
-                                switch(enchantLvl){
-                                    case 1:
-                                        damage *= (0.3f +(event.getEntityLiving().getRNG().nextInt(41) * 0.01f));
-                                        break;
-                                    case 2:
-                                        damage *= (0.7f +(event.getEntityLiving().getRNG().nextInt(51) * 0.01f));
-                                        break;
-                                    case 3:
-                                        damage *= (0.2f +(event.getEntityLiving().getRNG().nextInt(61) * 0.01f));
-                                        break;
-                                    default:
-                                }
-                                event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(),damage);
-                            }
-                            else{
-                                weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
-                            }
+                            weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
                         }
-                        ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
                     }
+                    ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
                 }
             }
         }
@@ -208,24 +208,26 @@ public class DiceOfFraudEnchantmentEventHandler {
     public static void doExoticHealerEnchantmentEvent(LivingHealEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                if(PlayerUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.exotic_healer_enchantment.get())){
+                int enchantmentLvl = PlayerUtil.getTotalLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.exotic_healer.get());
+                if(enchantmentLvl!=0){
                     int dice = event.getEntityLiving().getRNG().nextInt(100);
+                    float modifier = 1 + (enchantmentLvl - 1) * 0.1F;
                     if(dice<33){
                         event.setCanceled(true);
                     }else if(dice<66){
-                        event.setAmount(event.getAmount()*2);
+                        event.setAmount(event.getAmount()*2*modifier);
                     }else if(dice<90){
-                        event.setAmount(event.getAmount()*3);
+                        event.setAmount(event.getAmount()*3*modifier);
                     }else if(dice<91){
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.STRENGTH,600));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.STRENGTH, (int) (600*modifier)));
                     }else if(dice<92){
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED,600));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.SPEED, (int) (600*modifier)));
                     }else if(dice<93){
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.REGENERATION,600));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.REGENERATION, (int) (600*modifier)));
                     }else if(dice<94){
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.INVISIBILITY,600));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.INVISIBILITY, (int) (600*modifier)));
                     }else if(dice<95){
-                        event.getEntityLiving().attackEntityFrom(new DamageSource("flowingagony.exotic_healer"),event.getAmount());
+                        event.getEntityLiving().attackEntityFrom(new DamageSource("flowingagony.exotic_healer"),event.getAmount() * modifier);
                         event.setCanceled(true);
                     }
                 }

@@ -35,7 +35,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
                     double diff = ((LivingEntity) event.getSource().getTrueSource()).getHealth() - event.getEntityLiving().getHealth();
                     if(diff>=1){
                         diff = diff>10?10:diff;
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.encious_being_effect.get(),200, MathHelper.floor(diff)-1));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.envious_being_effect.get(),200, MathHelper.floor(diff)-1));
                     }
                 }
             }

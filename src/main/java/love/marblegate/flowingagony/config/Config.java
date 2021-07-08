@@ -57,6 +57,8 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue SHADOWBORN;
     public static final ForgeConfigSpec.BooleanValue BURIAL_OBJECT;
     public static final ForgeConfigSpec.BooleanValue BACK_AND_FILL;
+    public static final ForgeConfigSpec.BooleanValue SCHOLAR_OF_ORIGINAL_SIN;
+    public static final ForgeConfigSpec.BooleanValue ORIGINAL_SIN_EROSION;
 
     static{
         ForgeConfigSpec.Builder ACT_BUILDER = new ForgeConfigSpec.Builder();
@@ -123,6 +125,8 @@ public class Config {
         PROTOTYPE_CHAOTIC = ACT_BUILDER.comment("Is \"Prototype Chaotic\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("PROTOTYPE_CHAOTIC",true);
         PROTOTYPE_CHAOTIC_TYPE_BETA = ACT_BUILDER.comment("Is \"Prototype Chaotic Type β\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("PROTOTYPE_CHAOTIC_TYPE_BETA",true);
         SHADOWBORN = ACT_BUILDER.comment("Is \"Shadowburn\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("SHADOWBORN",true);
+        SCHOLAR_OF_ORIGINAL_SIN = ACT_BUILDER.comment("Is \"Scholar of Original Sin\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("SCHOLAR_OF_ORIGINAL_SIN",true);
+        ORIGINAL_SIN_EROSION = ACT_BUILDER.comment("Is \"Original Sin Erosion\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("ORIGINAL_SIN_EROSION",true);
         BURIAL_OBJECT = ACT_BUILDER.comment("Is \"Burial Object\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("BURIAL_OBJECT",true);
         ACT_BUILDER.pop();
         ACT_CONFIG = ACT_BUILDER.build();

@@ -7,13 +7,11 @@ import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,7 +29,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     public static void doVengeanceEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()), EnchantmentRegistry.vengeance_enchantment.get(),EquipmentSlotType.HEAD);
+                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()), EnchantmentRegistry.vengeance.get(),EquipmentSlotType.HEAD);
                 if(enchantmentLvl != 0){
                     if(event.getSource().getTrueSource() instanceof LivingEntity)
                         ((LivingEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),180,enchantmentLvl-1));
@@ -44,7 +42,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     public static void doPerceivedMaliceEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.perceived_malice_enchantment.get(), EquipmentSlotType.HEAD);
+                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.perceived_malice.get(), EquipmentSlotType.HEAD);
                 if(enchantmentLvl!=0){
                     if(event.getSource().getTrueSource() instanceof PlayerEntity){
                         ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy_effect.get(),200));
@@ -61,7 +59,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     @SubscribeEvent
     public static void doMaliceOutbreakEnchantmentEvent(LivingDamageEvent event){
         if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-            int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.malice_outbreak_enchantment.get(),EquipmentSlotType.HEAD);
+            int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.malice_outbreak.get(),EquipmentSlotType.HEAD);
             if(enchantmentLvl!=0){
                 if(event.getSource().getTrueSource() instanceof LivingEntity){
                     ((LivingEntity) event.getSource().getTrueSource()).applyKnockback(0.4f * enchantmentLvl,-event.getEntityLiving().getLookVec().x,-event.getEntityLiving().getLookVec().z);
@@ -86,7 +84,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     public static void doInfectiousMaliceEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.infectious_malice_enchantment.get());
+                int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.infectious_malice.get());
                 if(enchantNum!=0){
                     if(event.getSource().getTrueSource() instanceof PlayerEntity){
                         ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),200 * enchantNum));
@@ -130,7 +128,7 @@ public class LensOfMaliceEnchantmentEventHandler {
     public static void doISeeYouNowEnchantmentEvent(LivingSetAttackTargetEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getTarget() instanceof PlayerEntity){
-                if(PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity)event.getTarget()),EnchantmentRegistry.i_see_you_now_enchantment.get(),EquipmentSlotType.HEAD)){
+                if(PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity)event.getTarget()),EnchantmentRegistry.i_see_you_now.get(),EquipmentSlotType.HEAD)){
                     event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.GLOWING,6000));
                 }
             }

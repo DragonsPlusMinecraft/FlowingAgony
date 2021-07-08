@@ -5,14 +5,15 @@ import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -77,51 +78,17 @@ public class ExplicitEffectEventHandler {
     }
 
     @SubscribeEvent
-    public static void doCurseOfUndeadEffectEvent_applyBurning_removeCurrentImmuningEffect(TickEvent.PlayerTickEvent event){
+    public static void doCurseOfUndeadEffectEvent_applyBurning_setPlayerOnFireIfNoHelmet(TickEvent.PlayerTickEvent event){
         if(event.phase == TickEvent.Phase.START){
             if(!event.player.world.isRemote()){
                 if(event.player.isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
                     if(event.player.world.getDayTime()%24000<12000){
-                        if(!(event.player.world.isThundering()&&event.player.world.isThundering())){
+                        if(!event.player.world.isThundering() && !event.player.world.isRaining()){
                             if(event.player.world.canSeeSky(event.player.getPosition())){
-                                Iterator<ItemStack> armor = event.player.getArmorInventoryList().iterator();
-                                boolean hasHeadArmor = false;
-                                while(armor.hasNext()){
-                                    ItemStack itemStack = armor.next();
-                                    if(itemStack.getItem() instanceof ArmorItem){
-                                        if(((ArmorItem) itemStack.getItem()).getEquipmentSlot().equals(EquipmentSlotType.HEAD)){
-                                            hasHeadArmor = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if(!hasHeadArmor){
+                                if(PlayerUtil.hasHelmet(event.player))
                                     event.player.setFire(5);
-                                }
                             }
                         }
-                    }
-                    if(event.player.isPotionActive(Effects.HUNGER)){
-                        event.player.removeActivePotionEffect(Effects.HUNGER);
-                        //Sync to Client
-                        Networking.INSTANCE.send(
-                                PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.player
-                                ),
-                                new RemoveEffectSyncToClientPacket(RemoveEffectSyncToClientPacket.EffectType.HUNGER));
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void doCurseOfUndeadEffectEvent_addImmunity(PotionEvent.PotionApplicableEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity){
-                if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
-                    if(event.getPotionEffect().getPotion().equals(Effects.HUNGER)){
-                        event.setResult(Event.Result.DENY);
                     }
                 }
             }
@@ -134,12 +101,19 @@ public class ExplicitEffectEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getItem().getItem().equals(Items.ROTTEN_FLESH)){
                     if(event.getEntityLiving().isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
-                        event.getEntityLiving().heal(4);
+                        ((PlayerEntity)event.getEntityLiving()).heal(1);
+                        ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(Effects.STRENGTH,60));
                     }
                 }
                 else if(event.getItem().getItem().equals(Items.ENCHANTED_GOLDEN_APPLE)){
                     if(event.getEntityLiving().isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
                         event.getEntityLiving().removePotionEffect(EffectRegistry.curse_of_undead_effect.get());
+                        //Notify client to remove effect
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                ),
+                                new RemoveEffectSyncToClientPacket(EffectRegistry.curse_of_undead_effect.get()));
                     }
                 }
             }
@@ -148,19 +122,13 @@ public class ExplicitEffectEventHandler {
 
     @SubscribeEvent
     public static void doCurseOfUndeadEffectEvent_applyArmorDamageAmplifier(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
+        if(!event.getEntityLiving().world.isRemote()&&!event.isCanceled()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getEntityLiving().isPotionActive(EffectRegistry.curse_of_undead_effect.get())){
-                    if(event.getSource().getDamageType().equals("inFire")||event.getSource().getDamageType().equals("onFire")||event.getSource().getDamageType().equals("lava")){
+                    if(event.getSource().isFireDamage()){
                         event.setAmount(event.getAmount()*2);
-                        for (ItemStack itemStack : event.getEntityLiving().getArmorInventoryList()) {
-                            if (itemStack.getItem() instanceof ArmorItem) {
-                                if (((ArmorItem) itemStack.getItem()).getEquipmentSlot().equals(EquipmentSlotType.HEAD)) {
-                                    if (itemStack.getDamage() > 1) {
-                                        itemStack.setDamage(itemStack.getDamage() - 1);
-                                    }
-                                }
-                            }
+                        if(PlayerUtil.hasHelmet((PlayerEntity) event.getEntityLiving())){
+                            ((PlayerEntity)event.getEntityLiving()).getItemStackFromSlot(EquipmentSlotType.HEAD).damageItem(1,event.getEntityLiving(),a->{});
                         }
                     }
                 }

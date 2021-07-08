@@ -2,6 +2,7 @@ package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ import net.minecraft.item.ItemStack;
 
 public class BackAndFillEnchantment extends Enchantment{
     public BackAndFillEnchantment() {
-        super(Rarity.VERY_RARE, CustomEnchantmentType.BOW_AND_CROSSBOW, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.VERY_RARE, CustomEnchantmentType.BOW_AND_CROSSBOW, EquipmentSlotTypeSet.MAINHAND);
     }
 
     @Override

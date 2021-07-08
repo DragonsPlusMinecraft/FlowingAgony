@@ -2,6 +2,8 @@ package love.marblegate.flowingagony.capibility;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.cooldown.CoolDown;
+import love.marblegate.flowingagony.capibility.cooldown.ICoolDown;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -24,6 +26,11 @@ public class CapabilityTransfer {
             LazyOptional<IAbnormalJoyCapability> newAbnormalJoyPoint = event.getPlayer().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
             if (oldAbnormalJoyPoint.isPresent() && newAbnormalJoyPoint.isPresent()) {
                 newAbnormalJoyPoint.ifPresent((newCap) -> oldAbnormalJoyPoint.ifPresent((oldCap) -> newCap.set(oldCap.get())));
+            }
+            LazyOptional<ICoolDown> oldCoolDown = event.getOriginal().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
+            LazyOptional<ICoolDown> newCoolDown = event.getPlayer().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
+            if (oldCoolDown.isPresent() && newCoolDown.isPresent()) {
+                newCoolDown.ifPresent((newCap) -> oldCoolDown.ifPresent((oldCap) -> newCap.setMap(oldCap.getMap())));
             }
         }
     }

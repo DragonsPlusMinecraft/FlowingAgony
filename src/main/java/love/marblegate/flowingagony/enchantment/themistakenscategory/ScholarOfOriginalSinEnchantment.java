@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
+package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
@@ -8,9 +8,9 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
 
-public class PerceivedMaliceEnchantment extends Enchantment{
-    public PerceivedMaliceEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD);
+public class ScholarOfOriginalSinEnchantment extends Enchantment{
+    public ScholarOfOriginalSinEnchantment() {
+        super(Rarity.RARE, EnchantmentType.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST);
     }
 
     @Override
@@ -25,30 +25,36 @@ public class PerceivedMaliceEnchantment extends Enchantment{
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 3;
     }
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.vengeance.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.original_sin_erosion.get();
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PERCEIVED_MALICE.get(); }
+    public boolean isTreasureEnchantment() {
+        return true;
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PERCEIVED_MALICE.get(); }
+    public boolean canVillagerTrade() { return Config.SCHOLAR_OF_ORIGINAL_SIN.get(); }
+
+    @Override
+    public boolean canGenerateInLoot() { return Config.SCHOLAR_OF_ORIGINAL_SIN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PERCEIVED_MALICE.get();
+        return Config.SCHOLAR_OF_ORIGINAL_SIN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PERCEIVED_MALICE.get())
+        if(Config.SCHOLAR_OF_ORIGINAL_SIN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;
     }
+
 }
