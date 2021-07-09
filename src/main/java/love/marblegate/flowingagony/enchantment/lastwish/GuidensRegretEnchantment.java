@@ -7,12 +7,11 @@ import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
-public class MorirsDeathwishEnchantment extends Enchantment {
-    public MorirsDeathwishEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.BREAKABLE, EquipmentSlotTypeSet.ALL);
+public class GuidensRegretEnchantment extends Enchantment {
+    public GuidensRegretEnchantment() {
+        super(Rarity.VERY_RARE, EnchantmentType.BREAKABLE, EquipmentSlotTypeSet.ALL);
     }
 
     @Override
@@ -34,7 +33,7 @@ public class MorirsDeathwishEnchantment extends Enchantment {
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
                 && p_77326_1_ != EnchantmentRegistry.morirs_lifebound.get()
-                && p_77326_1_ != EnchantmentRegistry.guidens_regret.get()
+                && p_77326_1_ != EnchantmentRegistry.morirs_deathwish.get()
                 && p_77326_1_ != Enchantments.MENDING;
     }
 
@@ -44,19 +43,19 @@ public class MorirsDeathwishEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MORIRS_DEATHWISH.get(); }
+    public boolean canVillagerTrade() { return Config.GUIDENS_REGRET.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.MORIRS_DEATHWISH.get(); }
+    public boolean canGenerateInLoot() { return Config.GUIDENS_REGRET.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.MORIRS_DEATHWISH.get();
+        return Config.GUIDENS_REGRET.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.MORIRS_DEATHWISH.get())
+        if(Config.GUIDENS_REGRET.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

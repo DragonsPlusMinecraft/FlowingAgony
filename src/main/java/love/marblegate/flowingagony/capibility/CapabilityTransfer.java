@@ -6,6 +6,8 @@ import love.marblegate.flowingagony.capibility.cooldown.CoolDown;
 import love.marblegate.flowingagony.capibility.cooldown.ICoolDown;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.HatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.capibility.hatredbloodlinestatus.IHatredBloodlineStatusCapability;
+import love.marblegate.flowingagony.capibility.lastsweetdream.ILastSweetDreamCapability;
+import love.marblegate.flowingagony.capibility.lastsweetdream.LastSweetDreamCapability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,6 +33,11 @@ public class CapabilityTransfer {
             LazyOptional<ICoolDown> newCoolDown = event.getPlayer().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
             if (oldCoolDown.isPresent() && newCoolDown.isPresent()) {
                 newCoolDown.ifPresent((newCap) -> oldCoolDown.ifPresent((oldCap) -> newCap.setMap(oldCap.getMap())));
+            }
+            LazyOptional<ILastSweetDreamCapability> oldLastSweetDreamItem = event.getOriginal().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
+            LazyOptional<ILastSweetDreamCapability> newLastSweetDreamItem = event.getPlayer().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
+            if (oldLastSweetDreamItem.isPresent() && newLastSweetDreamItem.isPresent()) {
+                newLastSweetDreamItem.ifPresent((newCap) -> oldLastSweetDreamItem.ifPresent((oldCap) -> newCap.saveItemStack(oldCap.getItemStack())));
             }
         }
     }

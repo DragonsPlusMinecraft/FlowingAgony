@@ -59,6 +59,8 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue BACK_AND_FILL;
     public static final ForgeConfigSpec.BooleanValue SCHOLAR_OF_ORIGINAL_SIN;
     public static final ForgeConfigSpec.BooleanValue ORIGINAL_SIN_EROSION;
+    public static final ForgeConfigSpec.BooleanValue GUIDENS_REGRET;
+    public static final ForgeConfigSpec.BooleanValue LAST_SWEET_DREAM;
 
     static{
         ForgeConfigSpec.Builder ACT_BUILDER = new ForgeConfigSpec.Builder();
@@ -117,6 +119,8 @@ public class Config {
         TOO_RESENTFUL_TO_DIE = ACT_BUILDER.comment("Is \"Too Resentful to Die\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("TOO_RESENTFUL_TO_DIE",true);
         MORIRS_DEATHWISH = ACT_BUILDER.comment("Is \"Morir's Deathwish\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("MORIRS_DEATHWISH",true);
         MORIRS_LIFEBOUND = ACT_BUILDER.comment("Is \"Morir's Lifebound\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("MORIRS_LIFEBOUND",true);
+        GUIDENS_REGRET = ACT_BUILDER.comment("Is \"Guiden's Regret\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("GUIDENS_REGRET",true);
+        LAST_SWEET_DREAM = ACT_BUILDER.comment("Is \"Last Sweet Dream\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("LAST_SWEET_DREAM",true);
         NECESSARY_EVIL = ACT_BUILDER.comment("Is \"Necessary Evil\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("NECESSARY_EVIL",true);
         SURVIVAL_RUSE = ACT_BUILDER.comment("Is \"Survival Ruse\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("SURVIVAL_RUSE",true);
         SURVIVAL_SHORTCUT = ACT_BUILDER.comment("Is \"Survival Shortcut\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("SURVIVAL_SHORTCUT",true);

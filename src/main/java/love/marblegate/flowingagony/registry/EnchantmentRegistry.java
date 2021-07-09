@@ -4,6 +4,8 @@ import love.marblegate.flowingagony.enchantment.diceoffraudcategory.*;
 import love.marblegate.flowingagony.enchantment.flameofenvycategory.*;
 import love.marblegate.flowingagony.enchantment.gloomyeracategory.*;
 import love.marblegate.flowingagony.enchantment.innerpotentialcategory.*;
+import love.marblegate.flowingagony.enchantment.lastwish.GuidensRegretEnchantment;
+import love.marblegate.flowingagony.enchantment.lastwish.LastSweetDreamEnchantment;
 import love.marblegate.flowingagony.enchantment.lastwish.MorirsDeathwishEnchantment;
 import love.marblegate.flowingagony.enchantment.lastwish.MorirsLifeboundEnchantment;
 import love.marblegate.flowingagony.enchantment.lensofmalicecategory.*;
@@ -56,8 +58,10 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> survival_ruse = ENCHANTMENT.register("survival_ruse", SurvivalRuseEnchantment::new);
     public static final RegistryObject<Enchantment> necessary_evil = ENCHANTMENT.register("necessary_evil", NecessaryEvilEnchantment::new);
 
-    public static final RegistryObject<Enchantment> morirs_deathwish_enchantment = ENCHANTMENT.register("morirs_deathwish", () -> new MorirsDeathwishEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.values()));
-    public static final RegistryObject<Enchantment> morirs_lifebound_enchantment = ENCHANTMENT.register("morirs_lifebound", () -> new MorirsLifeboundEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.values()));
+    public static final RegistryObject<Enchantment> morirs_deathwish = ENCHANTMENT.register("morirs_deathwish", MorirsDeathwishEnchantment::new);
+    public static final RegistryObject<Enchantment> morirs_lifebound = ENCHANTMENT.register("morirs_lifebound", MorirsLifeboundEnchantment::new);
+    public static final RegistryObject<Enchantment> guidens_regret = ENCHANTMENT.register("guidens_regret", GuidensRegretEnchantment::new);
+    public static final RegistryObject<Enchantment> last_sweet_dream = ENCHANTMENT.register("last_sweet_dream", LastSweetDreamEnchantment::new);
 
     public static final RegistryObject<Enchantment> potential_burst_enchantment = ENCHANTMENT.register("potential_burst", () -> new PotentialBurstEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
     public static final RegistryObject<Enchantment> stubborn_step_enchantment = ENCHANTMENT.register("stubborn_step", () -> new StubbornStepEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.LEGS}));

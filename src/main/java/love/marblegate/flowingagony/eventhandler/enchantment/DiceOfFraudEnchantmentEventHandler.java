@@ -59,52 +59,52 @@ public class DiceOfFraudEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doAnEnchantedGoldenAppleADayEnchantmentEvent(PlayerEvent.PlayerChangedDimensionEvent event) {
-        if(!event.getPlayer().world.isRemote()){
-            LazyOptional<ICoolDown> coolDownCap = event.getEntityLiving().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
-            coolDownCap.ifPresent(
-                    cap -> {
-                        if(cap.isReady(CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)){
-                            int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment(event.getPlayer(),EnchantmentRegistry.an_enchanted_apple_a_day.get());
-                            if(enchantNum!=0){
-                                if(enchantNum == 1){
+        if(!event.getPlayer().world.isRemote()) {
+            int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment(event.getPlayer(), EnchantmentRegistry.an_enchanted_apple_a_day.get());
+            if (enchantNum != 0) {
+                LazyOptional<ICoolDown> coolDownCap = event.getEntityLiving().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
+                coolDownCap.ifPresent(
+                        cap -> {
+                            if (cap.isReady(CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)) {
+                                if (enchantNum == 1) {
                                     int tempInt = event.getPlayer().getRNG().nextInt(4);
-                                    switch (tempInt){
+                                    switch (tempInt) {
                                         case 0:
-                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION, 2400, 3));
                                             break;
                                         case 1:
-                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION, 400, 1));
                                             break;
                                         case 2:
-                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 6000));
                                             break;
                                         case 3:
-                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
+                                            event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6000));
                                             break;
                                     }
-                                } else if(enchantNum == 4){
-                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
-                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
-                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
-                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
-                                } else if(enchantNum < 4){
+                                } else if (enchantNum == 4) {
+                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION, 2400, 3));
+                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION, 400, 1));
+                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 6000));
+                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6000));
+                                } else if (enchantNum < 4) {
                                     Set<Integer> temp = new HashSet<>();
                                     int tempCount = enchantNum;
-                                    while(tempCount>0){
+                                    while (tempCount > 0) {
                                         int tempInt = event.getPlayer().getRNG().nextInt(4);
-                                        if(!temp.contains(tempInt)){
-                                            switch (tempInt){
+                                        if (!temp.contains(tempInt)) {
+                                            switch (tempInt) {
                                                 case 0:
-                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION,2400,3));
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.ABSORPTION, 2400, 3));
                                                     break;
                                                 case 1:
-                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION,400,1));
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.REGENERATION, 400, 1));
                                                     break;
                                                 case 2:
-                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,6000));
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 6000));
                                                     break;
                                                 case 3:
-                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE,6000));
+                                                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6000));
                                                     break;
                                             }
                                             temp.add(tempInt);
@@ -112,11 +112,10 @@ public class DiceOfFraudEnchantmentEventHandler {
                                         }
                                     }
                                 }
-                                cap.set(CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY,18000);
+                                cap.set(CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY, 18000);
                             }
-                        }
-                    }
-            );
+                        });
+            }
         }
     }
 

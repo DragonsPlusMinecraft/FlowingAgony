@@ -9,5 +9,6 @@ public class EquipmentSlotTypeSet {
     public static final EquipmentSlotType[] FEET = new EquipmentSlotType[]{EquipmentSlotType.FEET};
     public static final EquipmentSlotType[] MAINHAND = new EquipmentSlotType[]{EquipmentSlotType.MAINHAND};
     public static final EquipmentSlotType[] ARMORS = new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET};
+    public static final EquipmentSlotType[] ALL = EquipmentSlotType.values();
 
 }

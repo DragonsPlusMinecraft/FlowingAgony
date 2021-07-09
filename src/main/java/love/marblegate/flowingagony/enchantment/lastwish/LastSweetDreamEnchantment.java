@@ -7,12 +7,11 @@ import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
-public class MorirsDeathwishEnchantment extends Enchantment {
-    public MorirsDeathwishEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.BREAKABLE, EquipmentSlotTypeSet.ALL);
+public class LastSweetDreamEnchantment extends Enchantment {
+    public LastSweetDreamEnchantment() {
+        super(Rarity.VERY_RARE, EnchantmentType.BREAKABLE, EquipmentSlotTypeSet.ALL);
     }
 
     @Override
@@ -31,32 +30,24 @@ public class MorirsDeathwishEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.morirs_lifebound.get()
-                && p_77326_1_ != EnchantmentRegistry.guidens_regret.get()
-                && p_77326_1_ != Enchantments.MENDING;
-    }
-
-    @Override
     public boolean isTreasureEnchantment() {
         return true;
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MORIRS_DEATHWISH.get(); }
+    public boolean canVillagerTrade() { return Config.LAST_SWEET_DREAM.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.MORIRS_DEATHWISH.get(); }
+    public boolean canGenerateInLoot() { return Config.LAST_SWEET_DREAM.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.MORIRS_DEATHWISH.get();
+        return Config.LAST_SWEET_DREAM.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.MORIRS_DEATHWISH.get())
+        if(Config.LAST_SWEET_DREAM.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;
