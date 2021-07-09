@@ -1,15 +1,15 @@
 package love.marblegate.flowingagony.enchantment.innerpotentialcategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class PotentialBurstEnchantment extends Enchantment {
-    public PotentialBurstEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR_FEET, p_i46731_3_);
+    public PotentialBurstEnchantment() {
+        super(Rarity.UNCOMMON, EnchantmentType.ARMOR_FEET, EquipmentSlotTypeSet.FEET);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class PotentialBurstEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 2;
+        return 3;
     }
 
     @Override

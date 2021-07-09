@@ -191,7 +191,7 @@ public class TheMistakensEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doLightburnFungalParasiticEnchantmentEvent_removeCurrentImmuningEffect(TickEvent.PlayerTickEvent event){
+    public static void doLightburnFungalParasiticEnchantmentEvent_removeCurrentImmuneEffect(TickEvent.PlayerTickEvent event){
         if(!event.player.world.isRemote()){
             if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.player,EnchantmentRegistry.lightburn_fungal_parasitic.get(),EquipmentSlotType.CHEST)){
                 if(event.player.isPotionActive(Effects.POISON)){

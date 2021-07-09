@@ -10,6 +10,6 @@ public class FrivolousStepImplicitEffect extends BeneficialBlankImplicitEffect {
 
     @Override
     public double getAttributeModifierAmount(int amplifier, AttributeModifier modifier) {
-        return modifier.getAmount() + (0.02D * amplifier);
+        return modifier.getAmount() + (0.15D * amplifier);
     }
 }

@@ -28,10 +28,10 @@ public class EffectRegistry {
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"D6984A53-7DD1-4093-9878-345958E2E92A",-0.1D, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     public static final RegistryObject<Effect> potential_burst_enchantment_active_effect = EFFECT.register("potential_burst_enchantment_active", () -> new PotentialBurstImplicitEffect()
-            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"B22509E7-3596-430F-8F88-66A3EAFC99F7",0.03D, AttributeModifier.Operation.ADDITION));
+            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"B22509E7-3596-430F-8F88-66A3EAFC99F7",0.01D, AttributeModifier.Operation.MULTIPLY_BASE));
 
     public static final RegistryObject<Effect> frivolous_step_enchantment_active_effect = EFFECT.register("frivolous_step_enchantment_active", () -> new FrivolousStepImplicitEffect()
-            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"412C831F-22EA-43B8-B74B-D172019AD3D2",0.07D, AttributeModifier.Operation.ADDITION));
+            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"412C831F-22EA-43B8-B74B-D172019AD3D2",0.15D, AttributeModifier.Operation.MULTIPLY_BASE));
 
     public static final RegistryObject<Effect> hatred_bloodline_enchantment_active_effect = EFFECT.register("hatred_bloodline_enchantment_active", () -> new HatredBloodlineImplicitEffect()
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"C164A28C-4A60-4957-B414-1DF28bb56C74",0.0083D, AttributeModifier.Operation.ADDITION)

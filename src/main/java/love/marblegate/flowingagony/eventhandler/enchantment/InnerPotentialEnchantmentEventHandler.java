@@ -2,9 +2,11 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
+import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.PlayerUtil;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -23,79 +25,88 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
-    public static void doStubbornStepEnchantmentEvent_saddKnockBackResistenceModifier(LivingKnockBackEvent event){
+    public static void doStubbornStepEnchantmentEvent_addKnockBackResistenceModifier(LivingKnockBackEvent event){
         if(event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.stubborn_step_enchantment.get(),EquipmentSlotType.LEGS);
+                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.stubborn_step.get(),EquipmentSlotType.LEGS);
                 if(enchantLvl != 0){
-                    event.setStrength(event.getStrength() * (0.3f + enchantLvl * 0.2f));
+                    event.setStrength(event.getStrength() * (1 - enchantLvl * 0.15f));
                 }
             }
         }
     }
 
     @SubscribeEvent
-    public static void doStubbornStepEnchantmentEvent_cancelFloatingEffect(LivingAttackEvent event){
-        if(event.getEntityLiving() instanceof PlayerEntity){
-            if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.stubborn_step_enchantment.get(), EquipmentSlotType.LEGS)){
-                if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(Effects.LEVITATION))
-                    ((PlayerEntity)(event.getEntityLiving())).removeActivePotionEffect(Effects.LEVITATION);
+    public static void doStubbornStepEnchantmentEvent_cancelFloatingEffect(LivingDamageEvent event){
+        if(!event.getEntityLiving().world.isRemote()){
+            if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
+                if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.stubborn_step.get(), EquipmentSlotType.LEGS)){
+                    if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(Effects.LEVITATION)){
+                        ((PlayerEntity)(event.getEntityLiving())).removeActivePotionEffect(Effects.LEVITATION);
+                        //Sync to Client
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                ),
+                                new RemoveEffectSyncToClientPacket(Effects.LEVITATION));
+                    }
+                }
             }
         }
     }
 
     @SubscribeEvent
-    public static void doFrivolousStepEnchantmentEvent(LivingAttackEvent event){
-        if(event.getEntityLiving() instanceof PlayerEntity){
-            int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.frivolous_step_enchantment.get(), EquipmentSlotType.LEGS);
-            if(enchantLvl != 0){
-                if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(Effects.SLOWNESS))
-                    ((PlayerEntity)(event.getEntityLiving())).removeActivePotionEffect(Effects.SLOWNESS);
-                if(!event.getEntityLiving().world.isRemote()){
+    public static void doFrivolousStepEnchantmentEvent(LivingDamageEvent event){
+        if(!event.getEntityLiving().world.isRemote()){
+            if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
+                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.frivolous_step.get(), EquipmentSlotType.LEGS);
+                if(enchantLvl != 0){
                     if(enchantLvl == 1)
                         ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.frivolous_step_enchantment_active_effect.get(),200));
                     else
                         ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.frivolous_step_enchantment_active_effect.get(),200,1));
+                    if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(Effects.SLOWNESS)){
+                        ((PlayerEntity)(event.getEntityLiving())).removeActivePotionEffect(Effects.SLOWNESS);
+                        //Sync to Client
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                ),
+                                new RemoveEffectSyncToClientPacket(Effects.SLOWNESS));
+                    }
                 }
             }
         }
+
     }
 
     @SubscribeEvent
     public static void doPotentialBurstEnchantmentEvent_addSpeedModifier(TickEvent.PlayerTickEvent event){
         if(event.phase== TickEvent.Phase.START){
-            int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(event.player,EnchantmentRegistry.potential_burst_enchantment.get(),EquipmentSlotType.FEET);
-            if(enchantLvl!=0){
-                if(event.player.getHealth()<=(6+2*enchantLvl)){
-                    if(!(event.player.isSprinting()||event.player.isSwimming()||event.player.isElytraFlying())){
-                        if(enchantLvl==1){
-                            if(!event.player.world.isRemote())
-                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active_effect.get(),3));
+            if(!event.player.world.isRemote()){
+                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(event.player,EnchantmentRegistry.potential_burst.get(),EquipmentSlotType.FEET);
+                if(enchantLvl!=0){
+                    if(event.player.getHealth()<=(3+enchantLvl)){
+                        if(!(event.player.isSprinting()||event.player.isSwimming()||event.player.isElytraFlying())){
+                            if(event.player.isPotionActive(EffectRegistry.potential_burst_enchantment_active_effect.get())){
+                                int nextAmplifier = Math.min(event.player.getActivePotionEffect(EffectRegistry.potential_burst_enchantment_active_effect.get()).getAmplifier()+1,150);
+                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active_effect.get(),20,nextAmplifier));
+                            } else {
+                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active_effect.get(),20));
+                            }
                         }
-                        if(enchantLvl==2)
-                            if(!event.player.world.isRemote())
-                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active_effect.get(),3,1));
+                        else{
+                            if(event.player.isPotionActive(EffectRegistry.potential_burst_enchantment_active_effect.get())){
+                                event.player.removeActivePotionEffect(EffectRegistry.potential_burst_enchantment_active_effect.get());
+                                //Sync to Client
+                                Networking.INSTANCE.send(
+                                        PacketDistributor.PLAYER.with(
+                                                () -> (ServerPlayerEntity) event.player
+                                        ),
+                                        new RemoveEffectSyncToClientPacket(EffectRegistry.potential_burst_enchantment_active_effect.get()));
+                            }
+                        }
                     }
-                    else{
-                        if(enchantLvl==1){
-                            event.player.removeActivePotionEffect(EffectRegistry.potential_burst_enchantment_active_effect.get());
-                        }
-                        if(enchantLvl==2){
-                            event.player.removeActivePotionEffect(EffectRegistry.potential_burst_enchantment_active_effect.get());
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void doPotentialBurstEnchantmentEvent_modifyJumpVector(LivingEvent.LivingJumpEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
-            int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.potential_burst_enchantment.get(),EquipmentSlotType.FEET);
-            if (enchantLvl != 0) {
-                if(((PlayerEntity)(event.getEntityLiving())) .getHealth()<=(6+2*enchantLvl)){
-                    ((PlayerEntity)(event.getEntityLiving())).setMotion(((PlayerEntity)(event.getEntityLiving())).getMotion().add(0d,0.5d*enchantLvl,0d));
                 }
             }
         }
@@ -105,7 +116,7 @@ public class InnerPotentialEnchantmentEventHandler {
     public static void doMiraculousEscapeEnchantmentEvent_launch(LivingDamageEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity) {
             if (event.getEntityLiving().getHealth() < 4f) {
-                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.miraculous_escape_enchantment.get(), EquipmentSlotType.FEET)) {
+                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.miraculous_escape.get(), EquipmentSlotType.FEET)) {
                     if(!((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())){
                         //Play Sound Effect
                         if (!((PlayerEntity)(event.getEntityLiving())).world.isRemote) {
@@ -142,13 +153,11 @@ public class InnerPotentialEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()) {
             if (!event.isCanceled()) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.armor_up_enchantment.get(), EquipmentSlotType.CHEST);
+                    int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.armor_up.get(), EquipmentSlotType.CHEST);
                     if (enchantLvl != 0) {
                         if (((PlayerEntity)(event.getEntityLiving())).getHealth() < (5 + enchantLvl)) {
                             float existYellowHeart = ((PlayerEntity)(event.getEntityLiving())).getAbsorptionAmount();
-                            if (existYellowHeart + 1 > (5 + enchantLvl * 5)) {
-                                ((PlayerEntity)(event.getEntityLiving())).setAbsorptionAmount(5 + enchantLvl * 5);
-                            } else {
+                            if (existYellowHeart + 1 < (5 + enchantLvl)) {
                                 ((PlayerEntity)(event.getEntityLiving())).setAbsorptionAmount(existYellowHeart + 1);
                             }
                         }

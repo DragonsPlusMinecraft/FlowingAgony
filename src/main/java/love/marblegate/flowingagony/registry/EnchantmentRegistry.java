@@ -63,11 +63,11 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> guidens_regret = ENCHANTMENT.register("guidens_regret", GuidensRegretEnchantment::new);
     public static final RegistryObject<Enchantment> last_sweet_dream = ENCHANTMENT.register("last_sweet_dream", LastSweetDreamEnchantment::new);
 
-    public static final RegistryObject<Enchantment> potential_burst_enchantment = ENCHANTMENT.register("potential_burst", () -> new PotentialBurstEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> stubborn_step_enchantment = ENCHANTMENT.register("stubborn_step", () -> new StubbornStepEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.LEGS}));
-    public static final RegistryObject<Enchantment> frivolous_step_enchantment = ENCHANTMENT.register("frivolous_step", () -> new FrivolousStepEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.LEGS}));
-    public static final RegistryObject<Enchantment> miraculous_escape_enchantment = ENCHANTMENT.register("miraculous_escape", () -> new MiraculousEscapeEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> armor_up_enchantment = ENCHANTMENT.register("armor_up", () -> new ArmorUpEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
+    public static final RegistryObject<Enchantment> potential_burst = ENCHANTMENT.register("potential_burst", PotentialBurstEnchantment::new);
+    public static final RegistryObject<Enchantment> stubborn_step = ENCHANTMENT.register("stubborn_step", StubbornStepEnchantment::new);
+    public static final RegistryObject<Enchantment> frivolous_step = ENCHANTMENT.register("frivolous_step", FrivolousStepEnchantment::new);
+    public static final RegistryObject<Enchantment> miraculous_escape = ENCHANTMENT.register("miraculous_escape", MiraculousEscapeEnchantment::new);
+    public static final RegistryObject<Enchantment> armor_up = ENCHANTMENT.register("armor_up", ArmorUpEnchantment::new);
 
     public static final RegistryObject<Enchantment> regular_customer_program_enchantment = ENCHANTMENT.register("regular_customer_program", () -> new RegularCustomerProgramEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
     public static final RegistryObject<Enchantment> cleansing_before_using_enchantment = ENCHANTMENT.register("cleansing_before_using", () -> new CleansingBeforeUsingEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.values()));
