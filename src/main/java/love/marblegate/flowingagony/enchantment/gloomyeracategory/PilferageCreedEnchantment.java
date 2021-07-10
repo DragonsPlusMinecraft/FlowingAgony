@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -8,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class PilferageCreedEnchantment extends Enchantment {
-    public PilferageCreedEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR_FEET, p_i46731_3_);
+    public PilferageCreedEnchantment() {
+        super(Rarity.VERY_RARE, EnchantmentType.ARMOR_FEET, EquipmentSlotTypeSet.FEET);
     }
 
     @Override
@@ -23,12 +24,17 @@ public class PilferageCreedEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean isTreasureEnchantment() {
+        return true;
+    }
+
+    @Override
     public int getMaxLevel() {
         return 1;
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PILFERAGE_CREED.get(); }
+    public boolean canVillagerTrade() { return false; }
 
     @Override
     public boolean canGenerateInLoot() { return Config.PILFERAGE_CREED.get(); }

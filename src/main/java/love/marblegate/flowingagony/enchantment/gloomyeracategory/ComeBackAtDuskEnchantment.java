@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
@@ -9,8 +10,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class ComeBackAtDuskEnchantment extends Enchantment {
-    public ComeBackAtDuskEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR, p_i46731_3_);
+    public ComeBackAtDuskEnchantment() {
+        super(Rarity.RARE, EnchantmentType.ARMOR, EquipmentSlotTypeSet.ARMORS);
     }
 
     @Override
@@ -29,12 +30,17 @@ public class ComeBackAtDuskEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.dirty_money_enchantment.get();
+    public boolean isTreasureEnchantment() {
+        return true;
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.COME_BACK_AT_DUSK.get(); }
+    public boolean canApplyTogether(Enchantment p_77326_1_) {
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.dirty_money.get();
+    }
+
+    @Override
+    public boolean canVillagerTrade() { return false; }
 
     @Override
     public boolean canGenerateInLoot() { return Config.COME_BACK_AT_DUSK.get(); }

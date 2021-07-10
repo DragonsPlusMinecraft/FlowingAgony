@@ -1,18 +1,15 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
 import love.marblegate.flowingagony.config.Config;
-import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
+import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
-public class DirtyMoneyEnchantment extends Enchantment {
-    public DirtyMoneyEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentType.ARMOR, EquipmentSlotTypeSet.ARMORS);
+public class NimbleFingerEnchantment extends Enchantment {
+    public NimbleFingerEnchantment() {
+        super(Rarity.RARE, CustomEnchantmentType.SWORD_ARMOR_AND_TOOL , EquipmentSlotType.values());
     }
 
     @Override
@@ -27,33 +24,29 @@ public class DirtyMoneyEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 2;
+        return 1;
     }
 
     @Override
-    public boolean isTreasureEnchantment() {
-        return true;
-    }
+    public boolean canVillagerTrade() {
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        return Config.NIMBLE_FINGER.get(); }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.come_back_at_dusk.get();
-    }
-
-    @Override
-    public boolean canVillagerTrade() { return false; }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.DIRTY_MONEY.get(); }
+    public boolean canGenerateInLoot() {
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        return Config.NIMBLE_FINGER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.DIRTY_MONEY.get();
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        return Config.NIMBLE_FINGER.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.DIRTY_MONEY.get())
+        if(Config.HYBRID_SERVER_USER.get()) return false;
+        if(Config.NIMBLE_FINGER.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,27 +1,33 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import com.google.common.collect.Maps;
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.GodRollingDiceUtil;
 import love.marblegate.flowingagony.util.ItemUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.world.World;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,84 +39,32 @@ import java.util.Map;
 @Mod.EventBusSubscriber()
 public class GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
-    public static void doRegularCustomerProgramEnchanemtnetEvent(LivingDeathEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
-                if (((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().getItem() instanceof SwordItem || ((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().getItem() instanceof AxeItem) {
-                    if (PlayerUtil.isPlayerSpecificSlotEnchanted(((PlayerEntity) (event.getSource().getTrueSource())), EnchantmentRegistry.regular_customer_program_enchantment.get(), EquipmentSlotType.MAINHAND)) {
-                        CompoundNBT weaponNBT = ((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
-                        if (!weaponNBT.contains("regular_customer_program_target")) {
-                            weaponNBT.putString("regular_customer_program_target", event.getEntityLiving().getEntityString());
-                        } else {
-                            String recordedTarget = weaponNBT.getString("regular_customer_program_target");
-                            if (recordedTarget.equals(event.getEntityLiving().getEntityString())) {
-                                ItemStack reward = new ItemStack(Items.GOLD_NUGGET);
-                                if (event.getEntityLiving() instanceof MonsterEntity)
-                                    reward.setCount(event.getEntityLiving().getRNG().nextInt(12) + 1);
-                                else reward.setCount(event.getEntityLiving().getRNG().nextInt(6) + 1);
-                                event.getEntityLiving().world.addEntity(new ItemEntity(event.getEntityLiving().world,
-                                        event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(),
-                                        event.getEntityLiving().getPosZ(), reward));
-                            } else {
-                                weaponNBT.putString("regular_customer_program_target", event.getEntityLiving().getEntityString());
-                            }
-                        }
-                        ((PlayerEntity) (event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
-                    }
-                }
-            }
-        }
+    public static void doRegularCustomerProgramEnchantmentEvent(AnvilUpdateEvent event) {
+
     }
 
 
     @SubscribeEvent
-    public static void doCleansingBeforeUsingEnchantmentEvent_updateResult(AnvilUpdateEvent event) {
-        if(!Config.HYBRID_SERVER_USER.get()){
-            if (!event.getPlayer().world.isRemote()) {
-                if (ItemUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.cleansing_before_using_enchantment.get())
-                        && event.getLeft().getDamage() == 0 && event.getLeft().getItem().equals(event.getRight().getItem())) {
-                    event.setCost(1);
-                    ItemStack result = event.getLeft().copy();
-                    Map<Enchantment, Integer> left = EnchantmentHelper.getEnchantments(result);
-                    left.remove(EnchantmentRegistry.cleansing_before_using_enchantment.get());
-                    Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight().copy());
-                    boolean goVanillaForConflict = false;
-                    for (Enchantment lEnchantment : left.keySet()) {
-                        for (Enchantment rEnchantment : right.keySet()) {
-                            if (!lEnchantment.isCompatibleWith(rEnchantment)) {
-                                if (!lEnchantment.equals(rEnchantment)) {
-                                    goVanillaForConflict = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (goVanillaForConflict) break;
-                    }
-                    if (!goVanillaForConflict) {
-                        right.forEach(((enchantment, integer) -> left.merge(enchantment, integer, (oldV, newV) -> {
-                            if (oldV < newV) return newV;
-                            else if (oldV.equals(newV)) {
-                                if (oldV < enchantment.getMaxLevel()) return oldV + 1;
-                            }
-                            return oldV;
-                        })));
-                        EnchantmentHelper.setEnchantments(left, result);
-                        event.setOutput(result);
-                    }
-                }
-            }
-        }
+    public static void doCleansingBeforeUsingEnchantmentEvent(AnvilUpdateEvent event) {
+
     }
 
     @SubscribeEvent
     public static void doComeBackAtDuskEnchantmentEvent(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             if (!event.player.world.isRemote()) {
-                if (!PlayerUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.dirty_money_enchantment.get())) {
+                if (!PlayerUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.dirty_money.get())) {
                     if (event.player.world.getDayTime() % 24000 > 10999 && event.player.world.getDayTime() % 24000 < 13501) {
-                        if (!event.player.isPotionActive(Effects.HERO_OF_THE_VILLAGE)) {
-                            if (PlayerUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.come_back_at_dusk_enchantment.get())) {
-                                event.player.addPotionEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 300, event.player.getRNG().nextInt(3) + 1));
+                        if (PlayerUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.come_back_at_dusk.get())){
+                            if (!event.player.isPotionActive(Effects.HERO_OF_THE_VILLAGE)) {
+                                int amplifier;
+                                double temp = Math.random();
+                                if(temp<0.9) amplifier = 0;
+                                else if(temp<0.95) amplifier = 1;
+                                else if(temp<0.98) amplifier = 2;
+                                else if(temp<0.99) amplifier = 3;
+                                else amplifier = 4;
+                                event.player.addPotionEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 300, amplifier));
                             }
                         }
                     }
@@ -124,7 +78,7 @@ public class GloomyEraEnchantmentEventHandler {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 if (event.getPotionEffect().getPotion().equals(Effects.HERO_OF_THE_VILLAGE)) {
-                    if (PlayerUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.dirty_money_enchantment.get())) {
+                    if (PlayerUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.dirty_money.get())) {
                         event.setResult(Event.Result.DENY);
                     }
                 }
@@ -133,22 +87,16 @@ public class GloomyEraEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doDirtyMoneyEnchantmentEvent_preventHOTVEffect(LivingDeathEvent event) {
+    public static void doDirtyMoneyEnchantmentEvent_dropGoods(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getEntityLiving() instanceof VillagerEntity) {
-                if (event.getSource().getTrueSource() instanceof PlayerEntity) {
-                    int enchantLvl = PlayerUtil.getHighestLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.dirty_money_enchantment.get());
-                    if (enchantLvl != 0) {
-                        ItemStack reward_emerald = new ItemStack(Items.EMERALD);
-                        ItemStack reward_gold = new ItemStack(Items.GOLD_INGOT);
-                        reward_emerald.setCount(event.getEntityLiving().getRNG().nextInt(2) + enchantLvl - 1);
-                        reward_gold.setCount(event.getEntityLiving().getRNG().nextInt(enchantLvl + 1));
-                        event.getEntityLiving().world.addEntity(new ItemEntity(event.getEntityLiving().world,
-                                event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(),
-                                event.getEntityLiving().getPosZ(), reward_emerald));
-                        event.getEntityLiving().world.addEntity(new ItemEntity(event.getEntityLiving().world,
-                                event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(),
-                                event.getEntityLiving().getPosZ(), reward_gold));
+            if (event.getEntityLiving() instanceof VillagerEntity && event.getSource().getTrueSource() instanceof PlayerEntity) {
+                int enchantLvl = PlayerUtil.getHighestLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.dirty_money.get());
+                if (enchantLvl != 0) {
+                    if(Math.random()<0.1*enchantLvl){
+                        InventoryHelper.spawnItemStack(event.getEntityLiving().world,event.getEntityLiving().getPosX(),event.getEntityLiving().getPosY()+2,event.getEntityLiving().getPosZ(),Items.EMERALD.getDefaultInstance());
+                    }
+                    if(Math.random()<0.02*enchantLvl){
+                        InventoryHelper.spawnItemStack(event.getEntityLiving().world,event.getEntityLiving().getPosX(),event.getEntityLiving().getPosY()+2,event.getEntityLiving().getPosZ(),Items.GOLD_INGOT.getDefaultInstance());
                     }
                 }
             }
@@ -159,7 +107,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doPilferageCreedEnchantmentEvent(LivingFallEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.pilferage_creed_enchantment.get(), EquipmentSlotType.FEET)) {
+                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.pilferage_creed.get(), EquipmentSlotType.FEET)) {
                     if (event.getDistance() >= 5.0f) {
                         List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(), 5, 1, LivingEntity -> LivingEntity instanceof VillagerEntity);
                         if (!targets.isEmpty()) {
@@ -177,6 +125,136 @@ public class GloomyEraEnchantmentEventHandler {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void doCarefullyIdentifiedEnchantmentEvent(BlockEvent.BreakEvent event){
+        if(!event.getWorld().isRemote() && !event.isCanceled()){
+            if(event.getState().getBlock() == Blocks.STONE){
+                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(event.getPlayer(),EnchantmentRegistry.carefully_identified.get(),EquipmentSlotType.MAINHAND);
+                boolean hasSilkTouch = PlayerUtil.isPlayerSpecificSlotEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND);
+                boolean hasFortune = PlayerUtil.isPlayerSpecificSlotEnchanted(event.getPlayer(), Enchantments.FORTUNE,EquipmentSlotType.MAINHAND);
+                if(enchantmentLvl!=0){
+                    if(enchantmentLvl<2){
+                        if(Math.random()<0.01){
+                            ItemStack coal = hasSilkTouch ? Items.COAL_ORE.getDefaultInstance() : Items.COAL.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) coal.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),coal);
+                        }
+                    }
+                    if(enchantmentLvl<3){
+                        if(Math.random()<0.005){
+                            ItemStack iron = Items.IRON_ORE.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) iron.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),iron);
+                        }
+                    }
+                    if(enchantmentLvl<4){
+                        if(Math.random()<0.001){
+                            ItemStack gold = Items.GOLD_ORE.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) gold.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),gold);
+                        }
+                        if(Math.random()<0.002){
+                            ItemStack redstone = hasSilkTouch ? Items.REDSTONE_ORE.getDefaultInstance() : Items.REDSTONE.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) redstone.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),redstone);
+                        }
+                    }
+                    if(enchantmentLvl<5){
+                        if(Math.random()<0.001){
+                            ItemStack lapis = hasSilkTouch ? Items.LAPIS_ORE.getDefaultInstance() : Items.LAPIS_LAZULI.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) lapis.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),lapis);
+                        }
+                    }
+                    if(enchantmentLvl<6){
+                        if(Math.random()<0.001){
+                            ItemStack emerald = hasSilkTouch ? Items.EMERALD_ORE.getDefaultInstance() : Items.EMERALD.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) emerald.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),emerald);
+                        }
+                        if(Math.random()<0.001){
+                            ItemStack diamond = hasSilkTouch ? Items.DIAMOND_ORE.getDefaultInstance() : Items.DIAMOND.getDefaultInstance();
+                            if(hasFortune){
+                                if(Math.random()<0.5) diamond.grow(1);
+                            }
+                            InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),diamond);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void doNimbleFingerEnchantmentEvent(AnvilUpdateEvent event) {
+        if(!Config.HYBRID_SERVER_USER.get()){
+            if (!event.getPlayer().world.isRemote()) {
+                if (ItemUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.nimble_finger.get())
+                        && event.getLeft().getDamage() == 0) {
+                    if(isSameCategory(event.getLeft().getItem(),event.getRight().getItem())){
+                        ItemStack result = event.getLeft().copy();
+                        Map<Enchantment, Integer> left = EnchantmentHelper.getEnchantments(result);
+                        Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight());
+                        Map<Enchantment, Integer> output = Maps.newLinkedHashMap();
+                        for (Enchantment lEnchantment : left.keySet()) {
+                            if(lEnchantment!=EnchantmentRegistry.nimble_finger.get())
+                                output.put(lEnchantment,left.get(lEnchantment));
+                        }
+                        for (Enchantment rEnchantment : right.keySet()) {
+                            boolean compatible = true;
+                            for (Enchantment lEnchantment : left.keySet()) {
+                                if(!rEnchantment.isCompatibleWith(lEnchantment))
+                                    compatible = false;
+                                if(rEnchantment==lEnchantment){
+                                    if(right.get(rEnchantment)>left.get(lEnchantment)){
+                                        output.replace(rEnchantment,right.get(rEnchantment));
+                                    }
+                                }
+                            }
+                            if(compatible)
+                                output.put(rEnchantment,right.get(rEnchantment));
+                        }
+                        EnchantmentHelper.setEnchantments(output, result);
+                        event.setCost(event.getLeft().getRepairCost() + event.getRight().getRepairCost() + 1);
+                        event.setOutput(result);
+                    }
+                }
+            }
+        }
+    }
+
+    static boolean isSameCategory(Item lItem,Item rItem){
+        if(lItem instanceof SwordItem)
+            return rItem instanceof SwordItem;
+        else if(lItem instanceof AxeItem)
+            return rItem instanceof AxeItem;
+        else if(lItem instanceof HoeItem)
+            return rItem instanceof HoeItem;
+        else if(lItem instanceof PickaxeItem)
+            return rItem instanceof PickaxeItem;
+        else if(lItem instanceof ShovelItem)
+            return rItem instanceof ShovelItem;
+        else if(lItem instanceof ArmorItem) {
+            if (rItem instanceof ArmorItem) {
+                return ((ArmorItem) lItem).getEquipmentSlot() == ((ArmorItem) rItem).getEquipmentSlot();
+            } else
+                return false;
+        }
+        return false;
     }
 }
 

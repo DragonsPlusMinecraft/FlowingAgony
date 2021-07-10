@@ -61,6 +61,9 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue ORIGINAL_SIN_EROSION;
     public static final ForgeConfigSpec.BooleanValue GUIDENS_REGRET;
     public static final ForgeConfigSpec.BooleanValue LAST_SWEET_DREAM;
+    public static final ForgeConfigSpec.BooleanValue NIMBLE_FINGER;
+    public static final ForgeConfigSpec.BooleanValue CAREFULLY_IDENTIFIED;
+
 
     static{
         ForgeConfigSpec.Builder ACT_BUILDER = new ForgeConfigSpec.Builder();
@@ -69,7 +72,7 @@ public class Config {
                 "-------------IMPORTANT!-------------",
                 "If you are using hybrid server and encountered problem with anvil, please set this config option to \"true\".",
                 "NOTICEW: If you are using ARCLIGHT server version below 1.0.19, you must set this to \"true\"",
-                "Enchantment \"Cleansing Before Using\" will be complete disabled,",
+                "Enchantment \"Nimble Finger\" will be complete disabled,",
                 "which means it cannot be obtained and applied on survival mode and it won't function.",
                 "It is because hybrid server are changing forge's event hook and it does cause serious bugs sometimes.",
                 "We are not responsible to fixing bug caused hybrid server, but here we still offer a temporary solution.").define("HYBRID_SERVER_USER",false);
@@ -90,6 +93,8 @@ public class Config {
         COME_BACK_AT_DUSK = ACT_BUILDER.comment("Is \"Come Back At Dusk\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("COME_BACK_AT_DUSK",true);
         DIRTY_MONEY = ACT_BUILDER.comment("Is \"Dirty Money\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("DIRTY_MONEY",true);
         PILFERAGE_CREED = ACT_BUILDER.comment("Is \"Pilferage Creed\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("PILFERAGE_CREED",true);
+        CAREFULLY_IDENTIFIED = ACT_BUILDER.comment("Is \"Carefully Identified\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("CAREFULLY_IDENTIFIED",true);
+        NIMBLE_FINGER = ACT_BUILDER.comment("Is \"Nimble Finger\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("NIMBLE_FINGER",true);
         REGULAR_CUSTOMER_PROGRAM = ACT_BUILDER.comment("Is \"Regular Customer Program\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("REGULAR_CUSTOMER_PROGRAM",true);
         ARMOR_UP = ACT_BUILDER.comment("Is \"Armor Up!\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("ARMOR_UP",true);
         FRIVOLOUS_STEP = ACT_BUILDER.comment("Is \"Frivolous Step\" enchantment acquirable by enchantment table, toot, fishing or trading?").define("FRIVOLOUS_STEP",true);

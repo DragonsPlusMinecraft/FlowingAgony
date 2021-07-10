@@ -8,8 +8,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class RegularCustomerProgramEnchantment extends Enchantment {
-    public RegularCustomerProgramEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, CustomEnchantmentType.AXE_AND_SWORD , p_i46731_3_);
+    public RegularCustomerProgramEnchantment() {
+        super(Enchantment.Rarity.RARE, CustomEnchantmentType.SWORD_ARMOR_AND_TOOL , EquipmentSlotType.values());
     }
 
     @Override

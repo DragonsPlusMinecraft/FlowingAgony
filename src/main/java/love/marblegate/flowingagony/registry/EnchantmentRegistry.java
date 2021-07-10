@@ -69,11 +69,13 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> miraculous_escape = ENCHANTMENT.register("miraculous_escape", MiraculousEscapeEnchantment::new);
     public static final RegistryObject<Enchantment> armor_up = ENCHANTMENT.register("armor_up", ArmorUpEnchantment::new);
 
-    public static final RegistryObject<Enchantment> regular_customer_program_enchantment = ENCHANTMENT.register("regular_customer_program", () -> new RegularCustomerProgramEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> cleansing_before_using_enchantment = ENCHANTMENT.register("cleansing_before_using", () -> new CleansingBeforeUsingEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.values()));
-    public static final RegistryObject<Enchantment> come_back_at_dusk_enchantment = ENCHANTMENT.register("come_back_at_dusk", () -> new ComeBackAtDuskEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> dirty_money_enchantment = ENCHANTMENT.register("dirty_money", () -> new DirtyMoneyEnchantment(Enchantment.Rarity.VERY_RARE,new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET}));
-    public static final RegistryObject<Enchantment> pilferage_creed_enchantment = ENCHANTMENT.register("pilferage_creed", () -> new PilferageCreedEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
+    public static final RegistryObject<Enchantment> regular_customer_program = ENCHANTMENT.register("regular_customer_program", RegularCustomerProgramEnchantment::new);
+    public static final RegistryObject<Enchantment> cleansing_before_using = ENCHANTMENT.register("cleansing_before_using", CleansingBeforeUsingEnchantment::new);
+    public static final RegistryObject<Enchantment> come_back_at_dusk = ENCHANTMENT.register("come_back_at_dusk", ComeBackAtDuskEnchantment::new);
+    public static final RegistryObject<Enchantment> dirty_money = ENCHANTMENT.register("dirty_money", DirtyMoneyEnchantment::new);
+    public static final RegistryObject<Enchantment> pilferage_creed = ENCHANTMENT.register("pilferage_creed", PilferageCreedEnchantment::new);
+    public static final RegistryObject<Enchantment> carefully_identified = ENCHANTMENT.register("carefully_identified", CarefullyIdentifiedEnchantment::new);
+    public static final RegistryObject<Enchantment> nimble_finger = ENCHANTMENT.register("nimble_finger", NimbleFingerEnchantment::new);
 
     public static final RegistryObject<Enchantment> agony_screamer_enchantment = ENCHANTMENT.register("agony_screamer", () -> new AgonyScreamerEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
     public static final RegistryObject<Enchantment> insane_poet_enchantment = ENCHANTMENT.register("insane_poet", () -> new InsanePoetEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
