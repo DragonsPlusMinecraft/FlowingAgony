@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.render.CustomRenderType;
-import love.marblegate.flowingagony.util.PlayerUtil;
+import love.marblegate.flowingagony.util.EnchantmentUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -24,7 +24,7 @@ public class PerceivedMaliceEffectRenderer {
     @SubscribeEvent
     public static void render(RenderLivingEvent.Post event){
         ClientPlayerEntity player = Minecraft.getInstance().player;
-        if (PlayerUtil.isPlayerSpecificSlotEnchanted(player,EnchantmentRegistry.perceived_malice.get(), EquipmentSlotType.HEAD)) {
+        if (EnchantmentUtil.isPlayerItemEnchanted(player,EnchantmentRegistry.perceived_malice.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
             if(event.getEntity() instanceof MonsterEntity) {
                 if (player.getPositionVec().distanceTo(event.getEntity().getPositionVec())<=24)
                     highlight(event.getMatrixStack(), event.getBuffers(), event.getEntity());

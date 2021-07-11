@@ -6,7 +6,7 @@ import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.util.PlayerUtil;
+import love.marblegate.flowingagony.util.EnchantmentUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -30,7 +30,7 @@ public class RootedInHatredEnchantmentEventHandler {
             if(!event.isCanceled()) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth()) {
-                        int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.resentful_soul.get(), EquipmentSlotType.HEAD);
+                        int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.resentful_soul.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                         if (enchantmentLvl != 0) {
                             if (event.getEntityLiving().getLastAttackedEntityTime() <= (25 + enchantmentLvl * 25)) {
                                 event.setCanceled(true);
@@ -48,7 +48,7 @@ public class RootedInHatredEnchantmentEventHandler {
             if (!event.isCanceled()) {
                 if(event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().equals(event.getSource().getTrueSource())) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth()) {
-                        int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.too_resentful_to_die.get(), EquipmentSlotType.HEAD);
+                        int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.too_resentful_to_die.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                         if (!((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.extreme_hatred.get())){
                             if (enchantmentLvl != 0) {
                                 ((PlayerEntity)event.getEntityLiving()).heal(1 + enchantmentLvl * 3);
@@ -103,7 +103,7 @@ public class RootedInHatredEnchantmentEventHandler {
     public static void doOutrageousSpiritEnchantmentEvent(LivingHurtEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.outrageous_spirit.get(),EquipmentSlotType.MAINHAND);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.outrageous_spirit.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     int negativeEffectCount = 0;
                     if(((PlayerEntity) event.getSource().getTrueSource()).isBurning()) negativeEffectCount++;
@@ -120,7 +120,7 @@ public class RootedInHatredEnchantmentEventHandler {
     public static void doHatredBloodlikeEnchantmentEvent_acvtivateHatredBloodlineMarkOnDeath(LivingDeathEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantLvl = PlayerUtil.getTotalLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.hatred_bloodline.get());
+                int enchantLvl = EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.hatred_bloodline.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
                     LazyOptional<IHatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY);
                     statusCap.ifPresent(
@@ -153,7 +153,7 @@ public class RootedInHatredEnchantmentEventHandler {
     public static void doFreshRevengeEnchantmentEvent_applyBuff(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.fresh_revenge.get(),EquipmentSlotType.MAINHAND);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.fresh_revenge.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     if(event.getEntityLiving().getLastAttackedEntityTime()<=(20+enchantmentLvl*4)){
                         ((PlayerEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active.get(),200,enchantmentLvl-1));

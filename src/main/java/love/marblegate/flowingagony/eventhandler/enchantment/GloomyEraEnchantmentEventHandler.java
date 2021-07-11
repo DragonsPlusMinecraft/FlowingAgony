@@ -3,9 +3,8 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 import com.google.common.collect.Maps;
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.util.GodRollingDiceUtil;
-import love.marblegate.flowingagony.util.ItemUtil;
-import love.marblegate.flowingagony.util.PlayerUtil;
+import love.marblegate.flowingagony.util.EntityUtil;
+import love.marblegate.flowingagony.util.EnchantmentUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -13,12 +12,10 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -57,9 +54,9 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doComeBackAtDuskEnchantmentEvent(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             if (!event.player.world.isRemote()) {
-                if (!PlayerUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.dirty_money.get())) {
+                if (EnchantmentUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.dirty_money.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==0){
                     if (event.player.world.getDayTime() % 24000 > 10999 && event.player.world.getDayTime() % 24000 < 13501) {
-                        if (PlayerUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.come_back_at_dusk.get())){
+                        if (EnchantmentUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.come_back_at_dusk.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1){
                             if (!event.player.isPotionActive(Effects.HERO_OF_THE_VILLAGE)) {
                                 int amplifier;
                                 double temp = Math.random();
@@ -82,7 +79,7 @@ public class GloomyEraEnchantmentEventHandler {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 if (event.getPotionEffect().getPotion().equals(Effects.HERO_OF_THE_VILLAGE)) {
-                    if (PlayerUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.dirty_money.get())) {
+                    if (EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.dirty_money.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1) {
                         event.setResult(Event.Result.DENY);
                     }
                 }
@@ -94,7 +91,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doDirtyMoneyEnchantmentEvent_dropGoods(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof VillagerEntity && event.getSource().getTrueSource() instanceof PlayerEntity) {
-                int enchantLvl = PlayerUtil.getHighestLevelPlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.dirty_money.get());
+                int enchantLvl = EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.dirty_money.get(), EnchantmentUtil.ArmorEncCalOp.HIGHEST_LEVEL);
                 if (enchantLvl != 0) {
                     if(Math.random()<0.1*enchantLvl){
                         InventoryHelper.spawnItemStack(event.getEntityLiving().world,event.getEntityLiving().getPosX(),event.getEntityLiving().getPosY()+2,event.getEntityLiving().getPosZ(),Items.EMERALD.getDefaultInstance());
@@ -111,9 +108,9 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doPilferageCreedEnchantmentEvent(LivingFallEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.pilferage_creed.get(), EquipmentSlotType.FEET)) {
+                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.pilferage_creed.get(), EquipmentSlotType.FEET, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                     if (event.getDistance() >= 5.0f) {
-                        List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(), 5, 1, LivingEntity -> LivingEntity instanceof VillagerEntity);
+                        List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 5, 1, LivingEntity -> LivingEntity instanceof VillagerEntity);
                         if (!targets.isEmpty()) {
                             targets.forEach(LivingEntity -> {
                                 List<MerchantOffer> offers = ((VillagerEntity) LivingEntity).getOffers();
@@ -166,14 +163,14 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doCarefullyIdentifiedEnchantmentEvent(BlockEvent.BreakEvent event){
         if(!event.getWorld().isRemote() && !event.isCanceled()){
             if(event.getState().getBlock() == Blocks.STONE){
-                int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(event.getPlayer(),EnchantmentRegistry.carefully_identified.get(),EquipmentSlotType.MAINHAND);
-                boolean hasSilkTouch = PlayerUtil.isPlayerSpecificSlotEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND);
-                boolean hasFortune = PlayerUtil.isPlayerSpecificSlotEnchanted(event.getPlayer(), Enchantments.FORTUNE,EquipmentSlotType.MAINHAND);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.carefully_identified.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
+                int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.FORTUNE,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 if(enchantmentLvl!=0){
                     if(enchantmentLvl<2){
                         if(Math.random()<0.01){
-                            ItemStack coal = hasSilkTouch ? Items.COAL_ORE.getDefaultInstance() : Items.COAL.getDefaultInstance();
-                            if(hasFortune){
+                            ItemStack coal = silkTouchEnchantmentLvl == 1? Items.COAL_ORE.getDefaultInstance() : Items.COAL.getDefaultInstance();
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) coal.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),coal);
@@ -182,7 +179,7 @@ public class GloomyEraEnchantmentEventHandler {
                     if(enchantmentLvl<3){
                         if(Math.random()<0.005){
                             ItemStack iron = Items.IRON_ORE.getDefaultInstance();
-                            if(hasFortune){
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) iron.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),iron);
@@ -191,14 +188,14 @@ public class GloomyEraEnchantmentEventHandler {
                     if(enchantmentLvl<4){
                         if(Math.random()<0.001){
                             ItemStack gold = Items.GOLD_ORE.getDefaultInstance();
-                            if(hasFortune){
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) gold.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),gold);
                         }
                         if(Math.random()<0.002){
-                            ItemStack redstone = hasSilkTouch ? Items.REDSTONE_ORE.getDefaultInstance() : Items.REDSTONE.getDefaultInstance();
-                            if(hasFortune){
+                            ItemStack redstone = silkTouchEnchantmentLvl == 1 ? Items.REDSTONE_ORE.getDefaultInstance() : Items.REDSTONE.getDefaultInstance();
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) redstone.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),redstone);
@@ -206,8 +203,8 @@ public class GloomyEraEnchantmentEventHandler {
                     }
                     if(enchantmentLvl<5){
                         if(Math.random()<0.001){
-                            ItemStack lapis = hasSilkTouch ? Items.LAPIS_ORE.getDefaultInstance() : Items.LAPIS_LAZULI.getDefaultInstance();
-                            if(hasFortune){
+                            ItemStack lapis = silkTouchEnchantmentLvl == 1 ? Items.LAPIS_ORE.getDefaultInstance() : Items.LAPIS_LAZULI.getDefaultInstance();
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) lapis.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),lapis);
@@ -215,15 +212,15 @@ public class GloomyEraEnchantmentEventHandler {
                     }
                     if(enchantmentLvl<6){
                         if(Math.random()<0.001){
-                            ItemStack emerald = hasSilkTouch ? Items.EMERALD_ORE.getDefaultInstance() : Items.EMERALD.getDefaultInstance();
-                            if(hasFortune){
+                            ItemStack emerald = silkTouchEnchantmentLvl == 1 ? Items.EMERALD_ORE.getDefaultInstance() : Items.EMERALD.getDefaultInstance();
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) emerald.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),emerald);
                         }
                         if(Math.random()<0.001){
-                            ItemStack diamond = hasSilkTouch ? Items.DIAMOND_ORE.getDefaultInstance() : Items.DIAMOND.getDefaultInstance();
-                            if(hasFortune){
+                            ItemStack diamond = silkTouchEnchantmentLvl == 1 ? Items.DIAMOND_ORE.getDefaultInstance() : Items.DIAMOND.getDefaultInstance();
+                            if(fortuneEnchantmentLvl == 1){
                                 if(Math.random()<0.5) diamond.grow(1);
                             }
                             InventoryHelper.spawnItemStack((World) event.getWorld(),event.getPos().getX(), event.getPos().getY(),event.getPos().getZ(),diamond);
@@ -238,7 +235,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doNimbleFingerEnchantmentEvent(AnvilUpdateEvent event) {
         if(!Config.HYBRID_SERVER_USER.get()){
             if (!event.getPlayer().world.isRemote()) {
-                if (ItemUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.nimble_finger.get())
+                if (EnchantmentUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.nimble_finger.get()) == 1
                         && event.getLeft().getDamage() == 0) {
                     if(isSameCategory(event.getLeft().getItem(),event.getRight().getItem())){
                         ItemStack result = event.getLeft().copy();

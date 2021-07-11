@@ -136,7 +136,7 @@ public class ExplicitEffectEventHandler {
     public static void doAgonyResonanceEffectEvent(PotionEvent.PotionAddedEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getPotionEffect().getPotion().equals(EffectRegistry.agony_resonance.get())){
-                List<LivingEntity> entities = EntityUtil.getTargetListExceptOneself(event.getEntityLiving(),8,2, x->true);
+                List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself(event.getEntityLiving(),8,2, x->true);
                 entities.forEach(LivingEntity->{
                     if(LivingEntity.isPotionActive(EffectRegistry.been_resonated.get())){
                         LivingEntity.removePotionEffect(EffectRegistry.been_resonated.get());
@@ -157,7 +157,7 @@ public class ExplicitEffectEventHandler {
     public static void doBeenResonatedEffectEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving().isPotionActive(EffectRegistry.been_resonated.get())){
-                List<LivingEntity> entities = EntityUtil.getTargetListExceptOneself(event.getEntityLiving(),8,2, LivingEntity->
+                List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself(event.getEntityLiving(),8,2, LivingEntity->
                     LivingEntity.isPotionActive(EffectRegistry.agony_resonance.get()));
                 int damageIndex = event.getEntityLiving().getActivePotionEffect(EffectRegistry.been_resonated.get()).getAmplifier() + 1;
                 entities.forEach(LivingEntity-> LivingEntity.attackEntityFrom(new DamageSource("agony_resonance"),event.getAmount() * (0.35F + damageIndex * 0.15F)));

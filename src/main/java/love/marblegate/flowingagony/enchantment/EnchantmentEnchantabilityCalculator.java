@@ -1,8 +1,8 @@
-package love.marblegate.flowingagony.util;
+package love.marblegate.flowingagony.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 
-public class EnchantmentLevelUtil {
+public class EnchantmentEnchantabilityCalculator {
     public static int get(Enchantment.Rarity rarity, int highestEnchantmentLevel, int currentLevel, boolean isMin) {
         switch (rarity.getWeight()) {
             //Rarity is VERY RARE

@@ -10,16 +10,29 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.passive.horse.SkeletonHorseEntity;
 import net.minecraft.entity.passive.horse.ZombieHorseEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class EntityUtil {
-    public static List<LivingEntity> getTargetListExceptOneself(LivingEntity central, float radius, float height, Predicate<LivingEntity> predicate){
-        AxisAlignedBB aabb = new AxisAlignedBB(central.getPosition().getX()-radius,central.getPosition().getY()-height,central.getPosition().getZ()-radius,central.getPosition().getX()+radius,central.getPosition().getY()+height,central.getPosition().getZ()+radius);
-        List<LivingEntity> entities = central.world.getEntitiesWithinAABB(LivingEntity.class,aabb,predicate);
-        entities.remove(central);
+    public static List<LivingEntity> getTargetsExceptOneself(LivingEntity center, float radius, float height, Predicate<LivingEntity> predicate){
+        AxisAlignedBB aabb = new AxisAlignedBB(center.getPosition().getX()-radius,center.getPosition().getY()-height,center.getPosition().getZ()-radius,center.getPosition().getX()+radius,center.getPosition().getY()+height,center.getPosition().getZ()+radius);
+        List<LivingEntity> entities = center.world.getEntitiesWithinAABB(LivingEntity.class,aabb,predicate);
+        entities.remove(center);
+        return entities;
+    }
+
+    public static List<LivingEntity> getTargetsExceptOneself(PlayerEntity center, float radius, float height, Predicate<LivingEntity> predicate){
+        return getTargetsExceptOneself(center,radius,height,predicate);
+    }
+
+    public static List<LivingEntity> getTargetsOfSameType(LivingEntity center, float radius, float height, LivingEntity sourceEntity,boolean excludeOneself){
+        AxisAlignedBB aabb = new AxisAlignedBB(center.getPosition().getX()-radius,center.getPosition().getY()-height,center.getPosition().getZ()-radius,center.getPosition().getX()+radius,center.getPosition().getY()+height,center.getPosition().getZ()+radius);
+        List<LivingEntity> entities = center.world.getEntitiesWithinAABB(LivingEntity.class,aabb,livingEntity -> livingEntity.getClass() == sourceEntity.getClass());
+        if(excludeOneself) entities.remove(center);
         return entities;
     }
 

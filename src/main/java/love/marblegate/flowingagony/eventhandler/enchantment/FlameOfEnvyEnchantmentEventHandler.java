@@ -2,7 +2,8 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.util.PlayerUtil;
+import love.marblegate.flowingagony.util.EnchantmentUtil;
+import love.marblegate.flowingagony.util.EntityUtil;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.EndermanEntity;
@@ -31,7 +32,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doEnciousKindEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.encious_kind_enchantment.get(), EquipmentSlotType.CHEST)){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.encious_kind_enchantment.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     double diff = ((LivingEntity) event.getSource().getTrueSource()).getHealth() - event.getEntityLiving().getHealth();
                     if(diff>=1){
                         diff = diff>10?10:diff;
@@ -46,7 +47,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doEyesoreEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof LivingEntity && event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.eyesore_enchantment.get(), EquipmentSlotType.MAINHAND)){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.eyesore_enchantment.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.eyesore_enchantment_active.get(),60));
                 }
             }
@@ -57,7 +58,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doThornInFleshEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof LivingEntity && event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.thorn_in_flesh_enchantment.get(), EquipmentSlotType.MAINHAND)){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.thorn_in_flesh_enchantment.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.thorn_in_flesh_active.get(),180));
                 }
             }
@@ -71,9 +72,9 @@ public class FlameOfEnvyEnchantmentEventHandler {
                 if (((EntityRayTraceResult) event.getRayTraceResult()).getEntity() instanceof EndermanEntity) {
                     if (event.getArrow().getShooter() != null) {
                         if (event.getArrow().getShooter() instanceof PlayerEntity) {
-                            if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getArrow().getShooter(), EnchantmentRegistry.covert_knife_enchantment.get(), EquipmentSlotType.MAINHAND)) {
+                            if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), EnchantmentRegistry.covert_knife_enchantment.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                                 ((EntityRayTraceResult) event.getRayTraceResult()).getEntity().attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) event.getArrow().getShooter()), 9f);
-                                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getArrow().getShooter(), Enchantments.FLAME, EquipmentSlotType.MAINHAND)){
+                                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), Enchantments.FLAME, EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                                     ((EntityRayTraceResult) event.getRayTraceResult()).getEntity().setFire(5);
                                 }
                                 if(event.getArrow() instanceof SpectralArrowEntity){
@@ -101,8 +102,8 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doSourceOfEnvyEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.source_of_envy_enchantment.get(), EquipmentSlotType.CHEST)){
-                    List<LivingEntity> availableEnvySpreadTargets = PlayerUtil.getTargetListUnderSameType((PlayerEntity) event.getEntityLiving(),12,2, (LivingEntity) event.getSource().getTrueSource());
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.source_of_envy_enchantment.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                    List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsOfSameType((PlayerEntity) event.getEntityLiving(),12,2, (LivingEntity) event.getSource().getTrueSource(),true);
                     if(!availableEnvySpreadTargets.isEmpty()){
                         for(LivingEntity spreadTarget:availableEnvySpreadTargets){
                             spreadTarget.setRevengeTarget((LivingEntity) event.getSource().getTrueSource());

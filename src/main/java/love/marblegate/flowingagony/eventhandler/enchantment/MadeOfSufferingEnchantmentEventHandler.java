@@ -6,7 +6,8 @@ import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.util.PlayerUtil;
+import love.marblegate.flowingagony.util.EnchantmentUtil;
+import love.marblegate.flowingagony.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SlimeEntity;
@@ -32,7 +33,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getEntityLiving().isSwimming()){
-                    if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.drowning_phobia_enchantment.get(), EquipmentSlotType.HEAD)){
+                    if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.drowning_phobia_enchantment.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                         dealPhobiaEffectDamage(event,Effects.BLINDNESS);
                     }
                 }
@@ -46,7 +47,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getEntityLiving().isInLava()||event.getEntityLiving().getFireTimer()>0){
                     if(!(event.getSource().getDamageType().equals("inFire")||event.getSource().getDamageType().equals("onFire")||event.getSource().getDamageType().equals("lava"))){
-                        if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.burning_phobia_enchantment.get(), EquipmentSlotType.HEAD)){
+                        if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.burning_phobia_enchantment.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                             dealPhobiaEffectDamage(event,Effects.SLOWNESS);
                         }
                     }
@@ -58,7 +59,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     private static void dealPhobiaEffectDamage(LivingDamageEvent event, Effect effect_1) {
         event.getEntityLiving().addPotionEffect(new EffectInstance(effect_1,600));
         event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.NAUSEA,600));
-        List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(),12,2, LivingEntity->
+        List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(),12,2, LivingEntity->
                 LivingEntity instanceof MonsterEntity || LivingEntity instanceof SlimeEntity);
         for(LivingEntity target: targets) {
             target.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) event.getEntityLiving()), event.getAmount()*3);
@@ -69,7 +70,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onPrayerOfPainEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.prayer_of_pain_enchantment.get(),EquipmentSlotType.HEAD);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.prayer_of_pain_enchantment.get(),EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
                     if(event.getEntityLiving().getHealth()<(4+enchantLvl*2)){
                         if(event.getEntityLiving().isPotionActive(EffectRegistry.let_me_savor_it.get())){
@@ -95,7 +96,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onConstrainedHeartEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.constrained_heart_enchantment.get(), EquipmentSlotType.CHEST)) {
+                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.constrained_heart_enchantment.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                     if(event.getSource().getDamageType().equals("inFire")||event.getSource().getDamageType().equals("onFire")||
                             event.getSource().getDamageType().equals("lava")||event.getSource().getDamageType().equals("inWall")||
                             event.getSource().getDamageType().equals("cramming")||event.getSource().getDamageType().equals("fall")||
@@ -123,7 +124,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onPiercingFeverEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.piercing_fever_enchantment.get(), EquipmentSlotType.CHEST)) {
+                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.piercing_fever_enchantment.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                     if(event.getSource().getTrueSource() instanceof LivingEntity || event.getSource().getDamageType().equals("cactus")){
                         LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                         pointCap.ifPresent(
