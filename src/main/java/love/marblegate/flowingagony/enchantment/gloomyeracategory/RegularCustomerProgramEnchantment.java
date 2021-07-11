@@ -2,6 +2,7 @@ package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -9,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 public class RegularCustomerProgramEnchantment extends Enchantment {
     public RegularCustomerProgramEnchantment() {
-        super(Enchantment.Rarity.RARE, CustomEnchantmentType.SWORD_ARMOR_AND_TOOL , EquipmentSlotType.values());
+        super(Rarity.VERY_RARE, CustomEnchantmentType.AXE_AND_SWORD , EquipmentSlotTypeSet.MAINHAND);
     }
 
     @Override
@@ -28,7 +29,12 @@ public class RegularCustomerProgramEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.REGULAR_CUSTOMER_PROGRAM.get(); }
+    public boolean isTreasureEnchantment() {
+        return true;
+    }
+
+    @Override
+    public boolean canVillagerTrade() { return false; }
 
     @Override
     public boolean canGenerateInLoot() { return Config.REGULAR_CUSTOMER_PROGRAM.get(); }

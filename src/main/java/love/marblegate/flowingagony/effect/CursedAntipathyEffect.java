@@ -7,7 +7,6 @@ import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class CursedAntipathyEffect extends Effect {
@@ -17,7 +16,7 @@ public class CursedAntipathyEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.cursed_antipathy_effect.get()) {
+        if (this == EffectRegistry.cursed_antipathy.get()) {
             entityLivingBaseIn.attackEntityFrom(CustomDamageSource.CURSED_ANTIPATHY, 1.0F);
             //Play Particle Effect
             if (!entityLivingBaseIn.world.isRemote) {

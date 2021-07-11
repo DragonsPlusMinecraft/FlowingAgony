@@ -49,10 +49,10 @@ public class RootedInHatredEnchantmentEventHandler {
                 if(event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().equals(event.getSource().getTrueSource())) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth()) {
                         int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.too_resentful_to_die.get(), EquipmentSlotType.HEAD);
-                        if (!((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.extreme_hatred_effect.get())){
+                        if (!((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.extreme_hatred.get())){
                             if (enchantmentLvl != 0) {
                                 ((PlayerEntity)event.getEntityLiving()).heal(1 + enchantmentLvl * 3);
-                                ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200));
+                                ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred.get(), 7200));
                                 event.setCanceled(true);
                                 //Play Sound Effect - Stage 1
                                 if (!event.getEntityLiving().world.isRemote) {
@@ -65,10 +65,10 @@ public class RootedInHatredEnchantmentEventHandler {
                             }
                         } else {
                             if (enchantmentLvl != 0){
-                                int potionLvl = ((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier() + 1;
+                                int potionLvl = ((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.extreme_hatred.get()).getAmplifier() + 1;
                                 if (potionLvl == 1) {
                                     ((PlayerEntity)event.getEntityLiving()).heal(1 + enchantmentLvl * 2);
-                                    ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200, 1));
+                                    ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred.get(), 7200, 1));
                                     event.setCanceled(true);
                                     //Play Sound Effect - Stage 2
                                     if (!event.getEntityLiving().world.isRemote) {
@@ -80,7 +80,7 @@ public class RootedInHatredEnchantmentEventHandler {
                                     }
                                 } else if (potionLvl == 2) {
                                     ((PlayerEntity)event.getEntityLiving()).heal(1 + enchantmentLvl);
-                                    ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred_effect.get(), 7200, 2));
+                                    ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.extreme_hatred.get(), 7200, 2));
                                     event.setCanceled(true);
                                     //Play Sound Effect - Stage 3
                                     if (!event.getEntityLiving().world.isRemote) {
@@ -140,7 +140,7 @@ public class RootedInHatredEnchantmentEventHandler {
                         cap -> {
                             if (cap.getActiveLevel() != 0) {
                                 int hatredBloodlineLevel = cap.getActiveLevel();
-                                event.getPlayer().addPotionEffect(new EffectInstance(EffectRegistry.hatred_bloodline_enchantment_active_effect.get(), 800 * hatredBloodlineLevel, hatredBloodlineLevel - 1));
+                                event.getPlayer().addPotionEffect(new EffectInstance(EffectRegistry.hatred_bloodline_enchantment_active.get(), 800 * hatredBloodlineLevel, hatredBloodlineLevel - 1));
                                 cap.setActiveLevel(0);
                             }
                         }
@@ -156,7 +156,7 @@ public class RootedInHatredEnchantmentEventHandler {
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getSource().getTrueSource()), EnchantmentRegistry.fresh_revenge.get(),EquipmentSlotType.MAINHAND);
                 if(enchantmentLvl!=0){
                     if(event.getEntityLiving().getLastAttackedEntityTime()<=(20+enchantmentLvl*4)){
-                        ((PlayerEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active_effect.get(),200,enchantmentLvl-1));
+                        ((PlayerEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.fresh_revenge_enchantment_active.get(),200,enchantmentLvl-1));
                     }
                 }
             }

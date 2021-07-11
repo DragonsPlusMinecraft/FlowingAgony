@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.effect;
 
 import love.marblegate.flowingagony.registry.EffectRegistry;
-import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
@@ -14,11 +13,15 @@ public class ExtremeHatredEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.extreme_hatred_effect.get()) {
+        if (this == EffectRegistry.extreme_hatred.get()) {
             if(entityLivingBaseIn instanceof PlayerEntity){
-                PlayerUtil.crazilyComsumeFoodLevel((PlayerEntity) entityLivingBaseIn);
+                crazilyComsumeFoodLevel((PlayerEntity) entityLivingBaseIn);
             }
         }
+    }
+
+    static void crazilyComsumeFoodLevel(PlayerEntity player) {
+        player.getFoodStats().addExhaustion(4);
     }
 
     @Override

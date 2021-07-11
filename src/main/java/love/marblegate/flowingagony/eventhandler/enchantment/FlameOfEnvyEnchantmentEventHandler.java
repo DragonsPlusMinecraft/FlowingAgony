@@ -35,7 +35,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
                     double diff = ((LivingEntity) event.getSource().getTrueSource()).getHealth() - event.getEntityLiving().getHealth();
                     if(diff>=1){
                         diff = diff>10?10:diff;
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.envious_being_effect.get(),200, MathHelper.floor(diff)-1));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.envious_being.get(),200, MathHelper.floor(diff)-1));
                     }
                 }
             }
@@ -47,7 +47,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof LivingEntity && event.getSource().getTrueSource() instanceof PlayerEntity){
                 if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.eyesore_enchantment.get(), EquipmentSlotType.MAINHAND)){
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.eyesore_enchantment_active_effect.get(),60));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.eyesore_enchantment_active.get(),60));
                 }
             }
         }
@@ -58,7 +58,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof LivingEntity && event.getSource().getTrueSource() instanceof PlayerEntity){
                 if(PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.thorn_in_flesh_enchantment.get(), EquipmentSlotType.MAINHAND)){
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.thron_in_flesh_active_effect.get(),180));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.thorn_in_flesh_active.get(),180));
                 }
             }
         }

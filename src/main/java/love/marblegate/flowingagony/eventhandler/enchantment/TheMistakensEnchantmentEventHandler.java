@@ -1,5 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
@@ -10,6 +11,7 @@ import love.marblegate.flowingagony.util.EntityUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -87,11 +89,11 @@ public class TheMistakensEnchantmentEventHandler {
                 int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.prototype_chaotic.get(),EquipmentSlotType.CHEST);
                 if(enchantLvl!=0){
                     if(EffectUtil.isEffectShown(event.getPotionEffect())){
-                        if(((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.prototype_chaotic_enchantment_active_effect.get())){
-                            int newEffectAmplifier = Math.min(((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.prototype_chaotic_enchantment_active_effect.get()).getAmplifier()+enchantLvl,29);
-                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.prototype_chaotic_enchantment_active_effect.get(),1200,newEffectAmplifier));
+                        if(((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.prototype_chaotic_enchantment_active.get())){
+                            int newEffectAmplifier = Math.min(((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.prototype_chaotic_enchantment_active.get()).getAmplifier()+enchantLvl,29);
+                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.prototype_chaotic_enchantment_active.get(),1200,newEffectAmplifier));
                         } else {
-                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.prototype_chaotic_enchantment_active_effect.get(),1200,enchantLvl-1));
+                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.prototype_chaotic_enchantment_active.get(),1200,enchantLvl-1));
                         }
                         ((PlayerEntity)event.getEntityLiving()).heal(enchantLvl);
                     }
@@ -144,7 +146,7 @@ public class TheMistakensEnchantmentEventHandler {
                         if(EntityUtil.isAggresiveUndead((LivingEntity) event.getSource().getTrueSource())){
                             Random temp = event.getEntityLiving().getRNG();
                             if(temp.nextInt(100)<(6-enchantLvl)){
-                                ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.curse_of_undead_effect.get(),144000));
+                                ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.curse_of_undead.get(),144000));
                             }
                             if(EntityUtil.isCommonUndead((LivingEntity) event.getSource().getTrueSource())){
                                 if(enchantLvl==5) event.setCanceled(true);
@@ -172,12 +174,13 @@ public class TheMistakensEnchantmentEventHandler {
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.lightburn_fungal_parasitic.get(), EquipmentSlotType.CHEST);
                 if(enchantmentLvl!=0){
                     if(event.getSource().getTrueSource() instanceof LivingEntity){
-                        List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(), 8, 2, x -> true);
+                        List<LivingEntity> targets = PlayerUtil.getTargetList((PlayerEntity) event.getEntityLiving(), 8, 2,
+                                Config.VILLAGER_SAFE_MODE.get()?livingEntity -> !(livingEntity instanceof VillagerEntity) : x -> true);
                         if (!targets.isEmpty()) {
                             Random rand = event.getEntityLiving().getRNG();
                             for (LivingEntity target : targets) {
                                 if(rand.nextDouble()< 0.125D * (enchantmentLvl + 1))
-                                    target.addPotionEffect(new EffectInstance(EffectRegistry.lightburn_fungal_infection_effect.get(), 120));
+                                    target.addPotionEffect(new EffectInstance(EffectRegistry.lightburn_fungal_infection.get(), 120));
                             }
                         }
                     }
@@ -203,14 +206,14 @@ public class TheMistakensEnchantmentEventHandler {
                             ),
                             new RemoveEffectSyncToClientPacket(Effects.POISON));
                 }
-                if(event.player.isPotionActive(EffectRegistry.lightburn_fungal_infection_effect.get())){
-                    event.player.removeActivePotionEffect(EffectRegistry.lightburn_fungal_infection_effect.get());
+                if(event.player.isPotionActive(EffectRegistry.lightburn_fungal_infection.get())){
+                    event.player.removeActivePotionEffect(EffectRegistry.lightburn_fungal_infection.get());
                     //Sync to Client
                     Networking.INSTANCE.send(
                             PacketDistributor.PLAYER.with(
                                     () -> (ServerPlayerEntity) event.player
                             ),
-                            new RemoveEffectSyncToClientPacket(EffectRegistry.lightburn_fungal_infection_effect.get()));
+                            new RemoveEffectSyncToClientPacket(EffectRegistry.lightburn_fungal_infection.get()));
                 }
             }
         }
@@ -224,7 +227,7 @@ public class TheMistakensEnchantmentEventHandler {
                     if(event.getPotionEffect().getPotion().equals(Effects.POISON)){
                         event.setResult(Event.Result.DENY);
                     }
-                    if(event.getPotionEffect().getPotion().equals(EffectRegistry.lightburn_fungal_infection_effect.get())){
+                    if(event.getPotionEffect().getPotion().equals(EffectRegistry.lightburn_fungal_infection.get())){
                         event.setResult(Event.Result.DENY);
                     }
                 }

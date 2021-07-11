@@ -2,8 +2,6 @@ package love.marblegate.flowingagony.effect.special;
 
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
 
 
 public class MiraculousEscapeForceEscapeEffect extends HarmfulBlankImplicitEffect {
@@ -13,7 +11,7 @@ public class MiraculousEscapeForceEscapeEffect extends HarmfulBlankImplicitEffec
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.miraculous_escape_enchantment_force_escape_effect.get()) {
+        if (this == EffectRegistry.miraculous_escape_enchantment_force_escape.get()) {
             int duration = entityLivingBaseIn.getActivePotionEffect(this.getEffect()).getDuration();
             if(duration%40>25){
                 entityLivingBaseIn.setMotion(0,2,0);

@@ -33,39 +33,4 @@ public class GodRollingDiceUtil {
                 break;
         }
     }
-
-    public static LivingEntity getLuckyOne(List<LivingEntity> entities, Random random){
-        return entities.get(random.nextInt(entities.size()));
-    }
-
-    public static List<ItemStack> rollDiceForPilferage(ItemStack armorFeet,VillagerEntity villagerEntity, List<MerchantOffer> offers, Random random, double fallingHeight){
-        int extraluck = MathHelper.floor(fallingHeight);
-        extraluck= Math.min(extraluck, 15);
-        extraluck -=5;
-        List<ItemStack> itemStacks = new ArrayList<>();
-        boolean success = false;
-        if(random.nextInt(100) < 30 + 5*extraluck){
-            int temp = random.nextInt(offers.size());
-            itemStacks.add(offers.get(temp).getSellingStack().copy());
-            success = true;
-        }
-        if(random.nextInt(100) < 15 + 2.5f*extraluck&&offers.size()>3){
-            int temp = random.nextInt(offers.size());
-            itemStacks.add(offers.get(temp).getSellingStack().copy());
-            success = true;
-        }
-        if(random.nextInt(100) < 5 + 1.5f*extraluck&&offers.size()>5){
-            int temp = random.nextInt(offers.size());
-            itemStacks.add(offers.get(temp).getSellingStack().copy());
-            success = true;
-        }
-        if(random.nextInt(100) < 30 + 5*extraluck){
-            villagerEntity.attackEntityFrom(DamageSource.GENERIC,1+extraluck*0.5f);
-        }
-        if(success){
-            if(!armorFeet.equals(ItemStack.EMPTY))
-            armorFeet.damageItem(30,villagerEntity,x->{});
-        }
-        return itemStacks;
-    }
 }

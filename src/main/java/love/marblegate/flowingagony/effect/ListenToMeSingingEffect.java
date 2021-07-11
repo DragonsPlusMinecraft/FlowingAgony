@@ -13,7 +13,7 @@ public class ListenToMeSingingEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.listen_to_me_singing_effect.get()) {
+        if (this == EffectRegistry.listen_to_me_singing.get()) {
             int duration = entityLivingBaseIn.getActivePotionEffect(this.getEffect()).getDuration();
             if(duration%40>25){
                 entityLivingBaseIn.setMotion(0,0.41,0);
@@ -34,9 +34,9 @@ public class ListenToMeSingingEffect extends Effect {
                 entityLivingBaseIn.setMotion(0,0,0);
                 entityLivingBaseIn.velocityChanged=true;
                 entityLivingBaseIn.markPositionDirty();
-                float damage = entityLivingBaseIn.getMaxHealth()*0.1f+entityLivingBaseIn.getHealth()*0.3f;
-                damage = Math.min(20,damage);
-                damage = Math.max(2,damage);
+                float damage = entityLivingBaseIn.getMaxHealth()*0.2f+entityLivingBaseIn.getHealth()*0.5f;
+                damage = Math.min(getMaxDamage(amplifier),damage);
+                damage = Math.max(getMinDamage(amplifier),damage);
                 entityLivingBaseIn.attackEntityFrom((new DamageSource("flowingagony.rhythm_of_universe")), damage);
             }
         }
@@ -45,5 +45,16 @@ public class ListenToMeSingingEffect extends Effect {
     @Override
     public boolean isReady(int duration, int amplifier) {
         return true;
+    }
+
+    int getMaxDamage(int amplifier){
+        if(amplifier==0) return 9;
+        else return 12 + amplifier * 2;
+    }
+
+    int getMinDamage(int amplifier){
+        if(amplifier<3) return 1;
+        else if(amplifier==3) return 2;
+        else return 3;
     }
 }

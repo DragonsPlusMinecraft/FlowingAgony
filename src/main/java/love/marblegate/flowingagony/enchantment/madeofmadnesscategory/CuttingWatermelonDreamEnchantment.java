@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -8,8 +9,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class CuttingWatermelonDreamEnchantment extends Enchantment {
-    public CuttingWatermelonDreamEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.DIGGER, p_i46731_3_);
+    public CuttingWatermelonDreamEnchantment() {
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.DIGGER, EquipmentSlotTypeSet.MAINHAND);
     }
 
     @Override

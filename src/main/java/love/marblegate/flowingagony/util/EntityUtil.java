@@ -73,6 +73,12 @@ public class EntityUtil {
         return livingEntity instanceof ZombieHorseEntity || livingEntity instanceof SkeletonHorseEntity;
     }
 
+    public static boolean supportHeadDrop(LivingEntity livingEntity){
+        return  ((livingEntity instanceof ZombieEntity) && !(livingEntity instanceof ZombieVillagerEntity) && !(livingEntity instanceof DrownedEntity) && !(livingEntity instanceof ZombifiedPiglinEntity) && !(livingEntity instanceof HuskEntity)) ||
+                livingEntity instanceof SkeletonEntity || livingEntity instanceof CreeperEntity ||
+                livingEntity instanceof EnderDragonEntity || livingEntity instanceof WitherSkeletonEntity;
+    }
+
 
 
 }

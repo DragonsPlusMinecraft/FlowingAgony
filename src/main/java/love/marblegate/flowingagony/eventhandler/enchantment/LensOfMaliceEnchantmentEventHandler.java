@@ -32,7 +32,7 @@ public class LensOfMaliceEnchantmentEventHandler {
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()), EnchantmentRegistry.vengeance.get(),EquipmentSlotType.HEAD);
                 if(enchantmentLvl != 0){
                     if(event.getSource().getTrueSource() instanceof LivingEntity)
-                        ((LivingEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),180,enchantmentLvl-1));
+                        ((LivingEntity)event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred.get(),180,enchantmentLvl-1));
                 }
             }
         }
@@ -45,11 +45,11 @@ public class LensOfMaliceEnchantmentEventHandler {
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.perceived_malice.get(), EquipmentSlotType.HEAD);
                 if(enchantmentLvl!=0){
                     if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy_effect.get(),200));
+                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy.get(),200));
                         ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(Effects.SLOWNESS,200));
                     }
                     else{
-                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy_effect.get(),200,enchantmentLvl-1));
+                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy.get(),200,enchantmentLvl-1));
                     }
                 }
             }
@@ -87,7 +87,7 @@ public class LensOfMaliceEnchantmentEventHandler {
                 int enchantNum = PlayerUtil.getTotalPiecePlayerArmorEnchantedSameEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.infectious_malice.get());
                 if(enchantNum!=0){
                     if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred_effect.get(),200 * enchantNum));
+                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_hatred.get(),200 * enchantNum));
                     }
                     else {
                         List<EffectInstance> effects = ((LivingEntity) event.getSource().getTrueSource()).getActivePotionEffects().stream().filter(EffectInstance ->
@@ -142,7 +142,7 @@ public class LensOfMaliceEnchantmentEventHandler {
                 int enchantmentLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.back_and_fill.get(),EquipmentSlotType.MAINHAND);
                 if(enchantmentLvl!=0){
                     if(event.getEntityLiving().getAttackingEntity() == event.getSource().getTrueSource()){
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.back_and_fill_enchantment_active_effect.get(),100,enchantmentLvl-1));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.back_and_fill_enchantment_active.get(),100,enchantmentLvl-1));
                     } else {
                         event.setAmount(event.getAmount()+enchantmentLvl+1);
                     }

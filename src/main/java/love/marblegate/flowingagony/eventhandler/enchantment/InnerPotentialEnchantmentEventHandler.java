@@ -13,9 +13,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -62,9 +60,9 @@ public class InnerPotentialEnchantmentEventHandler {
                 int enchantLvl = PlayerUtil.isPlayerSpecificSlotWithEnchantmentLevel((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.frivolous_step.get(), EquipmentSlotType.LEGS);
                 if(enchantLvl != 0){
                     if(enchantLvl == 1)
-                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.frivolous_step_enchantment_active_effect.get(),200));
+                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.frivolous_step_enchantment_active.get(),200));
                     else
-                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.frivolous_step_enchantment_active_effect.get(),200,1));
+                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.frivolous_step_enchantment_active.get(),200,1));
                     if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(Effects.SLOWNESS)){
                         ((PlayerEntity)(event.getEntityLiving())).removeActivePotionEffect(Effects.SLOWNESS);
                         //Sync to Client
@@ -88,22 +86,22 @@ public class InnerPotentialEnchantmentEventHandler {
                 if(enchantLvl!=0){
                     if(event.player.getHealth()<=(3+enchantLvl)){
                         if(!(event.player.isSprinting()||event.player.isSwimming()||event.player.isElytraFlying())){
-                            if(event.player.isPotionActive(EffectRegistry.potential_burst_enchantment_active_effect.get())){
-                                int nextAmplifier = Math.min(event.player.getActivePotionEffect(EffectRegistry.potential_burst_enchantment_active_effect.get()).getAmplifier()+1,150);
-                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active_effect.get(),20,nextAmplifier));
+                            if(event.player.isPotionActive(EffectRegistry.potential_burst_enchantment_active.get())){
+                                int nextAmplifier = Math.min(event.player.getActivePotionEffect(EffectRegistry.potential_burst_enchantment_active.get()).getAmplifier()+1,150);
+                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active.get(),20,nextAmplifier));
                             } else {
-                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active_effect.get(),20));
+                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.potential_burst_enchantment_active.get(),20));
                             }
                         }
                         else{
-                            if(event.player.isPotionActive(EffectRegistry.potential_burst_enchantment_active_effect.get())){
-                                event.player.removeActivePotionEffect(EffectRegistry.potential_burst_enchantment_active_effect.get());
+                            if(event.player.isPotionActive(EffectRegistry.potential_burst_enchantment_active.get())){
+                                event.player.removeActivePotionEffect(EffectRegistry.potential_burst_enchantment_active.get());
                                 //Sync to Client
                                 Networking.INSTANCE.send(
                                         PacketDistributor.PLAYER.with(
                                                 () -> (ServerPlayerEntity) event.player
                                         ),
-                                        new RemoveEffectSyncToClientPacket(EffectRegistry.potential_burst_enchantment_active_effect.get()));
+                                        new RemoveEffectSyncToClientPacket(EffectRegistry.potential_burst_enchantment_active.get()));
                             }
                         }
                     }
@@ -117,7 +115,7 @@ public class InnerPotentialEnchantmentEventHandler {
         if (event.getEntityLiving() instanceof PlayerEntity) {
             if (event.getEntityLiving().getHealth() < 4f) {
                 if (PlayerUtil.isPlayerSpecificSlotEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.miraculous_escape.get(), EquipmentSlotType.FEET)) {
-                    if(!((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())){
+                    if(!((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active.get())){
                         //Play Sound Effect
                         if (!((PlayerEntity)(event.getEntityLiving())).world.isRemote) {
                             Networking.INSTANCE.send(
@@ -126,8 +124,8 @@ public class InnerPotentialEnchantmentEventHandler {
                                     ),
                                     new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT,true));
                         }
-                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_force_escape_effect.get(),40));
-                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_active_effect.get(),200));
+                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_force_escape.get(),40));
+                        ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.miraculous_escape_enchantment_active.get(),200));
                     }
                 }
             }
@@ -140,7 +138,7 @@ public class InnerPotentialEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 if(event.getSource().getDamageType().equals("fall")||event.getSource().getDamageType().equals("cramming")||event.getSource().getDamageType().equals("inWall")) {
-                    if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())){
+                    if(((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.miraculous_escape_enchantment_active.get())){
                         event.setCanceled(true);
                     }
                 }

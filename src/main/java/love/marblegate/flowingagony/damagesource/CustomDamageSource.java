@@ -8,6 +8,7 @@ public class CustomDamageSource {
     public static final DamageSource CURSED_HATRED = new DamageSource("flowingagony.curse_hatred");
     public static final DamageSource CURSED_ANTIPATHY = new DamageSource("flowingagony.cursed_antipathy_effect").setDamageBypassesArmor();
     public static final DamageSource LIGHTBURN_FUNGAL_INFECTION = new DamageSource("flowingagony.lightburn_fungal_infection");
+    public static final DamageSource CUTTING_WATERMELON_DREAM = new DamageSource("flowingagony.cutting_watermelon_dream");
 
 
     public static DamageSource causeLetMeSavorItDamage(LivingEntity livingEntity) {

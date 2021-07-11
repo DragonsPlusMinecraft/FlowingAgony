@@ -91,10 +91,6 @@ public class PlayerUtil {
         return items;
     }
 
-    public static void crazilyComsumeFoodLevel(PlayerEntity player) {
-        player.getFoodStats().addExhaustion(4);
-    }
-
     public static List<LivingEntity> getTargetList(PlayerEntity player, float radius, float height, Predicate<LivingEntity> predicate){
         AxisAlignedBB aabb = new AxisAlignedBB(player.getPosition().getX()-radius,player.getPosition().getY()-height,player.getPosition().getZ()-radius,player.getPosition().getX()+radius,player.getPosition().getY()+height,player.getPosition().getZ()+radius);
         List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class,aabb,predicate);

@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentLevelUtil;
 import net.minecraft.enchantment.Enchantment;
@@ -10,8 +11,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class PaperBrainEnchantment extends Enchantment {
-    public PaperBrainEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.WEAPON, p_i46731_3_);
+    public PaperBrainEnchantment() {
+        super(Enchantment.Rarity.RARE, EnchantmentType.WEAPON, EquipmentSlotTypeSet.MAINHAND);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class PaperBrainEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.shock_therapy_enchantment.get()
+                && p_77326_1_ != EnchantmentRegistry.shock_therapy.get()
                 && p_77326_1_ != Enchantments.SHARPNESS
                 && p_77326_1_ != Enchantments.BANE_OF_ARTHROPODS
                 && p_77326_1_ != Enchantments.SMITE;

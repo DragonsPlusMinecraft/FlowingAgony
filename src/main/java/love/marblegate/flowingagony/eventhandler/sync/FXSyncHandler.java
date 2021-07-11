@@ -27,15 +27,15 @@ public class FXSyncHandler {
 
     private static void reapplyFX(PlayerEntity player) {
         if (!player.world.isRemote()) {
-            if (player.isPotionActive(EffectRegistry.miraculous_escape_enchantment_active_effect.get())) {
+            if (player.isPotionActive(EffectRegistry.miraculous_escape_enchantment_active.get())) {
                 Networking.INSTANCE.send(
                         PacketDistributor.PLAYER.with(
                                 () -> (ServerPlayerEntity) player
                         ),
                         new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true));
             }
-            if (player.isPotionActive(EffectRegistry.extreme_hatred_effect.get())) {
-                int temp = player.getActivePotionEffect(EffectRegistry.extreme_hatred_effect.get()).getAmplifier();
+            if (player.isPotionActive(EffectRegistry.extreme_hatred.get())) {
+                int temp = player.getActivePotionEffect(EffectRegistry.extreme_hatred.get()).getAmplifier();
                 switch (temp) {
                     case 0:
                         Networking.INSTANCE.send(

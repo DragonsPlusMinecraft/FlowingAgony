@@ -77,11 +77,11 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> carefully_identified = ENCHANTMENT.register("carefully_identified", CarefullyIdentifiedEnchantment::new);
     public static final RegistryObject<Enchantment> nimble_finger = ENCHANTMENT.register("nimble_finger", NimbleFingerEnchantment::new);
 
-    public static final RegistryObject<Enchantment> agony_screamer_enchantment = ENCHANTMENT.register("agony_screamer", () -> new AgonyScreamerEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> insane_poet_enchantment = ENCHANTMENT.register("insane_poet", () -> new InsanePoetEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> paper_brain_enchantment = ENCHANTMENT.register("paper_brain", () -> new PaperBrainEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> shock_therapy_enchantment = ENCHANTMENT.register("shock_therapy", () -> new ShockTherapyEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> cutting_watermelon_dream_enchantment = ENCHANTMENT.register("cutting_watermelon_dream", () -> new CuttingWatermelonDreamEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
+    public static final RegistryObject<Enchantment> agony_screamer = ENCHANTMENT.register("agony_screamer", AgonyScreamerEnchantment::new);
+    public static final RegistryObject<Enchantment> insane_poet = ENCHANTMENT.register("insane_poet", InsanePoetEnchantment::new);
+    public static final RegistryObject<Enchantment> paper_brain = ENCHANTMENT.register("paper_brain", PaperBrainEnchantment::new);
+    public static final RegistryObject<Enchantment> shock_therapy = ENCHANTMENT.register("shock_therapy", ShockTherapyEnchantment::new);
+    public static final RegistryObject<Enchantment> cutting_watermelon_dream = ENCHANTMENT.register("cutting_watermelon_dream", CuttingWatermelonDreamEnchantment::new);
 
     public static final RegistryObject<Enchantment> drowning_phobia_enchantment = ENCHANTMENT.register("drowning_phobia", () -> new DrowningPhobiaEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
     public static final RegistryObject<Enchantment> burning_phobia_enchantment = ENCHANTMENT.register("burning_phobia", () -> new BurningPhobiaEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));

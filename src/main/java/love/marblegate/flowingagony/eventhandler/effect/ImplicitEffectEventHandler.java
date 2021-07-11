@@ -16,8 +16,8 @@ public class ImplicitEffectEventHandler {
     public static void doHatredBloodlineEnchantmentActiveEffectEvent(LivingHurtEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(((PlayerEntity )event.getSource().getTrueSource()).isPotionActive(EffectRegistry.hatred_bloodline_enchantment_active_effect.get())){
-                    int effectLvl = ((PlayerEntity )event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.hatred_bloodline_enchantment_active_effect.get()).getAmplifier()+1;
+                if(((PlayerEntity )event.getSource().getTrueSource()).isPotionActive(EffectRegistry.hatred_bloodline_enchantment_active.get())){
+                    int effectLvl = ((PlayerEntity )event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.hatred_bloodline_enchantment_active.get()).getAmplifier()+1;
                     event.setAmount((float)(event.getAmount()*(1+effectLvl*0.25)));
                 }
             }
@@ -28,7 +28,7 @@ public class ImplicitEffectEventHandler {
     public static void doCleanMiraculousEscapeSoundFX(PotionEvent.PotionExpiryEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                if(event.getPotionEffect().getPotion().equals(EffectRegistry.miraculous_escape_enchantment_active_effect)){
+                if(event.getPotionEffect().getPotion().equals(EffectRegistry.miraculous_escape_enchantment_active)){
                     //Play Sound Effect
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(
