@@ -31,7 +31,7 @@ public class CursedAntipathyParticleData implements IParticleData {
 
     @Override
     public ParticleType<?> getType() {
-        return ParticleRegistry.cursed_antipathy_particle.get();
+        return ParticleRegistry.cursed_antipathy.get();
     }
 
     @Override

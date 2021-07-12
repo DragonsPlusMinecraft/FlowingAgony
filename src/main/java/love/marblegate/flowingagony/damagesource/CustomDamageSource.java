@@ -18,4 +18,9 @@ public class CustomDamageSource {
     public static DamageSource causeBurialObjectDamage(LivingEntity livingEntity) {
         return new FlowingAgonyMobtoMobDamageSource("flowingagony.burial_object_curse", livingEntity).setDamageBypassesArmor();
     }
+
+    public static DamageSource causePhobiaDamage(LivingEntity livingEntity) {
+        return new FlowingAgonyMobtoMobDamageSource("flowingagony.phobia", livingEntity);
+
+    }
 }

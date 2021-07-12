@@ -66,6 +66,7 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue LAST_SWEET_DREAM;
     public static final ForgeConfigSpec.BooleanValue NIMBLE_FINGER;
     public static final ForgeConfigSpec.BooleanValue CAREFULLY_IDENTIFIED;
+    public static final ForgeConfigSpec.BooleanValue DESTRUCTION_WORSHIP;
 
 
     static{
@@ -127,6 +128,7 @@ public class Config {
         CONSTRAINED_HEART = ACT_BUILDER.define("CONSTRAINED_HEART",true);
         DROWNING_PHOBIA = ACT_BUILDER.define("DROWNING_PHOBIA",true);
         PIERCING_FEVER = ACT_BUILDER.define("PIERCING_FEVER",true);
+        DESTRUCTION_WORSHIP = ACT_BUILDER.define("DESTRUCTION_WORSHIP",true);
         PRAYER_OF_PAIN = ACT_BUILDER.define("PRAYER_OF_PAIN",true);
         FRESH_REVENGE = ACT_BUILDER.define("FRESH_REVENGE",true);
         HATRED_BLOODLINE = ACT_BUILDER.define("HATRED_BLOODLINE",true);

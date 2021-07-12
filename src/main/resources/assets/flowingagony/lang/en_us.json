@@ -29,6 +29,7 @@
   "enchantment.flowingagony.drowning_phobia": "Drowning Phobia",
   "enchantment.flowingagony.prayer_of_pain": "Prayer of Pain",
   "enchantment.flowingagony.piercing_fever": "Piercing Fever",
+  "enchantment.flowingagony.destruction_worship": "Destruction Worship",
   "enchantment.flowingagony.constrained_heart": "Constrained Heart",
   "enchantment.flowingagony.fresh_revenge": "Fresh Revenge",
   "enchantment.flowingagony.hatred_bloodline": "Hatred Bloodline",
@@ -81,5 +82,6 @@
   "death.attack.flowingagony.exotic_healer":"%1$s now thinks Doomfist is a good choice to main.",
   "death.attack.flowingagony.lightburn_fungal_infection":"%1$s turned into light.",
   "death.attack.flowingagony.let_me_savor_it":"%1$s died from suffering due to attacking %2$s Who was enjoying suffering",
-  "death.attack.flowingagony.rhythm_of_universe":"%1$s embraced decease due to gravitational disorder."
+  "death.attack.flowingagony.rhythm_of_universe":"%1$s embraced decease due to gravitational disorder.",
+  "death.attack.flowingagony.phobia":"%1$s died suddenly in name of %2$s 's infectious fear。"
 }

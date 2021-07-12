@@ -29,6 +29,7 @@
   "enchantment.flowingagony.drowning_phobia": "溺亡恐惧症",
   "enchantment.flowingagony.prayer_of_pain": "祈难人",
   "enchantment.flowingagony.piercing_fever": "穿刺狂热",
+  "enchantment.flowingagony.destruction_worship": "毁灭崇拜",
   "enchantment.flowingagony.constrained_heart": "束缚之心",
   "enchantment.flowingagony.fresh_revenge": "仇不隔夜",
   "enchantment.flowingagony.hatred_bloodline": "怨恨血脉",
@@ -81,5 +82,6 @@
   "death.attack.flowingagony.exotic_healer":"%1$s 选择去玩末日铁拳。",
   "death.attack.flowingagony.lightburn_fungal_infection":"%1$s 被光蚀真菌腐蚀成光。",
   "death.attack.flowingagony.let_me_savor_it":"%1$s 因攻击正在享受痛苦的 %2$s 分担痛苦而死。",
-  "death.attack.flowingagony.rhythm_of_universe":"%1$s 死于重力混乱导致的重伤。"
+  "death.attack.flowingagony.rhythm_of_universe":"%1$s 死于重力混乱导致的重伤。",
+  "death.attack.flowingagony.phobia":"%1$s 因被 %2$s 的恐惧感染而猝死。"
 }

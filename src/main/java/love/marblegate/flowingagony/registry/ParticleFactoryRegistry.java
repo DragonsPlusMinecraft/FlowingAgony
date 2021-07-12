@@ -12,6 +12,6 @@ public class ParticleFactoryRegistry {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(ParticleRegistry.cursed_antipathy_particle.get(), CursedAntipathyParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(ParticleRegistry.cursed_antipathy.get(), CursedAntipathyParticle.Factory::new);
     }
 }

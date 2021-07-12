@@ -83,11 +83,12 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> shock_therapy = ENCHANTMENT.register("shock_therapy", ShockTherapyEnchantment::new);
     public static final RegistryObject<Enchantment> cutting_watermelon_dream = ENCHANTMENT.register("cutting_watermelon_dream", CuttingWatermelonDreamEnchantment::new);
 
-    public static final RegistryObject<Enchantment> drowning_phobia_enchantment = ENCHANTMENT.register("drowning_phobia", () -> new DrowningPhobiaEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> burning_phobia_enchantment = ENCHANTMENT.register("burning_phobia", () -> new BurningPhobiaEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> prayer_of_pain_enchantment = ENCHANTMENT.register("prayer_of_pain", () -> new PrayerOfPainEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.HEAD}));
-    public static final RegistryObject<Enchantment> constrained_heart_enchantment = ENCHANTMENT.register("constrained_heart", () -> new ConstrainedHeartEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
-    public static final RegistryObject<Enchantment> piercing_fever_enchantment = ENCHANTMENT.register("piercing_fever", () -> new PiercingFeverEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
+    public static final RegistryObject<Enchantment> drowning_phobia = ENCHANTMENT.register("drowning_phobia", DrowningPhobiaEnchantment::new);
+    public static final RegistryObject<Enchantment> burning_phobia = ENCHANTMENT.register("burning_phobia", BurningPhobiaEnchantment::new);
+    public static final RegistryObject<Enchantment> prayer_of_pain = ENCHANTMENT.register("prayer_of_pain", PrayerOfPainEnchantment::new);
+    public static final RegistryObject<Enchantment> constrained_heart = ENCHANTMENT.register("constrained_heart", ConstrainedHeartEnchantment::new);
+    public static final RegistryObject<Enchantment> piercing_fever = ENCHANTMENT.register("piercing_fever", PiercingFeverEnchantment::new);
+    public static final RegistryObject<Enchantment> destruction_worship = ENCHANTMENT.register("destruction_worship", DestructionWorshipEnchantment::new);
 
     public static final RegistryObject<Enchantment> encious_kind_enchantment = ENCHANTMENT.register("encious_kind", () -> new EnciousKindEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
     public static final RegistryObject<Enchantment> eyesore_enchantment = ENCHANTMENT.register("eyesore", () -> new EyesoreEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
