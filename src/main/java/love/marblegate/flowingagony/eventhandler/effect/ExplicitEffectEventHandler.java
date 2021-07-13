@@ -140,12 +140,8 @@ public class ExplicitEffectEventHandler {
                 entities.forEach(LivingEntity->{
                     if(LivingEntity.isPotionActive(EffectRegistry.been_resonated.get())){
                         LivingEntity.removePotionEffect(EffectRegistry.been_resonated.get());
-                        //Sync to Client
-                        Networking.INSTANCE.send(
-                                PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getEntityLiving()
-                                ),
-                                new RemoveEffectSyncToClientPacket(EffectRegistry.been_resonated.get()));
+                        //Do not Sync to Client
+                        //It is due to I did not write packet to handle remove mob's effect
                     }
                     LivingEntity.addPotionEffect(new EffectInstance(EffectRegistry.been_resonated.get(),event.getPotionEffect().getDuration(),event.getPotionEffect().getAmplifier()));
                 });

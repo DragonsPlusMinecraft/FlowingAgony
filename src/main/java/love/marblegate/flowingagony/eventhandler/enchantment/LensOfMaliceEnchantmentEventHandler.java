@@ -49,7 +49,7 @@ public class LensOfMaliceEnchantmentEventHandler {
                         ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(Effects.SLOWNESS,200));
                     }
                     else{
-                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy.get(),200,enchantmentLvl-1));
+                        ((LivingEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.cursed_antipathy.get(),200,enchantmentLvl-1));
                     }
                 }
             }

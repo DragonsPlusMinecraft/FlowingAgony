@@ -111,7 +111,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doSourceOfEnvyEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.source_of_envy.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.source_of_envy.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0) {
                     if(event.getSource().getTrueSource() instanceof PlayerEntity){
                         List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(),12,2, livingEntity -> EntityUtil.isHostile(livingEntity,false));
