@@ -1,11 +1,9 @@
 package love.marblegate.flowingagony.network.packet;
 
-import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.Effect;
-import net.minecraft.potion.Effects;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;

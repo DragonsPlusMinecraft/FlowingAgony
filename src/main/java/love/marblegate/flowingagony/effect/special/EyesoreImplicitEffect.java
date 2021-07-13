@@ -17,8 +17,9 @@ public class EyesoreImplicitEffect extends ImplicitBaseEffect {
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.eyesore_enchantment_active.get()) {
             entityLivingBaseIn.world.createExplosion(entityLivingBaseIn, entityLivingBaseIn.getPosX(), entityLivingBaseIn.getPosY(), entityLivingBaseIn.getPosZ(), 1, Explosion.Mode.NONE);
-            entityLivingBaseIn.attackEntityFrom(DamageSource.causeExplosionDamage(entityLivingBaseIn), 30f);
-            entityLivingBaseIn.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 600));
+            entityLivingBaseIn.attackEntityFrom(DamageSource.causeExplosionDamage(entityLivingBaseIn), 3 + amplifier * 2);
+            entityLivingBaseIn.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 60 + 20 * amplifier));
+            entityLivingBaseIn.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60 + 20 * amplifier));
         }
     }
 

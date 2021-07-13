@@ -2,14 +2,14 @@ package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class SourceOfEnvyEnchantment extends Enchantment {
-    public SourceOfEnvyEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.ARMOR_CHEST, p_i46731_3_);
+    public SourceOfEnvyEnchantment() {
+        super(Rarity.VERY_RARE, EnchantmentType.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class SourceOfEnvyEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 5;
     }
 
     @Override

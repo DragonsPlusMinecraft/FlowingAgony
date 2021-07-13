@@ -1,16 +1,16 @@
 package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
 import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class ThornInFleshEnchantment extends Enchantment {
-    public ThornInFleshEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.CROSSBOW, p_i46731_3_);
+    public ThornInFleshEnchantment() {
+        super(Rarity.VERY_RARE, EnchantmentType.CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND);
     }
 
     @Override
@@ -25,12 +25,12 @@ public class ThornInFleshEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 3;
     }
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.eyesore_enchantment.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.eyesore.get();
     }
 
     @Override

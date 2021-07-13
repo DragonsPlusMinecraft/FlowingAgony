@@ -2,14 +2,14 @@ package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
 import love.marblegate.flowingagony.config.Config;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 public class CovertKnifeEnchantment extends Enchantment {
-    public CovertKnifeEnchantment(Rarity p_i46731_1_, EquipmentSlotType[] p_i46731_3_) {
-        super(p_i46731_1_, EnchantmentType.BOW, p_i46731_3_);
+    public CovertKnifeEnchantment() {
+        super(Rarity.RARE, EnchantmentType.BOW, EquipmentSlotTypeSet.MAIN_HAND);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CovertKnifeEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 3;
     }
 
     @Override

@@ -33,9 +33,7 @@ public class PlaySoundPacket {
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
             proxy = new ClientProxy();
-            ctx.get().enqueueWork(() -> {
-                proxy.handleISound(type,onOrOff);
-            });
+            ctx.get().enqueueWork(() -> proxy.handleISound(type,onOrOff));
             ctx.get().setPacketHandled(true);
         });
 

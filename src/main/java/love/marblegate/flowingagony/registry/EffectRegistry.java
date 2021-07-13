@@ -21,7 +21,7 @@ public class EffectRegistry {
     public static final RegistryObject<Effect> listen_to_me_singing = EFFECT.register("listen_to_me_singing", ListenToMeSingingEffect::new);
     public static final RegistryObject<Effect> lightburn_fungal_infection = EFFECT.register("lightburn_fungal_infection", LightburnFungalInfectionEffect::new);
     public static final RegistryObject<Effect> envious_being = EFFECT.register("envious_being", () -> new EnviousBeingEffect()
-            .addAttributesModifier(Attributes.ATTACK_DAMAGE,"444E310D-DE08-4D8D-A4B1-33B06CFB8703",1D, AttributeModifier.Operation.ADDITION));
+            .addAttributesModifier(Attributes.ATTACK_DAMAGE,"444E310D-DE08-4D8D-A4B1-33B06CFB8703",4D, AttributeModifier.Operation.ADDITION));
 
     //Hidden Effect
     public static final RegistryObject<Effect> back_and_fill_enchantment_active = EFFECT.register("back_and_fill_enchantment_active", () -> new BackAndFillImplicitEffect()
@@ -58,6 +58,9 @@ public class EffectRegistry {
 
     public static final RegistryObject<Effect> thorn_in_flesh_active = EFFECT.register("thorn_in_flesh_active", () -> new ThornInFleshImplicitEffect()
             .addAttributesModifier(Attributes.MOVEMENT_SPEED,"081F9BE2-F716-49B4-A579-62582F2A9DA8",-0.5D, AttributeModifier.Operation.MULTIPLY_TOTAL));
+
+    public static final RegistryObject<Effect> thorn_in_flesh_active_for_player = EFFECT.register("thorn_in_flesh_active_for_player", () -> new ThornInFleshImplicitEffect()
+            .addAttributesModifier(Attributes.MOVEMENT_SPEED,"228345E7-66DC-4808-B325-82BE7728D3FC",-0.2D, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     public static final RegistryObject<Effect> eyesore_enchantment_active = EFFECT.register("eyesore_enchantment_active", EyesoreImplicitEffect::new);
 

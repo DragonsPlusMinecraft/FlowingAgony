@@ -28,7 +28,7 @@ public class ImplicitEffectEventHandler {
     public static void doCleanMiraculousEscapeSoundFX(PotionEvent.PotionExpiryEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                if(event.getPotionEffect().getPotion().equals(EffectRegistry.miraculous_escape_enchantment_active)){
+                if(event.getPotionEffect().getPotion().equals(EffectRegistry.miraculous_escape_enchantment_active.get())){
                     //Play Sound Effect
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(

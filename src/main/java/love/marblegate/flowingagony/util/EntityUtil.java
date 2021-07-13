@@ -13,7 +13,6 @@ import net.minecraft.entity.passive.horse.ZombieHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -26,7 +25,7 @@ public class EntityUtil {
     }
 
     public static List<LivingEntity> getTargetsExceptOneself(PlayerEntity center, float radius, float height, Predicate<LivingEntity> predicate){
-        return getTargetsExceptOneself(center,radius,height,predicate);
+        return getTargetsExceptOneself((LivingEntity) center,radius,height,predicate);
     }
 
     public static List<LivingEntity> getTargetsOfSameType(LivingEntity center, float radius, float height, LivingEntity sourceEntity,boolean excludeOneself){

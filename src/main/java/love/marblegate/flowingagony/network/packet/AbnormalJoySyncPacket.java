@@ -2,9 +2,6 @@ package love.marblegate.flowingagony.network.packet;
 
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
-import love.marblegate.flowingagony.fx.particle.cursedantipathyparticle.CursedAntipathyParticleData;
-import love.marblegate.flowingagony.util.proxy.ClientProxy;
-import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;

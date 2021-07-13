@@ -2,6 +2,8 @@ package love.marblegate.flowingagony.effect.special;
 
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.DamageSource;
 
 public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
     public ThornInFleshImplicitEffect() {
@@ -14,9 +16,13 @@ public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
         if (this == EffectRegistry.thorn_in_flesh_active.get()) {
             int duration = entityLivingBaseIn.getActivePotionEffect(this.getEffect()).getDuration();
             if(duration%60<10){
-                entityLivingBaseIn.setMotion(0,entityLivingBaseIn.getMotion().y,0);
-                entityLivingBaseIn.velocityChanged=true;
-                entityLivingBaseIn.markPositionDirty();
+                if(entityLivingBaseIn instanceof PlayerEntity){
+                    entityLivingBaseIn.attackEntityFrom(DamageSource.causeThornsDamage(entityLivingBaseIn),1);
+                } else {
+                    entityLivingBaseIn.setMotion(0,entityLivingBaseIn.getMotion().y,0);
+                    entityLivingBaseIn.velocityChanged=true;
+                    entityLivingBaseIn.markPositionDirty();
+                }
             }
         }
     }

@@ -16,7 +16,6 @@ import love.marblegate.flowingagony.enchantment.survivaltrickscategory.*;
 import love.marblegate.flowingagony.enchantment.themistakenscategory.*;
 import love.marblegate.flowingagony.enchantment.themistakenscategory.curse.BurialObjectCurse;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -90,10 +89,12 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> piercing_fever = ENCHANTMENT.register("piercing_fever", PiercingFeverEnchantment::new);
     public static final RegistryObject<Enchantment> destruction_worship = ENCHANTMENT.register("destruction_worship", DestructionWorshipEnchantment::new);
 
-    public static final RegistryObject<Enchantment> encious_kind_enchantment = ENCHANTMENT.register("encious_kind", () -> new EnciousKindEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
-    public static final RegistryObject<Enchantment> eyesore_enchantment = ENCHANTMENT.register("eyesore", () -> new EyesoreEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> thorn_in_flesh_enchantment = ENCHANTMENT.register("thorn_in_flesh", () -> new ThornInFleshEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> covert_knife_enchantment = ENCHANTMENT.register("covert_knife", () -> new CovertKnifeEnchantment(Enchantment.Rarity.RARE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
-    public static final RegistryObject<Enchantment> source_of_envy_enchantment = ENCHANTMENT.register("source_of_envy", () -> new SourceOfEnvyEnchantment(Enchantment.Rarity.VERY_RARE, new EquipmentSlotType[]{EquipmentSlotType.CHEST}));
+    //registry name of envious kind enchantment is a "legacy typo".
+    //for maximum compatibility when player update to new version, we do not change it.
+    public static final RegistryObject<Enchantment> envious_kind = ENCHANTMENT.register("encious_kind", EnviousKindEnchantment::new);
+    public static final RegistryObject<Enchantment> eyesore = ENCHANTMENT.register("eyesore", EyesoreEnchantment::new);
+    public static final RegistryObject<Enchantment> thorn_in_flesh = ENCHANTMENT.register("thorn_in_flesh", ThornInFleshEnchantment::new);
+    public static final RegistryObject<Enchantment> covert_knife = ENCHANTMENT.register("covert_knife", CovertKnifeEnchantment::new);
+    public static final RegistryObject<Enchantment> source_of_envy = ENCHANTMENT.register("source_of_envy", SourceOfEnvyEnchantment::new);
 
 }
