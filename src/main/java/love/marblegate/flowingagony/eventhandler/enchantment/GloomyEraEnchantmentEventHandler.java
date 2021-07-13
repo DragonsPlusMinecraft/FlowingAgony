@@ -12,6 +12,8 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.WitchEntity;
+import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
@@ -19,7 +21,9 @@ import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.village.GossipType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.TickEvent;
@@ -40,14 +44,34 @@ import java.util.Random;
 @Mod.EventBusSubscriber()
 public class GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
-    public static void doRegularCustomerProgramEnchantmentEvent(AnvilUpdateEvent event) {
-
+    public static void doRegularCustomerProgramEnchantmentEvent(LivingDeathEvent event) {
+        if(!event.getEntityLiving().world.isRemote()){
+            if(event.getSource().getTrueSource() instanceof PlayerEntity && (event.getEntityLiving() instanceof ZombieVillagerEntity || event.getEntityLiving() instanceof WitchEntity)){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.regular_customer_program.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                    List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself(event.getEntityLiving(),12,2,livingEntity -> livingEntity instanceof VillagerEntity);
+                    if(!targets.isEmpty()){
+                        for(LivingEntity target:targets){
+                            ((VillagerEntity) target).getGossip().add(((PlayerEntity)event.getSource().getTrueSource()).getUniqueID(), GossipType.MINOR_POSITIVE,1);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
     @SubscribeEvent
-    public static void doCleansingBeforeUsingEnchantmentEvent(AnvilUpdateEvent event) {
-
+    public static void doCleansingBeforeUsingEnchantmentEvent(LivingDeathEvent event) {
+        if(!event.getEntityLiving().world.isRemote()){
+            if(event.getSource().getTrueSource() instanceof PlayerEntity && event.getEntityLiving() instanceof VillagerEntity){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.cleansing_before_using.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                    event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).setRepairCost(0);
+                    if(event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).isDamageable()){
+                        event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).setDamage(event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).getDamage()-10);
+                    }
+                }
+            }
+        }
     }
 
     @SubscribeEvent
