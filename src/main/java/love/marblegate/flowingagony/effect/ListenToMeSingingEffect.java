@@ -14,7 +14,7 @@ public class ListenToMeSingingEffect extends Effect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.listen_to_me_singing.get()) {
-            int duration = entityLivingBaseIn.getActivePotionEffect(this.getEffect()).getDuration();
+            int duration = entityLivingBaseIn.getActivePotionEffect(getEffect()).getDuration();
             if(duration%40>25){
                 entityLivingBaseIn.setMotion(0,0.41,0);
                 entityLivingBaseIn.velocityChanged=true;

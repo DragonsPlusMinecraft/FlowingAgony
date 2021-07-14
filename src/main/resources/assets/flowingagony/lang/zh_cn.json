@@ -58,7 +58,6 @@
   "enchantment.flowingagony.back_and_fill": "见风使舵",
   "enchantment.flowingagony.scholar_of_original_sin": "原罪学者",
   "enchantment.flowingagony.original_sin_erosion": "原罪侵蚀",
-
   "effect.flowingagony.cursed_hatred": "仇恨诅咒",
   "effect.flowingagony.cursed_antipathy": "憎恶诅咒",
   "effect.flowingagony.extreme_hatred": "极端憎恨",
@@ -69,13 +68,11 @@
   "effect.flowingagony.curse_of_undead": "亡灵诅咒",
   "effect.flowingagony.lightburn_fungal_infection": "光蚀真菌感染",
   "effect.flowingagony.encious_being": "残暴妒者",
-
   "sound.flowingagony.miraculous_escape_heartbeat": "沉重的心跳声",
   "sound.flowingagony.malice_outbreak_knockback_sound": "击退声",
   "sound.flowingagony.extreme_hatred_first_stage_sound": "心跳声",
   "sound.flowingagony.extreme_hatred_medium_stage_sound": "心跳声",
   "sound.flowingagony.extreme_hatred_final_stage_sound": "心跳声",
-
   "death.attack.flowingagony.burial_object_curse":"%1$s 随着 %2$s 一同死去了。",
   "death.attack.flowingagony.cursed_hatred":"%1$s 被仇恨融为了血水。",
   "death.attack.flowingagony.cursed_antipathy":"%1$s 被难以消解的憎恶从里到外彻底烧焦了。",
@@ -84,7 +81,6 @@
   "death.attack.flowingagony.let_me_savor_it":"%1$s 因攻击正在享受痛苦的 %2$s 分担痛苦而死。",
   "death.attack.flowingagony.rhythm_of_universe":"%1$s 死于重力混乱导致的重伤。",
   "death.attack.flowingagony.phobia":"%1$s 因被 %2$s 的恐惧感染而猝死。",
-
   "enchantment.flowingagony.an_enchanted_golden_apple_a_day.desc": "穿越维度将赋予你附魔金苹果的增益。",
   "enchantment.flowingagony.deathpunk.desc": "你的死亡将由其他事物替你承担。",
   "enchantment.flowingagony.exotic_healer.desc": "你的自愈能力有了自己的想法。也许是值得的？",

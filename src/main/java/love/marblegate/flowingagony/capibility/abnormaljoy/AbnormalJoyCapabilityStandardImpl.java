@@ -4,7 +4,7 @@ public class AbnormalJoyCapabilityStandardImpl implements IAbnormalJoyCapability
     private float abnormalJoyPoint;
 
     public AbnormalJoyCapabilityStandardImpl(){
-        this.abnormalJoyPoint = 0;
+        abnormalJoyPoint = 0;
     }
     @Override
     public float get() {
@@ -13,7 +13,7 @@ public class AbnormalJoyCapabilityStandardImpl implements IAbnormalJoyCapability
 
     @Override
     public void set(float level) {
-        this.abnormalJoyPoint = level;
+        abnormalJoyPoint = level;
     }
 
     @Override

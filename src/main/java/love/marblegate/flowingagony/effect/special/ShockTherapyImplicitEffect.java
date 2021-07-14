@@ -26,11 +26,9 @@ public class ShockTherapyImplicitEffect extends HarmfulBlankImplicitEffect {
     @Override
     public boolean isReady(int duration, int amplifier) {
         int k = 10;
-        if (k > 0) {
+        if (duration > 0) {
             return duration % k == 0;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 }

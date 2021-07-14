@@ -36,13 +36,13 @@ public class CursedAntipathyParticleData implements IParticleData {
 
     @Override
     public void write(PacketBuffer buffer) {
-        buffer.writeFloat(this.diameter);
+        buffer.writeFloat(diameter);
     }
 
     @Override
     public String getParameters() {
         return String.format(Locale.ROOT, "%s %.2f",
-                this.getType().getRegistryName(), diameter);
+                getType().getRegistryName(), diameter);
     }
 
     public float getDiameter() {

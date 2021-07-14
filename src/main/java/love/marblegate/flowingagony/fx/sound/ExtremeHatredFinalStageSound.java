@@ -11,16 +11,16 @@ public class ExtremeHatredFinalStageSound extends TickableSound {
     public ExtremeHatredFinalStageSound(ClientPlayerEntity player) {
         super(SoundRegistry.extreme_hatred_final_stage_sound.get(), SoundCategory.PLAYERS);
         this.player = player;
-        this.repeat = true;
-        this.repeatDelay = 0;
-        this.volume = 30.0F;
-        this.pitch = 1F;
+        repeat = true;
+        repeatDelay = 0;
+        volume = 30.0F;
+        pitch = 1F;
     }
 
     @Override
     public void tick() {
-        if (!this.player.isAlive()) {
-            this.finishPlaying();
+        if (!player.isAlive()) {
+            finishPlaying();
         }
     }
 }

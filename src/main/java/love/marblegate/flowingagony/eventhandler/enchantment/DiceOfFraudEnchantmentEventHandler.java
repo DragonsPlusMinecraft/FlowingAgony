@@ -199,20 +199,23 @@ public class DiceOfFraudEnchantmentEventHandler {
                 int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)(event.getSource().getTrueSource())), EnchantmentRegistry.savor_the_taste.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
                     CompoundNBT weaponNBT = ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
-                    if(!weaponNBT.contains("savor_the_tasted_target")){
-                        weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
-                    }
-                    else{
-                        String recordedTarget = weaponNBT.getString("savor_the_tasted_target");
-                        if(recordedTarget.equals(event.getEntityLiving().getEntityString())){
-                            float modifiedDamage = event.getAmount() + event.getEntityLiving().getRNG().nextInt(5) + enchantLvl * 4 - 1;
-                            event.setAmount(modifiedDamage);
-                        }
-                        else{
+                    //Prevent NPE
+                    if(weaponNBT != null && event.getEntityLiving().getEntityString() != null){
+                        if(!weaponNBT.contains("savor_the_tasted_target")){
                             weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
                         }
+                        else{
+                            String recordedTarget = weaponNBT.getString("savor_the_tasted_target");
+                            if(recordedTarget.equals(event.getEntityLiving().getEntityString())){
+                                float modifiedDamage = event.getAmount() + event.getEntityLiving().getRNG().nextInt(5) + enchantLvl * 4 - 1;
+                                event.setAmount(modifiedDamage);
+                            }
+                            else{
+                                weaponNBT.putString("savor_the_tasted_target",event.getEntityLiving().getEntityString());
+                            }
+                        }
+                        ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
                     }
-                    ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().setTag(weaponNBT);
                 }
             }
         }

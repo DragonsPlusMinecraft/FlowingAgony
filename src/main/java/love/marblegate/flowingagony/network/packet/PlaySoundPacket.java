@@ -15,8 +15,8 @@ public class PlaySoundPacket {
     public static IProxy proxy = new IProxy() {};
 
     public PlaySoundPacket(PacketBuffer buffer) {
-        this.type = buffer.readEnumValue(ModSoundType.class);
-        this.onOrOff = buffer.readBoolean();
+        type = buffer.readEnumValue(ModSoundType.class);
+        onOrOff = buffer.readBoolean();
     }
 
     public PlaySoundPacket(ModSoundType type, boolean onOrOff) {
@@ -26,8 +26,8 @@ public class PlaySoundPacket {
 
 
     public void toBytes(PacketBuffer buffer) {
-        buffer.writeEnumValue(this.type);
-        buffer.writeBoolean(this.onOrOff);
+        buffer.writeEnumValue(type);
+        buffer.writeBoolean(onOrOff);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

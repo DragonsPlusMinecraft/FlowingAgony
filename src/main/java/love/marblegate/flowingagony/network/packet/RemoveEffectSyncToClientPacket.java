@@ -19,7 +19,7 @@ public class RemoveEffectSyncToClientPacket {
     }
 
     public RemoveEffectSyncToClientPacket(PacketBuffer buffer) {
-        this.effect = buffer.readRegistryIdSafe(Effect.class);
+        effect = buffer.readRegistryIdSafe(Effect.class);
     }
 
     public void toBytes(PacketBuffer buffer) {

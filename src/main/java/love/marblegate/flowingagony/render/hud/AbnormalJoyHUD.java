@@ -19,14 +19,14 @@ public class AbnormalJoyHUD extends AbstractGui {
     private MatrixStack matrixStack;
 
     public AbnormalJoyHUD(MatrixStack matrixStack) {
-        this.width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        this.height = Minecraft.getInstance().getMainWindow().getScaledHeight();
-        this.minecraft = Minecraft.getInstance();
+        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        minecraft = Minecraft.getInstance();
         this.matrixStack = matrixStack;
     }
 
     public void setMatrixStack(MatrixStack stack) {
-        this.matrixStack = stack;
+        matrixStack = stack;
     }
 
     public void render() {
@@ -39,9 +39,9 @@ public class AbnormalJoyHUD extends AbstractGui {
             );
             if(abnormalJoyPoint.get()!=0) {
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                this.minecraft.getTextureManager().bindTexture(HUD);
-                int x = this.width / 2 - 91;
-                int y = this.height - 32 + 3 + 3;
+                minecraft.getTextureManager().bindTexture(HUD);
+                int x = width / 2 - 91;
+                int y = height - 32 + 3 + 3;
                 //Render Background
                 blit(matrixStack, x, y, 0, 0, 182, 3);
 

@@ -11,12 +11,12 @@ public class CursedAntipathyParticle extends SpriteTexturedParticle {
     protected CursedAntipathyParticle(ClientWorld world, double x, double y, double z, float diameter) {
         super(world, x, y, z);
         maxAge = 100;
-        this.motionX = (Math.random() * 2.0D - 1.0D) * (double)0.1F;
-        this.motionY = 0F;
-        this.motionZ = (Math.random() * 2.0D - 1.0D) * (double)0.1F;
+        motionX = (Math.random() * 2.0D - 1.0D) * (double)0.1F;
+        motionY = 0F;
+        motionZ = (Math.random() * 2.0D - 1.0D) * (double)0.1F;
         final float PARTICLE_SCALE_FOR_ONE_METRE = 0.1F;
         particleScale = PARTICLE_SCALE_FOR_ONE_METRE * diameter;
-        this.canCollide = true;
+        canCollide = true;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CursedAntipathyParticle extends SpriteTexturedParticle {
         @Override
         public Particle makeParticle(CursedAntipathyParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             CursedAntipathyParticle cursedHatredParticle = new CursedAntipathyParticle(worldIn, x, y, z, typeIn.getDiameter());
-            cursedHatredParticle.selectSpriteRandomly(this.spriteSet);
+            cursedHatredParticle.selectSpriteRandomly(spriteSet);
             return cursedHatredParticle;
         }
     }

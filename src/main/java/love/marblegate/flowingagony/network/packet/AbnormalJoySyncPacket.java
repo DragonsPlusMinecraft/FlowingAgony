@@ -19,12 +19,12 @@ public class AbnormalJoySyncPacket {
     }
 
     public AbnormalJoySyncPacket(PacketBuffer buffer) {
-        this.value = buffer.readFloat();
+        value = buffer.readFloat();
     }
 
 
     public void toBytes(PacketBuffer buffer) {
-        buffer.writeFloat(this.value);
+        buffer.writeFloat(value);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

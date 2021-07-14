@@ -27,25 +27,25 @@ public class ParticleEffectPacket {
     }
 
     public ParticleEffectPacket(PacketBuffer buffer) {
-        this.type = buffer.readEnumValue(EffectType.class);
-        this.x = buffer.readDouble();
-        this.y = buffer.readDouble();
-        this.z = buffer.readDouble();
+        type = buffer.readEnumValue(EffectType.class);
+        x = buffer.readDouble();
+        y = buffer.readDouble();
+        z = buffer.readDouble();
         int argsSum = buffer.readInt();
-        this.args = new double[argsSum];
+        args = new double[argsSum];
         for (int i = 0; i < argsSum; i++) {
-            this.args[i] = buffer.readDouble();
+            args[i] = buffer.readDouble();
         }
     }
 
 
     public void toBytes(PacketBuffer buffer) {
-        buffer.writeEnumValue(this.type);
-        buffer.writeDouble(this.x);
-        buffer.writeDouble(this.y);
-        buffer.writeDouble(this.z);
-        buffer.writeInt(this.args.length);
-        for (double arg : this.args) {
+        buffer.writeEnumValue(type);
+        buffer.writeDouble(x);
+        buffer.writeDouble(y);
+        buffer.writeDouble(z);
+        buffer.writeInt(args.length);
+        for (double arg : args) {
             buffer.writeDouble(arg);
         }
     }

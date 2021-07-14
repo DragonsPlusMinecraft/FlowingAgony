@@ -21,11 +21,11 @@ public class PlaySoundWIthLocationPacket {
 
 
     public PlaySoundWIthLocationPacket(PacketBuffer buffer) {
-        this.type = buffer.readEnumValue(ModSoundType.class);
-        this.onOrOff = buffer.readBoolean();
-        this.x = buffer.readDouble();
-        this.y = buffer.readDouble();
-        this.z = buffer.readDouble();
+        type = buffer.readEnumValue(ModSoundType.class);
+        onOrOff = buffer.readBoolean();
+        x = buffer.readDouble();
+        y = buffer.readDouble();
+        z = buffer.readDouble();
     }
 
     public PlaySoundWIthLocationPacket(ModSoundType type, boolean onOrOff, double x, double y, double z) {
@@ -38,11 +38,11 @@ public class PlaySoundWIthLocationPacket {
 
 
     public void toBytes(PacketBuffer buffer) {
-        buffer.writeEnumValue(this.type);
-        buffer.writeBoolean(this.onOrOff);
-        buffer.writeDouble(this.x);
-        buffer.writeDouble(this.y);
-        buffer.writeDouble(this.z);
+        buffer.writeEnumValue(type);
+        buffer.writeBoolean(onOrOff);
+        buffer.writeDouble(x);
+        buffer.writeDouble(y);
+        buffer.writeDouble(z);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

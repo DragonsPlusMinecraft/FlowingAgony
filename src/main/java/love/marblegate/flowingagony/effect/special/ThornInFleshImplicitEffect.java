@@ -14,7 +14,7 @@ public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.thorn_in_flesh_active.get()) {
-            int duration = entityLivingBaseIn.getActivePotionEffect(this.getEffect()).getDuration();
+            int duration = entityLivingBaseIn.getActivePotionEffect(getEffect()).getDuration();
             if(duration%60<10){
                 if(entityLivingBaseIn instanceof PlayerEntity){
                     entityLivingBaseIn.attackEntityFrom(DamageSource.causeThornsDamage(entityLivingBaseIn),1);

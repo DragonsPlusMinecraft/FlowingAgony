@@ -4,7 +4,7 @@ public class HatredBloodlineStatusCapabilityStardardImpl implements IHatredBlood
     private int hatredBloodlineLevel;
 
     public HatredBloodlineStatusCapabilityStardardImpl(){
-        this.hatredBloodlineLevel = 0;
+        hatredBloodlineLevel = 0;
     }
 
     @Override
@@ -14,7 +14,7 @@ public class HatredBloodlineStatusCapabilityStardardImpl implements IHatredBlood
 
     @Override
     public void setActiveLevel(int level) {
-        this.hatredBloodlineLevel = level;
+        hatredBloodlineLevel = level;
     }
 
 }

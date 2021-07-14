@@ -7,12 +7,12 @@ public class LastSweetDreamCapabilityStardardImpl implements ILastSweetDreamCapa
     private ItemStack itemStack;
 
     public LastSweetDreamCapabilityStardardImpl() {
-        this.itemStack = Items.AIR.getDefaultInstance();
+        itemStack = Items.AIR.getDefaultInstance();
     }
 
     @Override
     public ItemStack getItemStack() {
-        return this.itemStack.copy();
+        return itemStack.copy();
     }
 
     @Override
@@ -22,12 +22,12 @@ public class LastSweetDreamCapabilityStardardImpl implements ILastSweetDreamCapa
 
     @Override
     public void clear() {
-        this.itemStack = Items.AIR.getDefaultInstance();
+        itemStack = Items.AIR.getDefaultInstance();
     }
 
     @Override
     public boolean isEmpty() {
-        return this.itemStack.getItem() == Items.AIR;
+        return itemStack.getItem() == Items.AIR;
     }
 
 }
