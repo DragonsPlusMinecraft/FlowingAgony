@@ -33,8 +33,12 @@ public class LastWishEnchantmentEventHandler {
                     List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_deathwish.get());
                     for(ItemStack item: items){
                         int repairPoint = 0;
-                        for(int i=0;i<Math.floor(event.getAmount());i++)
-                            repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(3);
+                        if(event.getAmount()<1){
+                            repairPoint += Math.floor(event.getAmount()*event.getEntityLiving().getRNG().nextInt(3));
+                        }else{
+                            for(int i=0;i<Math.floor(event.getAmount());i++)
+                                repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(3);
+                        }
                         item.setDamage(item.getDamage() - repairPoint);
                     }
                 }
@@ -116,22 +120,23 @@ public class LastWishEnchantmentEventHandler {
     public static void doLastSweetDreamEnchantmentEvent_saveItem(ItemTossEvent event){
         if(!event.getPlayer().world.isRemote()){
             if(!event.isCanceled()){
-                System.out.print((float)event.getEntityItem().getItem().getDamage()/event.getEntityItem().getItem().getMaxDamage()+"\n");
-                if(EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(),EnchantmentRegistry.last_sweet_dream.get()) ==1 && (float)event.getEntityItem().getItem().getDamage()/event.getEntityItem().getItem().getMaxDamage() > 0.9F){
-                    LazyOptional<ILastSweetDreamCapability> itemCap = event.getPlayer().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
-                    itemCap.ifPresent(
-                            cap -> {
-                                if(cap.isEmpty()){
-                                    cap.saveItemStack(event.getEntityItem().getItem());
-                                } else {
-                                    ItemStack oldItem = cap.getItemStack();
-                                    cap.clear();
-                                    cap.saveItemStack(event.getEntityItem().getItem());
-                                    InventoryHelper.spawnItemStack(event.getPlayer().world,event.getPlayer().getPosX(),event.getPlayer().getPosY()+2,event.getPlayer().getPosZ(),oldItem);
+                if(EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(),EnchantmentRegistry.last_sweet_dream.get()) ==1 && event.getEntityItem().getItem().isDamageable()){
+                    if((float)event.getEntityItem().getItem().getDamage()/event.getEntityItem().getItem().getMaxDamage() > 0.9F){
+                        LazyOptional<ILastSweetDreamCapability> itemCap = event.getPlayer().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
+                        itemCap.ifPresent(
+                                cap -> {
+                                    if(cap.isEmpty()){
+                                        cap.saveItemStack(event.getEntityItem().getItem());
+                                    } else {
+                                        ItemStack oldItem = cap.getItemStack();
+                                        cap.clear();
+                                        cap.saveItemStack(event.getEntityItem().getItem());
+                                        InventoryHelper.spawnItemStack(event.getPlayer().world,event.getPlayer().getPosX(),event.getPlayer().getPosY()+2,event.getPlayer().getPosZ(),oldItem);
+                                    }
+                                    event.setCanceled(true);
                                 }
-                                event.setCanceled(true);
-                            }
-                    );
+                        );
+                    }
                 }
             }
         }
