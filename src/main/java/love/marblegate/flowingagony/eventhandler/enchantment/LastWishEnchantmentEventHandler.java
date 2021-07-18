@@ -10,6 +10,7 @@ import love.marblegate.flowingagony.util.EnchantmentUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -29,14 +30,16 @@ public class LastWishEnchantmentEventHandler {
     public static void doMorirsDeathwishEnchantmentEvent_mendOnHurt(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled()){
-                if(event.getEntityLiving() instanceof PlayerEntity){
+                if(event.getEntityLiving() instanceof PlayerEntity && event.getSource() != DamageSource.OUT_OF_WORLD){
                     List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_deathwish.get());
                     for(ItemStack item: items){
                         int repairPoint = 0;
                         if(event.getAmount()<1){
                             repairPoint += Math.floor(event.getAmount()*event.getEntityLiving().getRNG().nextInt(3));
                         }else{
-                            for(int i=0;i<Math.floor(event.getAmount());i++)
+                            //I really did not expect how could someone applies damage more than 100!!!!!
+                            int temp = (int) Math.max(Math.floor(event.getAmount()),100);
+                            for(int i=0;i<temp;i++)
                                 repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(3);
                         }
                         item.setDamage(item.getDamage() - repairPoint);
