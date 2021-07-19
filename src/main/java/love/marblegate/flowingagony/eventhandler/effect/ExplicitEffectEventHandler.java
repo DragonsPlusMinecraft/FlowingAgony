@@ -7,6 +7,7 @@ import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacke
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
+import love.marblegate.flowingagony.util.proxy.StandardUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -14,11 +15,9 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,31 +40,29 @@ public class ExplicitEffectEventHandler {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void doExtremeHatredEffectEvent(LivingHurtEvent event){
+    public static void doExtremeHatredEffectEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(((PlayerEntity)(event.getSource().getTrueSource())).isPotionActive(EffectRegistry.extreme_hatred.get())){
-                    int potionLvl = event.getEntityLiving().getActivePotionEffect(EffectRegistry.extreme_hatred.get()).getAmplifier()+1;
+                if(((PlayerEntity) (event.getSource().getTrueSource())).isPotionActive(EffectRegistry.extreme_hatred.get())){
+                    int potionLvl = ((PlayerEntity) (event.getSource().getTrueSource())).getActivePotionEffect(EffectRegistry.extreme_hatred.get()).getAmplifier()+1;
                     if(event.getAmount()*(1+potionLvl)>=event.getEntityLiving().getHealth()){
                         ((PlayerEntity)(event.getSource().getTrueSource())).removePotionEffect(EffectRegistry.extreme_hatred.get());
                         //Remove Sound Effect If Killing Action Is Confirmed
-                        if (!event.getSource().getTrueSource().world.isRemote) {
-                            Networking.INSTANCE.send(
-                                    PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) event.getSource().getTrueSource()
-                                    ),
-                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE,false));
-                            Networking.INSTANCE.send(
-                                    PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) event.getSource().getTrueSource()
-                                    ),
-                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE,false));
-                            Networking.INSTANCE.send(
-                                    PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) event.getSource().getTrueSource()
-                                    ),
-                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE,false));
-                        }
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.getSource().getTrueSource()
+                                ),
+                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE,false));
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.getSource().getTrueSource()
+                                ),
+                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE,false));
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.getSource().getTrueSource()
+                                ),
+                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE,false));
                     }
                     event.setAmount(event.getAmount()*(1+potionLvl));
                 }
@@ -142,9 +139,7 @@ public class ExplicitEffectEventHandler {
                     //It is due to I did not write packet to handle remove mob's effect
                 }
                 List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself(event.getEntityLiving(),8,2, x->true);
-                entities.forEach(LivingEntity->{
-                    LivingEntity.addPotionEffect(new EffectInstance(EffectRegistry.been_resonated.get(),event.getPotionEffect().getDuration(),event.getPotionEffect().getAmplifier()));
-                });
+                entities.forEach(LivingEntity-> LivingEntity.addPotionEffect(new EffectInstance(EffectRegistry.been_resonated.get(),event.getPotionEffect().getDuration(),event.getPotionEffect().getAmplifier())));
             }
         }
     }
@@ -162,12 +157,26 @@ public class ExplicitEffectEventHandler {
     }
 
     @SubscribeEvent
-    public static void onLetMeSavorItEffectEvent_dealDamage(LivingDamageEvent event) {
+    public static void onLetMeSavorItEffectEvent_reduceDamage(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getEntityLiving() instanceof PlayerEntity) {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+                if (((PlayerEntity) event.getSource().getTrueSource()).isPotionActive(EffectRegistry.let_me_savor_it.get())) {
+                    int effectLvl = ((PlayerEntity) event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.let_me_savor_it.get()).getAmplifier() + 1;
+                    event.setAmount(event.getAmount() * (1 - 0.09F*effectLvl));
+                }
+            }
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void onLetMeSavorItEffectEvent_reflectDamage(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (event.getEntityLiving() instanceof PlayerEntity && StandardUtil.shouldReflectDamage(event)) {
                 if ((event.getEntityLiving()).isPotionActive(EffectRegistry.let_me_savor_it.get())) {
                     int effectLvl = (event.getEntityLiving().getActivePotionEffect(EffectRegistry.let_me_savor_it.get())).getAmplifier() + 1;
                     if (event.getSource().getTrueSource() instanceof LivingEntity) {
+                        //If the enemy has same buff, do not reflect damage
                         if(!((LivingEntity)event.getSource().getTrueSource()).isPotionActive(EffectRegistry.let_me_savor_it.get()))
                             event.getSource().getTrueSource().
                                     attackEntityFrom(CustomDamageSource.causeLetMeSavorItDamage(event.getEntityLiving()),effectLvl * event.getAmount());
@@ -182,8 +191,17 @@ public class ExplicitEffectEventHandler {
         if (!event.player.world.isRemote()) {
             if(event.phase== TickEvent.Phase.START){
                 if ((event.player.isPotionActive(EffectRegistry.let_me_savor_it.get()))){
-                    if(event.player.getHealth()>12)
+                    if(event.player.getHealth()>12){
                         event.player.removeActivePotionEffect(EffectRegistry.let_me_savor_it.get());
+                        //Sync to Client
+                        Networking.INSTANCE.send(
+                                PacketDistributor.PLAYER.with(
+                                        () -> (ServerPlayerEntity) event.player
+                                ),
+                                new RemoveEffectSyncToClientPacket(EffectRegistry.let_me_savor_it.get()));
+                    }
+
+
                 }
             }
         }

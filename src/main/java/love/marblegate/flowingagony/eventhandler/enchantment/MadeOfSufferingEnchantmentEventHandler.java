@@ -9,6 +9,7 @@ import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
+import love.marblegate.flowingagony.util.proxy.StandardUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -29,7 +30,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     @SubscribeEvent
     public static void onDrowningPhobiaEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity){
+            if(event.getEntityLiving() instanceof PlayerEntity && StandardUtil.shouldReflectDamage(event)){
                 if(event.getEntityLiving().isSwimming()){
                     int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.drowning_phobia.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if(enchantmentLvl!=0){
@@ -43,7 +44,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     @SubscribeEvent
     public static void onBurningPhobiaEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity){
+            if(event.getEntityLiving() instanceof PlayerEntity && StandardUtil.shouldReflectDamage(event)){
                 if(event.getEntityLiving().isInLava()||event.getEntityLiving().getFireTimer()>0){
                     if(!event.getSource().isFireDamage()){
                         int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.burning_phobia.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);

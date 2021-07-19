@@ -81,8 +81,14 @@ public class LastWishEnchantmentEventHandler {
                     List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_lifebound.get());
                     for(ItemStack item: items){
                         int repairPoint = 0;
-                        for(int i=0;i<Math.floor(event.getAmount());i++)
-                            repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(10);
+                        if(event.getAmount()<1){
+                            repairPoint += Math.floor(event.getAmount()*event.getEntityLiving().getRNG().nextInt(3));
+                        }else{
+                            //It's the same as above
+                            int temp = (int) Math.max(Math.floor(event.getAmount()),100);
+                            for(int i=0;i<temp;i++)
+                                repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(10);
+                        }
                         item.setDamage(item.getDamage() - repairPoint);
                     }
                 }
