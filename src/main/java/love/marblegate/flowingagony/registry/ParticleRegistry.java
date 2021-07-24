@@ -9,5 +9,5 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ParticleRegistry {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, "flowingagony");
-    public static final RegistryObject<ParticleType<CursedAntipathyParticleData>> cursed_antipathy = PARTICLE_TYPES.register("cursed_antipathy_particle", CursedAntipathyParticleType::new);
+    public static final RegistryObject<ParticleType<CursedAntipathyParticleData>> CURSED_ANTIPATHY_PARTICLE = PARTICLE_TYPES.register("cursed_antipathy_particle", CursedAntipathyParticleType::new);
 }

@@ -9,7 +9,7 @@ import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
-import love.marblegate.flowingagony.util.proxy.StandardUtil;
+import love.marblegate.flowingagony.util.StandardUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -32,7 +32,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && StandardUtil.shouldReflectDamage(event)){
                 if(event.getEntityLiving().isSwimming()){
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.drowning_phobia.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.DROWNING_PHOBIA.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if(enchantmentLvl!=0){
                         dealPhobiaEffectDamage(event,Effects.BLINDNESS,enchantmentLvl);
                     }
@@ -47,7 +47,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
             if(event.getEntityLiving() instanceof PlayerEntity && StandardUtil.shouldReflectDamage(event)){
                 if(event.getEntityLiving().isInLava()||event.getEntityLiving().getFireTimer()>0){
                     if(!event.getSource().isFireDamage()){
-                        int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.burning_phobia.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                        int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.BURNING_PHOBIA.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                         if(enchantmentLvl!=0){
                             dealPhobiaEffectDamage(event,Effects.SLOWNESS,enchantmentLvl);
                         }
@@ -76,22 +76,22 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onPrayerOfPainEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.prayer_of_pain.get(),EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.PRAYER_OF_PAIN.get(),EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
                     if(event.getEntityLiving().getHealth()<(4+enchantLvl*2)){
-                        if(event.getEntityLiving().isPotionActive(EffectRegistry.let_me_savor_it.get())){
-                            if(event.getEntityLiving().getActivePotionEffect(EffectRegistry.let_me_savor_it.get()).getAmplifier()<9)
-                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.let_me_savor_it.get(),72000,
-                                    event.getEntityLiving().getActivePotionEffect(EffectRegistry.let_me_savor_it.get()).getAmplifier()+1));
+                        if(event.getEntityLiving().isPotionActive(EffectRegistry.LET_ME_SAVOR_IT.get())){
+                            if(event.getEntityLiving().getActivePotionEffect(EffectRegistry.LET_ME_SAVOR_IT.get()).getAmplifier()<9)
+                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.LET_ME_SAVOR_IT.get(),72000,
+                                    event.getEntityLiving().getActivePotionEffect(EffectRegistry.LET_ME_SAVOR_IT.get()).getAmplifier()+1));
                         } else {
-                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.let_me_savor_it.get(),72000));
+                            event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.LET_ME_SAVOR_IT.get(),72000));
                         }
                     }
                 }
             }
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                if(((PlayerEntity) event.getSource().getTrueSource()).isPotionActive(EffectRegistry.let_me_savor_it.get())){
-                    int effectLvl = ((PlayerEntity) event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.let_me_savor_it.get()).getAmplifier();
+                if(((PlayerEntity) event.getSource().getTrueSource()).isPotionActive(EffectRegistry.LET_ME_SAVOR_IT.get())){
+                    int effectLvl = ((PlayerEntity) event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.LET_ME_SAVOR_IT.get()).getAmplifier();
                     event.setAmount(event.getAmount()*(1-0.09f*(effectLvl+1)));
                 }
             }
@@ -102,7 +102,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onConstrainedHeartEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.constrained_heart.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.CONSTRAINED_HEART.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl!=0) {
                     if(event.getSource().isFireDamage()||event.getSource().getDamageType().equals("inWall")||
                             event.getSource().getDamageType().equals("cramming")||event.getSource().getDamageType().equals("fall")||
@@ -119,7 +119,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onPiercingFeverEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.piercing_fever.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.PIERCING_FEVER.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl!=0){
                     if(event.getSource().isProjectile() || event.getSource().getDamageType().equals("cactus") || event.getSource().getDamageType().equals("sweetBerryBush")){
                         grandAbnormalJoyPoint(event, enchantLvl);
@@ -133,7 +133,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     public static void onDestructionWorshipEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.destruction_worship.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.DESTRUCTION_WORSHIP.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl!=0){
                     if(event.getSource().isMagicDamage() || event.getSource().isExplosion() || event.getSource().getDamageType().equals("lightningBolt")){
                         grandAbnormalJoyPoint(event, enchantLvl);

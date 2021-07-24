@@ -11,7 +11,7 @@ public class MiraculousEscapeForceEscapeEffect extends HarmfulBlankImplicitEffec
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.miraculous_escape_enchantment_force_escape.get()) {
+        if (this == EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get()) {
             int duration = entityLivingBaseIn.getActivePotionEffect(getEffect()).getDuration();
             if(duration%40>25){
                 entityLivingBaseIn.setMotion(0,2,0);

@@ -31,7 +31,7 @@ public class LastWishEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled()){
                 if(event.getEntityLiving() instanceof PlayerEntity && event.getSource() != DamageSource.OUT_OF_WORLD){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_deathwish.get());
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_DEATHWISH.get());
                     for(ItemStack item: items){
                         int repairPoint = 0;
                         if(event.getAmount()<1){
@@ -54,7 +54,7 @@ public class LastWishEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled()){
                 if(event.getEntityLiving() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_deathwish.get());
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_DEATHWISH.get());
                     if(!items.isEmpty()){
                         LazyOptional<ICoolDown> coolDownCap = event.getEntityLiving().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
                         coolDownCap.ifPresent(
@@ -78,7 +78,7 @@ public class LastWishEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled()){
                 if(event.getEntityLiving() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_lifebound.get());
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_LIFEBOUND.get());
                     for(ItemStack item: items){
                         int repairPoint = 0;
                         if(event.getAmount()<1){
@@ -101,7 +101,7 @@ public class LastWishEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled()){
                 if(event.getEntityLiving() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.morirs_lifebound.get());
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_LIFEBOUND.get());
                     for(ItemStack item: items){
                         item.damageItem(32,event.getEntityLiving(),x->{});
                     }
@@ -115,7 +115,7 @@ public class LastWishEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled()){
                 if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.guidens_regret.get());
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.GUIDENS_REGRET.get());
                     for(ItemStack item: items){
                         int repairPoint = 1 + event.getEntityLiving().getRNG().nextInt(3);
                         item.setDamage(item.getDamage() - repairPoint);
@@ -129,7 +129,7 @@ public class LastWishEnchantmentEventHandler {
     public static void doLastSweetDreamEnchantmentEvent_saveItem(ItemTossEvent event){
         if(!event.getPlayer().world.isRemote()){
             if(!event.isCanceled()){
-                if(EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(),EnchantmentRegistry.last_sweet_dream.get()) ==1 && event.getEntityItem().getItem().isDamageable()){
+                if(EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(),EnchantmentRegistry.LAST_SWEET_DREAM.get()) ==1 && event.getEntityItem().getItem().isDamageable()){
                     if((float)event.getEntityItem().getItem().getDamage()/event.getEntityItem().getItem().getMaxDamage() > 0.9F){
                         LazyOptional<ILastSweetDreamCapability> itemCap = event.getPlayer().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
                         itemCap.ifPresent(

@@ -9,7 +9,7 @@ public class ExtremeHatredFirstStageSound extends TickableSound {
     private final ClientPlayerEntity player;
 
     public ExtremeHatredFirstStageSound(ClientPlayerEntity player) {
-        super(SoundRegistry.extreme_hatred_first_stage_sound.get(), SoundCategory.PLAYERS);
+        super(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.get(), SoundCategory.PLAYERS);
         this.player = player;
         repeat = true;
         repeatDelay = 0;

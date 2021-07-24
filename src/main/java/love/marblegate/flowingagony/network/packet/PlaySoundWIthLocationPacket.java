@@ -50,7 +50,7 @@ public class PlaySoundWIthLocationPacket {
             proxy = new ClientProxy();
             ctx.get().enqueueWork(() -> {
                 if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                    proxy.playSoundWithLocation(SoundRegistry.malice_outbreak_knockback_sound.get(), SoundCategory.PLAYERS, 5, 0.5F,x,y,z,true);
+                    proxy.playSoundWithLocation(SoundRegistry.MALICE_OUTBREAK_KNOCKBACK_SOUND.get(), SoundCategory.PLAYERS, 5, 0.5F,x,y,z,true);
                 }
             });
             ctx.get().setPacketHandled(true);

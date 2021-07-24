@@ -25,7 +25,7 @@ public class SurvivalTricksEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.survival_shortcut.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_SHORTCUT.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if(enchantmentLvl!=0){
                         if(event.getSource().getTrueSource() instanceof PlayerEntity){
                             event.setAmount(event.getAmount() * (0.95F - 0.05F * enchantmentLvl));
@@ -47,7 +47,7 @@ public class SurvivalTricksEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.survival_ruse.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_RUSE.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if(enchantmentLvl!=0){
                         if(event.getSource().getTrueSource() instanceof PlayerEntity){
                             event.setAmount(event.getAmount() * (0.95F - 0.05F * enchantmentLvl));
@@ -68,7 +68,7 @@ public class SurvivalTricksEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.necessary_evil.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.NECESSARY_EVIL.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if(enchantmentLvl!=0){
                         if(event.getSource().getTrueSource() instanceof PlayerEntity){
                             event.setAmount(event.getAmount() * (0.85F - 0.05F * enchantmentLvl));

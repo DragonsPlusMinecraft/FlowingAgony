@@ -30,7 +30,7 @@ public class VengeanceEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.perceived_malice.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.PERCEIVED_MALICE.get();
     }
 
     @Override

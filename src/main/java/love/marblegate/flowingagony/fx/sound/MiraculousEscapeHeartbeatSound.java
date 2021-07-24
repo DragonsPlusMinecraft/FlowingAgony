@@ -9,7 +9,7 @@ public class MiraculousEscapeHeartbeatSound extends TickableSound {
     private final ClientPlayerEntity player;
 
     public MiraculousEscapeHeartbeatSound(ClientPlayerEntity player) {
-        super(SoundRegistry.miraculous_escape_heartbeat.get(), SoundCategory.PLAYERS);
+        super(SoundRegistry.MIRACULOUS_ESCAPE_HEARTBEAT.get(), SoundCategory.PLAYERS);
         this.player = player;
         repeat = true;
         repeatDelay = 0;

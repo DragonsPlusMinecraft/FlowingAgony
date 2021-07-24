@@ -28,10 +28,10 @@ public class ClientProxy implements IProxy{
     public void handleISound(PlaySoundPacket.ModSoundType type, boolean onOrOff) {
         if(type== PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT){
             if(onOrOff){
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.miraculous_escape_heartbeat.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.MIRACULOUS_ESCAPE_HEARTBEAT.getId(), SoundCategory.PLAYERS);
                 Minecraft.getInstance().getSoundHandler().play(new MiraculousEscapeHeartbeatSound(Minecraft.getInstance().player));
             } else {
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.miraculous_escape_heartbeat.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.MIRACULOUS_ESCAPE_HEARTBEAT.getId(), SoundCategory.PLAYERS);
             }
 
         }
@@ -39,26 +39,26 @@ public class ClientProxy implements IProxy{
             if(onOrOff){
                 Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player));
             } else {
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.extreme_hatred_first_stage_sound.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
             }
 
         }
         if(type== PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE){
             if(onOrOff){
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.extreme_hatred_first_stage_sound.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
                 Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player));
             } else {
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.extreme_hatred_medium_stage_sound.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_MEDIUM_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
             }
 
         }
         if(type== PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE){
             if(onOrOff) {
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.extreme_hatred_medium_stage_sound.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_MEDIUM_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
                 Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredFinalStageSound(Minecraft.getInstance().player));
             }
             else{
-                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.extreme_hatred_final_stage_sound.getId(), SoundCategory.PLAYERS);
+                Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_FINAL_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
             }
         }
     }

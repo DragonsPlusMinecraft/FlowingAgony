@@ -31,8 +31,8 @@ public class DestructionWorshipEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.constrained_heart.get()
-                && p_77326_1_ != EnchantmentRegistry.piercing_fever.get();
+                && p_77326_1_ != EnchantmentRegistry.CONSTRAINED_HEART.get()
+                && p_77326_1_ != EnchantmentRegistry.PIERCING_FEVER.get();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class CursedAntipathyEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.cursed_antipathy.get()) {
+        if (this == EffectRegistry.CURSED_ANTIPATHY.get()) {
             entityLivingBaseIn.attackEntityFrom(CustomDamageSource.CURSED_ANTIPATHY, 1.0F);
             //Play Particle Effect
             if (!entityLivingBaseIn.world.isRemote) {

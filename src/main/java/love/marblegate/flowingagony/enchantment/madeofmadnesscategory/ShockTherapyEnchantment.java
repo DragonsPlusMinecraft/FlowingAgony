@@ -32,7 +32,7 @@ public class ShockTherapyEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.paper_brain.get()
+                && p_77326_1_ != EnchantmentRegistry.PAPER_BRAIN.get()
                 && p_77326_1_ != Enchantments.SHARPNESS
                 && p_77326_1_ != Enchantments.BANE_OF_ARTHROPODS
                 && p_77326_1_ != Enchantments.SMITE;

@@ -30,7 +30,7 @@ public class OriginalSinErosionEnchantment extends Enchantment{
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.scholar_of_original_sin.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.SCHOLAR_OF_ORIGINAL_SIN.get();
     }
 
     @Override

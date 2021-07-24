@@ -35,7 +35,7 @@ public class DirtyMoneyEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.come_back_at_dusk.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.COME_BACK_AT_DUSK.get();
     }
 
     @Override

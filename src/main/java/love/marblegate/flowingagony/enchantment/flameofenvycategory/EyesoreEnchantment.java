@@ -30,7 +30,7 @@ public class EyesoreEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.thorn_in_flesh.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.THORN_IN_FLESH.get();
     }
 
     @Override

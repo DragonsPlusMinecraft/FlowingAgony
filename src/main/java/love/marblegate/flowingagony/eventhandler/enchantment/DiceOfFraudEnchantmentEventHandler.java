@@ -35,7 +35,7 @@ public class DiceOfFraudEnchantmentEventHandler {
     public static void doTricksterEnchantmentEvent(AttackEntityEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getTarget() instanceof LivingEntity){
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.trickster.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.TRICKSTER.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl==1){
                     appendixEffectForTrickster((LivingEntity) event.getTarget(),((LivingEntity) event.getTarget()).getRNG().nextInt(5)+1);
                 }
@@ -75,7 +75,7 @@ public class DiceOfFraudEnchantmentEventHandler {
     @SubscribeEvent
     public static void doAnEnchantedGoldenAppleADayEnchantmentEvent(PlayerEvent.PlayerChangedDimensionEvent event) {
         if(!event.getPlayer().world.isRemote()) {
-            int enchantNum = EnchantmentUtil.isPlayerArmorEnchanted(event.getPlayer(), EnchantmentRegistry.an_enchanted_apple_a_day.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_PIECE);
+            int enchantNum = EnchantmentUtil.isPlayerArmorEnchanted(event.getPlayer(), EnchantmentRegistry.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_PIECE);
             if (enchantNum != 0) {
                 LazyOptional<ICoolDown> coolDownCap = event.getEntityLiving().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
                 coolDownCap.ifPresent(
@@ -140,7 +140,7 @@ public class DiceOfFraudEnchantmentEventHandler {
             if(!event.isCanceled()){
                 if(event.getEntityLiving() instanceof PlayerEntity) {
                     if (event.getAmount() >= event.getEntityLiving().getHealth() && (!event.getSource().getDamageType().equals("outOfWorld"))) {
-                        if (EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.deathpunk.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
+                        if (EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.DEATHPUNK.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
                             int solution = event.getEntityLiving().getRNG().nextInt(4);
                             int health = MathHelper.floor((((PlayerEntity) event.getEntityLiving()).getHealth()));
                             int maxHealth = MathHelper.floor((((PlayerEntity) event.getEntityLiving()).getMaxHealth()));
@@ -181,7 +181,7 @@ public class DiceOfFraudEnchantmentEventHandler {
                             if (damageEnchantment) {
                                 event.getEntityLiving().setHealth(((PlayerEntity) event.getEntityLiving()).getMaxHealth());
                                 Map<Enchantment, Integer> enchantmentList = EnchantmentHelper.getEnchantments(event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.CHEST));
-                                enchantmentList.remove(EnchantmentRegistry.deathpunk.get());
+                                enchantmentList.remove(EnchantmentRegistry.DEATHPUNK.get());
                                 EnchantmentHelper.setEnchantments(enchantmentList, ((PlayerEntity) event.getEntityLiving()).getItemStackFromSlot(EquipmentSlotType.CHEST));
                             }
                             event.setCanceled(true);
@@ -196,7 +196,7 @@ public class DiceOfFraudEnchantmentEventHandler {
     public static void doSavorTheTastedEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)(event.getSource().getTrueSource())), EnchantmentRegistry.savor_the_taste.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)(event.getSource().getTrueSource())), EnchantmentRegistry.SAVOR_THE_TASTED.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
                     CompoundNBT weaponNBT = ((PlayerEntity)(event.getSource().getTrueSource())).getHeldItemMainhand().getTag();
                     //Prevent NPE
@@ -225,7 +225,7 @@ public class DiceOfFraudEnchantmentEventHandler {
     public static void doExoticHealerEnchantmentEvent(LivingHealEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.exotic_healer.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.EXOTIC_HEALER.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     int dice = event.getEntityLiving().getRNG().nextInt(100);
                     float modifier = 1 + (enchantmentLvl - 1) * 0.1F;

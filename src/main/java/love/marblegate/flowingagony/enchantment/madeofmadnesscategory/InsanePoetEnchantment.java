@@ -31,7 +31,7 @@ public class InsanePoetEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.agony_screamer.get() && p_77326_1_ != Enchantments.POWER && p_77326_1_ != Enchantments.PUNCH;
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.AGONY_SCREAMER.get() && p_77326_1_ != Enchantments.POWER && p_77326_1_ != Enchantments.PUNCH;
     }
 
     @Override

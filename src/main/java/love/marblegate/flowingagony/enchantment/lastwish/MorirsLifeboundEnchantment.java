@@ -32,8 +32,8 @@ public class MorirsLifeboundEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.guidens_regret.get()
-                && p_77326_1_ != EnchantmentRegistry.morirs_deathwish.get()
+                && p_77326_1_ != EnchantmentRegistry.GUIDENS_REGRET.get()
+                && p_77326_1_ != EnchantmentRegistry.MORIRS_DEATHWISH.get()
                 && p_77326_1_ != Enchantments.MENDING;
     }
 

@@ -30,7 +30,7 @@ public class SurvivalShortcutEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.survival_ruse.get() && p_77326_1_ != EnchantmentRegistry.necessary_evil.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.SURVIVAL_RUSE.get() && p_77326_1_ != EnchantmentRegistry.NECESSARY_EVIL.get();
     }
 
     @Override

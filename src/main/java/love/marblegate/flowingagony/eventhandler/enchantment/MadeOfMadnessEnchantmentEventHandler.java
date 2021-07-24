@@ -30,9 +30,9 @@ public class MadeOfMadnessEnchantmentEventHandler {
     public static void onAgonyScreamerEnchantmentEven(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()) {
             if (event.getSource().getTrueSource() instanceof PlayerEntity) {
-                int enchantmentLvl =  EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.agony_screamer.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl =  EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.AGONY_SCREAMER.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl!=0) {
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.agony_resonance.get(), 140 + 20 * enchantmentLvl,enchantmentLvl));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.AGONY_RESONANCE.get(), 140 + 20 * enchantmentLvl,enchantmentLvl));
                 }
             }
         }
@@ -42,10 +42,10 @@ public class MadeOfMadnessEnchantmentEventHandler {
     public static void onInsanePoetEnchantmentEven(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getSource().getTrueSource() instanceof PlayerEntity) {
-                int enchantmentLvl =  EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.insane_poet.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl =  EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.INSANE_POET.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl!=0) {
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.listen_to_me_singing.get(), enchantmentLvl * 40,enchantmentLvl-1));
-                    ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.insane_poet_enchantment_active.get(),enchantmentLvl * 40));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.LISTEN_TO_ME_SINGING.get(), enchantmentLvl * 40,enchantmentLvl-1));
+                    ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.INSANE_POET_ENCHANTMENT_ACTIVE.get(),enchantmentLvl * 40));
                     event.setAmount(event.getAmount() * 0.1f);
                 }
             }
@@ -56,9 +56,9 @@ public class MadeOfMadnessEnchantmentEventHandler {
     public static void onPaperBrainEnchantmentEven(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.paper_brain.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.PAPER_BRAIN.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.paper_brain_enchantment_active.get(),20+40*enchantLvl,enchantLvl-1));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.PAPER_BRAIN_ENCHANTMENT_ACTIVE.get(),20+40*enchantLvl,enchantLvl-1));
                     event.setAmount(event.getAmount()*0.1f);
                 }
             }
@@ -69,9 +69,9 @@ public class MadeOfMadnessEnchantmentEventHandler {
     public static void onShockTherapyEnchantmentEven(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.shock_therapy.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.SHOCK_THERAPY.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.shock_therapy_enchantment_active.get(),20+40*enchantLvl,enchantLvl-1));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.SHOCK_THERAPY_ENCHANTMENT_ACTIVE.get(),20+40*enchantLvl,enchantLvl-1));
                     event.setAmount(event.getAmount()*0.1f);
                 }
             }
@@ -82,7 +82,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
     public static void onCuttingWatermelonDreamEnchantmentEvent_dealDamage(BlockEvent.BreakEvent event){
         if(!event.getPlayer().world.isRemote()){
             if(event.getState().getBlock().equals(Blocks.MELON)){
-                if(EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.cutting_watermelon_dream.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                if(EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.CUTTING_WATERMELON_DREAM.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself(event.getPlayer(),12,2,
                             livingEntity -> EntityUtil.isHostile(livingEntity,false));
                     if(!targets.isEmpty()){
@@ -119,7 +119,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
                 && event.getSource()==CustomDamageSource.CUTTING_WATERMELON_DREAM
                 && event.getSource().getTrueSource() instanceof PlayerEntity
                 && EntityUtil.supportHeadDrop(event.getEntityLiving())){
-            if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.cutting_watermelon_dream.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+            if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.CUTTING_WATERMELON_DREAM.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                 int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),Enchantments.FORTUNE,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(silkTouchEnchantmentLvl==1){

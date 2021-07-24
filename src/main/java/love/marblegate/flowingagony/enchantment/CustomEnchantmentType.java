@@ -15,7 +15,7 @@ public class CustomEnchantmentType {
     public static final EnchantmentType PICKAXE = EnchantmentType.create("flowingagony:PICKAXE", Item-> Item instanceof PickaxeItem);
     public static final EnchantmentType ALMOST_EVERYTHING = EnchantmentType.create("flowingagony:ALMOST_EVERYTHING", Item -> Item instanceof IVanishable || Block.getBlockFromItem(Item) instanceof IVanishable || BREAKABLE.canEnchantItem(Item) || WEARABLE.canEnchantItem(Item));
 
-    public static void addToItemGourp() {
+    public static void addToItemGroup() {
         EnchantmentType[] TOOL_TYPES = new EnchantmentType[ItemGroup.TOOLS.getRelevantEnchantmentTypes().length + 4];
         for (int i = 0; i < ItemGroup.TOOLS.getRelevantEnchantmentTypes().length; i++) {
             TOOL_TYPES[i] = ItemGroup.TOOLS.getRelevantEnchantmentTypes()[i];

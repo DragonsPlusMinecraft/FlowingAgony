@@ -47,7 +47,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doRegularCustomerProgramEnchantmentEvent(LivingDeathEvent event) {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity && (event.getEntityLiving() instanceof ZombieVillagerEntity || event.getEntityLiving() instanceof WitchEntity)){
-                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.regular_customer_program.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.REGULAR_CUSTOMER_PROGRAM.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself(event.getEntityLiving(),12,2,livingEntity -> livingEntity instanceof VillagerEntity);
                     if(!targets.isEmpty()){
                         for(LivingEntity target:targets){
@@ -64,7 +64,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doCleansingBeforeUsingEnchantmentEvent(LivingDeathEvent event) {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity && event.getEntityLiving() instanceof VillagerEntity){
-                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.cleansing_before_using.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.CLEANSING_BEFORE_USING.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).setRepairCost(0);
                     if(event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).isDamageable()){
                         event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).setDamage(event.getEntityLiving().getHeldItem(Hand.MAIN_HAND).getDamage()-10);
@@ -78,9 +78,9 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doComeBackAtDuskEnchantmentEvent(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             if (!event.player.world.isRemote()) {
-                if (EnchantmentUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.dirty_money.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==0){
+                if (EnchantmentUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.DIRTY_MONEY.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==0){
                     if (event.player.world.getDayTime() % 24000 > 10999 && event.player.world.getDayTime() % 24000 < 13501) {
-                        if (EnchantmentUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.come_back_at_dusk.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1){
+                        if (EnchantmentUtil.isPlayerArmorEnchanted(event.player, EnchantmentRegistry.COME_BACK_AT_DUSK.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1){
                             if (!event.player.isPotionActive(Effects.HERO_OF_THE_VILLAGE)) {
                                 int amplifier;
                                 double temp = Math.random();
@@ -103,7 +103,7 @@ public class GloomyEraEnchantmentEventHandler {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 if (event.getPotionEffect().getPotion().equals(Effects.HERO_OF_THE_VILLAGE)) {
-                    if (EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.dirty_money.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1) {
+                    if (EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.DIRTY_MONEY.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1) {
                         event.setResult(Event.Result.DENY);
                     }
                 }
@@ -115,7 +115,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doDirtyMoneyEnchantmentEvent_dropGoods(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof VillagerEntity && event.getSource().getTrueSource() instanceof PlayerEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.dirty_money.get(), EnchantmentUtil.ArmorEncCalOp.HIGHEST_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerArmorEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.DIRTY_MONEY.get(), EnchantmentUtil.ArmorEncCalOp.HIGHEST_LEVEL);
                 if (enchantLvl != 0) {
                     if(Math.random()<0.1*enchantLvl){
                         InventoryHelper.spawnItemStack(event.getEntityLiving().world,event.getEntityLiving().getPosX(),event.getEntityLiving().getPosY()+2,event.getEntityLiving().getPosZ(),Items.EMERALD.getDefaultInstance());
@@ -132,7 +132,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doPilferageCreedEnchantmentEvent(LivingFallEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
-                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.pilferage_creed.get(), EquipmentSlotType.FEET, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
+                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.PILFERAGE_CREED.get(), EquipmentSlotType.FEET, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                     if (event.getDistance() >= 5.0f) {
                         List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 5, 1, LivingEntity -> LivingEntity instanceof VillagerEntity);
                         if (!targets.isEmpty()) {
@@ -187,7 +187,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doCarefullyIdentifiedEnchantmentEvent(BlockEvent.BreakEvent event){
         if(!event.getWorld().isRemote() && !event.isCanceled()){
             if(event.getState().getBlock() == Blocks.STONE){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.carefully_identified.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),EnchantmentRegistry.CAREFULLY_IDENTIFIED.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.FORTUNE,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 if(enchantmentLvl!=0){
@@ -259,7 +259,7 @@ public class GloomyEraEnchantmentEventHandler {
     public static void doNimbleFingerEnchantmentEvent(AnvilUpdateEvent event) {
         if(!Config.HYBRID_SERVER_USER.get()){
             if (!event.getPlayer().world.isRemote()) {
-                if (EnchantmentUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.nimble_finger.get()) == 1
+                if (EnchantmentUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.NIMBLE_FINGER.get()) == 1
                         && event.getLeft().getDamage() == 0) {
                     if(isSameCategory(event.getLeft().getItem(),event.getRight().getItem())){
                         ItemStack result = event.getLeft().copy();
@@ -267,7 +267,7 @@ public class GloomyEraEnchantmentEventHandler {
                         Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight());
                         Map<Enchantment, Integer> output = Maps.newLinkedHashMap();
                         for (Enchantment lEnchantment : left.keySet()) {
-                            if(lEnchantment!=EnchantmentRegistry.nimble_finger.get())
+                            if(lEnchantment!=EnchantmentRegistry.NIMBLE_FINGER.get())
                                 output.put(lEnchantment,left.get(lEnchantment));
                         }
                         for (Enchantment rEnchantment : right.keySet()) {

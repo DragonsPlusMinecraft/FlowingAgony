@@ -13,7 +13,7 @@ public class LightburnFungalInfectionEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.lightburn_fungal_infection.get()) {
+        if (this == EffectRegistry.LIGHTBURN_FUNGAL_INFECTION.get()) {
             entityLivingBaseIn.attackEntityFrom(CustomDamageSource.LIGHTBURN_FUNGAL_INFECTION, 3.0F);
         }
     }

@@ -14,7 +14,7 @@ public class ShockTherapyImplicitEffect extends HarmfulBlankImplicitEffect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.shock_therapy_enchantment_active.get()) {
+        if (this == EffectRegistry.SHOCK_THERAPY_ENCHANTMENT_ACTIVE.get()) {
             LightningBoltEntity lightningboltentity = EntityType.LIGHTNING_BOLT.create(entityLivingBaseIn.world);
             lightningboltentity.setPosition(entityLivingBaseIn.getPosX(),entityLivingBaseIn.getPosY(),entityLivingBaseIn.getPosZ());
             lightningboltentity.setEffectOnly(true);

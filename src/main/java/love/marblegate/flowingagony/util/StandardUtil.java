@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.util.proxy;
+package love.marblegate.flowingagony.util;
 
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 

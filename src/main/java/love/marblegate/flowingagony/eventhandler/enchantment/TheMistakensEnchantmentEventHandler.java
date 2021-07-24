@@ -45,7 +45,7 @@ public class TheMistakensEnchantmentEventHandler {
             if(!event.player.world.isRemote()){
                 if (event.player.isPotionActive(Effects.BLINDNESS)) {
                     if (event.player.world.getLight(new BlockPos(event.player.getPosition())) >= 5) {
-                        if (EnchantmentUtil.isPlayerItemEnchanted(event.player, EnchantmentRegistry.shadowborn.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
+                        if (EnchantmentUtil.isPlayerItemEnchanted(event.player, EnchantmentRegistry.SHADOWBORN.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                             event.player.removeActivePotionEffect(Effects.BLINDNESS);
                             //Sync to Client
                             Networking.INSTANCE.send(
@@ -57,7 +57,7 @@ public class TheMistakensEnchantmentEventHandler {
                     }
                 }
                 if(event.player.world.getLight(new BlockPos(event.player.getPosition()))<=5){
-                    if(EnchantmentUtil.isPlayerItemEnchanted(event.player,EnchantmentRegistry.shadowborn.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                    if(EnchantmentUtil.isPlayerItemEnchanted(event.player,EnchantmentRegistry.SHADOWBORN.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                         if(!event.player.isPotionActive(Effects.NIGHT_VISION)){
                             event.player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION,1200));
                         }
@@ -71,7 +71,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doShadowBornEnchantmentEvent_addImmunity(PotionEvent.PotionApplicableEvent event){
         if(!event.getEntityLiving().world.isRemote() && !(event.getResult() == Event.Result.DENY)){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.shadowborn.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SHADOWBORN.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     if (event.getEntityLiving().world.getLight(new BlockPos(event.getEntityLiving().getPosition())) >= 5){
                         if(event.getPotionEffect().getPotion() == Effects.BLINDNESS){
                             event.setResult(Event.Result.DENY);
@@ -86,14 +86,14 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doPrototypeChaoticEnchantmentEvent(PotionEvent.PotionAddedEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.prototype_chaotic.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.PROTOTYPE_CHAOTIC.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantLvl!=0){
                     if(EffectUtil.isEffectShown(event.getPotionEffect())){
-                        if(((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.prototype_chaotic_enchantment_active.get())){
-                            int newEffectAmplifier = Math.min(((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.prototype_chaotic_enchantment_active.get()).getAmplifier()+enchantLvl,29);
-                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.prototype_chaotic_enchantment_active.get(),1200,newEffectAmplifier));
+                        if(((PlayerEntity)event.getEntityLiving()).isPotionActive(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get())){
+                            int newEffectAmplifier = Math.min(((PlayerEntity)event.getEntityLiving()).getActivePotionEffect(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get()).getAmplifier()+enchantLvl,29);
+                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(),1200,newEffectAmplifier));
                         } else {
-                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.prototype_chaotic_enchantment_active.get(),1200,enchantLvl-1));
+                            ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(),1200,enchantLvl-1));
                         }
                         ((PlayerEntity)event.getEntityLiving()).heal(enchantLvl);
                     }
@@ -105,10 +105,10 @@ public class TheMistakensEnchantmentEventHandler {
     @SubscribeEvent
     public static void doPrototypeChaoticTypeBetaEnchantmentEvent(PotionEvent.PotionAddedEvent event){
         if(!event.getEntityLiving().world.isRemote() && event.getEntityLiving() instanceof PlayerEntity){
-            if(EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.prototype_chaotic_type_beta.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+            if(EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.PROTOTYPE_CHAOTIC_TYPE_BETA.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                 if(EffectUtil.isEffectShown(event.getPotionEffect())){
                     if(event.getPotionEffect().getPotion().getEffectType() == EffectType.BENEFICIAL && !event.getPotionEffect().getPotion().isInstant()){
-                        if(EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.prototype_chaotic.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                        if(EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity)event.getEntityLiving()),EnchantmentRegistry.PROTOTYPE_CHAOTIC.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                             event.getPotionEffect().combine(new EffectInstance(event.getPotionEffect().getPotion(),event.getPotionEffect().getDuration()*3));
                             List<EffectInstance> negativeEffects = ((PlayerEntity)event.getEntityLiving()).getActivePotionEffects().stream()
                                     .filter(effectInstance-> effectInstance.getPotion().getEffectType() == EffectType.HARMFUL)
@@ -141,12 +141,12 @@ public class TheMistakensEnchantmentEventHandler {
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
                 if(!event.isCanceled()){
-                    int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.corrupted_kindred.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.CORRUPTED_KINDRED.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if(enchantLvl!=0){
                         if(EntityUtil.isAggresiveUndead((LivingEntity) event.getSource().getTrueSource())){
                             Random temp = event.getEntityLiving().getRNG();
                             if(temp.nextInt(100)<(6-enchantLvl)){
-                                ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.curse_of_undead.get(),144000));
+                                ((PlayerEntity)event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.CURSE_OF_UNDEAD.get(),144000));
                             }
                             if(EntityUtil.isCommonUndead((LivingEntity) event.getSource().getTrueSource())){
                                 if(enchantLvl==5) event.setCanceled(true);
@@ -171,7 +171,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doLightburnFungalParasiticEnchantmentEvent_applyProtectionAndSpreadFungalEffect(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.lightburn_fungal_parasitic.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.LIGHTBURN_FUNGAL_PARASITIC.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     if(event.getSource().getTrueSource() instanceof LivingEntity){
                         List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 8, 2,
@@ -180,7 +180,7 @@ public class TheMistakensEnchantmentEventHandler {
                             Random rand = event.getEntityLiving().getRNG();
                             for (LivingEntity target : targets) {
                                 if(rand.nextDouble()< 0.125D * (enchantmentLvl + 1))
-                                    target.addPotionEffect(new EffectInstance(EffectRegistry.lightburn_fungal_infection.get(), 120));
+                                    target.addPotionEffect(new EffectInstance(EffectRegistry.LIGHTBURN_FUNGAL_INFECTION.get(), 120));
                             }
                         }
                     }
@@ -196,7 +196,7 @@ public class TheMistakensEnchantmentEventHandler {
     @SubscribeEvent
     public static void doLightburnFungalParasiticEnchantmentEvent_removeCurrentImmuneEffect(TickEvent.PlayerTickEvent event){
         if(!event.player.world.isRemote()){
-            if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.player,EnchantmentRegistry.lightburn_fungal_parasitic.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+            if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.player,EnchantmentRegistry.LIGHTBURN_FUNGAL_PARASITIC.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                 if(event.player.isPotionActive(Effects.POISON)){
                     event.player.removeActivePotionEffect(Effects.POISON);
                     //Sync to Client
@@ -206,14 +206,14 @@ public class TheMistakensEnchantmentEventHandler {
                             ),
                             new RemoveEffectSyncToClientPacket(Effects.POISON));
                 }
-                if(event.player.isPotionActive(EffectRegistry.lightburn_fungal_infection.get())){
-                    event.player.removeActivePotionEffect(EffectRegistry.lightburn_fungal_infection.get());
+                if(event.player.isPotionActive(EffectRegistry.LIGHTBURN_FUNGAL_INFECTION.get())){
+                    event.player.removeActivePotionEffect(EffectRegistry.LIGHTBURN_FUNGAL_INFECTION.get());
                     //Sync to Client
                     Networking.INSTANCE.send(
                             PacketDistributor.PLAYER.with(
                                     () -> (ServerPlayerEntity) event.player
                             ),
-                            new RemoveEffectSyncToClientPacket(EffectRegistry.lightburn_fungal_infection.get()));
+                            new RemoveEffectSyncToClientPacket(EffectRegistry.LIGHTBURN_FUNGAL_INFECTION.get()));
                 }
             }
         }
@@ -223,11 +223,11 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doLightburnFungalParasiticEnchantmentEvent_addImmunity(PotionEvent.PotionApplicableEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.lightburn_fungal_parasitic.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.LIGHTBURN_FUNGAL_PARASITIC.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                     if(event.getPotionEffect().getPotion().equals(Effects.POISON)){
                         event.setResult(Event.Result.DENY);
                     }
-                    if(event.getPotionEffect().getPotion().equals(EffectRegistry.lightburn_fungal_infection.get())){
+                    if(event.getPotionEffect().getPotion().equals(EffectRegistry.LIGHTBURN_FUNGAL_INFECTION.get())){
                         event.setResult(Event.Result.DENY);
                     }
                 }
@@ -239,7 +239,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doScholarOfOriginalSinEnchantmentEvent_addWeakness(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && !event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.scholar_of_original_sin.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.SCHOLAR_OF_ORIGINAL_SIN.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     float extraDamage = Math.min(event.getAmount() * (1.1F - 0.1F * enchantmentLvl),10);
                     event.setAmount(event.getAmount()+extraDamage);
@@ -252,7 +252,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doScholarOfOriginalSinEnchantmentEvent_extendHarmfulEffect(PotionEvent.PotionAddedEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.scholar_of_original_sin.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.SCHOLAR_OF_ORIGINAL_SIN.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     if(event.getPotionEffect().getPotion().getEffectType()==EffectType.HARMFUL&&EffectUtil.isEffectShown(event.getPotionEffect()))
                         event.getPotionEffect().combine(new EffectInstance(event.getPotionEffect().getPotion(), (int) (event.getPotionEffect().getDuration()*(2.1-0.1*enchantmentLvl))));
@@ -265,7 +265,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doScholarOfOriginalSinEnchantmentEvent_extraEXP(PlayerXpEvent.PickupXp event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.scholar_of_original_sin.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.SCHOLAR_OF_ORIGINAL_SIN.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     event.getOrb().xpValue = (int) (event.getOrb().xpValue * (1.35 + 0.15 * enchantmentLvl));
                 }
@@ -277,7 +277,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doOriginalSinErosionEnchantmentEvent_decreaseAttack(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource() ,EnchantmentRegistry.original_sin_erosion.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource() ,EnchantmentRegistry.ORIGINAL_SIN_EROSION.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     float damageModified = Math.max(event.getAmount() - 5 + enchantmentLvl,0);
                     event.setAmount(damageModified);
@@ -290,7 +290,7 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doOriginalSinErosionEnchantmentEvent_extraEXP(PlayerXpEvent.PickupXp event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.original_sin_erosion.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.ORIGINAL_SIN_EROSION.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     event.getOrb().xpValue = (int) (event.getOrb().xpValue * (1.05 + 0.05 * enchantmentLvl));
                 }
@@ -306,7 +306,7 @@ public class TheMistakensEnchantmentEventHandler {
                 AxisAlignedBB scanningArea = new AxisAlignedBB(originalDeathPos.getX()-16,originalDeathPos.getY()-1,originalDeathPos.getZ()-16,originalDeathPos.getX()+16,originalDeathPos.getY()+1,originalDeathPos.getZ()+16);
                 List<PlayerEntity> players = event.getEntityLiving().world.getEntitiesWithinAABB(PlayerEntity.class,scanningArea);
                 for(PlayerEntity player : players){
-                    if(EnchantmentUtil.isPlayerArmorEnchanted(player, EnchantmentRegistry.burial_object.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1){
+                    if(EnchantmentUtil.isPlayerArmorEnchanted(player, EnchantmentRegistry.BURIAL_OBJECT.get(), EnchantmentUtil.ArmorEncCalOp.GENERAL)==1){
                         player.attackEntityFrom(CustomDamageSource.causeBurialObjectDamage(((PlayerEntity)event.getEntityLiving())),120);
                     }
                 }

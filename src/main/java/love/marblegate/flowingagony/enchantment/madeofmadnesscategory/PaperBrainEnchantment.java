@@ -32,7 +32,7 @@ public class PaperBrainEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.shock_therapy.get()
+                && p_77326_1_ != EnchantmentRegistry.SHOCK_THERAPY.get()
                 && p_77326_1_ != Enchantments.SHARPNESS
                 && p_77326_1_ != Enchantments.BANE_OF_ARTHROPODS
                 && p_77326_1_ != Enchantments.SMITE;

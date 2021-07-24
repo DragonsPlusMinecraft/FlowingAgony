@@ -32,12 +32,12 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doEnviousKindEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.envious_kind.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.ENVIOUS_KIND.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
                     double diff = (event.getEntityLiving().getHealth() - ((PlayerEntity) event.getSource().getTrueSource()).getHealth());
                     if(diff>=0){
                         int amplifier = (int) Math.floor(diff/10);
-                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.envious_being.get(),200, amplifier));
+                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.ENVIOUS_BEING.get(),200, amplifier));
                     }
                 }
             }
@@ -48,9 +48,9 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doEyesoreEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.eyesore.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.EYESORE.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.eyesore_enchantment_active.get(),61,enchantmentLvl-1));
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.EYESORE_ENCHANTMENT_ACTIVE.get(),61,enchantmentLvl-1));
                 }
             }
         }
@@ -60,12 +60,12 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doThornInFleshEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.thorn_in_flesh.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.THORN_IN_FLESH.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0) {
                     if (event.getEntityLiving() instanceof PlayerEntity)
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.thorn_in_flesh_active_for_player.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.THORN_IN_FLESH_ACTIVE_FOR_PLAYER.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
                     else
-                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.thorn_in_flesh_active.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
+                        event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.THORN_IN_FLESH_ACTIVE.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
                 }
             }
         }
@@ -78,7 +78,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
                 if (((EntityRayTraceResult) event.getRayTraceResult()).getEntity() instanceof EndermanEntity) {
                     if (event.getArrow().getShooter() != null) {
                         if (event.getArrow().getShooter() instanceof PlayerEntity) {
-                            int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), EnchantmentRegistry.covert_knife.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                            int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), EnchantmentRegistry.COVERT_KNIFE.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                             if(enchantmentLvl!=0){
                                 if(enchantmentLvl == 3 || (enchantmentLvl == 2 ? (Math.random() < 0.75) : (Math.random() < 0.5))){
                                     ((EntityRayTraceResult) event.getRayTraceResult()).getEntity().attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) event.getArrow().getShooter()), 9f);
@@ -111,7 +111,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
     public static void doSourceOfEnvyEnchantmentEvent(LivingDamageEvent event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
-                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.source_of_envy.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SOURCE_OF_ENVY.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0) {
                     if(event.getSource().getTrueSource() instanceof PlayerEntity){
                         List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(),12,2, livingEntity -> EntityUtil.isHostile(livingEntity,false));

@@ -31,8 +31,8 @@ public class PrayerOfPainEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_
-                != EnchantmentRegistry.burning_phobia.get() && p_77326_1_
-                != EnchantmentRegistry.drowning_phobia.get();
+                != EnchantmentRegistry.BURNING_PHOBIA.get() && p_77326_1_
+                != EnchantmentRegistry.DROWNING_PHOBIA.get();
     }
 
     @Override

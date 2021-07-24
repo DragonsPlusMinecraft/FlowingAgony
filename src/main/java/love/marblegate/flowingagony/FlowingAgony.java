@@ -23,6 +23,6 @@ public class FlowingAgony {
         SoundRegistry.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ParticleRegistry.PARTICLE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        CustomEnchantmentType.addToItemGourp();
+        CustomEnchantmentType.addToItemGroup();
     }
 }

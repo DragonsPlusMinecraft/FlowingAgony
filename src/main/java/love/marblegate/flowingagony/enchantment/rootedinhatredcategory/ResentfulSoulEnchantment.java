@@ -30,7 +30,7 @@ public class ResentfulSoulEnchantment extends Enchantment{
 
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.too_resentful_to_die.get();
+        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.TOO_RESENTFUL_TO_DIE.get();
     }
 
     @Override

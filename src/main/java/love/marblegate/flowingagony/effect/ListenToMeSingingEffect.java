@@ -1,10 +1,10 @@
 package love.marblegate.flowingagony.effect;
 
+import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
-import net.minecraft.util.DamageSource;
 
 public class ListenToMeSingingEffect extends Effect {
     public ListenToMeSingingEffect() {
@@ -13,7 +13,7 @@ public class ListenToMeSingingEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        if (this == EffectRegistry.listen_to_me_singing.get()) {
+        if (this == EffectRegistry.LISTEN_TO_ME_SINGING.get()) {
             int duration = entityLivingBaseIn.getActivePotionEffect(getEffect()).getDuration();
             if(duration%40>25){
                 entityLivingBaseIn.setMotion(0,0.41,0);
@@ -37,7 +37,7 @@ public class ListenToMeSingingEffect extends Effect {
                 float damage = entityLivingBaseIn.getMaxHealth()*0.2f+entityLivingBaseIn.getHealth()*0.5f;
                 damage = Math.min(getMaxDamage(amplifier),damage);
                 damage = Math.max(getMinDamage(amplifier),damage);
-                entityLivingBaseIn.attackEntityFrom((new DamageSource("flowingagony.rhythm_of_universe")), damage);
+                entityLivingBaseIn.attackEntityFrom(CustomDamageSource.RHYTHM_OF_UNIVERSE, damage);
             }
         }
     }

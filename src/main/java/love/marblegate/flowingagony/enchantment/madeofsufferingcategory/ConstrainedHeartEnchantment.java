@@ -31,8 +31,8 @@ public class ConstrainedHeartEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment p_77326_1_) {
         return super.canApplyTogether(p_77326_1_)
-                && p_77326_1_ != EnchantmentRegistry.piercing_fever.get()
-                && p_77326_1_ != EnchantmentRegistry.destruction_worship.get();
+                && p_77326_1_ != EnchantmentRegistry.PIERCING_FEVER.get()
+                && p_77326_1_ != EnchantmentRegistry.DESTRUCTION_WORSHIP.get();
     }
 
     @Override
