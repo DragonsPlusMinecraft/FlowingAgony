@@ -5,14 +5,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 
 public class CustomDamageSource {
-    public static final DamageSource CURSED_HATRED = new DamageSource("flowingagony.curse_hatred");
-    public static final DamageSource CURSED_ANTIPATHY = new DamageSource("flowingagony.cursed_antipathy_effect").setDamageBypassesArmor();
-    public static final DamageSource LIGHTBURN_FUNGAL_INFECTION = new DamageSource("flowingagony.lightburn_fungal_infection");
-    public static final DamageSource CUTTING_WATERMELON_DREAM = new DamageSource("flowingagony.cutting_watermelon_dream");
-    public static final DamageSource AGONY_RESONANCE = new DamageSource("flowingagony.agony_resonance");
-    public static final DamageSource RHYTHM_OF_UNIVERSE = new DamageSource("flowingagony.rhythm_of_universe");
-
-
+    public static final DamageSource CURSED_HATRED = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.curse_hatred");
+    public static final DamageSource CURSED_ANTIPATHY = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.cursed_antipathy_effect").setDamageBypassesArmor();
+    public static final DamageSource LIGHTBURN_FUNGAL_INFECTION = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.lightburn_fungal_infection");
+    public static final DamageSource CUTTING_WATERMELON_DREAM = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.cutting_watermelon_dream");
+    public static final DamageSource AGONY_RESONANCE = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.agony_resonance");
+    public static final DamageSource RHYTHM_OF_UNIVERSE = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.rhythm_of_universe");
 
     public static DamageSource causeLetMeSavorItDamage(LivingEntity livingEntity) {
         return new FlowingAgonyMobtoMobDamageSource("flowingagony.let_me_savor_it", livingEntity);

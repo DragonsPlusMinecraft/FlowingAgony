@@ -28,6 +28,6 @@ public class FlowingAgonyMobtoMobDamageSource extends EntityDamageSource {
     @Override
     public ITextComponent getDeathMessage(LivingEntity entityLivingBaseIn) {
         String s = "death.attack." + damageType;
-        return new TranslationTextComponent(s, entityLivingBaseIn.getDisplayName(),damageSourceEntity);
+        return new TranslationTextComponent(s, entityLivingBaseIn.getDisplayName(),damageSourceEntity.getDisplayName());
     }
 }
