@@ -27,7 +27,7 @@ public class RemoveEffectSyncToClientPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.runWhenOn(Dist.CLIENT,()-> () -> {
             ctx.get().enqueueWork(() -> {
                 proxy = new ClientProxy();
                 proxy.removeEffect(effect);

@@ -33,15 +33,6 @@ public class CleansingBeforeUsingEnchantment extends Enchantment {
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() {
-        return Config.CLEANSING_BEFORE_USING.get();
-    }
-
-    @Override
-    public boolean canGenerateInLoot() {
-        return Config.CLEANSING_BEFORE_USING.get();
-    }
 
     @Override
     public boolean isAllowedOnBooks() {

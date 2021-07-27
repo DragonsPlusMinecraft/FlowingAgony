@@ -33,12 +33,6 @@ public class LightburnFungalParasiticEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.LIGHTBURN_FUNGAL_PARASITIC.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.LIGHTBURN_FUNGAL_PARASITIC.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.LIGHTBURN_FUNGAL_PARASITIC.get();
     }

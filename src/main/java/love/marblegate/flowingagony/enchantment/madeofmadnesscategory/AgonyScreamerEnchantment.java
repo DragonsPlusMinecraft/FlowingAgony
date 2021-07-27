@@ -33,11 +33,6 @@ public class AgonyScreamerEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.INSANE_POET.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.AGONY_SCREAMER.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.AGONY_SCREAMER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

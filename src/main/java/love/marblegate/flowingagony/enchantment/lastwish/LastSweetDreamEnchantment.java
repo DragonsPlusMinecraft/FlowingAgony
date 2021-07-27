@@ -32,11 +32,6 @@ public class LastSweetDreamEnchantment extends Enchantment {
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.LAST_SWEET_DREAM.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.LAST_SWEET_DREAM.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

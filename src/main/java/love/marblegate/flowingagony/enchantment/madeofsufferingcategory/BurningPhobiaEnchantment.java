@@ -35,11 +35,6 @@ public class BurningPhobiaEnchantment extends Enchantment {
                 != EnchantmentRegistry.PRAYER_OF_PAIN.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.BURNING_PHOBIA.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.BURNING_PHOBIA.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

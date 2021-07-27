@@ -37,11 +37,6 @@ public class BurialObjectCurse extends Enchantment {
         return false;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.BURIAL_OBJECT.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.BURIAL_OBJECT.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

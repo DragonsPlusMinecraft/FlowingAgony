@@ -32,11 +32,6 @@ public class PilferageCreedEnchantment extends Enchantment {
         return 1;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return false; }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PILFERAGE_CREED.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

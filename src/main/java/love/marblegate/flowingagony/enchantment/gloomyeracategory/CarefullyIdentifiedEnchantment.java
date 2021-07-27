@@ -29,16 +29,6 @@ public class CarefullyIdentifiedEnchantment extends Enchantment {
 
 
     @Override
-    public boolean canVillagerTrade() {
-        return Config.CAREFULLY_IDENTIFIED.get();
-    }
-
-    @Override
-    public boolean canGenerateInLoot() {
-        return Config.CAREFULLY_IDENTIFIED.get();
-    }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.CAREFULLY_IDENTIFIED.get();
     }

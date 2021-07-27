@@ -28,12 +28,6 @@ public class PrototypeChaoticTypeBetaEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get();
     }

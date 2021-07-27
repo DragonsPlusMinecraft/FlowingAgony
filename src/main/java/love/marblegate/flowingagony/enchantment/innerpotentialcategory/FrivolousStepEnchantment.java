@@ -33,11 +33,6 @@ public class FrivolousStepEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.STUBBORN_STEP.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.FRIVOLOUS_STEP.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.FRIVOLOUS_STEP.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

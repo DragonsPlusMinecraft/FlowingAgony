@@ -35,11 +35,6 @@ public class DestructionWorshipEnchantment extends Enchantment {
                 && p_77326_1_ != EnchantmentRegistry.PIERCING_FEVER.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.PIERCING_FEVER.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PIERCING_FEVER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

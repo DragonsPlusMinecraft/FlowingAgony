@@ -27,11 +27,6 @@ public class ExoticHealerEnchantment extends Enchantment{
         return 2;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.EXOTIC_HEALER.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.EXOTIC_HEALER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

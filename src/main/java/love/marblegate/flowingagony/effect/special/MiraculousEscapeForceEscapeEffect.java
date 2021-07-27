@@ -20,7 +20,6 @@ public class MiraculousEscapeForceEscapeEffect extends HarmfulBlankImplicitEffec
                 entityLivingBaseIn.setMotion(entityLivingBaseIn.getLookVec().getX(),duration/12.5,entityLivingBaseIn.getLookVec().getZ());
             }
             entityLivingBaseIn.velocityChanged=true;
-            entityLivingBaseIn.markPositionDirty();
         }
     }
 

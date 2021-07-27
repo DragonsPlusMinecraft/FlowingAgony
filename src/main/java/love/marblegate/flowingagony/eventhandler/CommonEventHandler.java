@@ -11,6 +11,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class CommonEventHandler {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(Networking::registerMessage);
+        Networking.registerMessage();
     }
 }

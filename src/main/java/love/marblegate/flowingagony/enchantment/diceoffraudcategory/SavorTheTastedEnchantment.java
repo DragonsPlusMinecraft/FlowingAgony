@@ -27,11 +27,6 @@ public class SavorTheTastedEnchantment extends Enchantment{
         return 3;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.SAVOR_THE_TASTED.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.SAVOR_THE_TASTED.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

@@ -38,11 +38,6 @@ public class ComeBackAtDuskEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.DIRTY_MONEY.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return false; }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.COME_BACK_AT_DUSK.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

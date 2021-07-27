@@ -27,11 +27,6 @@ public class DeathpunkEnchantment extends Enchantment{
         return 1;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.DEATH_PUNK.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.DEATH_PUNK.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

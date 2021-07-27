@@ -27,11 +27,6 @@ public class CorrruptedKindredEnchantment extends Enchantment {
         return 5;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.CORRUPTED_KINDRED.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.CORRUPTED_KINDRED.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

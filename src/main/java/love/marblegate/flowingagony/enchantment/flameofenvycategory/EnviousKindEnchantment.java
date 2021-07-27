@@ -27,11 +27,6 @@ public class EnviousKindEnchantment extends Enchantment {
         return 1;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.ENCIOUS_KIND.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.ENCIOUS_KIND.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

@@ -23,7 +23,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class EnchantmentRegistry {
 
-    public static final DeferredRegister<Enchantment> ENCHANTMENT = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, "flowingagony");
+    public static final DeferredRegister<Enchantment> ENCHANTMENT = new DeferredRegister<>(ForgeRegistries.ENCHANTMENTS, "flowingagony");
 
     public static final RegistryObject<Enchantment> VENGEANCE = ENCHANTMENT.register("vengeance", VengeanceEnchantment::new);
     public static final RegistryObject<Enchantment> PERCEIVED_MALICE = ENCHANTMENT.register("perceived_malice", PerceivedMaliceEnchantment::new);
@@ -74,13 +74,11 @@ public class EnchantmentRegistry {
     public static final RegistryObject<Enchantment> DIRTY_MONEY = ENCHANTMENT.register("dirty_money", DirtyMoneyEnchantment::new);
     public static final RegistryObject<Enchantment> PILFERAGE_CREED = ENCHANTMENT.register("pilferage_creed", PilferageCreedEnchantment::new);
     public static final RegistryObject<Enchantment> CAREFULLY_IDENTIFIED = ENCHANTMENT.register("carefully_identified", CarefullyIdentifiedEnchantment::new);
-    public static final RegistryObject<Enchantment> NIMBLE_FINGER = ENCHANTMENT.register("nimble_finger", NimbleFingerEnchantment::new);
 
     public static final RegistryObject<Enchantment> AGONY_SCREAMER = ENCHANTMENT.register("agony_screamer", AgonyScreamerEnchantment::new);
     public static final RegistryObject<Enchantment> INSANE_POET = ENCHANTMENT.register("insane_poet", InsanePoetEnchantment::new);
     public static final RegistryObject<Enchantment> PAPER_BRAIN = ENCHANTMENT.register("paper_brain", PaperBrainEnchantment::new);
     public static final RegistryObject<Enchantment> SHOCK_THERAPY = ENCHANTMENT.register("shock_therapy", ShockTherapyEnchantment::new);
-    public static final RegistryObject<Enchantment> CUTTING_WATERMELON_DREAM = ENCHANTMENT.register("cutting_watermelon_dream", CuttingWatermelonDreamEnchantment::new);
 
     public static final RegistryObject<Enchantment> DROWNING_PHOBIA = ENCHANTMENT.register("drowning_phobia", DrowningPhobiaEnchantment::new);
     public static final RegistryObject<Enchantment> BURNING_PHOBIA = ENCHANTMENT.register("burning_phobia", BurningPhobiaEnchantment::new);

@@ -28,12 +28,6 @@ public class ShadowbornEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.SHADOWBORN.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.SHADOWBORN.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.SHADOWBORN.get();
     }

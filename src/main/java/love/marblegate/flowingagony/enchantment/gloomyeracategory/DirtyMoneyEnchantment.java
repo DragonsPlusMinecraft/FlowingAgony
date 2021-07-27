@@ -38,11 +38,6 @@ public class DirtyMoneyEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.COME_BACK_AT_DUSK.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return false; }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.DIRTY_MONEY.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

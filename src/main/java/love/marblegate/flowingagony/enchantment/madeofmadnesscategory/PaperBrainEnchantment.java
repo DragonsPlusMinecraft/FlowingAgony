@@ -38,11 +38,6 @@ public class PaperBrainEnchantment extends Enchantment {
                 && p_77326_1_ != Enchantments.SMITE;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.PAPER_BRAIN.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PAPER_BRAIN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

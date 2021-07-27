@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.effect;
 
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -19,22 +18,6 @@ public class ImplicitEffectEventHandler {
                 if(((PlayerEntity )event.getSource().getTrueSource()).isPotionActive(EffectRegistry.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE.get())){
                     int effectLvl = ((PlayerEntity )event.getSource().getTrueSource()).getActivePotionEffect(EffectRegistry.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE.get()).getAmplifier()+1;
                     event.setAmount((float)(event.getAmount()*(1+effectLvl*0.25)));
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void doCleanMiraculousEscapeSoundFX(PotionEvent.PotionExpiryEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity){
-                if(event.getPotionEffect().getPotion().equals(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())){
-                    //Play Sound Effect
-                        Networking.INSTANCE.send(
-                                PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getEntityLiving()
-                                ),
-                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT,false));
                 }
             }
         }

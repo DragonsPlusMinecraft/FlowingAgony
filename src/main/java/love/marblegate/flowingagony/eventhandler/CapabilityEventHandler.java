@@ -4,7 +4,6 @@ package love.marblegate.flowingagony.eventhandler;
 import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -34,12 +33,6 @@ public class CapabilityEventHandler {
                                     cap.decrease(MathHelper.floor(cap.get()));
                                 }
                             }
-                            //Sync to Client
-                            Networking.INSTANCE.send(
-                                    PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) (event.getSource().getTrueSource())
-                                    ),
-                                    new AbnormalJoySyncPacket(cap.get()));
                         }
                 );
             }

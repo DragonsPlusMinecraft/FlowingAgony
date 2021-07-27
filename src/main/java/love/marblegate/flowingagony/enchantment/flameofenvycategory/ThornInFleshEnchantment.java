@@ -33,11 +33,6 @@ public class ThornInFleshEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.EYESORE.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.THORN_IN_FLESH.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.THORN_IN_FLESH.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

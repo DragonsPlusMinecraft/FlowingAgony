@@ -38,11 +38,6 @@ public class EyesoreEnchantment extends Enchantment {
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.EYESORE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.EYESORE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

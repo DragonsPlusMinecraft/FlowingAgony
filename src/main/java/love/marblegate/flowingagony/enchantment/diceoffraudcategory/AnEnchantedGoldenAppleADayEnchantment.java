@@ -28,12 +28,6 @@ public class AnEnchantedGoldenAppleADayEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get();
     }

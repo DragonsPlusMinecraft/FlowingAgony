@@ -38,11 +38,6 @@ public class TooResentfulToDieEnchantment extends Enchantment{
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.TOO_RESENTFUL_TO_DIE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.TOO_RESENTFUL_TO_DIE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

@@ -27,13 +27,6 @@ public class BackAndFillEnchantment extends Enchantment{
         return 3;
     }
 
-
-    @Override
-    public boolean canVillagerTrade() { return Config.BACK_AND_FILL.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.BACK_AND_FILL.get(); }
-
     @Override
     public boolean isAllowedOnBooks() {
         return Config.BACK_AND_FILL.get();

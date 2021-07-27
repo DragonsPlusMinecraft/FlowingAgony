@@ -34,11 +34,6 @@ public class InsanePoetEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.AGONY_SCREAMER.get() && p_77326_1_ != Enchantments.POWER && p_77326_1_ != Enchantments.PUNCH;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.INSANE_POET.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.INSANE_POET.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

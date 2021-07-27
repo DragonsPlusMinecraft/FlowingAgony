@@ -38,11 +38,6 @@ public class ResentfulSoulEnchantment extends Enchantment{
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.RESENTFUL_SOUL.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.RESENTFUL_SOUL.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

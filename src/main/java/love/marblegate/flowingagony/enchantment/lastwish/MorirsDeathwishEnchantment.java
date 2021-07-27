@@ -43,12 +43,6 @@ public class MorirsDeathwishEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MORIRS_DEATHWISH.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.MORIRS_DEATHWISH.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.MORIRS_DEATHWISH.get();
     }

@@ -34,12 +34,6 @@ public class PerceivedMaliceEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PERCEIVED_MALICE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PERCEIVED_MALICE.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.PERCEIVED_MALICE.get();
     }

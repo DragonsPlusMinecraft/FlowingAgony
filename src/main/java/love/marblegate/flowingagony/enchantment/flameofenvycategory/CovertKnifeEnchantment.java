@@ -27,11 +27,6 @@ public class CovertKnifeEnchantment extends Enchantment {
         return 3;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.COVERT_KNIFE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.COVERT_KNIFE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

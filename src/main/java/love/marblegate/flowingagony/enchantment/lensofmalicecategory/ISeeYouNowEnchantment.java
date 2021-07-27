@@ -28,12 +28,6 @@ public class ISeeYouNowEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.I_SEE_YOU_NOW.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.I_SEE_YOU_NOW.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.I_SEE_YOU_NOW.get();
     }

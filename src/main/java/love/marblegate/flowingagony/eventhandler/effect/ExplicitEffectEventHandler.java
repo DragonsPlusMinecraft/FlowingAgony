@@ -2,7 +2,6 @@ package love.marblegate.flowingagony.eventhandler.effect;
 
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
@@ -47,22 +46,6 @@ public class ExplicitEffectEventHandler {
                     int potionLvl = ((PlayerEntity) (event.getSource().getTrueSource())).getActivePotionEffect(EffectRegistry.EXTREME_HATRED.get()).getAmplifier()+1;
                     if(event.getAmount()*(1+potionLvl)>=event.getEntityLiving().getHealth()){
                         ((PlayerEntity)(event.getSource().getTrueSource())).removePotionEffect(EffectRegistry.EXTREME_HATRED.get());
-                        //Remove Sound Effect If Killing Action Is Confirmed
-                        Networking.INSTANCE.send(
-                                PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getSource().getTrueSource()
-                                ),
-                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE,false));
-                        Networking.INSTANCE.send(
-                                PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getSource().getTrueSource()
-                                ),
-                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE,false));
-                        Networking.INSTANCE.send(
-                                PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getSource().getTrueSource()
-                                ),
-                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE,false));
                     }
                     event.setAmount(event.getAmount()*(1+potionLvl));
                 }

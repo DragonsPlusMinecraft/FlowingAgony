@@ -38,11 +38,6 @@ public class ShockTherapyEnchantment extends Enchantment {
                 && p_77326_1_ != Enchantments.SMITE;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.SHOCK_THERAPY.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.SHOCK_THERAPY.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

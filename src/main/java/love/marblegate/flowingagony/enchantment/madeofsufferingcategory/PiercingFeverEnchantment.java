@@ -36,12 +36,6 @@ public class PiercingFeverEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PIERCING_FEVER.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PIERCING_FEVER.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.PIERCING_FEVER.get();
     }

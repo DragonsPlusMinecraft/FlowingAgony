@@ -28,12 +28,6 @@ public class OutrageoutSpiritEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.OUTRAGEOUS_SPIRIT.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.OUTRAGEOUS_SPIRIT.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.OUTRAGEOUS_SPIRIT.get();
     }

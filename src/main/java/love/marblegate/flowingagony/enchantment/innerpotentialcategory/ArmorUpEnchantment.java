@@ -27,11 +27,6 @@ public class ArmorUpEnchantment extends Enchantment {
         return 3;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.ARMOR_UP.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.ARMOR_UP.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

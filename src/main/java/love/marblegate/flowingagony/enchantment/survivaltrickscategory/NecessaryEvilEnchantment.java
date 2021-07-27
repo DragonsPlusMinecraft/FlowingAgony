@@ -33,11 +33,6 @@ public class NecessaryEvilEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.SURVIVAL_SHORTCUT.get() && p_77326_1_ != EnchantmentRegistry.SURVIVAL_RUSE.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.NECESSARY_EVIL.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.NECESSARY_EVIL.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

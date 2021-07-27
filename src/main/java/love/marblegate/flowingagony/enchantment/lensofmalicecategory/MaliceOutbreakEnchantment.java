@@ -28,12 +28,6 @@ public class MaliceOutbreakEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MALICE_OUTBREAK.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.MALICE_OUTBREAK.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.MALICE_OUTBREAK.get();
     }

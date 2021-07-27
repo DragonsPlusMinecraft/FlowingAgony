@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.monster.*;
-import net.minecraft.entity.monster.piglin.PiglinEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.passive.horse.SkeletonHorseEntity;
@@ -37,16 +36,14 @@ public class EntityUtil {
 
     public static boolean isHostile(LivingEntity livingEntity,boolean restrictMode){
         if(restrictMode){
-            return (livingEntity instanceof MonsterEntity && !(livingEntity instanceof PiglinEntity) && !(livingEntity instanceof SpiderEntity) && !(livingEntity instanceof EndermanEntity)) ||
+            return (livingEntity instanceof MonsterEntity && !(livingEntity instanceof ZombiePigmanEntity) && !(livingEntity instanceof SpiderEntity) && !(livingEntity instanceof EndermanEntity)) ||
                     livingEntity instanceof SlimeEntity ||
                     livingEntity instanceof FlyingEntity ||
-                    livingEntity instanceof HoglinEntity ||
                     livingEntity instanceof EnderDragonEntity;
         }else{
             return livingEntity instanceof MonsterEntity ||
                     livingEntity instanceof SlimeEntity ||
                     livingEntity instanceof FlyingEntity ||
-                    livingEntity instanceof HoglinEntity ||
                     livingEntity instanceof EnderDragonEntity;
         }
     }
@@ -55,8 +52,7 @@ public class EntityUtil {
         if(restrictMode){
             return  isNeutral(livingEntity,false) ||
                     livingEntity instanceof EndermanEntity ||
-                    livingEntity instanceof PiglinEntity ||
-                    livingEntity instanceof ZombifiedPiglinEntity ||
+                    livingEntity instanceof ZombiePigmanEntity ||
                     livingEntity instanceof SpiderEntity;
         } else {
             return livingEntity instanceof BeeEntity ||
@@ -78,7 +74,7 @@ public class EntityUtil {
     }
 
     public static boolean isRareUndead(LivingEntity livingEntity){
-        return livingEntity instanceof PhantomEntity || livingEntity instanceof WitherSkeletonEntity || livingEntity instanceof StrayEntity || livingEntity instanceof GhastEntity || livingEntity instanceof ZoglinEntity;
+        return livingEntity instanceof PhantomEntity || livingEntity instanceof WitherSkeletonEntity || livingEntity instanceof StrayEntity || livingEntity instanceof GhastEntity || livingEntity instanceof ZombiePigmanEntity;
     }
 
     public static boolean isPassiveUndead(LivingEntity livingEntity){
@@ -86,7 +82,7 @@ public class EntityUtil {
     }
 
     public static boolean supportHeadDrop(LivingEntity livingEntity){
-        return  ((livingEntity instanceof ZombieEntity) && !(livingEntity instanceof ZombieVillagerEntity) && !(livingEntity instanceof DrownedEntity) && !(livingEntity instanceof ZombifiedPiglinEntity) && !(livingEntity instanceof HuskEntity)) ||
+        return  ((livingEntity instanceof ZombieEntity) && !(livingEntity instanceof ZombieVillagerEntity) && !(livingEntity instanceof DrownedEntity) && !(livingEntity instanceof HuskEntity)) ||
                 livingEntity instanceof SkeletonEntity || livingEntity instanceof CreeperEntity ||
                 livingEntity instanceof EnderDragonEntity || livingEntity instanceof WitherSkeletonEntity;
     }

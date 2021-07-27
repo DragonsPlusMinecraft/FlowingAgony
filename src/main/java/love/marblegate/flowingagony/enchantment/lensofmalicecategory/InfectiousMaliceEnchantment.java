@@ -33,12 +33,6 @@ public class InfectiousMaliceEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.INFECTIOUS_MALICE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.INFECTIOUS_MALICE.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.INFECTIOUS_MALICE.get();
     }

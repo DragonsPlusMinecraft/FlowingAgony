@@ -28,12 +28,6 @@ public class FreshRevengeEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.FRESH_REVENGE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.FRESH_REVENGE.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.FRESH_REVENGE.get();
     }

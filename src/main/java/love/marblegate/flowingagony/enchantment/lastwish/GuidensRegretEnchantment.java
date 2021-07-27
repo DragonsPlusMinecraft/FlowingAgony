@@ -42,11 +42,6 @@ public class GuidensRegretEnchantment extends Enchantment {
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.GUIDENS_REGRET.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.GUIDENS_REGRET.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

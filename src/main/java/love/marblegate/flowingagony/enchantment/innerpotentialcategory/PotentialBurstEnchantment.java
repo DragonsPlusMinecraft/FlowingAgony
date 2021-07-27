@@ -27,11 +27,6 @@ public class PotentialBurstEnchantment extends Enchantment {
         return 3;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.POTENTIAL_BURST.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.POTENTIAL_BURST.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

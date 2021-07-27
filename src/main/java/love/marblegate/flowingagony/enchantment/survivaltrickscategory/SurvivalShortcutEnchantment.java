@@ -33,11 +33,6 @@ public class SurvivalShortcutEnchantment extends Enchantment {
         return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.SURVIVAL_RUSE.get() && p_77326_1_ != EnchantmentRegistry.NECESSARY_EVIL.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.SURVIVAL_SHORTCUT.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.SURVIVAL_SHORTCUT.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

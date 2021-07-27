@@ -4,7 +4,6 @@ import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability
 import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
@@ -146,15 +145,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     private static void grandAbnormalJoyPoint(LivingDamageEvent event, int enchantLvl) {
         LazyOptional<IAbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
         pointCap.ifPresent(
-                cap-> {
-                    cap.add(event.getAmount()*(0.25F*(1+enchantLvl)));
-                    //Sync to Client
-                    Networking.INSTANCE.send(
-                            PacketDistributor.PLAYER.with(
-                                    () -> (ServerPlayerEntity) (event.getEntityLiving())
-                            ),
-                            new AbnormalJoySyncPacket(cap.get()));
-                }
+                cap-> cap.add(event.getAmount()*(0.25F*(1+enchantLvl)))
         );
     }
 

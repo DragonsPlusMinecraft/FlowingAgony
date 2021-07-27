@@ -27,11 +27,6 @@ public class TricksterEnchantment extends Enchantment {
         return 2;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.TRICKSTER.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.TRICKSTER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

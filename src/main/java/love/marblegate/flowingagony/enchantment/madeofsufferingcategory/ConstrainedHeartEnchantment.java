@@ -36,12 +36,6 @@ public class ConstrainedHeartEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.CONSTRAINED_HEART.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.CONSTRAINED_HEART.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.CONSTRAINED_HEART.get();
     }

@@ -35,11 +35,6 @@ public class PrayerOfPainEnchantment extends Enchantment {
                 != EnchantmentRegistry.DROWNING_PHOBIA.get();
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.PRAYER_OF_PAIN.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.PRAYER_OF_PAIN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

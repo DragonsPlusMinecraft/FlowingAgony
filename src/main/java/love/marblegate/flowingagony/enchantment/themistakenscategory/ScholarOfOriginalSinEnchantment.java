@@ -39,12 +39,6 @@ public class ScholarOfOriginalSinEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.SCHOLAR_OF_ORIGINAL_SIN.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.SCHOLAR_OF_ORIGINAL_SIN.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.SCHOLAR_OF_ORIGINAL_SIN.get();
     }

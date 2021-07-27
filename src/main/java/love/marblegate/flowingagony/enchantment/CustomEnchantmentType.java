@@ -1,8 +1,6 @@
 package love.marblegate.flowingagony.enchantment;
 
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.IVanishable;
 import net.minecraft.item.*;
 
 import static net.minecraft.enchantment.EnchantmentType.BREAKABLE;
@@ -13,7 +11,7 @@ public class CustomEnchantmentType {
     public static final EnchantmentType SWORD_ARMOR_AND_TOOL = EnchantmentType.create("flowingagony:SWORD_ARMOR_AND_TOOL", Item-> Item instanceof ArmorItem || Item instanceof TieredItem);
     public static final EnchantmentType BOW_AND_CROSSBOW = EnchantmentType.create("flowingagony:BOW_AND_CROSSBOW", Item-> Item instanceof ShootableItem);
     public static final EnchantmentType PICKAXE = EnchantmentType.create("flowingagony:PICKAXE", Item-> Item instanceof PickaxeItem);
-    public static final EnchantmentType ALMOST_EVERYTHING = EnchantmentType.create("flowingagony:ALMOST_EVERYTHING", Item -> Item instanceof IVanishable || Block.getBlockFromItem(Item) instanceof IVanishable || BREAKABLE.canEnchantItem(Item) || WEARABLE.canEnchantItem(Item));
+    public static final EnchantmentType ALMOST_EVERYTHING = EnchantmentType.create("flowingagony:ALMOST_EVERYTHING", Item -> BREAKABLE.canEnchantItem(Item) || WEARABLE.canEnchantItem(Item));
 
     public static void addToItemGroup() {
         EnchantmentType[] TOOL_TYPES = new EnchantmentType[ItemGroup.TOOLS.getRelevantEnchantmentTypes().length + 4];

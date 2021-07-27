@@ -27,11 +27,6 @@ public class SourceOfEnvyEnchantment extends Enchantment {
         return 5;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.SOURCE_OF_ENVY.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.SOURCE_OF_ENVY.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

@@ -37,13 +37,6 @@ public class OriginalSinErosionEnchantment extends Enchantment{
     public boolean isTreasureEnchantment() {
         return true;
     }
-
-    @Override
-    public boolean canVillagerTrade() { return Config.ORIGINAL_SIN_EROSION.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.ORIGINAL_SIN_EROSION.get(); }
-
     @Override
     public boolean isAllowedOnBooks() {
         return Config.ORIGINAL_SIN_EROSION.get();

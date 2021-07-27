@@ -34,12 +34,6 @@ public class VengeanceEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.VENGEANCE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.VENGEANCE.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.VENGEANCE.get();
     }

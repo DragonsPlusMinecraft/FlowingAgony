@@ -32,11 +32,6 @@ public class HatredBloodlineEnchantment extends Enchantment{
         return true;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.HATRED_BLOODLINE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.HATRED_BLOODLINE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

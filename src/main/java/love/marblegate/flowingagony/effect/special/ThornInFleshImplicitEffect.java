@@ -21,7 +21,6 @@ public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
                 } else {
                     entityLivingBaseIn.setMotion(0,entityLivingBaseIn.getMotion().y,0);
                     entityLivingBaseIn.velocityChanged=true;
-                    entityLivingBaseIn.markPositionDirty();
                 }
             }
         }

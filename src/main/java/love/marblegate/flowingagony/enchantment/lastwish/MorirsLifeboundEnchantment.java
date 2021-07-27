@@ -43,12 +43,6 @@ public class MorirsLifeboundEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MORIRS_LIFEBOUND.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.MORIRS_LIFEBOUND.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.MORIRS_LIFEBOUND.get();
     }

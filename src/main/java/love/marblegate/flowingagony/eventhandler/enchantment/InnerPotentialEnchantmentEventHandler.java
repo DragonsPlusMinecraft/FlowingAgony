@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
@@ -116,14 +115,6 @@ public class InnerPotentialEnchantmentEventHandler {
             if (event.getEntityLiving().getHealth() < 4f) {
                 if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.MIRACULOUS_ESCAPE.get(), EquipmentSlotType.FEET, EnchantmentUtil.ItemEncCalOp.GENERAL)==1) {
                     if(!((PlayerEntity)(event.getEntityLiving())).isPotionActive(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())){
-                        //Play Sound Effect
-                        if (!((PlayerEntity)(event.getEntityLiving())).world.isRemote) {
-                            Networking.INSTANCE.send(
-                                    PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) (event.getEntityLiving())
-                                    ),
-                                    new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT,true));
-                        }
                         ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get(),40));
                         ((PlayerEntity)(event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get(),200));
                     }

@@ -27,11 +27,6 @@ public class MiraculousEscapeEnchantment extends Enchantment {
         return 1;
     }
 
-    @Override
-    public boolean canVillagerTrade() { return Config.MIRACULOUS_ESCAPE.get(); }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.MIRACULOUS_ESCAPE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {

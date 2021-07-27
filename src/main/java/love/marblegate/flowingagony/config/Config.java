@@ -4,7 +4,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Config {
     public static final ForgeConfigSpec ACT_CONFIG;
-    public static final ForgeConfigSpec.BooleanValue HYBRID_SERVER_USER;
 
     public static final ForgeConfigSpec.BooleanValue VILLAGER_SAFE_MODE;
 
@@ -34,7 +33,6 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue PERCEIVED_MALICE;
     public static final ForgeConfigSpec.BooleanValue VENGEANCE;
     public static final ForgeConfigSpec.BooleanValue AGONY_SCREAMER;
-    public static final ForgeConfigSpec.BooleanValue CUTTING_WATERMELON_DREAM;
     public static final ForgeConfigSpec.BooleanValue INSANE_POET;
     public static final ForgeConfigSpec.BooleanValue PAPER_BRAIN;
     public static final ForgeConfigSpec.BooleanValue SHOCK_THERAPY;
@@ -64,7 +62,6 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue ORIGINAL_SIN_EROSION;
     public static final ForgeConfigSpec.BooleanValue GUIDENS_REGRET;
     public static final ForgeConfigSpec.BooleanValue LAST_SWEET_DREAM;
-    public static final ForgeConfigSpec.BooleanValue NIMBLE_FINGER;
     public static final ForgeConfigSpec.BooleanValue CAREFULLY_IDENTIFIED;
     public static final ForgeConfigSpec.BooleanValue DESTRUCTION_WORSHIP;
 
@@ -77,19 +74,8 @@ public class Config {
                 "and \"Survival Shortcut\", \"Necessary Evil\", \"Pilferage Creed\" cannot damage villager.").define("VILLAGER_SAFE_MODE",false);
         ACT_BUILDER.pop();
 
-        ACT_BUILDER.push("compatibility");
-        HYBRID_SERVER_USER = ACT_BUILDER.comment(
-                "-------------IMPORTANT!-------------",
-                "If you are using hybrid server and encountered problem with anvil, please set this config option to \"true\".",
-                "NOTICE: If you are using ARCLIGHT server version below 1.0.19, you must set this to \"true\"",
-                "Enchantment \"Nimble Finger\" will be complete disabled,",
-                "which means it cannot be obtained and applied on survival mode and it won't function.",
-                "It is because hybrid server are changing forge's event hook and it does cause serious bugs sometimes.",
-                "We are not responsible to fixing bug caused hybrid server, but here we still offer a temporary solution.").define("HYBRID_SERVER_USER",false);
-        ACT_BUILDER.pop();
-
         ACT_BUILDER.comment("Enchantment Acquirable Setting",
-                "If you set certain item to \"false\", the relevant enchantment will become not acquirable to survival mode player.",
+                "If you set certain item to \"false\", the relevant enchantment will become not acquirable by enchantment table.",
                 "Enchantment which is acquirable is still functional.").push("acquirable");
         AN_ENCHANTED_GOLDEN_APPLE_A_DAY = ACT_BUILDER.define("AN_ENCHANTED_GOLDEN_APPLE_A_DAY",true);
         DEATH_PUNK = ACT_BUILDER.define("DEATH_PUNK",true);
@@ -106,7 +92,6 @@ public class Config {
         DIRTY_MONEY = ACT_BUILDER.define("DIRTY_MONEY",true);
         PILFERAGE_CREED = ACT_BUILDER.define("PILFERAGE_CREED",true);
         CAREFULLY_IDENTIFIED = ACT_BUILDER.define("CAREFULLY_IDENTIFIED",true);
-        NIMBLE_FINGER = ACT_BUILDER.define("NIMBLE_FINGER",true);
         REGULAR_CUSTOMER_PROGRAM = ACT_BUILDER.define("REGULAR_CUSTOMER_PROGRAM",true);
         ARMOR_UP = ACT_BUILDER.define("ARMOR_UP",true);
         FRIVOLOUS_STEP = ACT_BUILDER.define("FRIVOLOUS_STEP",true);
@@ -120,7 +105,6 @@ public class Config {
         VENGEANCE = ACT_BUILDER.define("VENGEANCE",true);
         BACK_AND_FILL = ACT_BUILDER.define("BACK_AND_FILL",true);
         AGONY_SCREAMER = ACT_BUILDER.define("AGONY_SCREAMER",true);
-        CUTTING_WATERMELON_DREAM = ACT_BUILDER.define("CUTTING_WATERMELON_DREAM",true);
         INSANE_POET = ACT_BUILDER.define("INSANE_POET",true);
         PAPER_BRAIN = ACT_BUILDER.define("PAPER_BRAIN",true);
         SHOCK_THERAPY = ACT_BUILDER.define("SHOCK_THERAPY",true);

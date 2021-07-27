@@ -18,22 +18,18 @@ public class ListenToMeSingingEffect extends Effect {
             if(duration%40>25){
                 entityLivingBaseIn.setMotion(0,0.41,0);
                 entityLivingBaseIn.velocityChanged=true;
-                entityLivingBaseIn.markPositionDirty();
             }
             else if(duration%40>7){
                 entityLivingBaseIn.setMotion(0,0.0,0);
                 entityLivingBaseIn.velocityChanged=true;
-                entityLivingBaseIn.markPositionDirty();
             }
             else if(duration%40>0){
                 entityLivingBaseIn.setMotion(0,-0.79,0);
                 entityLivingBaseIn.velocityChanged=true;
-                entityLivingBaseIn.markPositionDirty();
             }
             else if(duration%40==0){
                 entityLivingBaseIn.setMotion(0,0,0);
                 entityLivingBaseIn.velocityChanged=true;
-                entityLivingBaseIn.markPositionDirty();
                 float damage = entityLivingBaseIn.getMaxHealth()*0.2f+entityLivingBaseIn.getHealth()*0.5f;
                 damage = Math.min(getMaxDamage(amplifier),damage);
                 damage = Math.max(getMinDamage(amplifier),damage);

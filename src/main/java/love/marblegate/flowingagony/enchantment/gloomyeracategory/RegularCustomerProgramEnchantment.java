@@ -33,12 +33,6 @@ public class RegularCustomerProgramEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return false; }
-
-    @Override
-    public boolean canGenerateInLoot() { return Config.REGULAR_CUSTOMER_PROGRAM.get(); }
-
-    @Override
     public boolean isAllowedOnBooks() {
         return Config.REGULAR_CUSTOMER_PROGRAM.get();
     }

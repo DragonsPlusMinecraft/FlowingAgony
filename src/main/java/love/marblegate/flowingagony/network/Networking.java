@@ -24,34 +24,6 @@ public class Networking {
         );
         INSTANCE.registerMessage(
                 nextID(),
-                PlaySoundPacket.class,
-                PlaySoundPacket::toBytes,
-                PlaySoundPacket::new,
-                PlaySoundPacket::handle
-        );
-        INSTANCE.registerMessage(
-                nextID(),
-                ParticleEffectPacket.class,
-                ParticleEffectPacket::toBytes,
-                ParticleEffectPacket::new,
-                ParticleEffectPacket::handle
-        );
-        INSTANCE.registerMessage(
-                nextID(),
-                PlaySoundWIthLocationPacket.class,
-                PlaySoundWIthLocationPacket::toBytes,
-                PlaySoundWIthLocationPacket::new,
-                PlaySoundWIthLocationPacket::handle
-        );
-        INSTANCE.registerMessage(
-                nextID(),
-                AbnormalJoySyncPacket.class,
-                AbnormalJoySyncPacket::toBytes,
-                AbnormalJoySyncPacket::new,
-                AbnormalJoySyncPacket::handle
-        );
-        INSTANCE.registerMessage(
-                nextID(),
                 RemoveEffectSyncToClientPacket.class,
                 RemoveEffectSyncToClientPacket::toBytes,
                 RemoveEffectSyncToClientPacket::new,
