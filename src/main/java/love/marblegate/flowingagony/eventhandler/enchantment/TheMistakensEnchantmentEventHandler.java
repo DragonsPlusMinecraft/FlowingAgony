@@ -261,13 +261,13 @@ public class TheMistakensEnchantmentEventHandler {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void doScholarOfOriginalSinEnchantmentEvent_extraEXP(PlayerXpEvent.PickupXp event){
         if(!event.getEntityLiving().world.isRemote()){
             if(event.getEntityLiving() instanceof PlayerEntity){
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.SCHOLAR_OF_ORIGINAL_SIN.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
-                    event.getOrb().xpValue = (int) (event.getOrb().xpValue * (1.35 + 0.15 * enchantmentLvl));
+                    event.getPlayer().giveExperiencePoints((int) (event.getOrb().xpValue * (0.35 + 0.15 * enchantmentLvl)));
                 }
             }
         }
@@ -286,13 +286,13 @@ public class TheMistakensEnchantmentEventHandler {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void doOriginalSinErosionEnchantmentEvent_extraEXP(PlayerXpEvent.PickupXp event){
         if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity){
+            if(event.getEntityLiving() instanceof PlayerEntity && !event.isCanceled()){
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.ORIGINAL_SIN_EROSION.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if(enchantmentLvl!=0){
-                    event.getOrb().xpValue = (int) (event.getOrb().xpValue * (1.05 + 0.05 * enchantmentLvl));
+                    event.getPlayer().giveExperiencePoints((int) (event.getOrb().xpValue * (0.05 + 0.05 * enchantmentLvl)));
                 }
             }
         }

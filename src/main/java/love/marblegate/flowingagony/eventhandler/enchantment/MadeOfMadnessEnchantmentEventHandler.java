@@ -7,15 +7,21 @@ import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
+import net.minecraft.loot.*;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -86,7 +92,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
                     List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself(event.getPlayer(),12,2,
                             livingEntity -> EntityUtil.isHostile(livingEntity,false));
                     if(!targets.isEmpty()){
-                        int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),Enchantments.FORTUNE,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
+                        int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                         int unbreakingEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(),Enchantments.UNBREAKING,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                         float damage = 0;
                         if(event.getPlayer().getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem() instanceof ToolItem){
@@ -98,7 +104,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
                             damage *= (4+event.getPlayer().getRNG().nextDouble()*2);
                         else damage *= (2+event.getPlayer().getRNG().nextDouble());
                         for(LivingEntity target: targets) {
-                            target.attackEntityFrom(CustomDamageSource.CUTTING_WATERMELON_DREAM, damage);
+                            target.attackEntityFrom(CustomDamageSource.causeCuttingWaterMelonDream(event.getPlayer()), damage);
                         }
                         int damageAppliedToItem = 5;
                         if(unbreakingEnchantmentLvl!=0){
@@ -114,15 +120,15 @@ public class MadeOfMadnessEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void onCuttingWatermelonDreamEnchantmentEvent_dropHead(LivingDeathEvent event){
+    public static void onCuttingWatermelonDreamEnchantmentEvent_dropHeadAndExtraLoot(LivingDeathEvent event){
         if(!event.getEntityLiving().world.isRemote && !event.isCanceled()
-                && event.getSource()==CustomDamageSource.CUTTING_WATERMELON_DREAM
+                && event.getSource().getDamageType().equals("flowingagony.cutting_watermelon_dream")
                 && event.getSource().getTrueSource() instanceof PlayerEntity
                 && EntityUtil.supportHeadDrop(event.getEntityLiving())){
             if(EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.CUTTING_WATERMELON_DREAM.get(),EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
                 int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),Enchantments.SILK_TOUCH,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),Enchantments.FORTUNE,EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                if(silkTouchEnchantmentLvl==1){
+                if(silkTouchEnchantmentLvl>0){
                     double dropHeadRate =  0.025 + 0.01 * fortuneEnchantmentLvl;
                     if(Math.random()<dropHeadRate){
                         if(event.getEntityLiving() instanceof ZombieEntity)
@@ -137,8 +143,35 @@ public class MadeOfMadnessEnchantmentEventHandler {
                             InventoryHelper.spawnItemStack(event.getEntityLiving().world,event.getEntityLiving().getPosX(),event.getEntityLiving().getPosY(),event.getEntityLiving().getPosZ(), Items.DRAGON_HEAD.getDefaultInstance());
                     }
                 }
+                if(fortuneEnchantmentLvl>0){
+                    dropLoot(event.getEntityLiving(), (PlayerEntity) event.getSource().getTrueSource(),DamageSource.causePlayerDamage((PlayerEntity) event.getSource().getTrueSource()),fortuneEnchantmentLvl);
+                }
             }
         }
     }
+
+    protected static void dropLoot(LivingEntity livingEntity,PlayerEntity playerEntity,DamageSource damageSourceIn,int lootLevel) {
+        ResourceLocation resourcelocation = livingEntity.getLootTableResourceLocation();
+        LootTable loottable = livingEntity.world.getServer().getLootTableManager().getLootTableFromLocation(resourcelocation);
+        LootContext.Builder lootcontext$builder = getLootContextBuilder(livingEntity,playerEntity, damageSourceIn);
+        LootContext ctx = lootcontext$builder.build(LootParameterSets.ENTITY);
+        loottable.generate(ctx).forEach( itemStack -> {
+            itemStack = recalculateLootByLootingLevel(itemStack,ctx,lootLevel);
+            livingEntity.entityDropItem(itemStack);
+        });
+    }
+
+    public static ItemStack recalculateLootByLootingLevel(ItemStack stack,LootContext context, int lootLevel) {
+        float f = (float)lootLevel * RandomValueRange.of(0F,1F).generateFloat(context.getRandom());
+        stack.grow(Math.round(f));
+        return stack;
+    }
+
+    protected static LootContext.Builder getLootContextBuilder(LivingEntity livingEntity,PlayerEntity playerEntity, DamageSource damageSourceIn) {
+        LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)livingEntity.world)).withRandom(livingEntity.getRNG()).withParameter(LootParameters.THIS_ENTITY, livingEntity).withParameter(LootParameters.ORIGIN, livingEntity.getPositionVec()).withParameter(LootParameters.DAMAGE_SOURCE, damageSourceIn).withNullableParameter(LootParameters.KILLER_ENTITY, damageSourceIn.getTrueSource()).withNullableParameter(LootParameters.DIRECT_KILLER_ENTITY, damageSourceIn.getImmediateSource());
+        lootcontext$builder = lootcontext$builder.withParameter(LootParameters.LAST_DAMAGE_PLAYER, playerEntity).withLuck(playerEntity.getLuck());
+        return lootcontext$builder;
+    }
+
 
 }
