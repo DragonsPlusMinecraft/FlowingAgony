@@ -2,8 +2,11 @@ package love.marblegate.flowingagony.network;
 
 import love.marblegate.flowingagony.network.packet.*;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+
+import java.util.Optional;
 
 
 public class Networking {
@@ -27,35 +30,40 @@ public class Networking {
                 PlaySoundPacket.class,
                 PlaySoundPacket::toBytes,
                 PlaySoundPacket::new,
-                PlaySoundPacket::handle
+                PlaySoundPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         INSTANCE.registerMessage(
                 nextID(),
                 ParticleEffectPacket.class,
                 ParticleEffectPacket::toBytes,
                 ParticleEffectPacket::new,
-                ParticleEffectPacket::handle
+                ParticleEffectPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         INSTANCE.registerMessage(
                 nextID(),
                 PlaySoundWIthLocationPacket.class,
                 PlaySoundWIthLocationPacket::toBytes,
                 PlaySoundWIthLocationPacket::new,
-                PlaySoundWIthLocationPacket::handle
+                PlaySoundWIthLocationPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         INSTANCE.registerMessage(
                 nextID(),
                 AbnormalJoySyncPacket.class,
                 AbnormalJoySyncPacket::toBytes,
                 AbnormalJoySyncPacket::new,
-                AbnormalJoySyncPacket::handle
+                AbnormalJoySyncPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         INSTANCE.registerMessage(
                 nextID(),
                 RemoveEffectSyncToClientPacket.class,
                 RemoveEffectSyncToClientPacket::toBytes,
                 RemoveEffectSyncToClientPacket::new,
-                RemoveEffectSyncToClientPacket::handle
+                RemoveEffectSyncToClientPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
     }
 }
