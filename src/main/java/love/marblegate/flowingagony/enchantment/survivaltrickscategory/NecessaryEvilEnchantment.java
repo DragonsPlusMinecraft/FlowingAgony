@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.survivaltrickscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -34,19 +34,19 @@ public class NecessaryEvilEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.NECESSARY_EVIL.get(); }
+    public boolean canVillagerTrade() { return Configuration.NECESSARY_EVIL.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.NECESSARY_EVIL.get(); }
+    public boolean canGenerateInLoot() { return Configuration.NECESSARY_EVIL.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.NECESSARY_EVIL.get();
+        return Configuration.NECESSARY_EVIL.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.NECESSARY_EVIL.get())
+        if(Configuration.NECESSARY_EVIL.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

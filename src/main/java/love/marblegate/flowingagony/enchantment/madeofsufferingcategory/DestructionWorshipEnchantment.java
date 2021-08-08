@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofsufferingcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
@@ -36,19 +36,19 @@ public class DestructionWorshipEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PIERCING_FEVER.get(); }
+    public boolean canVillagerTrade() { return Configuration.PIERCING_FEVER.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PIERCING_FEVER.get(); }
+    public boolean canGenerateInLoot() { return Configuration.PIERCING_FEVER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PIERCING_FEVER.get();
+        return Configuration.PIERCING_FEVER.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PIERCING_FEVER.get())
+        if(Configuration.PIERCING_FEVER.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class ISeeYouNowEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.I_SEE_YOU_NOW.get(); }
+    public boolean canVillagerTrade() { return Configuration.I_SEE_YOU_NOW.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.I_SEE_YOU_NOW.get(); }
+    public boolean canGenerateInLoot() { return Configuration.I_SEE_YOU_NOW.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.I_SEE_YOU_NOW.get();
+        return Configuration.I_SEE_YOU_NOW.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.I_SEE_YOU_NOW.get())
+        if(Configuration.I_SEE_YOU_NOW.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

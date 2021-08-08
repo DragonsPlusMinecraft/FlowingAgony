@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -28,19 +28,19 @@ public class SavorTheTastedEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.SAVOR_THE_TASTED.get(); }
+    public boolean canVillagerTrade() { return Configuration.SAVOR_THE_TASTED.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.SAVOR_THE_TASTED.get(); }
+    public boolean canGenerateInLoot() { return Configuration.SAVOR_THE_TASTED.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.SAVOR_THE_TASTED.get();
+        return Configuration.SAVOR_THE_TASTED.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.SAVOR_THE_TASTED.get())
+        if(Configuration.SAVOR_THE_TASTED.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

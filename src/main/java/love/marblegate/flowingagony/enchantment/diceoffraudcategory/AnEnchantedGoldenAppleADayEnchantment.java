@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class AnEnchantedGoldenAppleADayEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(); }
+    public boolean canVillagerTrade() { return Configuration.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(); }
+    public boolean canGenerateInLoot() { return Configuration.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get();
+        return Configuration.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get())
+        if(Configuration.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

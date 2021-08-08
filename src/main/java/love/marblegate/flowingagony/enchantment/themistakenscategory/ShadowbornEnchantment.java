@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class ShadowbornEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.SHADOWBORN.get(); }
+    public boolean canVillagerTrade() { return Configuration.SHADOWBORN.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.SHADOWBORN.get(); }
+    public boolean canGenerateInLoot() { return Configuration.SHADOWBORN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.SHADOWBORN.get();
+        return Configuration.SHADOWBORN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.SHADOWBORN.get())
+        if(Configuration.SHADOWBORN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -35,22 +35,22 @@ public class CleansingBeforeUsingEnchantment extends Enchantment {
 
     @Override
     public boolean canVillagerTrade() {
-        return Config.CLEANSING_BEFORE_USING.get();
+        return Configuration.CLEANSING_BEFORE_USING.get();
     }
 
     @Override
     public boolean canGenerateInLoot() {
-        return Config.CLEANSING_BEFORE_USING.get();
+        return Configuration.CLEANSING_BEFORE_USING.get();
     }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.CLEANSING_BEFORE_USING.get();
+        return Configuration.CLEANSING_BEFORE_USING.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.CLEANSING_BEFORE_USING.get())
+        if(Configuration.CLEANSING_BEFORE_USING.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.registry.EffectRegistry;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
@@ -16,7 +16,7 @@ public class FlowingAgony {
 
 
     public FlowingAgony(){
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.ACT_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.ACT_CONFIG);
 
         EnchantmentRegistry.ENCHANTMENT.register(FMLJavaModLoadingContext.get().getModEventBus());
         EffectRegistry.EFFECT.register(FMLJavaModLoadingContext.get().getModEventBus());

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -35,19 +35,19 @@ public class InsanePoetEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.INSANE_POET.get(); }
+    public boolean canVillagerTrade() { return Configuration.INSANE_POET.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.INSANE_POET.get(); }
+    public boolean canGenerateInLoot() { return Configuration.INSANE_POET.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.INSANE_POET.get();
+        return Configuration.INSANE_POET.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.INSANE_POET.get())
+        if(Configuration.INSANE_POET.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

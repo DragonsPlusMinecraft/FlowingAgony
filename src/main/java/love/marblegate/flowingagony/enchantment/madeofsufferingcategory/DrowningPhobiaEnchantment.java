@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofsufferingcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -36,19 +36,19 @@ public class DrowningPhobiaEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.DROWNING_PHOBIA.get(); }
+    public boolean canVillagerTrade() { return Configuration.DROWNING_PHOBIA.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.DROWNING_PHOBIA.get(); }
+    public boolean canGenerateInLoot() { return Configuration.DROWNING_PHOBIA.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.DROWNING_PHOBIA.get();
+        return Configuration.DROWNING_PHOBIA.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.DROWNING_PHOBIA.get())
+        if(Configuration.DROWNING_PHOBIA.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

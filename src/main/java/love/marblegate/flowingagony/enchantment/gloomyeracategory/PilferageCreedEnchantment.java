@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -36,16 +36,16 @@ public class PilferageCreedEnchantment extends Enchantment {
     public boolean canVillagerTrade() { return false; }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PILFERAGE_CREED.get(); }
+    public boolean canGenerateInLoot() { return Configuration.PILFERAGE_CREED.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PILFERAGE_CREED.get();
+        return Configuration.PILFERAGE_CREED.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PILFERAGE_CREED.get())
+        if(Configuration.PILFERAGE_CREED.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

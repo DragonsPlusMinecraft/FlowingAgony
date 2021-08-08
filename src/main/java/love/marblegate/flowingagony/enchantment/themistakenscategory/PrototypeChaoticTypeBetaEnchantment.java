@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class PrototypeChaoticTypeBetaEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get(); }
+    public boolean canVillagerTrade() { return Configuration.PROTOTYPE_CHAOTIC_TYPE_BETA.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get(); }
+    public boolean canGenerateInLoot() { return Configuration.PROTOTYPE_CHAOTIC_TYPE_BETA.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get();
+        return Configuration.PROTOTYPE_CHAOTIC_TYPE_BETA.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PROTOTYPE_CHAOTIC_TYPE_BETA.get())
+        if(Configuration.PROTOTYPE_CHAOTIC_TYPE_BETA.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

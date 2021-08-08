@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -42,16 +42,16 @@ public class DirtyMoneyEnchantment extends Enchantment {
     public boolean canVillagerTrade() { return false; }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.DIRTY_MONEY.get(); }
+    public boolean canGenerateInLoot() { return Configuration.DIRTY_MONEY.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.DIRTY_MONEY.get();
+        return Configuration.DIRTY_MONEY.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.DIRTY_MONEY.get())
+        if(Configuration.DIRTY_MONEY.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
@@ -175,7 +175,7 @@ public class TheMistakensEnchantmentEventHandler {
                 if(enchantmentLvl!=0){
                     if(event.getSource().getTrueSource() instanceof LivingEntity){
                         List<LivingEntity> targets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 8, 2,
-                                Config.VILLAGER_SAFE_MODE.get()?livingEntity -> !(livingEntity instanceof VillagerEntity) : x -> true);
+                                Configuration.VILLAGER_SAFE_MODE.get()? livingEntity -> !(livingEntity instanceof VillagerEntity) : x -> true);
                         if (!targets.isEmpty()) {
                             Random rand = event.getEntityLiving().getRNG();
                             for (LivingEntity target : targets) {

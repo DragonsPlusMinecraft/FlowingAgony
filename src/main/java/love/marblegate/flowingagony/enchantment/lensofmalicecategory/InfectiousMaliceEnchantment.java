@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -33,19 +33,19 @@ public class InfectiousMaliceEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.INFECTIOUS_MALICE.get(); }
+    public boolean canVillagerTrade() { return Configuration.INFECTIOUS_MALICE.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.INFECTIOUS_MALICE.get(); }
+    public boolean canGenerateInLoot() { return Configuration.INFECTIOUS_MALICE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.INFECTIOUS_MALICE.get();
+        return Configuration.INFECTIOUS_MALICE.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.INFECTIOUS_MALICE.get())
+        if(Configuration.INFECTIOUS_MALICE.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

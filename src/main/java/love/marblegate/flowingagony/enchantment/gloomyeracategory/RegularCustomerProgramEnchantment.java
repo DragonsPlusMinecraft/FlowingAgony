@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -36,16 +36,16 @@ public class RegularCustomerProgramEnchantment extends Enchantment {
     public boolean canVillagerTrade() { return false; }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.REGULAR_CUSTOMER_PROGRAM.get(); }
+    public boolean canGenerateInLoot() { return Configuration.REGULAR_CUSTOMER_PROGRAM.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.REGULAR_CUSTOMER_PROGRAM.get();
+        return Configuration.REGULAR_CUSTOMER_PROGRAM.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.REGULAR_CUSTOMER_PROGRAM.get())
+        if(Configuration.REGULAR_CUSTOMER_PROGRAM.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

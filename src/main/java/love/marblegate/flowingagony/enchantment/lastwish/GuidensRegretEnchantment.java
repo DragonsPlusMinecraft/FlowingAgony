@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.lastwish;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -43,19 +43,19 @@ public class GuidensRegretEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.GUIDENS_REGRET.get(); }
+    public boolean canVillagerTrade() { return Configuration.GUIDENS_REGRET.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.GUIDENS_REGRET.get(); }
+    public boolean canGenerateInLoot() { return Configuration.GUIDENS_REGRET.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.GUIDENS_REGRET.get();
+        return Configuration.GUIDENS_REGRET.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.GUIDENS_REGRET.get())
+        if(Configuration.GUIDENS_REGRET.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

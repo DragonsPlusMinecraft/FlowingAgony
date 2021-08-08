@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofsufferingcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -36,19 +36,19 @@ public class PrayerOfPainEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PRAYER_OF_PAIN.get(); }
+    public boolean canVillagerTrade() { return Configuration.PRAYER_OF_PAIN.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PRAYER_OF_PAIN.get(); }
+    public boolean canGenerateInLoot() { return Configuration.PRAYER_OF_PAIN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PRAYER_OF_PAIN.get();
+        return Configuration.PRAYER_OF_PAIN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PRAYER_OF_PAIN.get())
+        if(Configuration.PRAYER_OF_PAIN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

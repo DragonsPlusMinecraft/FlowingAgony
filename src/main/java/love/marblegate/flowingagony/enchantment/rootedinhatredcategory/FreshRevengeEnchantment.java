@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -28,19 +28,19 @@ public class FreshRevengeEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.FRESH_REVENGE.get(); }
+    public boolean canVillagerTrade() { return Configuration.FRESH_REVENGE.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.FRESH_REVENGE.get(); }
+    public boolean canGenerateInLoot() { return Configuration.FRESH_REVENGE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.FRESH_REVENGE.get();
+        return Configuration.FRESH_REVENGE.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.FRESH_REVENGE.get())
+        if(Configuration.FRESH_REVENGE.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

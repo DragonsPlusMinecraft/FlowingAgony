@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -39,19 +39,19 @@ public class ScholarOfOriginalSinEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.SCHOLAR_OF_ORIGINAL_SIN.get(); }
+    public boolean canVillagerTrade() { return Configuration.SCHOLAR_OF_ORIGINAL_SIN.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.SCHOLAR_OF_ORIGINAL_SIN.get(); }
+    public boolean canGenerateInLoot() { return Configuration.SCHOLAR_OF_ORIGINAL_SIN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.SCHOLAR_OF_ORIGINAL_SIN.get();
+        return Configuration.SCHOLAR_OF_ORIGINAL_SIN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.SCHOLAR_OF_ORIGINAL_SIN.get())
+        if(Configuration.SCHOLAR_OF_ORIGINAL_SIN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

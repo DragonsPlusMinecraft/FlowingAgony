@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class MaliceOutbreakEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MALICE_OUTBREAK.get(); }
+    public boolean canVillagerTrade() { return Configuration.MALICE_OUTBREAK.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.MALICE_OUTBREAK.get(); }
+    public boolean canGenerateInLoot() { return Configuration.MALICE_OUTBREAK.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.MALICE_OUTBREAK.get();
+        return Configuration.MALICE_OUTBREAK.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.MALICE_OUTBREAK.get())
+        if(Configuration.MALICE_OUTBREAK.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class EnviousKindEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.ENCIOUS_KIND.get(); }
+    public boolean canVillagerTrade() { return Configuration.ENCIOUS_KIND.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.ENCIOUS_KIND.get(); }
+    public boolean canGenerateInLoot() { return Configuration.ENCIOUS_KIND.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.ENCIOUS_KIND.get();
+        return Configuration.ENCIOUS_KIND.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.ENCIOUS_KIND.get())
+        if(Configuration.ENCIOUS_KIND.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

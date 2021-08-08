@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -34,19 +34,19 @@ public class ThornInFleshEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.THORN_IN_FLESH.get(); }
+    public boolean canVillagerTrade() { return Configuration.THORN_IN_FLESH.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.THORN_IN_FLESH.get(); }
+    public boolean canGenerateInLoot() { return Configuration.THORN_IN_FLESH.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.THORN_IN_FLESH.get();
+        return Configuration.THORN_IN_FLESH.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.THORN_IN_FLESH.get())
+        if(Configuration.THORN_IN_FLESH.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

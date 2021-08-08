@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.innerpotentialcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class MiraculousEscapeEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.MIRACULOUS_ESCAPE.get(); }
+    public boolean canVillagerTrade() { return Configuration.MIRACULOUS_ESCAPE.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.MIRACULOUS_ESCAPE.get(); }
+    public boolean canGenerateInLoot() { return Configuration.MIRACULOUS_ESCAPE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.MIRACULOUS_ESCAPE.get();
+        return Configuration.MIRACULOUS_ESCAPE.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.MIRACULOUS_ESCAPE.get())
+        if(Configuration.MIRACULOUS_ESCAPE.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

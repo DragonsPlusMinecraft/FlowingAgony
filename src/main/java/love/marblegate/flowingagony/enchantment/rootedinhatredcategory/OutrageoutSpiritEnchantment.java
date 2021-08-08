@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -28,19 +28,19 @@ public class OutrageoutSpiritEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.OUTRAGEOUS_SPIRIT.get(); }
+    public boolean canVillagerTrade() { return Configuration.OUTRAGEOUS_SPIRIT.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.OUTRAGEOUS_SPIRIT.get(); }
+    public boolean canGenerateInLoot() { return Configuration.OUTRAGEOUS_SPIRIT.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.OUTRAGEOUS_SPIRIT.get();
+        return Configuration.OUTRAGEOUS_SPIRIT.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.OUTRAGEOUS_SPIRIT.get())
+        if(Configuration.OUTRAGEOUS_SPIRIT.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

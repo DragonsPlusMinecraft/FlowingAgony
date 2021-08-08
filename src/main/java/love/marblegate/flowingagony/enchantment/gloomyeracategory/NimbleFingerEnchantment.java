@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -29,24 +29,24 @@ public class NimbleFingerEnchantment extends Enchantment {
 
     @Override
     public boolean canVillagerTrade() {
-        if(Config.HYBRID_SERVER_USER.get()) return false;
-        return Config.NIMBLE_FINGER.get(); }
+        if(Configuration.HYBRID_SERVER_USER.get()) return false;
+        return Configuration.NIMBLE_FINGER.get(); }
 
     @Override
     public boolean canGenerateInLoot() {
-        if(Config.HYBRID_SERVER_USER.get()) return false;
-        return Config.NIMBLE_FINGER.get(); }
+        if(Configuration.HYBRID_SERVER_USER.get()) return false;
+        return Configuration.NIMBLE_FINGER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        if(Config.HYBRID_SERVER_USER.get()) return false;
-        return Config.NIMBLE_FINGER.get();
+        if(Configuration.HYBRID_SERVER_USER.get()) return false;
+        return Configuration.NIMBLE_FINGER.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.HYBRID_SERVER_USER.get()) return false;
-        if(Config.NIMBLE_FINGER.get())
+        if(Configuration.HYBRID_SERVER_USER.get()) return false;
+        if(Configuration.NIMBLE_FINGER.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

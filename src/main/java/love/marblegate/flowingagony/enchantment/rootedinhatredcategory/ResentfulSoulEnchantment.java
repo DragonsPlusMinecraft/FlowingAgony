@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -39,19 +39,19 @@ public class ResentfulSoulEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.RESENTFUL_SOUL.get(); }
+    public boolean canVillagerTrade() { return Configuration.RESENTFUL_SOUL.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.RESENTFUL_SOUL.get(); }
+    public boolean canGenerateInLoot() { return Configuration.RESENTFUL_SOUL.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.RESENTFUL_SOUL.get();
+        return Configuration.RESENTFUL_SOUL.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.RESENTFUL_SOUL.get())
+        if(Configuration.RESENTFUL_SOUL.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

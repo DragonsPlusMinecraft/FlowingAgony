@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -39,19 +39,19 @@ public class EyesoreEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.EYESORE.get(); }
+    public boolean canVillagerTrade() { return Configuration.EYESORE.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.EYESORE.get(); }
+    public boolean canGenerateInLoot() { return Configuration.EYESORE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.EYESORE.get();
+        return Configuration.EYESORE.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.EYESORE.get())
+        if(Configuration.EYESORE.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import com.google.common.collect.Maps;
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
@@ -174,7 +174,7 @@ public class GloomyEraEnchantmentEventHandler {
             success = true;
         }
         if(random.nextInt(100) < 30 + 5 * extraluck){
-            if(!Config.VILLAGER_SAFE_MODE.get()) villagerEntity.attackEntityFrom(DamageSource.GENERIC,1+extraluck*0.5f);
+            if(!Configuration.VILLAGER_SAFE_MODE.get()) villagerEntity.attackEntityFrom(DamageSource.GENERIC,1+extraluck*0.5f);
         }
         if(success){
             if(!armorFeet.equals(ItemStack.EMPTY))
@@ -257,7 +257,7 @@ public class GloomyEraEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doNimbleFingerEnchantmentEvent(AnvilUpdateEvent event) {
-        if(!Config.HYBRID_SERVER_USER.get()){
+        if(!Configuration.HYBRID_SERVER_USER.get()){
             if (!event.getPlayer().world.isRemote()) {
                 if (EnchantmentUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.NIMBLE_FINGER.get()) == 1
                         && event.getLeft().getDamage() == 0) {

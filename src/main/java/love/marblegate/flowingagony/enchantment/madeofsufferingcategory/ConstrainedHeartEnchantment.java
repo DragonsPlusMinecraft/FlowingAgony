@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofsufferingcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -36,19 +36,19 @@ public class ConstrainedHeartEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.CONSTRAINED_HEART.get(); }
+    public boolean canVillagerTrade() { return Configuration.CONSTRAINED_HEART.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.CONSTRAINED_HEART.get(); }
+    public boolean canGenerateInLoot() { return Configuration.CONSTRAINED_HEART.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.CONSTRAINED_HEART.get();
+        return Configuration.CONSTRAINED_HEART.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.CONSTRAINED_HEART.get())
+        if(Configuration.CONSTRAINED_HEART.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

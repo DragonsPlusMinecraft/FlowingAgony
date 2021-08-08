@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.innerpotentialcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class ArmorUpEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.ARMOR_UP.get(); }
+    public boolean canVillagerTrade() { return Configuration.ARMOR_UP.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.ARMOR_UP.get(); }
+    public boolean canGenerateInLoot() { return Configuration.ARMOR_UP.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.ARMOR_UP.get();
+        return Configuration.ARMOR_UP.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.ARMOR_UP.get())
+        if(Configuration.ARMOR_UP.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

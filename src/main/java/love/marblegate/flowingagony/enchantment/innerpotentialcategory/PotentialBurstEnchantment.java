@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.innerpotentialcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class PotentialBurstEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.POTENTIAL_BURST.get(); }
+    public boolean canVillagerTrade() { return Configuration.POTENTIAL_BURST.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.POTENTIAL_BURST.get(); }
+    public boolean canGenerateInLoot() { return Configuration.POTENTIAL_BURST.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.POTENTIAL_BURST.get();
+        return Configuration.POTENTIAL_BURST.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.POTENTIAL_BURST.get())
+        if(Configuration.POTENTIAL_BURST.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

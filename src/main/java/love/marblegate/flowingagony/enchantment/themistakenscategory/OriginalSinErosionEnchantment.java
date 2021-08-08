@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -39,19 +39,19 @@ public class OriginalSinErosionEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.ORIGINAL_SIN_EROSION.get(); }
+    public boolean canVillagerTrade() { return Configuration.ORIGINAL_SIN_EROSION.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.ORIGINAL_SIN_EROSION.get(); }
+    public boolean canGenerateInLoot() { return Configuration.ORIGINAL_SIN_EROSION.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.ORIGINAL_SIN_EROSION.get();
+        return Configuration.ORIGINAL_SIN_EROSION.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.ORIGINAL_SIN_EROSION.get())
+        if(Configuration.ORIGINAL_SIN_EROSION.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

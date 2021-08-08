@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -42,16 +42,16 @@ public class ComeBackAtDuskEnchantment extends Enchantment {
     public boolean canVillagerTrade() { return false; }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.COME_BACK_AT_DUSK.get(); }
+    public boolean canGenerateInLoot() { return Configuration.COME_BACK_AT_DUSK.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.COME_BACK_AT_DUSK.get();
+        return Configuration.COME_BACK_AT_DUSK.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.COME_BACK_AT_DUSK.get())
+        if(Configuration.COME_BACK_AT_DUSK.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
@@ -32,7 +32,7 @@ public class SurvivalTricksEnchantmentEventHandler {
                         } else {
                             if (!(event.getAmount() < 9 - enchantmentLvl)){
                                 List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 16, 2,
-                                        Config.VILLAGER_SAFE_MODE.get() ? livingEntity -> !EntityUtil.isHostile(livingEntity,false) && !(livingEntity instanceof VillagerEntity) : livingEntity -> !EntityUtil.isHostile(livingEntity,false));
+                                        Configuration.VILLAGER_SAFE_MODE.get() ? livingEntity -> !EntityUtil.isHostile(livingEntity,false) && !(livingEntity instanceof VillagerEntity) : livingEntity -> !EntityUtil.isHostile(livingEntity,false));
                                 damageTransfer(entities, event, enchantmentLvl, false);
                             }
                         }
@@ -75,7 +75,7 @@ public class SurvivalTricksEnchantmentEventHandler {
                         } else {
                             if (!(event.getAmount() < 13 - enchantmentLvl)){
                                 List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 16, 2,
-                                        Config.VILLAGER_SAFE_MODE.get() ? livingEntity -> !(livingEntity instanceof PlayerEntity) && !(livingEntity instanceof VillagerEntity) : livingEntity ->!(livingEntity instanceof PlayerEntity));
+                                        Configuration.VILLAGER_SAFE_MODE.get() ? livingEntity -> !(livingEntity instanceof PlayerEntity) && !(livingEntity instanceof VillagerEntity) : livingEntity ->!(livingEntity instanceof PlayerEntity));
                                 damageTransfer(entities, event, enchantmentLvl, true);
                             }
                         }

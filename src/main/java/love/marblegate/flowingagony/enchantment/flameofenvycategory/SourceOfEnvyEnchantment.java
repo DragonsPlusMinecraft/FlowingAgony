@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.flameofenvycategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class SourceOfEnvyEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.SOURCE_OF_ENVY.get(); }
+    public boolean canVillagerTrade() { return Configuration.SOURCE_OF_ENVY.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.SOURCE_OF_ENVY.get(); }
+    public boolean canGenerateInLoot() { return Configuration.SOURCE_OF_ENVY.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.SOURCE_OF_ENVY.get();
+        return Configuration.SOURCE_OF_ENVY.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.SOURCE_OF_ENVY.get())
+        if(Configuration.SOURCE_OF_ENVY.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

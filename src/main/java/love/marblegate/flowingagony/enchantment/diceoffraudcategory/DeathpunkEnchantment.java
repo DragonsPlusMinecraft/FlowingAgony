@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class DeathpunkEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.DEATH_PUNK.get(); }
+    public boolean canVillagerTrade() { return Configuration.DEATH_PUNK.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.DEATH_PUNK.get(); }
+    public boolean canGenerateInLoot() { return Configuration.DEATH_PUNK.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.DEATH_PUNK.get();
+        return Configuration.DEATH_PUNK.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.DEATH_PUNK.get())
+        if(Configuration.DEATH_PUNK.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

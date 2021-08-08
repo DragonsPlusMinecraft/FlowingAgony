@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class CorrruptedKindredEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.CORRUPTED_KINDRED.get(); }
+    public boolean canVillagerTrade() { return Configuration.CORRUPTED_KINDRED.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.CORRUPTED_KINDRED.get(); }
+    public boolean canGenerateInLoot() { return Configuration.CORRUPTED_KINDRED.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.CORRUPTED_KINDRED.get();
+        return Configuration.CORRUPTED_KINDRED.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.CORRUPTED_KINDRED.get())
+        if(Configuration.CORRUPTED_KINDRED.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

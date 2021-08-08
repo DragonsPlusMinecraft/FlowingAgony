@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -33,19 +33,19 @@ public class CuttingWatermelonDreamEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.CUTTING_WATERMELON_DREAM.get(); }
+    public boolean canVillagerTrade() { return Configuration.CUTTING_WATERMELON_DREAM.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.CUTTING_WATERMELON_DREAM.get(); }
+    public boolean canGenerateInLoot() { return Configuration.CUTTING_WATERMELON_DREAM.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.CUTTING_WATERMELON_DREAM.get();
+        return Configuration.CUTTING_WATERMELON_DREAM.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.CUTTING_WATERMELON_DREAM.get())
+        if(Configuration.CUTTING_WATERMELON_DREAM.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

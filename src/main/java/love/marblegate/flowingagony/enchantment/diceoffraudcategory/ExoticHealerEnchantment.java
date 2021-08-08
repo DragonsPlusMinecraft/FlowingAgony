@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -28,19 +28,19 @@ public class ExoticHealerEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.EXOTIC_HEALER.get(); }
+    public boolean canVillagerTrade() { return Configuration.EXOTIC_HEALER.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.EXOTIC_HEALER.get(); }
+    public boolean canGenerateInLoot() { return Configuration.EXOTIC_HEALER.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.EXOTIC_HEALER.get();
+        return Configuration.EXOTIC_HEALER.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.EXOTIC_HEALER.get())
+        if(Configuration.EXOTIC_HEALER.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

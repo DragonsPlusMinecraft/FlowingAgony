@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -39,19 +39,19 @@ public class PaperBrainEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PAPER_BRAIN.get(); }
+    public boolean canVillagerTrade() { return Configuration.PAPER_BRAIN.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PAPER_BRAIN.get(); }
+    public boolean canGenerateInLoot() { return Configuration.PAPER_BRAIN.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PAPER_BRAIN.get();
+        return Configuration.PAPER_BRAIN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PAPER_BRAIN.get())
+        if(Configuration.PAPER_BRAIN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

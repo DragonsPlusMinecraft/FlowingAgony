@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -30,22 +30,22 @@ public class CarefullyIdentifiedEnchantment extends Enchantment {
 
     @Override
     public boolean canVillagerTrade() {
-        return Config.CAREFULLY_IDENTIFIED.get();
+        return Configuration.CAREFULLY_IDENTIFIED.get();
     }
 
     @Override
     public boolean canGenerateInLoot() {
-        return Config.CAREFULLY_IDENTIFIED.get();
+        return Configuration.CAREFULLY_IDENTIFIED.get();
     }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.CAREFULLY_IDENTIFIED.get();
+        return Configuration.CAREFULLY_IDENTIFIED.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.CAREFULLY_IDENTIFIED.get())
+        if(Configuration.CAREFULLY_IDENTIFIED.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

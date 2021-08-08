@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
@@ -34,19 +34,19 @@ public class PerceivedMaliceEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.PERCEIVED_MALICE.get(); }
+    public boolean canVillagerTrade() { return Configuration.PERCEIVED_MALICE.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.PERCEIVED_MALICE.get(); }
+    public boolean canGenerateInLoot() { return Configuration.PERCEIVED_MALICE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.PERCEIVED_MALICE.get();
+        return Configuration.PERCEIVED_MALICE.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.PERCEIVED_MALICE.get())
+        if(Configuration.PERCEIVED_MALICE.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

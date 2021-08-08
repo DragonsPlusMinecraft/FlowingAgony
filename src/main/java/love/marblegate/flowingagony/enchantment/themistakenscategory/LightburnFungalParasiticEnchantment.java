@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -33,19 +33,19 @@ public class LightburnFungalParasiticEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.LIGHTBURN_FUNGAL_PARASITIC.get(); }
+    public boolean canVillagerTrade() { return Configuration.LIGHTBURN_FUNGAL_PARASITIC.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.LIGHTBURN_FUNGAL_PARASITIC.get(); }
+    public boolean canGenerateInLoot() { return Configuration.LIGHTBURN_FUNGAL_PARASITIC.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.LIGHTBURN_FUNGAL_PARASITIC.get();
+        return Configuration.LIGHTBURN_FUNGAL_PARASITIC.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.LIGHTBURN_FUNGAL_PARASITIC.get())
+        if(Configuration.LIGHTBURN_FUNGAL_PARASITIC.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

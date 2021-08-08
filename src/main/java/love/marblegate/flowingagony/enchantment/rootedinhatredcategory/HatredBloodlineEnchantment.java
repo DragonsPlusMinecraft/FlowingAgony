@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
-import love.marblegate.flowingagony.config.Config;
+import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
@@ -33,19 +33,19 @@ public class HatredBloodlineEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Config.HATRED_BLOODLINE.get(); }
+    public boolean canVillagerTrade() { return Configuration.HATRED_BLOODLINE.get(); }
 
     @Override
-    public boolean canGenerateInLoot() { return Config.HATRED_BLOODLINE.get(); }
+    public boolean canGenerateInLoot() { return Configuration.HATRED_BLOODLINE.get(); }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Config.HATRED_BLOODLINE.get();
+        return Configuration.HATRED_BLOODLINE.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Config.HATRED_BLOODLINE.get())
+        if(Configuration.HATRED_BLOODLINE.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;
