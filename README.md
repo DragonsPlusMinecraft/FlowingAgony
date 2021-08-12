@@ -1,4 +1,6 @@
-# Flowing_Agony
- MarbleGate's Exotic Enchantments: Flowing Agony Mod
- 
-[![Crowdin](https://badges.crowdin.net/marblegates-exotic-enchantment/localized.svg)](https://i18n.marblegate.love/project/marblegates-exotic-enchantment)
+![Cover](ghassets/Github%20Social%20Preview.png)
+
+<h2 align="center">Useful Link</h2>
+
+<p align="center"><a href="https://marblegate.gitbook.io/flowing-agony-wiki/">Official WIKI</a> | <a href="https://www.curseforge.com/minecraft/mc-mods/marblegates-exotic-enchantment-flowing-agony">CurseForge</a> | <a href="https://www.mcmod.cn/class/3872.html">MCMOD.CN</a></p>
+
