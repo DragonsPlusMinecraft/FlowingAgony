@@ -29,7 +29,7 @@ public class HatredBloodlineStatusCapability {
 
         @Override
         public void readNBT(Capability<IHatredBloodlineStatusCapability> capability, IHatredBloodlineStatusCapability instance, Direction side, INBT nbt) {
-            int hatredBloodlineLevel = ((CompoundNBT)nbt).getInt("hatred_bloodline_level");
+            int hatredBloodlineLevel = ((CompoundNBT) nbt).getInt("hatred_bloodline_level");
             instance.setActiveLevel(hatredBloodlineLevel);
         }
     }

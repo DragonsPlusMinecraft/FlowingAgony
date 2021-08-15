@@ -21,18 +21,18 @@ import java.util.Random;
 public class SurvivalTricksEnchantmentEventHandler {
 
     @SubscribeEvent(priority = EventPriority.LOW)
-    public static void doSurvivalShortcutEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
+    public static void doSurvivalShortcutEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_SHORTCUT.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                    if(enchantmentLvl!=0){
-                        if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_SHORTCUT.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    if (enchantmentLvl != 0) {
+                        if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                             event.setAmount(event.getAmount() * (0.95F - 0.05F * enchantmentLvl));
                         } else {
-                            if (!(event.getAmount() < 9 - enchantmentLvl)){
+                            if (!(event.getAmount() < 9 - enchantmentLvl)) {
                                 List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 16, 2,
-                                        Configuration.VILLAGER_SAFE_MODE.get() ? livingEntity -> !EntityUtil.isHostile(livingEntity,false) && !(livingEntity instanceof VillagerEntity) : livingEntity -> !EntityUtil.isHostile(livingEntity,false));
+                                        Configuration.GeneralSetting.VILLAGER_SAFE_MODE.get() ? livingEntity -> !EntityUtil.isHostile(livingEntity, false) && !(livingEntity instanceof VillagerEntity) : livingEntity -> !EntityUtil.isHostile(livingEntity, false));
                                 damageTransfer(entities, event, enchantmentLvl, false);
                             }
                         }
@@ -43,17 +43,17 @@ public class SurvivalTricksEnchantmentEventHandler {
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
-    public static void doSurvivalSRuseEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
+    public static void doSurvivalSRuseEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_RUSE.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                    if(enchantmentLvl!=0){
-                        if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_RUSE.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    if (enchantmentLvl != 0) {
+                        if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                             event.setAmount(event.getAmount() * (0.95F - 0.05F * enchantmentLvl));
                         } else {
-                            if (!(event.getAmount() < 9 - enchantmentLvl)){
-                                List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 16, 2, livingEntity -> EntityUtil.isHostile(livingEntity,false) );
+                            if (!(event.getAmount() < 9 - enchantmentLvl)) {
+                                List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 16, 2, livingEntity -> EntityUtil.isHostile(livingEntity, false));
                                 damageTransfer(entities, event, enchantmentLvl, false);
                             }
                         }
@@ -64,18 +64,18 @@ public class SurvivalTricksEnchantmentEventHandler {
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
-    public static void doNecessaryEvilEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
+    public static void doNecessaryEvilEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.NECESSARY_EVIL.get(),EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                    if(enchantmentLvl!=0){
-                        if(event.getSource().getTrueSource() instanceof PlayerEntity){
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.NECESSARY_EVIL.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    if (enchantmentLvl != 0) {
+                        if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                             event.setAmount(event.getAmount() * (0.85F - 0.05F * enchantmentLvl));
                         } else {
-                            if (!(event.getAmount() < 13 - enchantmentLvl)){
+                            if (!(event.getAmount() < 13 - enchantmentLvl)) {
                                 List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 16, 2,
-                                        Configuration.VILLAGER_SAFE_MODE.get() ? livingEntity -> !(livingEntity instanceof PlayerEntity) && !(livingEntity instanceof VillagerEntity) : livingEntity ->!(livingEntity instanceof PlayerEntity));
+                                        Configuration.GeneralSetting.VILLAGER_SAFE_MODE.get() ? livingEntity -> !(livingEntity instanceof PlayerEntity) && !(livingEntity instanceof VillagerEntity) : livingEntity -> !(livingEntity instanceof PlayerEntity));
                                 damageTransfer(entities, event, enchantmentLvl, true);
                             }
                         }
@@ -85,35 +85,35 @@ public class SurvivalTricksEnchantmentEventHandler {
         }
     }
 
-    private static void damageTransfer(List<LivingEntity> entities, LivingDamageEvent event,int lvl, boolean shareMode) {
-        if(!entities.isEmpty()){
-            if(shareMode){
-                float damageSharedPerEntity = event.getAmount()/entities.size();
-                for(LivingEntity entity: entities){
-                    entity.attackEntityFrom(DamageSource.GENERIC,damageSharedPerEntity);
+    private static void damageTransfer(List<LivingEntity> entities, LivingDamageEvent event, int lvl, boolean shareMode) {
+        if (!entities.isEmpty()) {
+            if (shareMode) {
+                float damageSharedPerEntity = event.getAmount() / entities.size();
+                for (LivingEntity entity : entities) {
+                    entity.attackEntityFrom(DamageSource.GENERIC, damageSharedPerEntity);
                 }
-            }else{
+            } else {
                 LivingEntity target;
-                if(entities.size()==1)
+                if (entities.size() == 1)
                     target = entities.get(0);
-                else{
-                    target = getLuckyOne(entities,event.getEntityLiving().getRNG());
+                else {
+                    target = getLuckyOne(entities, event.getEntityLiving().getRNG());
                 }
-                target.attackEntityFrom(DamageSource.GENERIC,event.getAmount());
+                target.attackEntityFrom(DamageSource.GENERIC, event.getAmount());
             }
             event.setCanceled(true);
         } else {
-            if(event.getSource().getDamageType().equals("explosion")){
-                if(shareMode) event.setAmount(event.getAmount()*(0.7F - lvl * 0.1F));
-                else event.setAmount(event.getAmount()*(0.9F - lvl * 0.1F));
+            if (event.getSource().getDamageType().equals("explosion")) {
+                if (shareMode) event.setAmount(event.getAmount() * (0.7F - lvl * 0.1F));
+                else event.setAmount(event.getAmount() * (0.9F - lvl * 0.1F));
             } else {
-                if(shareMode) event.setAmount(event.getAmount()*(0.85F - lvl * 0.05F));
-                else event.setAmount(event.getAmount()*(0.95F - lvl * 0.05F));
+                if (shareMode) event.setAmount(event.getAmount() * (0.85F - lvl * 0.05F));
+                else event.setAmount(event.getAmount() * (0.95F - lvl * 0.05F));
             }
         }
     }
 
-    public static LivingEntity getLuckyOne(List<LivingEntity> entities, Random random){
+    public static LivingEntity getLuckyOne(List<LivingEntity> entities, Random random) {
         return entities.get(random.nextInt(entities.size()));
     }
 }

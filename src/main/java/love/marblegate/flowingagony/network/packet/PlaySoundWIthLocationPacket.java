@@ -17,7 +17,8 @@ public class PlaySoundWIthLocationPacket {
     private final double x;
     private final double y;
     private final double z;
-    public static IProxy proxy = new IProxy() {};
+    public static IProxy proxy = new IProxy() {
+    };
 
 
     public PlaySoundWIthLocationPacket(PacketBuffer buffer) {
@@ -46,11 +47,11 @@ public class PlaySoundWIthLocationPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             proxy = new ClientProxy();
             ctx.get().enqueueWork(() -> {
                 if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                    proxy.playSoundWithLocation(SoundRegistry.MALICE_OUTBREAK_KNOCKBACK_SOUND.get(), SoundCategory.PLAYERS, 5, 0.5F,x,y,z,true);
+                    proxy.playSoundWithLocation(SoundRegistry.MALICE_OUTBREAK_KNOCKBACK_SOUND.get(), SoundCategory.PLAYERS, 5, 0.5F, x, y, z, true);
                 }
             });
             ctx.get().setPacketHandled(true);

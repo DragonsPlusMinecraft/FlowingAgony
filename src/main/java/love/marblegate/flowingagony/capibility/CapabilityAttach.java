@@ -18,9 +18,9 @@ public class CapabilityAttach {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation("flowingagony", "hatred_bloodline_level"), new HatredBloodlineStatusCapabilityProvider());
-            event.addCapability(new ResourceLocation("flowingagony","abnormal_joy_point"),new AbnormalJoyCapabilityProvider());
-            event.addCapability(new ResourceLocation("flowingagony","cool_down"),new CoolDownProvider());
-            event.addCapability(new ResourceLocation("flowingagony","last_sweet_dream_item"),new LastSweetDreamCapabilityProvider());
+            event.addCapability(new ResourceLocation("flowingagony", "abnormal_joy_point"), new AbnormalJoyCapabilityProvider());
+            event.addCapability(new ResourceLocation("flowingagony", "cool_down"), new CoolDownProvider());
+            event.addCapability(new ResourceLocation("flowingagony", "last_sweet_dream_item"), new LastSweetDreamCapabilityProvider());
         }
     }
 }

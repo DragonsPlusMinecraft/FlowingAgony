@@ -2,24 +2,24 @@ package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
-import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 
 public class CarefullyIdentifiedEnchantment extends Enchantment {
     public CarefullyIdentifiedEnchantment() {
-        super(Rarity.VERY_RARE, CustomEnchantmentType.PICKAXE , EquipmentSlotTypeSet.MAIN_HAND);
+        super(Rarity.VERY_RARE, CustomEnchantmentType.PICKAXE, EquipmentSlotTypeSet.MAIN_HAND);
     }
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -30,22 +30,22 @@ public class CarefullyIdentifiedEnchantment extends Enchantment {
 
     @Override
     public boolean canVillagerTrade() {
-        return Configuration.CAREFULLY_IDENTIFIED.get();
+        return Configuration.AcquirableSetting.CAREFULLY_IDENTIFIED.get();
     }
 
     @Override
     public boolean canGenerateInLoot() {
-        return Configuration.CAREFULLY_IDENTIFIED.get();
+        return Configuration.AcquirableSetting.CAREFULLY_IDENTIFIED.get();
     }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.CAREFULLY_IDENTIFIED.get();
+        return Configuration.AcquirableSetting.CAREFULLY_IDENTIFIED.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.CAREFULLY_IDENTIFIED.get())
+        if (Configuration.AcquirableSetting.CAREFULLY_IDENTIFIED.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

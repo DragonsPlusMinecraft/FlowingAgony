@@ -31,13 +31,13 @@ public class AbnormalJoyHUD extends AbstractGui {
 
     public void render() {
 
-        if(!minecraft.gameSettings.hideGUI&&minecraft.playerController.gameIsSurvivalOrAdventure()){
+        if (!minecraft.gameSettings.hideGUI && minecraft.playerController.gameIsSurvivalOrAdventure()) {
             AtomicInteger abnormalJoyPoint = new AtomicInteger();
             LazyOptional<IAbnormalJoyCapability> pointCap = minecraft.player.getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
             pointCap.ifPresent(
-                    cap-> abnormalJoyPoint.set((int) Math.floor(cap.get()))
+                    cap -> abnormalJoyPoint.set((int) Math.floor(cap.get()))
             );
-            if(abnormalJoyPoint.get()!=0) {
+            if (abnormalJoyPoint.get() != 0) {
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
                 minecraft.getTextureManager().bindTexture(HUD);
                 int x = width / 2 - 91;

@@ -23,17 +23,17 @@ public class CoolDown {
         @Override
         public INBT writeNBT(Capability<ICoolDown> capability, ICoolDown instance, Direction side) {
             CompoundNBT compoundNBT = new CompoundNBT();
-            for(CoolDownType coolDownType:CoolDownType.values()){
-                compoundNBT.putInt(coolDownType.name(),instance.get(coolDownType));
+            for (CoolDownType coolDownType : CoolDownType.values()) {
+                compoundNBT.putInt(coolDownType.name(), instance.get(coolDownType));
             }
             return compoundNBT;
         }
 
         @Override
         public void readNBT(Capability<ICoolDown> capability, ICoolDown instance, Direction side, INBT nbt) {
-            for(CoolDownType coolDownType:CoolDownType.values()){
-                int temp = ((CompoundNBT)nbt).getInt(coolDownType.name());
-                instance.set(coolDownType,temp);
+            for (CoolDownType coolDownType : CoolDownType.values()) {
+                int temp = ((CompoundNBT) nbt).getInt(coolDownType.name());
+                instance.set(coolDownType, temp);
             }
         }
     }

@@ -16,10 +16,9 @@ public class AbnormalJoyCapabilityProvider implements ICapabilitySerializable<Co
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == AbnormalJoyCapability.ABNORMALJOY_CAPABILITY){
+        if (cap == AbnormalJoyCapability.ABNORMALJOY_CAPABILITY) {
             return impOptional.cast();
-        }
-        else return LazyOptional.empty();
+        } else return LazyOptional.empty();
     }
 
     @Override

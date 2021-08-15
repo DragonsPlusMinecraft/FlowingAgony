@@ -4,7 +4,6 @@ import love.marblegate.flowingagony.fx.particle.cursedantipathyparticle.CursedAn
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -17,7 +16,8 @@ public class ParticleEffectPacket {
     private final double y;
     private final double z;
     private final double[] args;
-    public static IProxy proxy = new IProxy() {};
+    public static IProxy proxy = new IProxy() {
+    };
 
     public ParticleEffectPacket(EffectType type, double x, double y, double z, double... args) {
         this.type = type;
@@ -52,11 +52,11 @@ public class ParticleEffectPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ctx.get().enqueueWork(() -> {
                 proxy = new ClientProxy();
-                if(type== EffectType.CURSED_ANTIPATHY_EFFECT){
-                    for(int i = 0; i < args[1]; i++) {
+                if (type == EffectType.CURSED_ANTIPATHY_EFFECT) {
+                    for (int i = 0; i < args[1]; i++) {
                         proxy.addParticleForceNear(new CursedAntipathyParticleData((float) args[0]), x, y, z, 0, 0, 0);
                     }
                 }

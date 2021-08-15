@@ -3,7 +3,7 @@ package love.marblegate.flowingagony.capibility.hatredbloodlinestatus;
 public class HatredBloodlineStatusCapabilityStardardImpl implements IHatredBloodlineStatusCapability {
     private int hatredBloodlineLevel;
 
-    public HatredBloodlineStatusCapabilityStardardImpl(){
+    public HatredBloodlineStatusCapabilityStardardImpl() {
         hatredBloodlineLevel = 0;
     }
 

@@ -12,43 +12,43 @@ import java.util.List;
 import java.util.Map;
 
 public class EnchantmentUtil {
-    public static int isItemEnchanted(ItemStack itemStack,Enchantment enchantment){
+    public static int isItemEnchanted(ItemStack itemStack, Enchantment enchantment) {
         Map<Enchantment, Integer> enchantList = EnchantmentHelper.getEnchantments(itemStack);
-        return enchantList.containsKey(enchantment)?1:0;
+        return enchantList.containsKey(enchantment) ? 1 : 0;
     }
 
-    public static int isPlayerArmorEnchanted(PlayerEntity player, Enchantment enchantment, ArmorEncCalOp mode){
-        if(mode == ArmorEncCalOp.GENERAL){
-            return isPlayerArmorEnchanted_general(player,enchantment);
-        } else if(mode == ArmorEncCalOp.TOTAL_PIECE){
-            return isPlayerArmorEnchanted_totalPiece(player,enchantment);
-        } else if(mode == ArmorEncCalOp.TOTAL_LEVEL){
-            return isPlayerArmorEnchanted_totalLevel(player,enchantment);
+    public static int isPlayerArmorEnchanted(PlayerEntity player, Enchantment enchantment, ArmorEncCalOp mode) {
+        if (mode == ArmorEncCalOp.GENERAL) {
+            return isPlayerArmorEnchanted_general(player, enchantment);
+        } else if (mode == ArmorEncCalOp.TOTAL_PIECE) {
+            return isPlayerArmorEnchanted_totalPiece(player, enchantment);
+        } else if (mode == ArmorEncCalOp.TOTAL_LEVEL) {
+            return isPlayerArmorEnchanted_totalLevel(player, enchantment);
         } else {
-            return isPlayerArmorEnchanted_highestLevel(player,enchantment);
+            return isPlayerArmorEnchanted_highestLevel(player, enchantment);
         }
     }
 
-    public static int isPlayerItemEnchanted(PlayerEntity player, Enchantment enchantment, EquipmentSlotType slotIn, ItemEncCalOp mode){
+    public static int isPlayerItemEnchanted(PlayerEntity player, Enchantment enchantment, EquipmentSlotType slotIn, ItemEncCalOp mode) {
         Map<Enchantment, Integer> enchantList = EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(slotIn));
-        if(mode == ItemEncCalOp.GENERAL){
+        if (mode == ItemEncCalOp.GENERAL) {
             return enchantList.containsKey(enchantment) ? 1 : 0;
         } else {
             return enchantList.getOrDefault(enchantment, 0);
         }
     }
 
-    public static List<ItemStack> getItemStackWithEnchantment(PlayerEntity player, Enchantment enchantment){
+    public static List<ItemStack> getItemStackWithEnchantment(PlayerEntity player, Enchantment enchantment) {
         List<ItemStack> items = new ArrayList<>();
-        for(EquipmentSlotType type : EquipmentSlotType.values()){
-            if(isPlayerItemEnchanted(player,enchantment,type, ItemEncCalOp.GENERAL)==1){
+        for (EquipmentSlotType type : EquipmentSlotType.values()) {
+            if (isPlayerItemEnchanted(player, enchantment, type, ItemEncCalOp.GENERAL) == 1) {
                 items.add(player.getItemStackFromSlot(type));
             }
         }
         return items;
     }
 
-    static int isPlayerArmorEnchanted_general(PlayerEntity player, Enchantment enchantment){
+    static int isPlayerArmorEnchanted_general(PlayerEntity player, Enchantment enchantment) {
         for (ItemStack itemStack : player.getArmorInventoryList()) {
             Map<Enchantment, Integer> enchantList = EnchantmentHelper.getEnchantments(itemStack);
             if (enchantList.containsKey(enchantment)) {
@@ -58,37 +58,37 @@ public class EnchantmentUtil {
         return 0;
     }
 
-    static int isPlayerArmorEnchanted_totalPiece(PlayerEntity player, Enchantment enchantment){
+    static int isPlayerArmorEnchanted_totalPiece(PlayerEntity player, Enchantment enchantment) {
         Iterator<ItemStack> armor = player.getArmorInventoryList().iterator();
         int count = 0;
-        while(armor.hasNext()){
+        while (armor.hasNext()) {
             Map<Enchantment, Integer> enchantList = EnchantmentHelper.getEnchantments(armor.next());
-            if(enchantList.containsKey(enchantment)){
-                count ++;
+            if (enchantList.containsKey(enchantment)) {
+                count++;
             }
         }
         return count;
     }
 
-    static int isPlayerArmorEnchanted_totalLevel(PlayerEntity player, Enchantment enchantment){
+    static int isPlayerArmorEnchanted_totalLevel(PlayerEntity player, Enchantment enchantment) {
         Iterator<ItemStack> armor = player.getArmorInventoryList().iterator();
         int count = 0;
-        while(armor.hasNext()){
+        while (armor.hasNext()) {
             Map<Enchantment, Integer> enchantList = EnchantmentHelper.getEnchantments(armor.next());
-            if(enchantList.containsKey(enchantment)){
+            if (enchantList.containsKey(enchantment)) {
                 count += enchantList.get(enchantment);
             }
         }
         return count;
     }
 
-    static int isPlayerArmorEnchanted_highestLevel(PlayerEntity player, Enchantment enchantment){
+    static int isPlayerArmorEnchanted_highestLevel(PlayerEntity player, Enchantment enchantment) {
         Iterator<ItemStack> armor = player.getArmorInventoryList().iterator();
         int count = 0;
-        while(armor.hasNext()){
+        while (armor.hasNext()) {
             Map<Enchantment, Integer> enchantList = EnchantmentHelper.getEnchantments(armor.next());
-            if(enchantList.containsKey(enchantment)){
-                if(enchantList.get(enchantment)>count) count = enchantList.get(enchantment);
+            if (enchantList.containsKey(enchantment)) {
+                if (enchantList.get(enchantment) > count) count = enchantList.get(enchantment);
             }
         }
         return count;

@@ -16,10 +16,9 @@ public class LastSweetDreamCapabilityProvider implements ICapabilitySerializable
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY){
+        if (cap == LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY) {
             return impOptional.cast();
-        }
-        else return LazyOptional.empty();
+        } else return LazyOptional.empty();
     }
 
     @Override

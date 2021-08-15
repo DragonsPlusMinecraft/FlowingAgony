@@ -30,12 +30,11 @@ public class LastSweetDreamCapability {
 
         @Override
         public void readNBT(Capability<ILastSweetDreamCapability> capability, ILastSweetDreamCapability instance, Direction side, INBT nbt) {
-            INBT NBTedItem = ((CompoundNBT)nbt).get("last_sweet_dream_itemstack");
-            if(NBTedItem!=null){
+            INBT NBTedItem = ((CompoundNBT) nbt).get("last_sweet_dream_itemstack");
+            if (NBTedItem != null) {
                 ItemStack itemStack = ItemStack.read((CompoundNBT) NBTedItem);
                 instance.saveItemStack(itemStack);
-            }
-            else
+            } else
                 instance.clear();
 
         }

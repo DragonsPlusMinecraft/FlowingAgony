@@ -36,7 +36,7 @@ public class DataSyncEventHandler {
     private static void syncAbnormalJoyCapability(PlayerEntity player) {
         LazyOptional<IAbnormalJoyCapability> pointCap = player.getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
         pointCap.ifPresent(
-                cap-> Networking.INSTANCE.send(
+                cap -> Networking.INSTANCE.send(
                         PacketDistributor.PLAYER.with(
                                 () -> (ServerPlayerEntity) player
                         ),

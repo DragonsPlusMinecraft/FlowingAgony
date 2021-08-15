@@ -29,15 +29,15 @@ import java.util.List;
 @Mod.EventBusSubscriber()
 public class FlameOfEnvyEnchantmentEventHandler {
     @SubscribeEvent
-    public static void doEnviousKindEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+    public static void doEnviousKindEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.ENVIOUS_KIND.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                if(enchantmentLvl!=0){
+                if (enchantmentLvl != 0) {
                     double diff = (event.getEntityLiving().getHealth() - ((PlayerEntity) event.getSource().getTrueSource()).getHealth());
-                    if(diff>=0){
-                        int amplifier = (int) Math.floor(diff/10);
-                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.ENVIOUS_BEING.get(),200, amplifier));
+                    if (diff >= 0) {
+                        int amplifier = (int) Math.floor(diff / 10);
+                        ((PlayerEntity) event.getSource().getTrueSource()).addPotionEffect(new EffectInstance(EffectRegistry.ENVIOUS_BEING.get(), 200, amplifier));
                     }
                 }
             }
@@ -45,23 +45,23 @@ public class FlameOfEnvyEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doEyesoreEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+    public static void doEyesoreEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.EYESORE.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                if(enchantmentLvl!=0){
-                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.EYESORE_ENCHANTMENT_ACTIVE.get(),61,enchantmentLvl-1));
+                if (enchantmentLvl != 0) {
+                    event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.EYESORE_ENCHANTMENT_ACTIVE.get(), 61, enchantmentLvl - 1));
                 }
             }
         }
     }
 
     @SubscribeEvent
-    public static void doThornInFleshEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+    public static void doThornInFleshEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.THORN_IN_FLESH.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                if(enchantmentLvl!=0) {
+                if (enchantmentLvl != 0) {
                     if (event.getEntityLiving() instanceof PlayerEntity)
                         event.getEntityLiving().addPotionEffect(new EffectInstance(EffectRegistry.THORN_IN_FLESH_ACTIVE_FOR_PLAYER.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
                     else
@@ -79,22 +79,22 @@ public class FlameOfEnvyEnchantmentEventHandler {
                     if (event.getArrow().getShooter() != null) {
                         if (event.getArrow().getShooter() instanceof PlayerEntity) {
                             int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), EnchantmentRegistry.COVERT_KNIFE.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                            if(enchantmentLvl!=0){
-                                if(enchantmentLvl == 3 || (enchantmentLvl == 2 ? (Math.random() < 0.75) : (Math.random() < 0.5))){
+                            if (enchantmentLvl != 0) {
+                                if (enchantmentLvl == 3 || (enchantmentLvl == 2 ? (Math.random() < 0.75) : (Math.random() < 0.5))) {
                                     ((EntityRayTraceResult) event.getRayTraceResult()).getEntity().attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) event.getArrow().getShooter()), 9f);
-                                    if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), Enchantments.FLAME, EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL)==1){
+                                    if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getArrow().getShooter(), Enchantments.FLAME, EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
                                         ((EntityRayTraceResult) event.getRayTraceResult()).getEntity().setFire(5);
                                     }
-                                    if(event.getArrow() instanceof SpectralArrowEntity){
+                                    if (event.getArrow() instanceof SpectralArrowEntity) {
                                         ((EndermanEntity) ((EntityRayTraceResult) event.getRayTraceResult()).getEntity()).addPotionEffect(new EffectInstance(Effects.GLOWING, 200));
                                     }
-                                    if(event.getArrow() instanceof ArrowEntity){
-                                        Potion potion = ObfuscationReflectionHelper.getPrivateValue(ArrowEntity.class, (ArrowEntity) event.getArrow(),"field_184560_g");
-                                        if(potion != Potions.EMPTY){
+                                    if (event.getArrow() instanceof ArrowEntity) {
+                                        Potion potion = ObfuscationReflectionHelper.getPrivateValue(ArrowEntity.class, (ArrowEntity) event.getArrow(), "field_184560_g");
+                                        if (potion != Potions.EMPTY) {
                                             List<EffectInstance> effectsOnArrow = potion.getEffects();
-                                            for(EffectInstance effect: effectsOnArrow){
-                                                int duration = MathHelper.ceil(effect.getDuration()*0.125f);
-                                                ((EndermanEntity) ((EntityRayTraceResult) event.getRayTraceResult()).getEntity()).addPotionEffect(new EffectInstance(effect.getPotion(),duration,effect.getAmplifier()));
+                                            for (EffectInstance effect : effectsOnArrow) {
+                                                int duration = MathHelper.ceil(effect.getDuration() * 0.125f);
+                                                ((EndermanEntity) ((EntityRayTraceResult) event.getRayTraceResult()).getEntity()).addPotionEffect(new EffectInstance(effect.getPotion(), duration, effect.getAmplifier()));
                                             }
                                         }
                                     }
@@ -108,24 +108,24 @@ public class FlameOfEnvyEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doSourceOfEnvyEnchantmentEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity){
+    public static void doSourceOfEnvyEnchantmentEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SOURCE_OF_ENVY.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                if(enchantmentLvl!=0) {
-                    if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                        List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(),12,2, livingEntity -> EntityUtil.isHostile(livingEntity,false));
-                        if(!availableEnvySpreadTargets.isEmpty()){
-                            for(LivingEntity spreadTarget:availableEnvySpreadTargets){
-                                if(Math.random()<0.08 + 0.02 * enchantmentLvl)
+                if (enchantmentLvl != 0) {
+                    if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+                        List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsExceptOneself((PlayerEntity) event.getEntityLiving(), 12, 2, livingEntity -> EntityUtil.isHostile(livingEntity, false));
+                        if (!availableEnvySpreadTargets.isEmpty()) {
+                            for (LivingEntity spreadTarget : availableEnvySpreadTargets) {
+                                if (Math.random() < 0.08 + 0.02 * enchantmentLvl)
                                     spreadTarget.setRevengeTarget((LivingEntity) event.getSource().getTrueSource());
                             }
                         }
                     } else {
-                        List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsOfSameType((PlayerEntity) event.getEntityLiving(),12,2, (LivingEntity) event.getSource().getTrueSource(),true);
-                        if(!availableEnvySpreadTargets.isEmpty()){
-                            for(LivingEntity spreadTarget:availableEnvySpreadTargets){
-                                if(Math.random()<0.15 + 0.05 * enchantmentLvl)
+                        List<LivingEntity> availableEnvySpreadTargets = EntityUtil.getTargetsOfSameType((PlayerEntity) event.getEntityLiving(), 12, 2, (LivingEntity) event.getSource().getTrueSource(), true);
+                        if (!availableEnvySpreadTargets.isEmpty()) {
+                            for (LivingEntity spreadTarget : availableEnvySpreadTargets) {
+                                if (Math.random() < 0.15 + 0.05 * enchantmentLvl)
                                     spreadTarget.setRevengeTarget((LivingEntity) event.getSource().getTrueSource());
                             }
                         }

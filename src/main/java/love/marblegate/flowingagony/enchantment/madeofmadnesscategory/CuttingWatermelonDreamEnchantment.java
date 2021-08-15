@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
@@ -14,12 +14,12 @@ public class CuttingWatermelonDreamEnchantment extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -33,19 +33,23 @@ public class CuttingWatermelonDreamEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.CUTTING_WATERMELON_DREAM.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.CUTTING_WATERMELON_DREAM.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.CUTTING_WATERMELON_DREAM.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.CUTTING_WATERMELON_DREAM.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.CUTTING_WATERMELON_DREAM.get();
+        return Configuration.AcquirableSetting.CUTTING_WATERMELON_DREAM.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.CUTTING_WATERMELON_DREAM.get())
+        if (Configuration.AcquirableSetting.CUTTING_WATERMELON_DREAM.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -1,9 +1,9 @@
 package love.marblegate.flowingagony.enchantment.madeofmadnesscategory;
 
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
@@ -15,12 +15,12 @@ public class AgonyScreamerEnchantment extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -34,19 +34,23 @@ public class AgonyScreamerEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.AGONY_SCREAMER.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.AGONY_SCREAMER.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.AGONY_SCREAMER.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.AGONY_SCREAMER.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.AGONY_SCREAMER.get();
+        return Configuration.AcquirableSetting.AGONY_SCREAMER.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.AGONY_SCREAMER.get())
+        if (Configuration.AcquirableSetting.AGONY_SCREAMER.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

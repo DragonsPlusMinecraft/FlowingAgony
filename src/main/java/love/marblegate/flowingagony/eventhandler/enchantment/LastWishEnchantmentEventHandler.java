@@ -27,19 +27,19 @@ import java.util.List;
 public class LastWishEnchantmentEventHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void doMorirsDeathwishEnchantmentEvent_mendOnHurt(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled()){
-                if(event.getEntityLiving() instanceof PlayerEntity && event.getSource() != DamageSource.OUT_OF_WORLD){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_DEATHWISH.get());
-                    for(ItemStack item: items){
+    public static void doMorirsDeathwishEnchantmentEvent_mendOnHurt(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled()) {
+                if (event.getEntityLiving() instanceof PlayerEntity && event.getSource() != DamageSource.OUT_OF_WORLD) {
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.MORIRS_DEATHWISH.get());
+                    for (ItemStack item : items) {
                         int repairPoint = 0;
-                        if(event.getAmount()<1){
-                            repairPoint += Math.floor(event.getAmount()*event.getEntityLiving().getRNG().nextInt(3));
-                        }else{
+                        if (event.getAmount() < 1) {
+                            repairPoint += Math.floor(event.getAmount() * event.getEntityLiving().getRNG().nextInt(3));
+                        } else {
                             //I really did not expect how could someone applies damage more than 100!!!!!
-                            int temp = (int) Math.max(Math.floor(event.getAmount()),100);
-                            for(int i=0;i<temp;i++)
+                            int temp = (int) Math.max(Math.floor(event.getAmount()), 100);
+                            for (int i = 0; i < temp; i++)
                                 repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(3);
                         }
                         item.setDamage(item.getDamage() - repairPoint);
@@ -50,22 +50,22 @@ public class LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doMorirsDeathwishEnchantmentEvent_mendOnDeath(LivingDeathEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled()){
-                if(event.getEntityLiving() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_DEATHWISH.get());
-                    if(!items.isEmpty()){
+    public static void doMorirsDeathwishEnchantmentEvent_mendOnDeath(LivingDeathEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled()) {
+                if (event.getEntityLiving() instanceof PlayerEntity) {
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.MORIRS_DEATHWISH.get());
+                    if (!items.isEmpty()) {
                         LazyOptional<ICoolDown> coolDownCap = event.getEntityLiving().getCapability(CoolDown.COOL_DOWN_CAPABILITY);
                         coolDownCap.ifPresent(
                                 cap -> {
-                                    if(cap.isReady(CoolDownType.MORIRS_DEATHWISH_DEATHMENDING)){
-                                        for(ItemStack item: items){
+                                    if (cap.isReady(CoolDownType.MORIRS_DEATHWISH_DEATHMENDING)) {
+                                        for (ItemStack item : items) {
                                             item.setDamage(item.getDamage() - 64);
                                         }
-                                        cap.set(CoolDownType.MORIRS_DEATHWISH_DEATHMENDING,12000);
+                                        cap.set(CoolDownType.MORIRS_DEATHWISH_DEATHMENDING, 12000);
                                     }
-                        });
+                                });
                     }
 
                 }
@@ -74,19 +74,19 @@ public class LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doMorirsLifeboundEnchantmentEvent_mendOnHeal(LivingHealEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled()){
-                if(event.getEntityLiving() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_LIFEBOUND.get());
-                    for(ItemStack item: items){
+    public static void doMorirsLifeboundEnchantmentEvent_mendOnHeal(LivingHealEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled()) {
+                if (event.getEntityLiving() instanceof PlayerEntity) {
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.MORIRS_LIFEBOUND.get());
+                    for (ItemStack item : items) {
                         int repairPoint = 0;
-                        if(event.getAmount()<1){
-                            repairPoint += Math.floor(event.getAmount()*event.getEntityLiving().getRNG().nextInt(3));
-                        }else{
+                        if (event.getAmount() < 1) {
+                            repairPoint += Math.floor(event.getAmount() * event.getEntityLiving().getRNG().nextInt(3));
+                        } else {
                             //It's the same as above
-                            int temp = (int) Math.max(Math.floor(event.getAmount()),100);
-                            for(int i=0;i<temp;i++)
+                            int temp = (int) Math.max(Math.floor(event.getAmount()), 100);
+                            for (int i = 0; i < temp; i++)
                                 repairPoint += 1 + event.getEntityLiving().getRNG().nextInt(10);
                         }
                         item.setDamage(item.getDamage() - repairPoint);
@@ -97,13 +97,14 @@ public class LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doMorirsLifeBoundEnchantmentEvent_damageOnDeath(LivingDeathEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled()){
-                if(event.getEntityLiving() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(),EnchantmentRegistry.MORIRS_LIFEBOUND.get());
-                    for(ItemStack item: items){
-                        item.damageItem(32,event.getEntityLiving(),x->{});
+    public static void doMorirsLifeBoundEnchantmentEvent_damageOnDeath(LivingDeathEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled()) {
+                if (event.getEntityLiving() instanceof PlayerEntity) {
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.MORIRS_LIFEBOUND.get());
+                    for (ItemStack item : items) {
+                        item.damageItem(32, event.getEntityLiving(), x -> {
+                        });
                     }
                 }
             }
@@ -111,12 +112,12 @@ public class LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doGuidensRegretEnchantmentEvent(LivingDeathEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(!event.isCanceled()){
-                if(event.getSource().getTrueSource() instanceof PlayerEntity){
-                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.GUIDENS_REGRET.get());
-                    for(ItemStack item: items){
+    public static void doGuidensRegretEnchantmentEvent(LivingDeathEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (!event.isCanceled()) {
+                if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+                    List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((PlayerEntity) event.getSource().getTrueSource(), EnchantmentRegistry.GUIDENS_REGRET.get());
+                    for (ItemStack item : items) {
                         int repairPoint = 1 + event.getEntityLiving().getRNG().nextInt(3);
                         item.setDamage(item.getDamage() - repairPoint);
                     }
@@ -126,21 +127,21 @@ public class LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doLastSweetDreamEnchantmentEvent_saveItem(ItemTossEvent event){
-        if(!event.getPlayer().world.isRemote()){
-            if(!event.isCanceled()){
-                if(EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(),EnchantmentRegistry.LAST_SWEET_DREAM.get()) ==1 && event.getEntityItem().getItem().isDamageable()){
-                    if((float)event.getEntityItem().getItem().getDamage()/event.getEntityItem().getItem().getMaxDamage() > 0.9F){
+    public static void doLastSweetDreamEnchantmentEvent_saveItem(ItemTossEvent event) {
+        if (!event.getPlayer().world.isRemote()) {
+            if (!event.isCanceled()) {
+                if (EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(), EnchantmentRegistry.LAST_SWEET_DREAM.get()) == 1 && event.getEntityItem().getItem().isDamageable()) {
+                    if ((float) event.getEntityItem().getItem().getDamage() / event.getEntityItem().getItem().getMaxDamage() > 0.9F) {
                         LazyOptional<ILastSweetDreamCapability> itemCap = event.getPlayer().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
                         itemCap.ifPresent(
                                 cap -> {
-                                    if(cap.isEmpty()){
+                                    if (cap.isEmpty()) {
                                         cap.saveItemStack(event.getEntityItem().getItem());
                                     } else {
                                         ItemStack oldItem = cap.getItemStack();
                                         cap.clear();
                                         cap.saveItemStack(event.getEntityItem().getItem());
-                                        InventoryHelper.spawnItemStack(event.getPlayer().world,event.getPlayer().getPosX(),event.getPlayer().getPosY()+2,event.getPlayer().getPosZ(),oldItem);
+                                        InventoryHelper.spawnItemStack(event.getPlayer().world, event.getPlayer().getPosX(), event.getPlayer().getPosY() + 2, event.getPlayer().getPosZ(), oldItem);
                                     }
                                     event.setCanceled(true);
                                 }
@@ -152,15 +153,15 @@ public class LastWishEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doLastSweetDreamEnchantmentEvent_retrieveItem(PlayerWakeUpEvent event){
-        if(!event.getPlayer().world.isRemote()){
+    public static void doLastSweetDreamEnchantmentEvent_retrieveItem(PlayerWakeUpEvent event) {
+        if (!event.getPlayer().world.isRemote()) {
             LazyOptional<ILastSweetDreamCapability> itemCap = event.getPlayer().getCapability(LastSweetDreamCapability.LAST_SWEET_DREAM_CAPABILITY);
             itemCap.ifPresent(
                     cap -> {
-                        if(!cap.isEmpty()){
+                        if (!cap.isEmpty()) {
                             ItemStack savedItem = cap.getItemStack();
                             savedItem.setDamage(0);
-                            InventoryHelper.spawnItemStack(event.getPlayer().world,event.getPlayer().getPosX(),event.getPlayer().getPosY()+2,event.getPlayer().getPosZ(),savedItem);
+                            InventoryHelper.spawnItemStack(event.getPlayer().world, event.getPlayer().getPosX(), event.getPlayer().getPosY() + 2, event.getPlayer().getPosZ(), savedItem);
                             cap.clear();
                         }
                     }

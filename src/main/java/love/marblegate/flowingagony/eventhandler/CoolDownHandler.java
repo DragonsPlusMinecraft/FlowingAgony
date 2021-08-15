@@ -12,13 +12,13 @@ import net.minecraftforge.fml.common.Mod;
 public class CoolDownHandler {
 
     @SubscribeEvent
-    public static void handle(TickEvent.PlayerTickEvent event){
-        if(!event.player.world.isRemote()){
-            if(event.phase == TickEvent.Phase.START){
+    public static void handle(TickEvent.PlayerTickEvent event) {
+        if (!event.player.world.isRemote()) {
+            if (event.phase == TickEvent.Phase.START) {
                 LazyOptional<ICoolDown> coolDownCap = event.player.getCapability(CoolDown.COOL_DOWN_CAPABILITY);
-                coolDownCap.ifPresent(cap->{
-                    for(CoolDownType coolDownType: CoolDownType.values()){
-                        if(!cap.isReady(coolDownType)){
+                coolDownCap.ifPresent(cap -> {
+                    for (CoolDownType coolDownType : CoolDownType.values()) {
+                        if (!cap.isReady(coolDownType)) {
                             cap.decrease(coolDownType);
                         }
                     }

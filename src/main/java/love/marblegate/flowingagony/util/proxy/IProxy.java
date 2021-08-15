@@ -7,12 +7,16 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 
 public interface IProxy {
-    default void addParticleForceNear(IParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed){}
+    default void addParticleForceNear(IParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    }
 
-    default void handleISound(PlaySoundPacket.ModSoundType type, boolean onOrOff){}
+    default void handleISound(PlaySoundPacket.ModSoundType type, boolean onOrOff) {
+    }
 
-    default void playSoundWithLocation(SoundEvent soundEvent, SoundCategory category, float volume, float pitch, double x, double y, double z, boolean distanceDelay){}
+    default void playSoundWithLocation(SoundEvent soundEvent, SoundCategory category, float volume, float pitch, double x, double y, double z, boolean distanceDelay) {
+    }
 
-    default void removeEffect(Effect effect){}
+    default void removeEffect(Effect effect) {
+    }
 
 }

@@ -15,12 +15,12 @@ public class DestructionWorshipEnchantment extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -36,19 +36,23 @@ public class DestructionWorshipEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.PIERCING_FEVER.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.PIERCING_FEVER.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.PIERCING_FEVER.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.PIERCING_FEVER.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.PIERCING_FEVER.get();
+        return Configuration.AcquirableSetting.PIERCING_FEVER.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.PIERCING_FEVER.get())
+        if (Configuration.AcquirableSetting.PIERCING_FEVER.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

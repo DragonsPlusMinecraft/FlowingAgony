@@ -21,13 +21,12 @@ public class LightburnFungalInfectionEffect extends Effect {
     @Override
     public boolean isReady(int duration, int amplifier) {
         int k = 40;
-        if(amplifier>0){
+        if (amplifier > 0) {
             k /= (amplifier * amplifier);
         }
         if (k > 0) {
             return duration % k == 0;
-        }
-        else {
+        } else {
             return false;
         }
     }

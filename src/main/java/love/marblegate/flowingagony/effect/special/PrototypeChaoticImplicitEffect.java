@@ -9,6 +9,6 @@ public class PrototypeChaoticImplicitEffect extends HarmfulBlankImplicitEffect {
 
     @Override
     public double getAttributeModifierAmount(int amplifier, AttributeModifier modifier) {
-        return modifier.getAmount() * (double)(amplifier + 1);
+        return modifier.getAmount() * (double) (amplifier + 1);
     }
 }

@@ -12,7 +12,8 @@ import java.util.function.Supplier;
 public class PlaySoundPacket {
     private final ModSoundType type;
     private final boolean onOrOff;
-    public static IProxy proxy = new IProxy() {};
+    public static IProxy proxy = new IProxy() {
+    };
 
     public PlaySoundPacket(PacketBuffer buffer) {
         type = buffer.readEnumValue(ModSoundType.class);
@@ -31,9 +32,9 @@ public class PlaySoundPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             proxy = new ClientProxy();
-            ctx.get().enqueueWork(() -> proxy.handleISound(type,onOrOff));
+            ctx.get().enqueueWork(() -> proxy.handleISound(type, onOrOff));
             ctx.get().setPacketHandled(true);
         });
 

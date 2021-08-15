@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory.curse;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
@@ -14,12 +14,12 @@ public class BurialObjectCurse extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -38,14 +38,18 @@ public class BurialObjectCurse extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.BURIAL_OBJECT.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.BURIAL_OBJECT.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.BURIAL_OBJECT.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.BURIAL_OBJECT.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.BURIAL_OBJECT.get();
+        return Configuration.AcquirableSetting.BURIAL_OBJECT.get();
     }
 
 }

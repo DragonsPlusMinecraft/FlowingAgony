@@ -16,10 +16,9 @@ public class HatredBloodlineStatusCapabilityProvider implements ICapabilitySeria
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY){
+        if (cap == HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY) {
             return impOptional.cast();
-        }
-        else return LazyOptional.empty();
+        } else return LazyOptional.empty();
     }
 
     @Override

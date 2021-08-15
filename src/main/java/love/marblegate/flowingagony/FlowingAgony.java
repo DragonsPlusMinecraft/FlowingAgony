@@ -15,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class FlowingAgony {
 
 
-    public FlowingAgony(){
+    public FlowingAgony() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.ACT_CONFIG);
 
         EnchantmentRegistry.ENCHANTMENT.register(FMLJavaModLoadingContext.get().getModEventBus());

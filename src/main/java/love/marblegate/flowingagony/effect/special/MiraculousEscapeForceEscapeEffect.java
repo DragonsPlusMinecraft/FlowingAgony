@@ -13,13 +13,12 @@ public class MiraculousEscapeForceEscapeEffect extends HarmfulBlankImplicitEffec
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get()) {
             int duration = entityLivingBaseIn.getActivePotionEffect(getEffect()).getDuration();
-            if(duration%40>25){
-                entityLivingBaseIn.setMotion(0,2,0);
+            if (duration % 40 > 25) {
+                entityLivingBaseIn.setMotion(0, 2, 0);
+            } else {
+                entityLivingBaseIn.setMotion(entityLivingBaseIn.getLookVec().getX(), duration / 12.5, entityLivingBaseIn.getLookVec().getZ());
             }
-            else{
-                entityLivingBaseIn.setMotion(entityLivingBaseIn.getLookVec().getX(),duration/12.5,entityLivingBaseIn.getLookVec().getZ());
-            }
-            entityLivingBaseIn.velocityChanged=true;
+            entityLivingBaseIn.velocityChanged = true;
             entityLivingBaseIn.markPositionDirty();
         }
     }

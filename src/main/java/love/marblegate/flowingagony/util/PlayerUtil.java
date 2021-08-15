@@ -5,7 +5,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 
 public class PlayerUtil {
 
-    public static boolean hasHelmet(PlayerEntity player){
+    public static boolean hasHelmet(PlayerEntity player) {
         return !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
     }
 

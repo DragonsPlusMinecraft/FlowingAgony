@@ -13,7 +13,7 @@ public class PaperBrainImplicitEffect extends HarmfulBlankImplicitEffect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.PAPER_BRAIN_ENCHANTMENT_ACTIVE.get()) {
-                entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC.setDamageBypassesArmor(),entityLivingBaseIn.getRNG().nextInt(4)+5);
+            entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC.setDamageBypassesArmor(), entityLivingBaseIn.getRNG().nextInt(4) + 5);
         }
     }
 

@@ -1,26 +1,26 @@
 package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
 
-public class ResentfulSoulEnchantment extends Enchantment{
+public class ResentfulSoulEnchantment extends Enchantment {
     public ResentfulSoulEnchantment() {
         super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD);
     }
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -39,19 +39,23 @@ public class ResentfulSoulEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.RESENTFUL_SOUL.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.RESENTFUL_SOUL.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.RESENTFUL_SOUL.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.RESENTFUL_SOUL.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.RESENTFUL_SOUL.get();
+        return Configuration.AcquirableSetting.RESENTFUL_SOUL.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.RESENTFUL_SOUL.get())
+        if (Configuration.AcquirableSetting.RESENTFUL_SOUL.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

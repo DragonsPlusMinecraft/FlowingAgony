@@ -18,13 +18,19 @@ public class ImplicitBaseEffect extends Effect {
     }
 
     @Override
-    public boolean shouldRender(EffectInstance effect) { return false; }
+    public boolean shouldRender(EffectInstance effect) {
+        return false;
+    }
 
     @Override
-    public boolean shouldRenderInvText(EffectInstance effect) { return false; }
+    public boolean shouldRenderInvText(EffectInstance effect) {
+        return false;
+    }
 
     @Override
-    public boolean shouldRenderHUD(EffectInstance effect) { return false; }
+    public boolean shouldRenderHUD(EffectInstance effect) {
+        return false;
+    }
 
     @Override
     public List<ItemStack> getCurativeItems() {

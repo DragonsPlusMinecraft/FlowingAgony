@@ -1,9 +1,9 @@
 package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
@@ -15,12 +15,12 @@ public class ComeBackAtDuskEnchantment extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -39,19 +39,23 @@ public class ComeBackAtDuskEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return false; }
+    public boolean canVillagerTrade() {
+        return false;
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.COME_BACK_AT_DUSK.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.COME_BACK_AT_DUSK.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.COME_BACK_AT_DUSK.get();
+        return Configuration.AcquirableSetting.COME_BACK_AT_DUSK.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.COME_BACK_AT_DUSK.get())
+        if (Configuration.AcquirableSetting.COME_BACK_AT_DUSK.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

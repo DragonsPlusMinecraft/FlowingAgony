@@ -1,26 +1,26 @@
 package love.marblegate.flowingagony.enchantment.themistakenscategory;
 
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
 
-public class ScholarOfOriginalSinEnchantment extends Enchantment{
+public class ScholarOfOriginalSinEnchantment extends Enchantment {
     public ScholarOfOriginalSinEnchantment() {
         super(Rarity.RARE, EnchantmentType.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST);
     }
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -39,19 +39,23 @@ public class ScholarOfOriginalSinEnchantment extends Enchantment{
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.SCHOLAR_OF_ORIGINAL_SIN.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.SCHOLAR_OF_ORIGINAL_SIN.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.SCHOLAR_OF_ORIGINAL_SIN.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.SCHOLAR_OF_ORIGINAL_SIN.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.SCHOLAR_OF_ORIGINAL_SIN.get();
+        return Configuration.AcquirableSetting.SCHOLAR_OF_ORIGINAL_SIN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.SCHOLAR_OF_ORIGINAL_SIN.get())
+        if (Configuration.AcquirableSetting.SCHOLAR_OF_ORIGINAL_SIN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

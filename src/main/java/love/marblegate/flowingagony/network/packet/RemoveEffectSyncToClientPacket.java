@@ -12,7 +12,8 @@ import java.util.function.Supplier;
 
 public class RemoveEffectSyncToClientPacket {
     private final Effect effect;
-    public static IProxy proxy = new IProxy() {};
+    public static IProxy proxy = new IProxy() {
+    };
 
     public RemoveEffectSyncToClientPacket(Effect effect) {
         this.effect = effect;
@@ -27,7 +28,7 @@ public class RemoveEffectSyncToClientPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ctx.get().enqueueWork(() -> {
                 proxy = new ClientProxy();
                 proxy.removeEffect(effect);

@@ -14,7 +14,7 @@ public class ExtremeHatredEffect extends Effect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.EXTREME_HATRED.get()) {
-            if(entityLivingBaseIn instanceof PlayerEntity){
+            if (entityLivingBaseIn instanceof PlayerEntity) {
                 crazilyComsumeFoodLevel((PlayerEntity) entityLivingBaseIn);
             }
         }
@@ -26,11 +26,10 @@ public class ExtremeHatredEffect extends Effect {
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        int k = (15/(amplifier+1));
+        int k = (15 / (amplifier + 1));
         if (k > 0) {
             return duration % k == 0;
-        }
-        else {
+        } else {
             return false;
         }
     }

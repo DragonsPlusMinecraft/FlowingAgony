@@ -1,9 +1,9 @@
 package love.marblegate.flowingagony.enchantment.madeofsufferingcategory;
 
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemStack;
@@ -15,12 +15,12 @@ public class PrayerOfPainEnchantment extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -36,19 +36,23 @@ public class PrayerOfPainEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.PRAYER_OF_PAIN.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.PRAYER_OF_PAIN.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.PRAYER_OF_PAIN.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.PRAYER_OF_PAIN.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.PRAYER_OF_PAIN.get();
+        return Configuration.AcquirableSetting.PRAYER_OF_PAIN.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.PRAYER_OF_PAIN.get())
+        if (Configuration.AcquirableSetting.PRAYER_OF_PAIN.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

@@ -19,18 +19,18 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class CapabilityEventHandler {
 
     @SubscribeEvent
-    public static void AbnormalJoyCapEvent(LivingDamageEvent event){
-        if(!event.getEntityLiving().world.isRemote()){
-            if(event.getSource().getTrueSource() instanceof PlayerEntity){
+    public static void AbnormalJoyCapEvent(LivingDamageEvent event) {
+        if (!event.getEntityLiving().world.isRemote()) {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity) {
                 LazyOptional<IAbnormalJoyCapability> pointCap = event.getSource().getTrueSource().getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                 pointCap.ifPresent(
-                        cap-> {
-                            if(cap.get()>=1){
-                                if(cap.get()>=5){
-                                    event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(),15);
+                        cap -> {
+                            if (cap.get() >= 1) {
+                                if (cap.get() >= 5) {
+                                    event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(), 15);
                                     cap.decrease(5f);
-                                }else{
-                                    event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(), MathHelper.floor(cap.get())*2f);
+                                } else {
+                                    event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setDamageBypassesArmor(), MathHelper.floor(cap.get()) * 2f);
                                     cap.decrease(MathHelper.floor(cap.get()));
                                 }
                             }

@@ -3,7 +3,7 @@ package love.marblegate.flowingagony.capibility.lastsweetdream;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class LastSweetDreamCapabilityStardardImpl implements ILastSweetDreamCapability{
+public class LastSweetDreamCapabilityStardardImpl implements ILastSweetDreamCapability {
     private ItemStack itemStack;
 
     public LastSweetDreamCapabilityStardardImpl() {

@@ -25,5 +25,5 @@ public class CustomRenderType extends RenderType {
                     .lightmap(LIGHTMAP_DISABLED)
                     .writeMask(COLOR_WRITE)
                     .build(false));
-    
+
 }

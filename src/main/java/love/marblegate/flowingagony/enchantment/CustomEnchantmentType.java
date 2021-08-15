@@ -9,10 +9,10 @@ import static net.minecraft.enchantment.EnchantmentType.BREAKABLE;
 import static net.minecraft.enchantment.EnchantmentType.WEARABLE;
 
 public class CustomEnchantmentType {
-    public static final EnchantmentType AXE_AND_SWORD = EnchantmentType.create("flowingagony:AXE_AND_SWORD", Item-> Item instanceof SwordItem || Item instanceof AxeItem);
-    public static final EnchantmentType SWORD_ARMOR_AND_TOOL = EnchantmentType.create("flowingagony:SWORD_ARMOR_AND_TOOL", Item-> Item instanceof ArmorItem || Item instanceof TieredItem);
-    public static final EnchantmentType BOW_AND_CROSSBOW = EnchantmentType.create("flowingagony:BOW_AND_CROSSBOW", Item-> Item instanceof ShootableItem);
-    public static final EnchantmentType PICKAXE = EnchantmentType.create("flowingagony:PICKAXE", Item-> Item instanceof PickaxeItem);
+    public static final EnchantmentType AXE_AND_SWORD = EnchantmentType.create("flowingagony:AXE_AND_SWORD", Item -> Item instanceof SwordItem || Item instanceof AxeItem);
+    public static final EnchantmentType SWORD_ARMOR_AND_TOOL = EnchantmentType.create("flowingagony:SWORD_ARMOR_AND_TOOL", Item -> Item instanceof ArmorItem || Item instanceof TieredItem);
+    public static final EnchantmentType BOW_AND_CROSSBOW = EnchantmentType.create("flowingagony:BOW_AND_CROSSBOW", Item -> Item instanceof ShootableItem);
+    public static final EnchantmentType PICKAXE = EnchantmentType.create("flowingagony:PICKAXE", Item -> Item instanceof PickaxeItem);
     public static final EnchantmentType ALMOST_EVERYTHING = EnchantmentType.create("flowingagony:ALMOST_EVERYTHING", Item -> Item instanceof IVanishable || Block.getBlockFromItem(Item) instanceof IVanishable || BREAKABLE.canEnchantItem(Item) || WEARABLE.canEnchantItem(Item));
 
     public static void addToItemGroup() {

@@ -11,9 +11,9 @@ public class CursedAntipathyParticle extends SpriteTexturedParticle {
     protected CursedAntipathyParticle(ClientWorld world, double x, double y, double z, float diameter) {
         super(world, x, y, z);
         maxAge = 100;
-        motionX = (Math.random() * 2.0D - 1.0D) * (double)0.1F;
+        motionX = (Math.random() * 2.0D - 1.0D) * (double) 0.1F;
         motionY = 0F;
-        motionZ = (Math.random() * 2.0D - 1.0D) * (double)0.1F;
+        motionZ = (Math.random() * 2.0D - 1.0D) * (double) 0.1F;
         final float PARTICLE_SCALE_FOR_ONE_METRE = 0.1F;
         particleScale = PARTICLE_SCALE_FOR_ONE_METRE * diameter;
         canCollide = true;

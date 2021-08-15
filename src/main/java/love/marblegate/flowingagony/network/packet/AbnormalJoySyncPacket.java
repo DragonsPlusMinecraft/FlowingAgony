@@ -28,11 +28,11 @@ public class AbnormalJoySyncPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()-> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ctx.get().enqueueWork(() -> {
                 LazyOptional<IAbnormalJoyCapability> pointCap = Minecraft.getInstance().player.getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
                 pointCap.ifPresent(
-                        cap-> cap.set(value)
+                        cap -> cap.set(value)
                 );
             });
             ctx.get().setPacketHandled(true);

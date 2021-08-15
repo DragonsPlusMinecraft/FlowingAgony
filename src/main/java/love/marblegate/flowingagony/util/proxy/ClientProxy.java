@@ -1,11 +1,11 @@
 package love.marblegate.flowingagony.util.proxy;
 
-import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
-import love.marblegate.flowingagony.registry.SoundRegistry;
 import love.marblegate.flowingagony.fx.sound.ExtremeHatredFinalStageSound;
 import love.marblegate.flowingagony.fx.sound.ExtremeHatredFirstStageSound;
 import love.marblegate.flowingagony.fx.sound.ExtremeHatredMediumStageSound;
 import love.marblegate.flowingagony.fx.sound.MiraculousEscapeHeartbeatSound;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
+import love.marblegate.flowingagony.registry.SoundRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.particles.IParticleData;
@@ -14,7 +14,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class ClientProxy implements IProxy{
+public class ClientProxy implements IProxy {
     @Override
     public void addParticleForceNear(IParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         World world = Minecraft.getInstance().world;
@@ -26,8 +26,8 @@ public class ClientProxy implements IProxy{
 
     @Override
     public void handleISound(PlaySoundPacket.ModSoundType type, boolean onOrOff) {
-        if(type== PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT){
-            if(onOrOff){
+        if (type == PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT) {
+            if (onOrOff) {
                 Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.MIRACULOUS_ESCAPE_HEARTBEAT.getId(), SoundCategory.PLAYERS);
                 Minecraft.getInstance().getSoundHandler().play(new MiraculousEscapeHeartbeatSound(Minecraft.getInstance().player));
             } else {
@@ -35,16 +35,16 @@ public class ClientProxy implements IProxy{
             }
 
         }
-        if(type== PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE){
-            if(onOrOff){
+        if (type == PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE) {
+            if (onOrOff) {
                 Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredFirstStageSound(Minecraft.getInstance().player));
             } else {
                 Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
             }
 
         }
-        if(type== PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE){
-            if(onOrOff){
+        if (type == PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE) {
+            if (onOrOff) {
                 Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
                 Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredMediumStageSound(Minecraft.getInstance().player));
             } else {
@@ -52,12 +52,11 @@ public class ClientProxy implements IProxy{
             }
 
         }
-        if(type== PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE){
-            if(onOrOff) {
+        if (type == PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE) {
+            if (onOrOff) {
                 Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_MEDIUM_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
                 Minecraft.getInstance().getSoundHandler().play(new ExtremeHatredFinalStageSound(Minecraft.getInstance().player));
-            }
-            else{
+            } else {
                 Minecraft.getInstance().getSoundHandler().stop(SoundRegistry.EXTREME_HATRED_FINAL_STAGE_SOUND.getId(), SoundCategory.PLAYERS);
             }
         }
@@ -69,7 +68,7 @@ public class ClientProxy implements IProxy{
     }
 
     @Override
-    public void removeEffect(Effect effect){
+    public void removeEffect(Effect effect) {
         Minecraft.getInstance().player.removeActivePotionEffect(effect.getEffect());
     }
 }

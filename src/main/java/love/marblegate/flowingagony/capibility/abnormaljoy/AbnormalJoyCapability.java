@@ -23,13 +23,13 @@ public class AbnormalJoyCapability {
         @Override
         public INBT writeNBT(Capability<IAbnormalJoyCapability> capability, IAbnormalJoyCapability instance, Direction side) {
             CompoundNBT compoundNBT = new CompoundNBT();
-            compoundNBT.putFloat("abnormal_joy",instance.get());
+            compoundNBT.putFloat("abnormal_joy", instance.get());
             return compoundNBT;
         }
 
         @Override
         public void readNBT(Capability<IAbnormalJoyCapability> capability, IAbnormalJoyCapability instance, Direction side, INBT nbt) {
-            float abnormalJoyPoint = ((CompoundNBT)nbt).getFloat("abnormal_joy");
+            float abnormalJoyPoint = ((CompoundNBT) nbt).getFloat("abnormal_joy");
             instance.set(abnormalJoyPoint);
         }
     }

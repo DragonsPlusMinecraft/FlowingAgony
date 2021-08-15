@@ -18,7 +18,7 @@ public class CapabilityTransfer {
 
     @SubscribeEvent
     public static void migrateCapDataWhenPlayerRespawn(PlayerEvent.Clone event) {
-        if(!event.getPlayer().world.isRemote()){
+        if (!event.getPlayer().world.isRemote()) {
             LazyOptional<IHatredBloodlineStatusCapability> oldHatredBloodStatus = event.getOriginal().getCapability(HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY);
             LazyOptional<IHatredBloodlineStatusCapability> newHatredBloodStatus = event.getPlayer().getCapability(HatredBloodlineStatusCapability.HATRED_BLOODLINE_STATUS_CAPABILITY);
             if (oldHatredBloodStatus.isPresent() && newHatredBloodStatus.isPresent()) {

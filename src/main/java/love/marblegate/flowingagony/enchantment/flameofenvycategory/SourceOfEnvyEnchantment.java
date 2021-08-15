@@ -14,12 +14,12 @@ public class SourceOfEnvyEnchantment extends Enchantment {
 
     @Override
     public int getMinEnchantability(int p_77321_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_77321_1_,true);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
     public int getMaxEnchantability(int p_223551_1_) {
-        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(),p_223551_1_,false);
+        return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
     @Override
@@ -28,19 +28,23 @@ public class SourceOfEnvyEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() { return Configuration.SOURCE_OF_ENVY.get(); }
+    public boolean canVillagerTrade() {
+        return Configuration.AcquirableSetting.SOURCE_OF_ENVY.get();
+    }
 
     @Override
-    public boolean canGenerateInLoot() { return Configuration.SOURCE_OF_ENVY.get(); }
+    public boolean canGenerateInLoot() {
+        return Configuration.AcquirableSetting.SOURCE_OF_ENVY.get();
+    }
 
     @Override
     public boolean isAllowedOnBooks() {
-        return Configuration.SOURCE_OF_ENVY.get();
+        return Configuration.AcquirableSetting.SOURCE_OF_ENVY.get();
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if(Configuration.SOURCE_OF_ENVY.get())
+        if (Configuration.AcquirableSetting.SOURCE_OF_ENVY.get())
             return super.canApplyAtEnchantingTable(stack);
         else
             return false;

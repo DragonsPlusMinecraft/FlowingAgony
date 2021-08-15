@@ -12,7 +12,7 @@ public interface ICoolDown {
 
     void decrease(CoolDownType coolDownType);
 
-    Map<CoolDownType,Integer> getMap();
+    Map<CoolDownType, Integer> getMap();
 
-    void setMap(Map<CoolDownType,Integer> coolDownMap);
+    void setMap(Map<CoolDownType, Integer> coolDownMap);
 }
