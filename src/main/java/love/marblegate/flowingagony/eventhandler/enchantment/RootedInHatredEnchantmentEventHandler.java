@@ -12,6 +12,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -26,15 +27,13 @@ public class RootedInHatredEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doResentfulSoulEnchantmentEvent(LivingDamageEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
-            if (!event.isCanceled()) {
-                if (event.getEntityLiving() instanceof PlayerEntity) {
-                    if (event.getAmount() >= event.getEntityLiving().getHealth()) {
-                        int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.RESENTFUL_SOUL.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                        if (enchantmentLvl != 0) {
-                            if (event.getEntityLiving().getLastAttackedEntityTime() <= (25 + enchantmentLvl * 25)) {
-                                event.setCanceled(true);
-                            }
+        if (!event.getEntityLiving().world.isRemote() && !event.isCanceled()) {
+            if (event.getEntityLiving() instanceof PlayerEntity && event.getSource() != DamageSource.OUT_OF_WORLD && !event.getSource().getDamageType().equals("flowingagony.burial_object_curse")) {
+                if (event.getAmount() >= event.getEntityLiving().getHealth()) {
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.RESENTFUL_SOUL.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    if (enchantmentLvl != 0) {
+                        if (event.getEntityLiving().getLastAttackedEntityTime() <= (25 + enchantmentLvl * 25)) {
+                            event.setCanceled(true);
                         }
                     }
                 }
@@ -44,52 +43,50 @@ public class RootedInHatredEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doTooResentfulToDieEnchantmentEvent(LivingDamageEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
-            if (!event.isCanceled()) {
-                if (event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().equals(event.getSource().getTrueSource())) {
-                    if (event.getAmount() >= event.getEntityLiving().getHealth()) {
-                        int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.TOO_RESENTFUL_TO_DIE.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                        if (!((PlayerEntity) event.getEntityLiving()).isPotionActive(EffectRegistry.EXTREME_HATRED.get())) {
-                            if (enchantmentLvl != 0) {
-                                ((PlayerEntity) event.getEntityLiving()).heal(1 + enchantmentLvl * 3);
-                                ((PlayerEntity) event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.EXTREME_HATRED.get(), 7200));
+        if (!event.getEntityLiving().world.isRemote() && !event.isCanceled()) {
+            if (event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().equals(event.getSource().getTrueSource()) && event.getSource() != DamageSource.OUT_OF_WORLD && !event.getSource().getDamageType().equals("flowingagony.burial_object_curse")) {
+                if (event.getAmount() >= event.getEntityLiving().getHealth()) {
+                    int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((PlayerEntity) event.getEntityLiving()), EnchantmentRegistry.TOO_RESENTFUL_TO_DIE.get(), EquipmentSlotType.HEAD, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                    if (!((PlayerEntity) event.getEntityLiving()).isPotionActive(EffectRegistry.EXTREME_HATRED.get())) {
+                        if (enchantmentLvl != 0) {
+                            ((PlayerEntity) event.getEntityLiving()).heal(1 + enchantmentLvl * 3);
+                            ((PlayerEntity) event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.EXTREME_HATRED.get(), 7200));
+                            event.setCanceled(true);
+                            //Play Sound Effect - Stage 1
+                            if (!event.getEntityLiving().world.isRemote) {
+                                Networking.INSTANCE.send(
+                                        PacketDistributor.PLAYER.with(
+                                                () -> (ServerPlayerEntity) event.getEntityLiving()
+                                        ),
+                                        new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true));
+                            }
+                        }
+                    } else {
+                        if (enchantmentLvl != 0) {
+                            int potionLvl = ((PlayerEntity) event.getEntityLiving()).getActivePotionEffect(EffectRegistry.EXTREME_HATRED.get()).getAmplifier() + 1;
+                            if (potionLvl == 1) {
+                                ((PlayerEntity) event.getEntityLiving()).heal(1 + enchantmentLvl * 2);
+                                ((PlayerEntity) event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.EXTREME_HATRED.get(), 7200, 1));
                                 event.setCanceled(true);
-                                //Play Sound Effect - Stage 1
+                                //Play Sound Effect - Stage 2
                                 if (!event.getEntityLiving().world.isRemote) {
                                     Networking.INSTANCE.send(
                                             PacketDistributor.PLAYER.with(
                                                     () -> (ServerPlayerEntity) event.getEntityLiving()
                                             ),
-                                            new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true));
+                                            new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true));
                                 }
-                            }
-                        } else {
-                            if (enchantmentLvl != 0) {
-                                int potionLvl = ((PlayerEntity) event.getEntityLiving()).getActivePotionEffect(EffectRegistry.EXTREME_HATRED.get()).getAmplifier() + 1;
-                                if (potionLvl == 1) {
-                                    ((PlayerEntity) event.getEntityLiving()).heal(1 + enchantmentLvl * 2);
-                                    ((PlayerEntity) event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.EXTREME_HATRED.get(), 7200, 1));
-                                    event.setCanceled(true);
-                                    //Play Sound Effect - Stage 2
-                                    if (!event.getEntityLiving().world.isRemote) {
-                                        Networking.INSTANCE.send(
-                                                PacketDistributor.PLAYER.with(
-                                                        () -> (ServerPlayerEntity) event.getEntityLiving()
-                                                ),
-                                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true));
-                                    }
-                                } else if (potionLvl == 2) {
-                                    ((PlayerEntity) event.getEntityLiving()).heal(1 + enchantmentLvl);
-                                    ((PlayerEntity) event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.EXTREME_HATRED.get(), 7200, 2));
-                                    event.setCanceled(true);
-                                    //Play Sound Effect - Stage 3
-                                    if (!event.getEntityLiving().world.isRemote) {
-                                        Networking.INSTANCE.send(
-                                                PacketDistributor.PLAYER.with(
-                                                        () -> (ServerPlayerEntity) event.getEntityLiving()
-                                                ),
-                                                new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true));
-                                    }
+                            } else if (potionLvl == 2) {
+                                ((PlayerEntity) event.getEntityLiving()).heal(1 + enchantmentLvl);
+                                ((PlayerEntity) event.getEntityLiving()).addPotionEffect(new EffectInstance(EffectRegistry.EXTREME_HATRED.get(), 7200, 2));
+                                event.setCanceled(true);
+                                //Play Sound Effect - Stage 3
+                                if (!event.getEntityLiving().world.isRemote) {
+                                    Networking.INSTANCE.send(
+                                            PacketDistributor.PLAYER.with(
+                                                    () -> (ServerPlayerEntity) event.getEntityLiving()
+                                            ),
+                                            new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true));
                                 }
                             }
                         }

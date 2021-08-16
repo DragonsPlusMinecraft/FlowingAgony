@@ -1,6 +1,7 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
@@ -23,7 +24,7 @@ public class SurvivalTricksEnchantmentEventHandler {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void doSurvivalShortcutEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
-            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
+            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD && !event.getSource().getDamageType().equals("flowingagony.burial_object_curse")) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
                     int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_SHORTCUT.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if (enchantmentLvl != 0) {
@@ -45,7 +46,7 @@ public class SurvivalTricksEnchantmentEventHandler {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void doSurvivalSRuseEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
-            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
+            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD && !event.getSource().getDamageType().equals("flowingagony.burial_object_curse")) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
                     int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.SURVIVAL_RUSE.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if (enchantmentLvl != 0) {
@@ -66,7 +67,7 @@ public class SurvivalTricksEnchantmentEventHandler {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void doNecessaryEvilEnchantmentEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().world.isRemote()) {
-            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD) {
+            if (!event.isCanceled() && event.getSource() != DamageSource.OUT_OF_WORLD && !event.getSource().getDamageType().equals("flowingagony.burial_object_curse")) {
                 if (event.getEntityLiving() instanceof PlayerEntity) {
                     int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.NECESSARY_EVIL.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if (enchantmentLvl != 0) {
