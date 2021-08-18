@@ -1,7 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;

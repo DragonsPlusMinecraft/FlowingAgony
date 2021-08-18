@@ -82,17 +82,17 @@ public class Configuration {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.push("general");
         GeneralSetting.VILLAGER_SAFE_MODE = builder.comment(
-                "If it's set to \"true\", \"Lightburn Fungal Parasitic\" cannot spread negative effect to villager,",
-                "and \"Survival Shortcut\", \"Necessary Evil\", \"Pilferage Creed\" cannot damage villager.")
+                        "If it's set to \"true\", \"Lightburn Fungal Parasitic\" cannot spread negative effect to villager,",
+                        "and \"Survival Shortcut\", \"Necessary Evil\", \"Pilferage Creed\" cannot damage villager.")
                 .define("VILLAGER_SAFE_MODE", false);
         GeneralSetting.INSANE_POET_DAMAGE_REDUCTION = builder.comment(
-                "The attack damage reduction ratio of \"Insane Poet\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
+                        "The attack damage reduction ratio of \"Insane Poet\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
                 .defineInRange("INSANE_POET_DAMAGE_REDUCTION", 0.9, 0, 1);
         GeneralSetting.SHOCK_THERAPY_DAMAGE_REDUCTION = builder.comment(
-                "The attack damage reduction ratio of \"Shock Therapy\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
+                        "The attack damage reduction ratio of \"Shock Therapy\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
                 .defineInRange("SHOCK_THERAPY_DAMAGE_REDUCTION", 0.9, 0, 1);
         GeneralSetting.PAPER_BRAIN_DAMAGE_REDUCTION = builder.comment(
-                "The attack damage reduction ratio of \"Paper Brain\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
+                        "The attack damage reduction ratio of \"Paper Brain\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
                 .defineInRange("PAPER_BRAIN_DAMAGE_REDUCTION", 0.9, 0, 1);
         builder.pop();
 
