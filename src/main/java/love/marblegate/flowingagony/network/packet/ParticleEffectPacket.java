@@ -3,10 +3,10 @@ package love.marblegate.flowingagony.network.packet;
 import love.marblegate.flowingagony.fx.particle.cursedantipathyparticle.CursedAntipathyParticleData;
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -27,8 +27,8 @@ public class ParticleEffectPacket {
         this.args = args;
     }
 
-    public ParticleEffectPacket(PacketBuffer buffer) {
-        type = buffer.readEnumValue(EffectType.class);
+    public ParticleEffectPacket(FriendlyByteBuf buffer) {
+        type = buffer.readEnum(EffectType.class);
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
@@ -40,8 +40,8 @@ public class ParticleEffectPacket {
     }
 
 
-    public void toBytes(PacketBuffer buffer) {
-        buffer.writeEnumValue(type);
+    public void toBytes(FriendlyByteBuf buffer) {
+        buffer.writeEnum(type);
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);

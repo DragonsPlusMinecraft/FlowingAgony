@@ -3,23 +3,23 @@ package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.item.ItemStack;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.ItemStack;
 
 public class TooResentfulToDieEnchantment extends Enchantment {
     public TooResentfulToDieEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD);
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, EquipmentSlotTypeSet.HEAD);
     }
 
     @Override
-    public int getMinEnchantability(int p_77321_1_) {
+    public int getMinCost(int p_77321_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
-    public int getMaxEnchantability(int p_223551_1_) {
+    public int getMaxCost(int p_223551_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
@@ -29,22 +29,22 @@ public class TooResentfulToDieEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.RESENTFUL_SOUL.get();
+    public boolean checkCompatibility(Enchantment p_77326_1_) {
+        return super.checkCompatibility(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.RESENTFUL_SOUL.get();
     }
 
     @Override
-    public boolean isTreasureEnchantment() {
+    public boolean isTreasureOnly() {
         return true;
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return Configuration.AcquirableSetting.TOO_RESENTFUL_TO_DIE.get();
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return Configuration.AcquirableSetting.TOO_RESENTFUL_TO_DIE.get();
     }
 

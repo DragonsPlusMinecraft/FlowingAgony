@@ -1,13 +1,13 @@
 package love.marblegate.flowingagony.network.packet;
 
-import love.marblegate.flowingagony.registry.SoundRegistry;
+import love.marblegate.flowingagony.fx.SoundRegistry;
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -21,8 +21,8 @@ public class PlaySoundWIthLocationPacket {
     };
 
 
-    public PlaySoundWIthLocationPacket(PacketBuffer buffer) {
-        type = buffer.readEnumValue(ModSoundType.class);
+    public PlaySoundWIthLocationPacket(FriendlyByteBuf buffer) {
+        type = buffer.readEnum(ModSoundType.class);
         onOrOff = buffer.readBoolean();
         x = buffer.readDouble();
         y = buffer.readDouble();
@@ -38,8 +38,8 @@ public class PlaySoundWIthLocationPacket {
     }
 
 
-    public void toBytes(PacketBuffer buffer) {
-        buffer.writeEnumValue(type);
+    public void toBytes(FriendlyByteBuf buffer) {
+        buffer.writeEnum(type);
         buffer.writeBoolean(onOrOff);
         buffer.writeDouble(x);
         buffer.writeDouble(y);
@@ -51,7 +51,7 @@ public class PlaySoundWIthLocationPacket {
             proxy = new ClientProxy();
             ctx.get().enqueueWork(() -> {
                 if (type == ModSoundType.MALICE_OUTBREAK_KNOCKBACK_SOUND) {
-                    proxy.playSoundWithLocation(SoundRegistry.MALICE_OUTBREAK_KNOCKBACK_SOUND.get(), SoundCategory.PLAYERS, 5, 0.5F, x, y, z, true);
+                    proxy.playSoundWithLocation(SoundRegistry.MALICE_OUTBREAK_KNOCKBACK_SOUND.get(), SoundSource.PLAYERS, 5, 0.5F, x, y, z, true);
                 }
             });
             ctx.get().setPacketHandled(true);

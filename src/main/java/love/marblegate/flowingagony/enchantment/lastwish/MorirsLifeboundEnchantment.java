@@ -3,24 +3,24 @@ package love.marblegate.flowingagony.enchantment.lastwish;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.ItemStack;
 
 public class MorirsLifeboundEnchantment extends Enchantment {
     public MorirsLifeboundEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentType.BREAKABLE, EquipmentSlotTypeSet.ALL);
+        super(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, EquipmentSlotTypeSet.ALL);
     }
 
     @Override
-    public int getMinEnchantability(int p_77321_1_) {
+    public int getMinCost(int p_77321_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
-    public int getMaxEnchantability(int p_223551_1_) {
+    public int getMaxCost(int p_223551_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
@@ -30,25 +30,25 @@ public class MorirsLifeboundEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_)
+    public boolean checkCompatibility(Enchantment p_77326_1_) {
+        return super.checkCompatibility(p_77326_1_)
                 && p_77326_1_ != EnchantmentRegistry.GUIDENS_REGRET.get()
                 && p_77326_1_ != EnchantmentRegistry.MORIRS_DEATHWISH.get()
                 && p_77326_1_ != Enchantments.MENDING;
     }
 
     @Override
-    public boolean isTreasureEnchantment() {
+    public boolean isTreasureOnly() {
         return true;
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return Configuration.AcquirableSetting.MORIRS_LIFEBOUND.get();
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return Configuration.AcquirableSetting.MORIRS_LIFEBOUND.get();
     }
 

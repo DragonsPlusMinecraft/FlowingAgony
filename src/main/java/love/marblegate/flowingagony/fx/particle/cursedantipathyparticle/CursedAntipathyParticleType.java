@@ -2,7 +2,7 @@ package love.marblegate.flowingagony.fx.particle.cursedantipathyparticle;
 
 
 import com.mojang.serialization.Codec;
-import net.minecraft.particles.ParticleType;
+import net.minecraft.core.particles.ParticleType;
 
 public class CursedAntipathyParticleType extends ParticleType<CursedAntipathyParticleData> {
     public CursedAntipathyParticleType() {
@@ -10,7 +10,7 @@ public class CursedAntipathyParticleType extends ParticleType<CursedAntipathyPar
     }
 
     @Override
-    public Codec<CursedAntipathyParticleData> func_230522_e_() {
+    public Codec<CursedAntipathyParticleData> codec() {
         return Codec.unit(new CursedAntipathyParticleData(0));
     }
 }

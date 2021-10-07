@@ -1,24 +1,24 @@
 package love.marblegate.flowingagony.enchantment.lensofmalicecategory;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
+import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.ItemStack;
 
 public class BackAndFillEnchantment extends Enchantment {
     public BackAndFillEnchantment() {
-        super(Rarity.VERY_RARE, CustomEnchantmentType.BOW_AND_CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND);
+        super(Rarity.VERY_RARE, CustomEnchantmentCategory.BOW_AND_CROSSBOW, EquipmentSlotTypeSet.MAIN_HAND);
     }
 
     @Override
-    public int getMinEnchantability(int p_77321_1_) {
+    public int getMinCost(int p_77321_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
-    public int getMaxEnchantability(int p_223551_1_) {
+    public int getMaxCost(int p_223551_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
@@ -29,12 +29,12 @@ public class BackAndFillEnchantment extends Enchantment {
 
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return Configuration.AcquirableSetting.BACK_AND_FILL.get();
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return Configuration.AcquirableSetting.BACK_AND_FILL.get();
     }
 

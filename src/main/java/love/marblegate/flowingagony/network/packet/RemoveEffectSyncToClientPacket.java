@@ -2,28 +2,28 @@ package love.marblegate.flowingagony.network.packet;
 
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.potion.Effect;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 public class RemoveEffectSyncToClientPacket {
-    private final Effect effect;
+    private final MobEffect effect;
     public static IProxy proxy = new IProxy() {
     };
 
-    public RemoveEffectSyncToClientPacket(Effect effect) {
+    public RemoveEffectSyncToClientPacket(MobEffect effect) {
         this.effect = effect;
     }
 
-    public RemoveEffectSyncToClientPacket(PacketBuffer buffer) {
-        effect = buffer.readRegistryIdSafe(Effect.class);
+    public RemoveEffectSyncToClientPacket(FriendlyByteBuf buffer) {
+        effect = buffer.readRegistryIdSafe(MobEffect.class);
     }
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeRegistryId(effect);
     }
 

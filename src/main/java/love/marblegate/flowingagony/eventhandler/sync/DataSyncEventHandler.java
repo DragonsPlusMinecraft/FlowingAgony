@@ -1,16 +1,16 @@
 package love.marblegate.flowingagony.eventhandler.sync;
 
-import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.CapabilityManager;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 @Mod.EventBusSubscriber()
 public class DataSyncEventHandler {
@@ -33,12 +33,12 @@ public class DataSyncEventHandler {
         syncAbnormalJoyCapability(event.getPlayer());
     }
 
-    private static void syncAbnormalJoyCapability(PlayerEntity player) {
-        LazyOptional<IAbnormalJoyCapability> pointCap = player.getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
+    private static void syncAbnormalJoyCapability(Player player) {
+        LazyOptional<AbnormalJoyCapability> pointCap = player.getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
         pointCap.ifPresent(
                 cap -> Networking.INSTANCE.send(
                         PacketDistributor.PLAYER.with(
-                                () -> (ServerPlayerEntity) player
+                                () -> (ServerPlayer) player
                         ),
                         new AbnormalJoySyncPacket(cap.get()))
         );

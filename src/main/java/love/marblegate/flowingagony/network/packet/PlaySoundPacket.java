@@ -2,10 +2,10 @@ package love.marblegate.flowingagony.network.packet;
 
 import love.marblegate.flowingagony.util.proxy.ClientProxy;
 import love.marblegate.flowingagony.util.proxy.IProxy;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -15,8 +15,8 @@ public class PlaySoundPacket {
     public static IProxy proxy = new IProxy() {
     };
 
-    public PlaySoundPacket(PacketBuffer buffer) {
-        type = buffer.readEnumValue(ModSoundType.class);
+    public PlaySoundPacket(FriendlyByteBuf buffer) {
+        type = buffer.readEnum(ModSoundType.class);
         onOrOff = buffer.readBoolean();
     }
 
@@ -26,8 +26,8 @@ public class PlaySoundPacket {
     }
 
 
-    public void toBytes(PacketBuffer buffer) {
-        buffer.writeEnumValue(type);
+    public void toBytes(FriendlyByteBuf buffer) {
+        buffer.writeEnum(type);
         buffer.writeBoolean(onOrOff);
     }
 

@@ -3,23 +3,23 @@ package love.marblegate.flowingagony.enchantment.themistakenscategory;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.item.ItemStack;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.ItemStack;
 
 public class ScholarOfOriginalSinEnchantment extends Enchantment {
     public ScholarOfOriginalSinEnchantment() {
-        super(Rarity.RARE, EnchantmentType.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST);
+        super(Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, EquipmentSlotTypeSet.CHEST);
     }
 
     @Override
-    public int getMinEnchantability(int p_77321_1_) {
+    public int getMinCost(int p_77321_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
-    public int getMaxEnchantability(int p_223551_1_) {
+    public int getMaxCost(int p_223551_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
@@ -29,22 +29,22 @@ public class ScholarOfOriginalSinEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.ORIGINAL_SIN_EROSION.get();
+    public boolean checkCompatibility(Enchantment p_77326_1_) {
+        return super.checkCompatibility(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.ORIGINAL_SIN_EROSION.get();
     }
 
     @Override
-    public boolean isTreasureEnchantment() {
+    public boolean isTreasureOnly() {
         return true;
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return Configuration.AcquirableSetting.SCHOLAR_OF_ORIGINAL_SIN.get();
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return Configuration.AcquirableSetting.SCHOLAR_OF_ORIGINAL_SIN.get();
     }
 

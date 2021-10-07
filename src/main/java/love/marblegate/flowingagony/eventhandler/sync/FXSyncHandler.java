@@ -2,13 +2,13 @@ package love.marblegate.flowingagony.eventhandler.sync;
 
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
-import love.marblegate.flowingagony.registry.EffectRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import love.marblegate.flowingagony.effect.EffectRegistry;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 @Mod.EventBusSubscriber()
 public class FXSyncHandler {
@@ -25,36 +25,36 @@ public class FXSyncHandler {
         reapplyFX(event.getPlayer());
     }
 
-    private static void reapplyFX(PlayerEntity player) {
-        if (!player.world.isRemote()) {
-            if (player.isPotionActive(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())) {
+    private static void reapplyFX(Player player) {
+        if (!player.level.isClientSide()) {
+            if (player.hasEffect(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())) {
                 Networking.INSTANCE.send(
                         PacketDistributor.PLAYER.with(
-                                () -> (ServerPlayerEntity) player
+                                () -> (ServerPlayer) player
                         ),
                         new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true));
             }
-            if (player.isPotionActive(EffectRegistry.EXTREME_HATRED.get())) {
-                int temp = player.getActivePotionEffect(EffectRegistry.EXTREME_HATRED.get()).getAmplifier();
+            if (player.hasEffect(EffectRegistry.EXTREME_HATRED.get())) {
+                int temp = player.getEffect(EffectRegistry.EXTREME_HATRED.get()).getAmplifier();
                 switch (temp) {
                     case 0:
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) player
+                                        () -> (ServerPlayer) player
                                 ),
                                 new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FIRST_STAGE, true));
                         break;
                     case 1:
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) player
+                                        () -> (ServerPlayer) player
                                 ),
                                 new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_MEDIUM_STAGE, true));
                         break;
                     case 2:
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) player
+                                        () -> (ServerPlayer) player
                                 ),
                                 new PlaySoundPacket(PlaySoundPacket.ModSoundType.EXTREME_HATRED_FINAL_STAGE, true));
                         break;

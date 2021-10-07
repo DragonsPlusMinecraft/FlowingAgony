@@ -1,29 +1,25 @@
 package love.marblegate.flowingagony.render;
 
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import org.lwjgl.opengl.GL11;
-
-import java.util.OptionalDouble;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import static com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS;
 
 public class CustomRenderType extends RenderType {
 
-    public CustomRenderType(String nameIn, VertexFormat formatIn, int drawModeIn, int bufferSizeIn, boolean useDelegateIn, boolean needsSortingIn, Runnable setupTaskIn, Runnable clearTaskIn) {
+    public CustomRenderType(String nameIn, VertexFormat formatIn, VertexFormat.Mode drawModeIn, int bufferSizeIn, boolean useDelegateIn, boolean needsSortingIn, Runnable setupTaskIn, Runnable clearTaskIn) {
         super(nameIn, formatIn, drawModeIn, bufferSizeIn, useDelegateIn, needsSortingIn, setupTaskIn, clearTaskIn);
     }
 
-    private static final LineState TARGET_INDICATOR_LINE = new LineState(OptionalDouble.of(5.0D));
-
-    public static final RenderType PERCEIVED_MALICE_INDICATOR = makeType("flowingagony.perceived_malice_indicator",
-            DefaultVertexFormats.POSITION_COLOR, GL11.GL_QUADS, 256,
-            RenderType.State.getBuilder()
-                    .transparency(TRANSLUCENT_TRANSPARENCY)
-                    .texture(NO_TEXTURE)
-                    .depthTest(DEPTH_ALWAYS)
-                    .cull(CULL_DISABLED)
-                    .lightmap(LIGHTMAP_DISABLED)
-                    .writeMask(COLOR_WRITE)
-                    .build(false));
+    public static final RenderType PERCEIVED_MALICE_INDICATOR = RenderType.create("flowingagony.perceived_malice_indicator",
+            DefaultVertexFormat.POSITION_COLOR, QUADS, 256, false, false,
+            RenderType.CompositeState.builder()
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setTextureState(NO_TEXTURE)
+                    .setDepthTestState(NO_DEPTH_TEST)
+                    .setCullState(NO_CULL)
+                    .setLightmapState(NO_LIGHTMAP)
+                    .setWriteMaskState(COLOR_WRITE)
+                    .createCompositeState(false));
 
 }

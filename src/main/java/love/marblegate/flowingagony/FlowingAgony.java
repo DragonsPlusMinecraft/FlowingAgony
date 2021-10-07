@@ -1,11 +1,11 @@
 package love.marblegate.flowingagony;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
-import love.marblegate.flowingagony.registry.EffectRegistry;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import love.marblegate.flowingagony.registry.ParticleRegistry;
-import love.marblegate.flowingagony.registry.SoundRegistry;
+import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
+import love.marblegate.flowingagony.effect.EffectRegistry;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.fx.ParticleRegistry;
+import love.marblegate.flowingagony.fx.SoundRegistry;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -23,6 +23,6 @@ public class FlowingAgony {
         SoundRegistry.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ParticleRegistry.PARTICLE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        CustomEnchantmentType.addToItemGroup();
+        CustomEnchantmentCategory.addToItemGroup();
     }
 }

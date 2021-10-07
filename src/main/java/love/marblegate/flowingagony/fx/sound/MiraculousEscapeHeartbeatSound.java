@@ -1,18 +1,18 @@
 package love.marblegate.flowingagony.fx.sound;
 
-import love.marblegate.flowingagony.registry.SoundRegistry;
-import net.minecraft.client.audio.TickableSound;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.util.SoundCategory;
+import love.marblegate.flowingagony.fx.SoundRegistry;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.sounds.SoundSource;
 
-public class MiraculousEscapeHeartbeatSound extends TickableSound {
-    private final ClientPlayerEntity player;
+public class MiraculousEscapeHeartbeatSound extends AbstractTickableSoundInstance {
+    private final LocalPlayer player;
 
-    public MiraculousEscapeHeartbeatSound(ClientPlayerEntity player) {
-        super(SoundRegistry.MIRACULOUS_ESCAPE_HEARTBEAT.get(), SoundCategory.PLAYERS);
+    public MiraculousEscapeHeartbeatSound(LocalPlayer player) {
+        super(SoundRegistry.MIRACULOUS_ESCAPE_HEARTBEAT.get(), SoundSource.PLAYERS);
         this.player = player;
-        repeat = true;
-        repeatDelay = 0;
+        looping = true;
+        delay = 0;
         volume = 20.0F;
         pitch = 1.0F;
     }
@@ -20,7 +20,7 @@ public class MiraculousEscapeHeartbeatSound extends TickableSound {
     @Override
     public void tick() {
         if (!player.isAlive()) {
-            finishPlaying();
+            stop();
         }
     }
 }

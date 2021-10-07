@@ -2,25 +2,25 @@ package love.marblegate.flowingagony.fx.particle.cursedantipathyparticle;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import love.marblegate.flowingagony.registry.ParticleRegistry;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
+import love.marblegate.flowingagony.fx.ParticleRegistry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 
 import java.util.Locale;
 
-public class CursedAntipathyParticleData implements IParticleData {
+public class CursedAntipathyParticleData implements ParticleOptions {
     private final float diameter;
 
-    public static final IDeserializer<CursedAntipathyParticleData> DESERIALIZER = new IDeserializer<CursedAntipathyParticleData>() {
+    public static final Deserializer<CursedAntipathyParticleData> DESERIALIZER = new Deserializer<CursedAntipathyParticleData>() {
         @Override
-        public CursedAntipathyParticleData deserialize(ParticleType<CursedAntipathyParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public CursedAntipathyParticleData fromCommand(ParticleType<CursedAntipathyParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             reader.expect(' ');
             return new CursedAntipathyParticleData(reader.readFloat());
         }
 
         @Override
-        public CursedAntipathyParticleData read(ParticleType<CursedAntipathyParticleData> particleTypeIn, PacketBuffer buffer) {
+        public CursedAntipathyParticleData fromNetwork(ParticleType<CursedAntipathyParticleData> particleTypeIn, FriendlyByteBuf buffer) {
             return new CursedAntipathyParticleData(buffer.readFloat());
         }
     };
@@ -35,12 +35,12 @@ public class CursedAntipathyParticleData implements IParticleData {
     }
 
     @Override
-    public void write(PacketBuffer buffer) {
+    public void writeToNetwork(FriendlyByteBuf buffer) {
         buffer.writeFloat(diameter);
     }
 
     @Override
-    public String getParameters() {
+    public String writeToString() {
         return String.format(Locale.ROOT, "%s %.2f",
                 getType().getRegistryName(), diameter);
     }

@@ -1,14 +1,14 @@
 package love.marblegate.flowingagony.enchantment;
 
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
 
 public class EquipmentSlotTypeSet {
-    public static final EquipmentSlotType[] HEAD = new EquipmentSlotType[]{EquipmentSlotType.HEAD};
-    public static final EquipmentSlotType[] CHEST = new EquipmentSlotType[]{EquipmentSlotType.CHEST};
-    public static final EquipmentSlotType[] LEGS = new EquipmentSlotType[]{EquipmentSlotType.LEGS};
-    public static final EquipmentSlotType[] FEET = new EquipmentSlotType[]{EquipmentSlotType.FEET};
-    public static final EquipmentSlotType[] MAIN_HAND = new EquipmentSlotType[]{EquipmentSlotType.MAINHAND};
-    public static final EquipmentSlotType[] ARMORS = new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET};
-    public static final EquipmentSlotType[] ALL = EquipmentSlotType.values();
+    public static final EquipmentSlot[] HEAD = new EquipmentSlot[]{EquipmentSlot.HEAD};
+    public static final EquipmentSlot[] CHEST = new EquipmentSlot[]{EquipmentSlot.CHEST};
+    public static final EquipmentSlot[] LEGS = new EquipmentSlot[]{EquipmentSlot.LEGS};
+    public static final EquipmentSlot[] FEET = new EquipmentSlot[]{EquipmentSlot.FEET};
+    public static final EquipmentSlot[] MAIN_HAND = new EquipmentSlot[]{EquipmentSlot.MAINHAND};
+    public static final EquipmentSlot[] ARMORS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
+    public static final EquipmentSlot[] ALL = EquipmentSlot.values();
 
 }

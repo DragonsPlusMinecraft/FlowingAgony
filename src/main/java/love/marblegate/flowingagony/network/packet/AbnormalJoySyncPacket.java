@@ -1,13 +1,13 @@
 package love.marblegate.flowingagony.network.packet;
 
-import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.CapabilityManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -18,19 +18,19 @@ public class AbnormalJoySyncPacket {
         this.value = value;
     }
 
-    public AbnormalJoySyncPacket(PacketBuffer buffer) {
+    public AbnormalJoySyncPacket(FriendlyByteBuf buffer) {
         value = buffer.readFloat();
     }
 
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeFloat(value);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ctx.get().enqueueWork(() -> {
-                LazyOptional<IAbnormalJoyCapability> pointCap = Minecraft.getInstance().player.getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
+                LazyOptional<AbnormalJoyCapability> pointCap = Minecraft.getInstance().player.getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
                 pointCap.ifPresent(
                         cap -> cap.set(value)
                 );

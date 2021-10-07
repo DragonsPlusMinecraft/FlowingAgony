@@ -3,23 +3,23 @@ package love.marblegate.flowingagony.enchantment.gloomyeracategory;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.item.ItemStack;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.ItemStack;
 
 public class DirtyMoneyEnchantment extends Enchantment {
     public DirtyMoneyEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentType.ARMOR, EquipmentSlotTypeSet.ARMORS);
+        super(Rarity.VERY_RARE, EnchantmentCategory.ARMOR, EquipmentSlotTypeSet.ARMORS);
     }
 
     @Override
-    public int getMinEnchantability(int p_77321_1_) {
+    public int getMinCost(int p_77321_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
-    public int getMaxEnchantability(int p_223551_1_) {
+    public int getMaxCost(int p_223551_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
@@ -29,22 +29,22 @@ public class DirtyMoneyEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean isTreasureEnchantment() {
+    public boolean isTreasureOnly() {
         return true;
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment p_77326_1_) {
-        return super.canApplyTogether(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.COME_BACK_AT_DUSK.get();
+    public boolean checkCompatibility(Enchantment p_77326_1_) {
+        return super.checkCompatibility(p_77326_1_) && p_77326_1_ != EnchantmentRegistry.COME_BACK_AT_DUSK.get();
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return Configuration.AcquirableSetting.DIRTY_MONEY.get();
     }
 

@@ -1,24 +1,24 @@
 package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.enchantment.CustomEnchantmentType;
+import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 
 public class TricksterEnchantment extends Enchantment {
     public TricksterEnchantment() {
-        super(Enchantment.Rarity.VERY_RARE, CustomEnchantmentType.AXE_AND_SWORD, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Enchantment.Rarity.VERY_RARE, CustomEnchantmentCategory.AXE_AND_SWORD, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
-    public int getMinEnchantability(int p_77321_1_) {
+    public int getMinCost(int p_77321_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_77321_1_, true);
     }
 
     @Override
-    public int getMaxEnchantability(int p_223551_1_) {
+    public int getMaxCost(int p_223551_1_) {
         return EnchantmentEnchantabilityCalculator.get(getRarity(), getMaxLevel(), p_223551_1_, false);
     }
 
@@ -28,12 +28,12 @@ public class TricksterEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return Configuration.AcquirableSetting.TRICKSTER.get();
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return Configuration.AcquirableSetting.TRICKSTER.get();
     }
 

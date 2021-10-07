@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class EnchantmentEnchantabilityCalculator {
     public static int get(Enchantment.Rarity rarity, int highestEnchantmentLevel, int currentLevel, boolean isMin) {

@@ -1,45 +1,49 @@
 package love.marblegate.flowingagony.render.hud;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import love.marblegate.flowingagony.capibility.abnormaljoy.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.abnormaljoy.IAbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
+import love.marblegate.flowingagony.capibility.CapabilityManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AbnormalJoyHUD extends AbstractGui {
+public class AbnormalJoyHUD extends GuiComponent {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
     private final ResourceLocation HUD = new ResourceLocation("flowingagony", "textures/gui/flowing_agony_hud_1.png");
-    private MatrixStack matrixStack;
+    private PoseStack matrixStack;
 
-    public AbnormalJoyHUD(MatrixStack matrixStack) {
-        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+    public AbnormalJoyHUD(PoseStack matrixStack) {
+        width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
         this.matrixStack = matrixStack;
     }
 
-    public void setMatrixStack(MatrixStack stack) {
+    public void setMatrixStack(PoseStack stack) {
         matrixStack = stack;
     }
 
     public void render() {
 
-        if (!minecraft.gameSettings.hideGUI && minecraft.playerController.gameIsSurvivalOrAdventure()) {
+        if (!minecraft.options.hideGui && minecraft.gameMode.hasExperience()) {
             AtomicInteger abnormalJoyPoint = new AtomicInteger();
-            LazyOptional<IAbnormalJoyCapability> pointCap = minecraft.player.getCapability(AbnormalJoyCapability.ABNORMALJOY_CAPABILITY);
+            LazyOptional<AbnormalJoyCapability> pointCap = minecraft.player.getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
             pointCap.ifPresent(
                     cap -> abnormalJoyPoint.set((int) Math.floor(cap.get()))
             );
             if (abnormalJoyPoint.get() != 0) {
-                RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                minecraft.getTextureManager().bindTexture(HUD);
+                //FIXME
+                // - Need Test
+                RenderSystem.setShaderColor(1.0F,1.0F,1.0F,1.0F);
+                minecraft.getTextureManager().bindForSetup(HUD);
+                /*RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+                minecraft.getTextureManager().bind(HUD)*/;
                 int x = width / 2 - 91;
                 int y = height - 32 + 3 + 3;
                 //Render Background

@@ -1,94 +1,116 @@
 package love.marblegate.flowingagony.util;
 
-import net.minecraft.entity.FlyingEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.monster.piglin.PiglinEntity;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.passive.horse.LlamaEntity;
-import net.minecraft.entity.passive.horse.SkeletonHorseEntity;
-import net.minecraft.entity.passive.horse.ZombieHorseEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.entity.FlyingMob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.horse.SkeletonHorse;
+import net.minecraft.world.entity.animal.horse.ZombieHorse;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 import java.util.function.Predicate;
 
+import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.animal.Dolphin;
+import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Panda;
+import net.minecraft.world.entity.animal.PolarBear;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Drowned;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.entity.monster.Stray;
+import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.Zoglin;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.ZombieVillager;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
+
 public class EntityUtil {
     public static List<LivingEntity> getTargetsExceptOneself(LivingEntity center, float radius, float height, Predicate<LivingEntity> predicate) {
-        AxisAlignedBB aabb = new AxisAlignedBB(center.getPosition().getX() - radius, center.getPosition().getY() - height, center.getPosition().getZ() - radius, center.getPosition().getX() + radius, center.getPosition().getY() + height, center.getPosition().getZ() + radius);
-        List<LivingEntity> entities = center.world.getEntitiesWithinAABB(LivingEntity.class, aabb, predicate);
+        AABB aabb = new AABB(center.blockPosition().getX() - radius, center.blockPosition().getY() - height, center.blockPosition().getZ() - radius, center.blockPosition().getX() + radius, center.blockPosition().getY() + height, center.blockPosition().getZ() + radius);
+        List<LivingEntity> entities = center.level.getEntitiesOfClass(LivingEntity.class, aabb, predicate);
         entities.remove(center);
         return entities;
     }
 
-    public static List<LivingEntity> getTargetsExceptOneself(PlayerEntity center, float radius, float height, Predicate<LivingEntity> predicate) {
+    public static List<LivingEntity> getTargetsExceptOneself(Player center, float radius, float height, Predicate<LivingEntity> predicate) {
         return getTargetsExceptOneself((LivingEntity) center, radius, height, predicate);
     }
 
     public static List<LivingEntity> getTargetsOfSameType(LivingEntity center, float radius, float height, LivingEntity sourceEntity, boolean excludeOneself) {
-        AxisAlignedBB aabb = new AxisAlignedBB(center.getPosition().getX() - radius, center.getPosition().getY() - height, center.getPosition().getZ() - radius, center.getPosition().getX() + radius, center.getPosition().getY() + height, center.getPosition().getZ() + radius);
-        List<LivingEntity> entities = center.world.getEntitiesWithinAABB(LivingEntity.class, aabb, livingEntity -> livingEntity.getClass() == sourceEntity.getClass());
+        AABB aabb = new AABB(center.blockPosition().getX() - radius, center.blockPosition().getY() - height, center.blockPosition().getZ() - radius, center.blockPosition().getX() + radius, center.blockPosition().getY() + height, center.blockPosition().getZ() + radius);
+        List<LivingEntity> entities = center.level.getEntitiesOfClass(LivingEntity.class, aabb, livingEntity -> livingEntity.getClass() == sourceEntity.getClass());
         if (excludeOneself) entities.remove(center);
         return entities;
     }
 
     public static boolean isHostile(LivingEntity livingEntity, boolean restrictMode) {
         if (restrictMode) {
-            return (livingEntity instanceof MonsterEntity && !(livingEntity instanceof PiglinEntity) && !(livingEntity instanceof SpiderEntity) && !(livingEntity instanceof EndermanEntity)) ||
-                    livingEntity instanceof SlimeEntity ||
-                    livingEntity instanceof FlyingEntity ||
-                    livingEntity instanceof HoglinEntity ||
-                    livingEntity instanceof EnderDragonEntity;
+            return (livingEntity instanceof Monster && !(livingEntity instanceof Piglin) && !(livingEntity instanceof Spider) && !(livingEntity instanceof EnderMan)) ||
+                    livingEntity instanceof Slime ||
+                    livingEntity instanceof FlyingMob ||
+                    livingEntity instanceof Hoglin ||
+                    livingEntity instanceof EnderDragon;
         } else {
-            return livingEntity instanceof MonsterEntity ||
-                    livingEntity instanceof SlimeEntity ||
-                    livingEntity instanceof FlyingEntity ||
-                    livingEntity instanceof HoglinEntity ||
-                    livingEntity instanceof EnderDragonEntity;
+            return livingEntity instanceof Monster ||
+                    livingEntity instanceof Slime ||
+                    livingEntity instanceof FlyingMob ||
+                    livingEntity instanceof Hoglin ||
+                    livingEntity instanceof EnderDragon;
         }
     }
 
     public static boolean isNeutral(LivingEntity livingEntity, boolean restrictMode) {
         if (restrictMode) {
             return isNeutral(livingEntity, false) ||
-                    livingEntity instanceof EndermanEntity ||
-                    livingEntity instanceof PiglinEntity ||
-                    livingEntity instanceof ZombifiedPiglinEntity ||
-                    livingEntity instanceof SpiderEntity;
+                    livingEntity instanceof EnderMan ||
+                    livingEntity instanceof Piglin ||
+                    livingEntity instanceof ZombifiedPiglin ||
+                    livingEntity instanceof Spider;
         } else {
-            return livingEntity instanceof BeeEntity ||
-                    livingEntity instanceof DolphinEntity ||
-                    livingEntity instanceof IronGolemEntity ||
-                    livingEntity instanceof WolfEntity ||
-                    livingEntity instanceof PandaEntity ||
-                    livingEntity instanceof PolarBearEntity ||
-                    livingEntity instanceof LlamaEntity;
+            return livingEntity instanceof Bee ||
+                    livingEntity instanceof Dolphin ||
+                    livingEntity instanceof IronGolem ||
+                    livingEntity instanceof Wolf ||
+                    livingEntity instanceof Panda ||
+                    livingEntity instanceof PolarBear ||
+                    livingEntity instanceof Llama;
         }
     }
 
     public static boolean isAggresiveUndead(LivingEntity livingEntity) {
-        return isCommonUndead(livingEntity) || isRareUndead(livingEntity) || livingEntity instanceof WitherEntity;
+        return isCommonUndead(livingEntity) || isRareUndead(livingEntity) || livingEntity instanceof WitherBoss;
     }
 
     public static boolean isCommonUndead(LivingEntity livingEntity) {
-        return livingEntity instanceof ZombieEntity || livingEntity instanceof SkeletonEntity;
+        return livingEntity instanceof Zombie || livingEntity instanceof Skeleton;
     }
 
     public static boolean isRareUndead(LivingEntity livingEntity) {
-        return livingEntity instanceof PhantomEntity || livingEntity instanceof WitherSkeletonEntity || livingEntity instanceof StrayEntity || livingEntity instanceof GhastEntity || livingEntity instanceof ZoglinEntity;
+        return livingEntity instanceof Phantom || livingEntity instanceof WitherSkeleton || livingEntity instanceof Stray || livingEntity instanceof Ghast || livingEntity instanceof Zoglin;
     }
 
-    public static boolean isPassiveUndead(LivingEntity livingEntity) {
-        return livingEntity instanceof ZombieHorseEntity || livingEntity instanceof SkeletonHorseEntity;
-    }
+//    public static boolean isPassiveUndead(LivingEntity livingEntity) {
+//        return livingEntity instanceof ZombieHorse || livingEntity instanceof SkeletonHorse;
+//    }
 
     public static boolean supportHeadDrop(LivingEntity livingEntity) {
-        return ((livingEntity instanceof ZombieEntity) && !(livingEntity instanceof ZombieVillagerEntity) && !(livingEntity instanceof DrownedEntity) && !(livingEntity instanceof ZombifiedPiglinEntity) && !(livingEntity instanceof HuskEntity)) ||
-                livingEntity instanceof SkeletonEntity || livingEntity instanceof CreeperEntity ||
-                livingEntity instanceof EnderDragonEntity || livingEntity instanceof WitherSkeletonEntity;
+        return ((livingEntity instanceof Zombie) && !(livingEntity instanceof ZombieVillager) && !(livingEntity instanceof Drowned) && !(livingEntity instanceof ZombifiedPiglin) && !(livingEntity instanceof Husk)) ||
+                livingEntity instanceof Skeleton || livingEntity instanceof Creeper ||
+                livingEntity instanceof EnderDragon || livingEntity instanceof WitherSkeleton;
     }
 
 

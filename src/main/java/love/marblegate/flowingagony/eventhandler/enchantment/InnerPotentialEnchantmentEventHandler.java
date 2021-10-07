@@ -3,30 +3,30 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
-import love.marblegate.flowingagony.registry.EffectRegistry;
-import love.marblegate.flowingagony.registry.EnchantmentRegistry;
+import love.marblegate.flowingagony.effect.EffectRegistry;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 @Mod.EventBusSubscriber()
 public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doStubbornStepEnchantmentEvent_addKnockBackResistenceModifier(LivingKnockBackEvent event) {
-        if (event.getEntityLiving().world.isRemote()) {
-            if (event.getEntityLiving() instanceof PlayerEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.STUBBORN_STEP.get(), EquipmentSlotType.LEGS, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+        if (event.getEntityLiving().level.isClientSide()) {
+            if (event.getEntityLiving() instanceof Player) {
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.STUBBORN_STEP.get(), EquipmentSlot.LEGS, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
                     event.setStrength(event.getStrength() * (1 - enchantLvl * 0.15f));
                 }
@@ -36,17 +36,17 @@ public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doStubbornStepEnchantmentEvent_cancelFloatingEffect(LivingDamageEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity) {
-                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.STUBBORN_STEP.get(), EquipmentSlotType.LEGS, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
-                    if (((PlayerEntity) (event.getEntityLiving())).isPotionActive(Effects.LEVITATION)) {
-                        ((PlayerEntity) (event.getEntityLiving())).removeActivePotionEffect(Effects.LEVITATION);
+        if (!event.getEntityLiving().level.isClientSide()) {
+            if (event.getEntityLiving() instanceof Player && event.getSource().getEntity() instanceof LivingEntity) {
+                if (EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.STUBBORN_STEP.get(), EquipmentSlot.LEGS, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
+                    if (((Player) (event.getEntityLiving())).hasEffect(MobEffects.LEVITATION)) {
+                        ((Player) (event.getEntityLiving())).removeEffectNoUpdate(MobEffects.LEVITATION);
                         //Sync to Client
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                        () -> (ServerPlayer) event.getEntityLiving()
                                 ),
-                                new RemoveEffectSyncToClientPacket(Effects.LEVITATION));
+                                new RemoveEffectSyncToClientPacket(MobEffects.LEVITATION));
                     }
                 }
             }
@@ -55,22 +55,22 @@ public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doFrivolousStepEnchantmentEvent(LivingDamageEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getEntityLiving() instanceof PlayerEntity && event.getSource().getTrueSource() instanceof LivingEntity) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.FRIVOLOUS_STEP.get(), EquipmentSlotType.LEGS, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+        if (!event.getEntityLiving().level.isClientSide()) {
+            if (event.getEntityLiving() instanceof Player && event.getSource().getEntity() instanceof LivingEntity) {
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.FRIVOLOUS_STEP.get(), EquipmentSlot.LEGS, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
                     if (enchantLvl == 1)
-                        ((PlayerEntity) (event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200));
+                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200));
                     else
-                        ((PlayerEntity) (event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200, 1));
-                    if (((PlayerEntity) (event.getEntityLiving())).isPotionActive(Effects.SLOWNESS)) {
-                        ((PlayerEntity) (event.getEntityLiving())).removeActivePotionEffect(Effects.SLOWNESS);
+                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200, 1));
+                    if (((Player) (event.getEntityLiving())).hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
+                        ((Player) (event.getEntityLiving())).removeEffectNoUpdate(MobEffects.MOVEMENT_SLOWDOWN);
                         //Sync to Client
                         Networking.INSTANCE.send(
                                 PacketDistributor.PLAYER.with(
-                                        () -> (ServerPlayerEntity) event.getEntityLiving()
+                                        () -> (ServerPlayer) event.getEntityLiving()
                                 ),
-                                new RemoveEffectSyncToClientPacket(Effects.SLOWNESS));
+                                new RemoveEffectSyncToClientPacket(MobEffects.MOVEMENT_SLOWDOWN));
                     }
                 }
             }
@@ -81,24 +81,24 @@ public class InnerPotentialEnchantmentEventHandler {
     @SubscribeEvent
     public static void doPotentialBurstEnchantmentEvent_addSpeedModifier(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
-            if (!event.player.world.isRemote()) {
-                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(event.player, EnchantmentRegistry.POTENTIAL_BURST.get(), EquipmentSlotType.FEET, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+            if (!event.player.level.isClientSide()) {
+                int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(event.player, EnchantmentRegistry.POTENTIAL_BURST.get(), EquipmentSlot.FEET, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
                     if (event.player.getHealth() <= (3 + enchantLvl)) {
-                        if (!(event.player.isSprinting() || event.player.isSwimming() || event.player.isElytraFlying())) {
-                            if (event.player.isPotionActive(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get())) {
-                                int nextAmplifier = Math.min(event.player.getActivePotionEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get()).getAmplifier() + 1, 150);
-                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20, nextAmplifier));
+                        if (!(event.player.isSprinting() || event.player.isSwimming() || event.player.isFallFlying())) {
+                            if (event.player.hasEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get())) {
+                                int nextAmplifier = Math.min(event.player.getEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get()).getAmplifier() + 1, 150);
+                                event.player.addEffect(new MobEffectInstance(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20, nextAmplifier));
                             } else {
-                                event.player.addPotionEffect(new EffectInstance(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20));
+                                event.player.addEffect(new MobEffectInstance(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20));
                             }
                         } else {
-                            if (event.player.isPotionActive(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get())) {
-                                event.player.removeActivePotionEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get());
+                            if (event.player.hasEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get())) {
+                                event.player.removeEffectNoUpdate(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get());
                                 //Sync to Client
                                 Networking.INSTANCE.send(
                                         PacketDistributor.PLAYER.with(
-                                                () -> (ServerPlayerEntity) event.player
+                                                () -> (ServerPlayer) event.player
                                         ),
                                         new RemoveEffectSyncToClientPacket(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get()));
                             }
@@ -111,20 +111,20 @@ public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doMiraculousEscapeEnchantmentEvent_launch(LivingDamageEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
+        if (event.getEntityLiving() instanceof Player) {
             if (event.getEntityLiving().getHealth() < 4f) {
-                if (EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.MIRACULOUS_ESCAPE.get(), EquipmentSlotType.FEET, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
-                    if (!((PlayerEntity) (event.getEntityLiving())).isPotionActive(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())) {
+                if (EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.MIRACULOUS_ESCAPE.get(), EquipmentSlot.FEET, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
+                    if (!((Player) (event.getEntityLiving())).hasEffect(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())) {
                         //Play Sound Effect
-                        if (!((PlayerEntity) (event.getEntityLiving())).world.isRemote) {
+                        if (!((Player) (event.getEntityLiving())).level.isClientSide) {
                             Networking.INSTANCE.send(
                                     PacketDistributor.PLAYER.with(
-                                            () -> (ServerPlayerEntity) (event.getEntityLiving())
+                                            () -> (ServerPlayer) (event.getEntityLiving())
                                     ),
                                     new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true));
                         }
-                        ((PlayerEntity) (event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get(), 40));
-                        ((PlayerEntity) (event.getEntityLiving())).addPotionEffect(new EffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get(), 200));
+                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get(), 40));
+                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get(), 200));
                     }
                 }
             }
@@ -134,10 +134,10 @@ public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doMiraculousEscapeEnchantmentEvent_processFallDamage(LivingDamageEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
-            if (event.getEntityLiving() instanceof PlayerEntity) {
-                if (event.getSource().getDamageType().equals("fall") || event.getSource().getDamageType().equals("cramming") || event.getSource().getDamageType().equals("inWall")) {
-                    if (((PlayerEntity) (event.getEntityLiving())).isPotionActive(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())) {
+        if (!event.getEntityLiving().level.isClientSide()) {
+            if (event.getEntityLiving() instanceof Player) {
+                if (event.getSource().getMsgId().equals("fall") || event.getSource().getMsgId().equals("cramming") || event.getSource().getMsgId().equals("inWall")) {
+                    if (((Player) (event.getEntityLiving())).hasEffect(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get())) {
                         event.setCanceled(true);
                     }
                 }
@@ -147,15 +147,15 @@ public class InnerPotentialEnchantmentEventHandler {
 
     @SubscribeEvent
     public static void doArmorUpEnchantmentEvent(LivingDamageEvent event) {
-        if (!event.getEntityLiving().world.isRemote()) {
+        if (!event.getEntityLiving().level.isClientSide()) {
             if (!event.isCanceled()) {
-                if (event.getEntityLiving() instanceof PlayerEntity) {
-                    int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getEntityLiving(), EnchantmentRegistry.ARMOR_UP.get(), EquipmentSlotType.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+                if (event.getEntityLiving() instanceof Player) {
+                    int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.ARMOR_UP.get(), EquipmentSlot.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                     if (enchantLvl != 0) {
-                        if (((PlayerEntity) (event.getEntityLiving())).getHealth() < (5 + enchantLvl)) {
-                            float existYellowHeart = ((PlayerEntity) (event.getEntityLiving())).getAbsorptionAmount();
+                        if (((Player) (event.getEntityLiving())).getHealth() < (5 + enchantLvl)) {
+                            float existYellowHeart = ((Player) (event.getEntityLiving())).getAbsorptionAmount();
                             if (existYellowHeart + 1 < (5 + enchantLvl)) {
-                                ((PlayerEntity) (event.getEntityLiving())).setAbsorptionAmount(existYellowHeart + 1);
+                                ((Player) (event.getEntityLiving())).setAbsorptionAmount(existYellowHeart + 1);
                             }
                         }
                     }

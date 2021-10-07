@@ -1,10 +1,10 @@
 package love.marblegate.flowingagony.damagesource;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nullable;
 
@@ -17,16 +17,16 @@ public class FlowingAgonyMobtoMobDamageSource extends EntityDamageSource {
 
     @Override
     @Nullable
-    public Entity getTrueSource() {
-        return damageSourceEntity;
+    public Entity getEntity() {
+        return entity;
     }
 
     /**
      * Gets the death message that is displayed when the player dies
      */
     @Override
-    public ITextComponent getDeathMessage(LivingEntity entityLivingBaseIn) {
-        String s = "death.attack." + damageType;
-        return new TranslationTextComponent(s, entityLivingBaseIn.getDisplayName(), damageSourceEntity.getDisplayName());
+    public Component getLocalizedDeathMessage(LivingEntity entityLivingBaseIn) {
+        String s = "death.attack." + msgId;
+        return new TranslatableComponent(s, entityLivingBaseIn.getDisplayName(), entity.getDisplayName());
     }
 }

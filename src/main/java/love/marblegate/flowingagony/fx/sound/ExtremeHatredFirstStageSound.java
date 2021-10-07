@@ -1,18 +1,18 @@
 package love.marblegate.flowingagony.fx.sound;
 
-import love.marblegate.flowingagony.registry.SoundRegistry;
-import net.minecraft.client.audio.TickableSound;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.util.SoundCategory;
+import love.marblegate.flowingagony.fx.SoundRegistry;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.sounds.SoundSource;
 
-public class ExtremeHatredFirstStageSound extends TickableSound {
-    private final ClientPlayerEntity player;
+public class ExtremeHatredFirstStageSound extends AbstractTickableSoundInstance {
+    private final LocalPlayer player;
 
-    public ExtremeHatredFirstStageSound(ClientPlayerEntity player) {
-        super(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.get(), SoundCategory.PLAYERS);
+    public ExtremeHatredFirstStageSound(LocalPlayer player) {
+        super(SoundRegistry.EXTREME_HATRED_FIRST_STAGE_SOUND.get(), SoundSource.PLAYERS);
         this.player = player;
-        repeat = true;
-        repeatDelay = 0;
+        looping = true;
+        delay = 0;
         volume = 35.0F;
         pitch = 1F;
     }
@@ -20,7 +20,7 @@ public class ExtremeHatredFirstStageSound extends TickableSound {
     @Override
     public void tick() {
         if (!player.isAlive()) {
-            finishPlaying();
+            stop();
         }
     }
 }
