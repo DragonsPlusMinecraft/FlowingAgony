@@ -1,20 +1,20 @@
 package love.marblegate.flowingagony.eventhandler.effect;
 
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
+import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
-import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.util.EntityUtil;
 import love.marblegate.flowingagony.util.PlayerUtil;
 import love.marblegate.flowingagony.util.StandardUtil;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;

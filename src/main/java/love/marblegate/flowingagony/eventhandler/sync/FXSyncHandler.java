@@ -1,10 +1,10 @@
 package love.marblegate.flowingagony.eventhandler.sync;
 
+import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
-import love.marblegate.flowingagony.effect.EffectRegistry;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

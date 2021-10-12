@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.damagesource;
 
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 public class CustomDamageSource {
     public static final DamageSource CURSED_HATRED = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.curse_hatred");

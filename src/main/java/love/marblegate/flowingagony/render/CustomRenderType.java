@@ -1,8 +1,9 @@
 package love.marblegate.flowingagony.render;
 
-import net.minecraft.client.renderer.RenderType;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.renderer.RenderType;
+
 import static com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS;
 
 public class CustomRenderType extends RenderType {

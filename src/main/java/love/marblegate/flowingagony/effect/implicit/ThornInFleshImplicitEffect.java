@@ -1,17 +1,15 @@
 package love.marblegate.flowingagony.effect.implicit;
 
 import love.marblegate.flowingagony.effect.EffectRegistry;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.damagesource.DamageSource;
 
 public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
     public ThornInFleshImplicitEffect() {
         super();
     }
 
-    //FIXME
-    // - need test
     @Override
     public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.THORN_IN_FLESH_ACTIVE.get()) {
@@ -22,7 +20,6 @@ public class ThornInFleshImplicitEffect extends HarmfulBlankImplicitEffect {
                 } else {
                     entityLivingBaseIn.setDeltaMovement(0, entityLivingBaseIn.getDeltaMovement().y, 0);
                     entityLivingBaseIn.hurtMarked = true;
-                    /*entityLivingBaseIn.checkAndResetForcedChunkAdditionFlag();*/
                 }
             }
         }

@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony;
 
 import love.marblegate.flowingagony.config.Configuration;
-import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
 import love.marblegate.flowingagony.effect.EffectRegistry;
+import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
 import love.marblegate.flowingagony.fx.ParticleRegistry;
 import love.marblegate.flowingagony.fx.SoundRegistry;

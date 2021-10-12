@@ -2,27 +2,27 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
-import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
 import love.marblegate.flowingagony.util.EffectUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -90,12 +90,12 @@ public class TheMistakensEnchantmentEventHandler {
             if (event.getEntityLiving() instanceof Player) {
                 int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted(((Player) event.getEntityLiving()), EnchantmentRegistry.PROTOTYPE_CHAOTIC.get(), EquipmentSlot.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
-                    if (EffectUtil.isEffectShown(event.getPotionEffect())) {
+                    if (EffectUtil.isExplicit(event.getPotionEffect())) {
                         if (((Player) event.getEntityLiving()).hasEffect(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get())) {
                             int newEffectAmplifier = Math.min(((Player) event.getEntityLiving()).getEffect(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get()).getAmplifier() + enchantLvl, 29);
-                            ((Player) event.getEntityLiving()).addEffect(new MobEffectInstance(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(), 1200, newEffectAmplifier));
+                            ((Player) event.getEntityLiving()).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(), 1200, newEffectAmplifier));
                         } else {
-                            ((Player) event.getEntityLiving()).addEffect(new MobEffectInstance(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(), 1200, enchantLvl - 1));
+                            ((Player) event.getEntityLiving()).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(), 1200, enchantLvl - 1));
                         }
                         ((Player) event.getEntityLiving()).heal(enchantLvl);
                     }
@@ -108,14 +108,14 @@ public class TheMistakensEnchantmentEventHandler {
     public static void doPrototypeChaoticTypeBetaEnchantmentEvent(PotionEvent.PotionAddedEvent event) {
         if (!event.getEntityLiving().level.isClientSide() && event.getEntityLiving() instanceof Player) {
             if (EnchantmentUtil.isPlayerItemEnchanted(((Player) event.getEntityLiving()), EnchantmentRegistry.PROTOTYPE_CHAOTIC_TYPE_BETA.get(), EquipmentSlot.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
-                if (EffectUtil.isEffectShown(event.getPotionEffect())) {
+                if (EffectUtil.isExplicit(event.getPotionEffect())) {
                     if (event.getPotionEffect().getEffect().getCategory() == MobEffectCategory.BENEFICIAL && !event.getPotionEffect().getEffect().isInstantenous()) {
                         if (EnchantmentUtil.isPlayerItemEnchanted(((Player) event.getEntityLiving()), EnchantmentRegistry.PROTOTYPE_CHAOTIC.get(), EquipmentSlot.CHEST, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
                             event.getPotionEffect().update(new MobEffectInstance(event.getPotionEffect().getEffect(), event.getPotionEffect().getDuration() * 3));
                             List<MobEffectInstance> negativeEffects = ((Player) event.getEntityLiving()).getActiveEffects().stream()
                                     .filter(effectInstance -> effectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL)
                                     .filter(effectInstance -> effectInstance.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
-                                    .filter(EffectUtil::isEffectShown)
+                                    .filter(EffectUtil::isExplicit)
                                     .collect(Collectors.toList());
                             if (!negativeEffects.isEmpty()) {
                                 for (MobEffectInstance effect : negativeEffects) {
@@ -255,7 +255,7 @@ public class TheMistakensEnchantmentEventHandler {
             if (event.getEntityLiving() instanceof Player) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.SCHOLAR_OF_ORIGINAL_SIN.get(), EquipmentSlot.CHEST, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl != 0) {
-                    if (event.getPotionEffect().getEffect().getCategory() == MobEffectCategory.HARMFUL && EffectUtil.isEffectShown(event.getPotionEffect()))
+                    if (event.getPotionEffect().getEffect().getCategory() == MobEffectCategory.HARMFUL && EffectUtil.isExplicit(event.getPotionEffect()))
                         event.getPotionEffect().update(new MobEffectInstance(event.getPotionEffect().getEffect(), (int) (event.getPotionEffect().getDuration() * (2.1 - 0.1 * enchantmentLvl))));
                 }
             }

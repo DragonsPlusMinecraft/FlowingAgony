@@ -3,11 +3,9 @@ package love.marblegate.flowingagony.enchantment.innerpotentialcategory;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.ItemStack;
-
-import net.minecraft.world.item.enchantment.Enchantment.Rarity;
 
 public class MiraculousEscapeEnchantment extends Enchantment {
     public MiraculousEscapeEnchantment() {

@@ -1,17 +1,17 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
+import love.marblegate.flowingagony.effect.EffectRegistry;
+import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.network.packet.RemoveEffectSyncToClientPacket;
-import love.marblegate.flowingagony.effect.EffectRegistry;
-import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.util.EffectUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
@@ -60,9 +60,9 @@ public class InnerPotentialEnchantmentEventHandler {
                 int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.FRIVOLOUS_STEP.get(), EquipmentSlot.LEGS, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
                     if (enchantLvl == 1)
-                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200));
+                        ((Player) (event.getEntityLiving())).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200));
                     else
-                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200, 1));
+                        ((Player) (event.getEntityLiving())).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.FRIVOLOUS_STEP_ENCHANTMENT_ACTIVE.get(), 200, 1));
                     if (((Player) (event.getEntityLiving())).hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
                         ((Player) (event.getEntityLiving())).removeEffectNoUpdate(MobEffects.MOVEMENT_SLOWDOWN);
                         //Sync to Client
@@ -88,9 +88,9 @@ public class InnerPotentialEnchantmentEventHandler {
                         if (!(event.player.isSprinting() || event.player.isSwimming() || event.player.isFallFlying())) {
                             if (event.player.hasEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get())) {
                                 int nextAmplifier = Math.min(event.player.getEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get()).getAmplifier() + 1, 150);
-                                event.player.addEffect(new MobEffectInstance(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20, nextAmplifier));
+                                event.player.addEffect(EffectUtil.genImplicitEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20, nextAmplifier));
                             } else {
-                                event.player.addEffect(new MobEffectInstance(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20));
+                                event.player.addEffect(EffectUtil.genImplicitEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get(), 20));
                             }
                         } else {
                             if (event.player.hasEffect(EffectRegistry.POTENTIAL_BURST_ENCHANTMENT_ACTIVE.get())) {
@@ -123,8 +123,8 @@ public class InnerPotentialEnchantmentEventHandler {
                                     ),
                                     new PlaySoundPacket(PlaySoundPacket.ModSoundType.MIRACULOUS_ESCAPE_HEARTBEAT, true));
                         }
-                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get(), 40));
-                        ((Player) (event.getEntityLiving())).addEffect(new MobEffectInstance(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get(), 200));
+                        ((Player) (event.getEntityLiving())).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get(), 40));
+                        ((Player) (event.getEntityLiving())).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_ACTIVE.get(), 200));
                     }
                 }
             }

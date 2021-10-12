@@ -2,9 +2,9 @@ package love.marblegate.flowingagony.effect;
 
 import love.marblegate.flowingagony.effect.explicit.*;
 import love.marblegate.flowingagony.effect.implicit.*;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,7 +23,7 @@ public class EffectRegistry {
     public static final RegistryObject<MobEffect> ENVIOUS_BEING = EFFECT.register("envious_being", () -> new EnviousBeingEffect()
             .addAttributeModifier(Attributes.ATTACK_DAMAGE, "444E310D-DE08-4D8D-A4B1-33B06CFB8703", 4D, AttributeModifier.Operation.ADDITION));
 
-    //Hidden Effect
+    //Implicit Effect
     public static final RegistryObject<MobEffect> BACK_AND_FILL_ENCHANTMENT_ACTIVE = EFFECT.register("back_and_fill_enchantment_active", () -> new BackAndFillImplicitEffect()
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, "D6984A53-7DD1-4093-9878-345958E2E92A", -0.1D, AttributeModifier.Operation.MULTIPLY_TOTAL));
 

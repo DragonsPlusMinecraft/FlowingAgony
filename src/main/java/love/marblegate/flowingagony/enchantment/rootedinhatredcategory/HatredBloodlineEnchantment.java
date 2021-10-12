@@ -3,9 +3,9 @@ package love.marblegate.flowingagony.enchantment.rootedinhatredcategory;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.ItemStack;
 
 public class HatredBloodlineEnchantment extends Enchantment {
     public HatredBloodlineEnchantment() {

@@ -21,7 +21,7 @@ public class PlayerCapabilityProvider implements ICapabilitySerializable<Compoun
     private final LastSweetDreamCapability lastSweetDreamCapability = new LastSweetDreamCapability();
     private final LazyOptional<LastSweetDreamCapability> lastSweetDreamCapabilityOptional = LazyOptional.of(() -> lastSweetDreamCapability);
 
-    public void invalidate(){
+    public void invalidate() {
         abnormalJoyCapabilityOptional.invalidate();
         coolDownOptional.invalidate();
         hatredBloodlineStatusCapabilityOptional.invalidate();
@@ -37,10 +37,11 @@ public class PlayerCapabilityProvider implements ICapabilitySerializable<Compoun
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
-        if(cap == CapabilityManager.ABNORMALJOY_CAPABILITY) return abnormalJoyCapabilityOptional.cast();
-        if(cap == CapabilityManager.COOL_DOWN_CAPABILITY) return coolDownOptional.cast();
-        if(cap == CapabilityManager.LAST_SWEET_DREAM_CAPABILITY) return lastSweetDreamCapabilityOptional.cast();
-        if(cap == CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY) return hatredBloodlineStatusCapabilityOptional.cast();
+        if (cap == CapabilityManager.ABNORMALJOY_CAPABILITY) return abnormalJoyCapabilityOptional.cast();
+        if (cap == CapabilityManager.COOL_DOWN_CAPABILITY) return coolDownOptional.cast();
+        if (cap == CapabilityManager.LAST_SWEET_DREAM_CAPABILITY) return lastSweetDreamCapabilityOptional.cast();
+        if (cap == CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY)
+            return hatredBloodlineStatusCapabilityOptional.cast();
         else return LazyOptional.empty();
     }
 

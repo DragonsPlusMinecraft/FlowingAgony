@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.render.hud;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
 import love.marblegate.flowingagony.capibility.CapabilityManager;
 import net.minecraft.client.Minecraft;
@@ -40,10 +40,10 @@ public class AbnormalJoyHUD extends GuiComponent {
             if (abnormalJoyPoint.get() != 0) {
                 //FIXME
                 // - Need Test
-                RenderSystem.setShaderColor(1.0F,1.0F,1.0F,1.0F);
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 minecraft.getTextureManager().bindForSetup(HUD);
                 /*RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                minecraft.getTextureManager().bind(HUD)*/;
+                minecraft.getTextureManager().bind(HUD)*/
                 int x = width / 2 - 91;
                 int y = height - 32 + 3 + 3;
                 //Render Background

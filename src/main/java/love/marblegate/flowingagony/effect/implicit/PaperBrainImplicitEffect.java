@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony.effect.implicit;
 
 import love.marblegate.flowingagony.effect.EffectRegistry;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 public class PaperBrainImplicitEffect extends HarmfulBlankImplicitEffect {
     public PaperBrainImplicitEffect() {

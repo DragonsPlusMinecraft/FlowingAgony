@@ -1,6 +1,5 @@
 package love.marblegate.flowingagony.fx;
 
-import love.marblegate.flowingagony.fx.ParticleRegistry;
 import love.marblegate.flowingagony.fx.particle.cursedantipathyparticle.CursedAntipathyParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;

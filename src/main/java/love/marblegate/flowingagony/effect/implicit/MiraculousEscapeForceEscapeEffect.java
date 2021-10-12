@@ -9,8 +9,6 @@ public class MiraculousEscapeForceEscapeEffect extends HarmfulBlankImplicitEffec
         super();
     }
 
-    //FIXME
-    // - need test
     @Override
     public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
         if (this == EffectRegistry.MIRACULOUS_ESCAPE_ENCHANTMENT_FORCE_ESCAPE.get()) {

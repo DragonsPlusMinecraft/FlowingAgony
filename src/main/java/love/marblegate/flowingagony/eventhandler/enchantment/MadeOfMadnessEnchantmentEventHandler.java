@@ -4,10 +4,15 @@ import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.util.EffectUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Creeper;
@@ -15,15 +20,15 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.Containers;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -32,11 +37,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-
-import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 @Mod.EventBusSubscriber()
 public class MadeOfMadnessEnchantmentEventHandler {
@@ -59,7 +59,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getEntity(), EnchantmentRegistry.INSANE_POET.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl != 0) {
                     event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.LISTEN_TO_ME_SINGING.get(), enchantmentLvl * 40, enchantmentLvl - 1));
-                    ((Player) event.getSource().getEntity()).addEffect(new MobEffectInstance(EffectRegistry.INSANE_POET_ENCHANTMENT_ACTIVE.get(), enchantmentLvl * 40));
+                    ((Player) event.getSource().getEntity()).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.INSANE_POET_ENCHANTMENT_ACTIVE.get(), enchantmentLvl * 40));
                     event.setAmount((float) (event.getAmount() * (1.0D - Configuration.GeneralSetting.INSANE_POET_DAMAGE_REDUCTION.get())));
                 }
             }
@@ -72,7 +72,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
             if (event.getSource().getEntity() instanceof Player) {
                 int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getEntity(), EnchantmentRegistry.PAPER_BRAIN.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
-                    event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.PAPER_BRAIN_ENCHANTMENT_ACTIVE.get(), 20 + 40 * enchantLvl, enchantLvl - 1));
+                    event.getEntityLiving().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.PAPER_BRAIN_ENCHANTMENT_ACTIVE.get(), 20 + 40 * enchantLvl, enchantLvl - 1));
                     event.setAmount((float) (event.getAmount() * (1.0D - Configuration.GeneralSetting.PAPER_BRAIN_DAMAGE_REDUCTION.get())));
                 }
             }
@@ -85,7 +85,7 @@ public class MadeOfMadnessEnchantmentEventHandler {
             if (event.getSource().getEntity() instanceof Player) {
                 int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getEntity(), EnchantmentRegistry.SHOCK_THERAPY.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
-                    event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.SHOCK_THERAPY_ENCHANTMENT_ACTIVE.get(), 20 + 40 * enchantLvl, enchantLvl - 1));
+                    event.getEntityLiving().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.SHOCK_THERAPY_ENCHANTMENT_ACTIVE.get(), 20 + 40 * enchantLvl, enchantLvl - 1));
                     event.setAmount((float) (event.getAmount() * (1.0D - Configuration.GeneralSetting.SHOCK_THERAPY_DAMAGE_REDUCTION.get())));
                 }
             }

@@ -4,8 +4,8 @@ import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
 import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class BackAndFillEnchantment extends Enchantment {
     public BackAndFillEnchantment() {

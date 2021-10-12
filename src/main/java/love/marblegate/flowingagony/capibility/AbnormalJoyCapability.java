@@ -1,8 +1,5 @@
 package love.marblegate.flowingagony.capibility;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.util.INBTSerializable;
-
 public class AbnormalJoyCapability {
     private float abnormalJoyPoint;
 

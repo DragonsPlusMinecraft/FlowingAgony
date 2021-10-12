@@ -1,8 +1,8 @@
 package love.marblegate.flowingagony.fx.sound;
 
 import love.marblegate.flowingagony.fx.SoundRegistry;
-import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.sounds.SoundSource;
 
 public class ExtremeHatredFinalStageSound extends AbstractTickableSoundInstance {

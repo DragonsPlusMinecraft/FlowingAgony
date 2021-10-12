@@ -1,12 +1,12 @@
 package love.marblegate.flowingagony.effect.explicit;
 
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
+import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.ParticleEffectPacket;
-import love.marblegate.flowingagony.effect.EffectRegistry;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 public class CursedAntipathyEffect extends MobEffect {

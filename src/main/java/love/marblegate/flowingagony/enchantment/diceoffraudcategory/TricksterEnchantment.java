@@ -3,9 +3,9 @@ package love.marblegate.flowingagony.enchantment.diceoffraudcategory;
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.CustomEnchantmentCategory;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class TricksterEnchantment extends Enchantment {
     public TricksterEnchantment() {

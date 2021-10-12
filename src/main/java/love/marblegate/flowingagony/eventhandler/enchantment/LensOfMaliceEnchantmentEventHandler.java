@@ -1,17 +1,18 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.PlaySoundWIthLocationPacket;
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.packet.PlaySoundWIthLocationPacket;
+import love.marblegate.flowingagony.util.EffectUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -139,7 +140,7 @@ public class LensOfMaliceEnchantmentEventHandler {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getEntity(), EnchantmentRegistry.BACK_AND_FILL.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl != 0) {
                     if (event.getEntityLiving().getKillCredit() == event.getSource().getEntity()) {
-                        event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.BACK_AND_FILL_ENCHANTMENT_ACTIVE.get(), 100, enchantmentLvl - 1));
+                        event.getEntityLiving().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.BACK_AND_FILL_ENCHANTMENT_ACTIVE.get(), 100, enchantmentLvl - 1));
                     } else {
                         event.setAmount(event.getAmount() + enchantmentLvl + 1);
                     }

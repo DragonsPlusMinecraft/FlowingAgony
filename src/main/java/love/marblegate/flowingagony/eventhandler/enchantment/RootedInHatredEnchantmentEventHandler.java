@@ -2,17 +2,18 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.capibility.CapabilityManager;
 import love.marblegate.flowingagony.capibility.HatredBloodlineStatusCapability;
-import love.marblegate.flowingagony.network.Networking;
-import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.network.Networking;
+import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
+import love.marblegate.flowingagony.util.EffectUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -137,7 +138,7 @@ public class RootedInHatredEnchantmentEventHandler {
                         cap -> {
                             if (cap.getActiveLevel() != 0) {
                                 int hatredBloodlineLevel = cap.getActiveLevel();
-                                event.getPlayer().addEffect(new MobEffectInstance(EffectRegistry.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE.get(), 800 * hatredBloodlineLevel, hatredBloodlineLevel - 1));
+                                event.getPlayer().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.HATRED_BLOODLINE_ENCHANTMENT_ACTIVE.get(), 800 * hatredBloodlineLevel, hatredBloodlineLevel - 1));
                                 cap.setActiveLevel(0);
                             }
                         }
@@ -153,7 +154,7 @@ public class RootedInHatredEnchantmentEventHandler {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(((Player) event.getSource().getEntity()), EnchantmentRegistry.FRESH_REVENGE.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl != 0) {
                     if (event.getEntityLiving().getLastHurtMobTimestamp() <= (20 + enchantmentLvl * 4)) {
-                        ((Player) event.getSource().getEntity()).addEffect(new MobEffectInstance(EffectRegistry.FRESH_REVENGE_ENCHANTMENT_ACTIVE.get(), 200, enchantmentLvl - 1));
+                        ((Player) event.getSource().getEntity()).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.FRESH_REVENGE_ENCHANTMENT_ACTIVE.get(), 200, enchantmentLvl - 1));
                     }
                 }
             }

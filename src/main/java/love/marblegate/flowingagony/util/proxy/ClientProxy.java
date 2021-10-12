@@ -1,17 +1,17 @@
 package love.marblegate.flowingagony.util.proxy;
 
+import love.marblegate.flowingagony.fx.SoundRegistry;
 import love.marblegate.flowingagony.fx.sound.ExtremeHatredFinalStageSound;
 import love.marblegate.flowingagony.fx.sound.ExtremeHatredFirstStageSound;
 import love.marblegate.flowingagony.fx.sound.ExtremeHatredMediumStageSound;
 import love.marblegate.flowingagony.fx.sound.MiraculousEscapeHeartbeatSound;
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
-import love.marblegate.flowingagony.fx.SoundRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.Level;
 
 public class ClientProxy implements IProxy {

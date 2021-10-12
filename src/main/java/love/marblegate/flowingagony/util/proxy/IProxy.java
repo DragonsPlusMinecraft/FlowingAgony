@@ -2,9 +2,9 @@ package love.marblegate.flowingagony.util.proxy;
 
 import love.marblegate.flowingagony.network.packet.PlaySoundPacket;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffect;
 
 public interface IProxy {
     default void addParticleForceNear(ParticleOptions particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {

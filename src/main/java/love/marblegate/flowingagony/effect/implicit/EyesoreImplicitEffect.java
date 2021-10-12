@@ -1,10 +1,10 @@
 package love.marblegate.flowingagony.effect.implicit;
 
 import love.marblegate.flowingagony.effect.EffectRegistry;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
 
 public class EyesoreImplicitEffect extends ImplicitBaseEffect {

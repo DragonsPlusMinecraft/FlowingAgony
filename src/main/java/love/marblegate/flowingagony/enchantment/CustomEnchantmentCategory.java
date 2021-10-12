@@ -1,15 +1,8 @@
 package love.marblegate.flowingagony.enchantment;
 
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.Vanishable;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.block.Block;
 
 public class CustomEnchantmentCategory {
     public static final EnchantmentCategory AXE_AND_SWORD = EnchantmentCategory.create("flowingagony:AXE_AND_SWORD", Item -> Item instanceof SwordItem || Item instanceof AxeItem);

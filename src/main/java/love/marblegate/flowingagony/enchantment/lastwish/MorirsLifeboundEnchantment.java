@@ -2,12 +2,12 @@ package love.marblegate.flowingagony.enchantment.lastwish;
 
 import love.marblegate.flowingagony.config.Configuration;
 import love.marblegate.flowingagony.enchantment.EnchantmentEnchantabilityCalculator;
-import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.ItemStack;
 
 public class MorirsLifeboundEnchantment extends Enchantment {
     public MorirsLifeboundEnchantment() {

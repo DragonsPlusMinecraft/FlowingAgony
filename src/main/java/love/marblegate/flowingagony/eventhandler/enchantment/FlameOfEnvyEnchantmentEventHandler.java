@@ -2,22 +2,23 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
+import love.marblegate.flowingagony.util.EffectUtil;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.util.Mth;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,7 +51,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
             if (event.getSource().getEntity() instanceof Player) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getEntity(), EnchantmentRegistry.EYESORE.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl != 0) {
-                    event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.EYESORE_ENCHANTMENT_ACTIVE.get(), 61, enchantmentLvl - 1));
+                    event.getEntityLiving().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.EYESORE_ENCHANTMENT_ACTIVE.get(), 61, enchantmentLvl - 1));
                 }
             }
         }
@@ -63,9 +64,9 @@ public class FlameOfEnvyEnchantmentEventHandler {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getEntity(), EnchantmentRegistry.THORN_IN_FLESH.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 if (enchantmentLvl != 0) {
                     if (event.getEntityLiving() instanceof Player)
-                        event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.THORN_IN_FLESH_ACTIVE_FOR_PLAYER.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
+                        event.getEntityLiving().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.THORN_IN_FLESH_ACTIVE_FOR_PLAYER.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
                     else
-                        event.getEntityLiving().addEffect(new MobEffectInstance(EffectRegistry.THORN_IN_FLESH_ACTIVE.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
+                        event.getEntityLiving().addEffect(EffectUtil.genImplicitEffect(EffectRegistry.THORN_IN_FLESH_ACTIVE.get(), 60 + 40 * enchantmentLvl, enchantmentLvl - 1));
                 }
             }
         }
