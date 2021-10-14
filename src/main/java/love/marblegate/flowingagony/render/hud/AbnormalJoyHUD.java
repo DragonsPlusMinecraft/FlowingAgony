@@ -25,10 +25,6 @@ public class AbnormalJoyHUD extends GuiComponent {
         this.matrixStack = matrixStack;
     }
 
-    public void setMatrixStack(PoseStack stack) {
-        matrixStack = stack;
-    }
-
     public void render() {
 
         if (!minecraft.options.hideGui && minecraft.gameMode.hasExperience()) {
@@ -38,12 +34,10 @@ public class AbnormalJoyHUD extends GuiComponent {
                     cap -> abnormalJoyPoint.set((int) Math.floor(cap.get()))
             );
             if (abnormalJoyPoint.get() != 0) {
-                //FIXME
-                // - Need Test
+
+                RenderSystem._setShaderTexture(0,HUD);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                minecraft.getTextureManager().bindForSetup(HUD);
-                /*RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                minecraft.getTextureManager().bind(HUD)*/
+
                 int x = width / 2 - 91;
                 int y = height - 32 + 3 + 3;
                 //Render Background

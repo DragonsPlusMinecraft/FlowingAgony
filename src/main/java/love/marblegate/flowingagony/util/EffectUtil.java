@@ -10,7 +10,7 @@ public class EffectUtil {
     }
 
     public static MobEffectInstance genImplicitEffect(MobEffect effect, int duration, int amplifier) {
-        return new MobEffectInstance(effect, duration, amplifier, false, false);
+        return new MobEffectInstance(effect, duration, amplifier, false,false);
     }
 
     public static boolean isImplicit(MobEffectInstance mobEffectInstance) {

@@ -170,8 +170,6 @@ public class MadeOfMadnessEnchantmentEventHandler {
         });
     }
 
-    //FIXME
-    // - need test
     public static ItemStack recalculateLootByLootingLevel(ItemStack stack, LootContext context, int lootLevel) {
         float f = (float) lootLevel * UniformGenerator.between(0F, 1F).getFloat(context);
         stack.grow(Math.round(f));
