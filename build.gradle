@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.17.1-1.1.1'
-group = 'love.marblegate' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'love.marblegate.flowingagony' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'flowingagony'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(16)

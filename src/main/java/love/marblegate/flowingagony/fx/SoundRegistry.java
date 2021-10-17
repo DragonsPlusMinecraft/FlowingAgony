@@ -13,6 +13,4 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> EXTREME_HATRED_FIRST_STAGE_SOUND = SOUNDS.register("extreme_hatred_first_stage_sound", () -> new SoundEvent(new ResourceLocation("flowingagony", "extreme_hatred_first_stage_sound")));
     public static final RegistryObject<SoundEvent> EXTREME_HATRED_MEDIUM_STAGE_SOUND = SOUNDS.register("extreme_hatred_medium_stage_sound", () -> new SoundEvent(new ResourceLocation("flowingagony", "extreme_hatred_medium_stage_sound")));
     public static final RegistryObject<SoundEvent> EXTREME_HATRED_FINAL_STAGE_SOUND = SOUNDS.register("extreme_hatred_final_stage_sound", () -> new SoundEvent(new ResourceLocation("flowingagony", "extreme_hatred_final_stage_sound")));
-
-
 }
