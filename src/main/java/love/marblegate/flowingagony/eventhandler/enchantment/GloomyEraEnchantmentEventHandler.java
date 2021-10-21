@@ -2,6 +2,7 @@ package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import com.google.common.collect.Maps;
 import love.marblegate.flowingagony.config.Configuration;
+import love.marblegate.flowingagony.enchantment.EquipmentSlotTypeSet;
 import love.marblegate.flowingagony.registry.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
 import love.marblegate.flowingagony.util.EntityUtil;
@@ -10,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.WitchEntity;
@@ -258,38 +260,20 @@ public class GloomyEraEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doNimbleFingerEnchantmentEvent(AnvilUpdateEvent event) {
-        if (!Configuration.CompatibilitySetting.HYBRID_SERVER_USER.get()) {
-            if (!event.getPlayer().world.isRemote()) {
-                if (EnchantmentUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.NIMBLE_FINGER.get()) == 1
-                        && event.getLeft().getDamage() == 0) {
-                    if (isSameCategory(event.getLeft().getItem(), event.getRight().getItem())) {
-                        ItemStack result = event.getLeft().copy();
-                        Map<Enchantment, Integer> left = EnchantmentHelper.getEnchantments(result);
-                        Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight());
-                        Map<Enchantment, Integer> output = Maps.newLinkedHashMap();
-                        for (Enchantment lEnchantment : left.keySet()) {
-                            if (lEnchantment != EnchantmentRegistry.NIMBLE_FINGER.get())
-                                output.put(lEnchantment, left.get(lEnchantment));
-                        }
-                        for (Enchantment rEnchantment : right.keySet()) {
-                            boolean compatible = true;
-                            for (Enchantment lEnchantment : left.keySet()) {
-                                if (!rEnchantment.isCompatibleWith(lEnchantment))
-                                    compatible = false;
-                                if (rEnchantment == lEnchantment) {
-                                    if (right.get(rEnchantment) > left.get(lEnchantment)) {
-                                        output.replace(rEnchantment, right.get(rEnchantment));
-                                    }
-                                }
-                            }
-                            if (compatible)
-                                output.put(rEnchantment, right.get(rEnchantment));
-                        }
-                        EnchantmentHelper.setEnchantments(output, result);
-                        event.setCost(event.getLeft().getRepairCost() + event.getRight().getRepairCost() + 1);
-                        event.setOutput(result);
+    public static void doNimbleFingerEnchantmentEvent(LivingDeathEvent event) {
+        if (!event.getEntityLiving().world.isRemote() && !event.isCanceled() && event.getEntityLiving() instanceof MobEntity
+                && !(event.getEntityLiving() instanceof PlayerEntity) && event.getSource().getTrueSource() instanceof PlayerEntity) {
+            int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((PlayerEntity) event.getSource().getTrueSource(),EnchantmentRegistry.NIMBLE_FINGER.get(), EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+            if (enchantLvl!=0){
+                List<ItemStack> equipments = new ArrayList<>();
+                for(ItemStack itemStack:event.getEntityLiving().getArmorInventoryList()){
+                    if(!itemStack.isEmpty()){
+                        equipments.add(itemStack);
                     }
+                }
+                for(ItemStack itemStack:equipments){
+                    if(event.getEntityLiving().getRNG().nextDouble() < 0.05D + 0.1D * enchantLvl)
+                        InventoryHelper.spawnItemStack(event.getEntityLiving().world, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY(), event.getEntityLiving().getPosZ(), itemStack);
                 }
             }
         }

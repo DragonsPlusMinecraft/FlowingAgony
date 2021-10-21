@@ -12,10 +12,6 @@ public class Configuration {
         public static ForgeConfigSpec.DoubleValue PAPER_BRAIN_DAMAGE_REDUCTION;
     }
 
-    public static class CompatibilitySetting {
-        public static ForgeConfigSpec.BooleanValue HYBRID_SERVER_USER;
-    }
-
     public static class AcquirableSetting {
         public static ForgeConfigSpec.BooleanValue AN_ENCHANTED_GOLDEN_APPLE_A_DAY;
         public static ForgeConfigSpec.BooleanValue DEATH_PUNK;
@@ -94,17 +90,6 @@ public class Configuration {
         GeneralSetting.PAPER_BRAIN_DAMAGE_REDUCTION = builder.comment(
                         "The attack damage reduction ratio of \"Paper Brain\". Default value is 0.9, which means the attack damage will be decreased by 90%.")
                 .defineInRange("PAPER_BRAIN_DAMAGE_REDUCTION", 0.9, 0, 1);
-        builder.pop();
-
-        builder.push("compatibility");
-        CompatibilitySetting.HYBRID_SERVER_USER = builder.comment(
-                "-------------IMPORTANT!-------------",
-                "If you are using hybrid server and encountered problem with anvil, please set this config option to \"true\".",
-                "NOTICE: If you are using ARCLIGHT server version below 1.0.19, you must set this to \"true\"",
-                "Enchantment \"Nimble Finger\" will be complete disabled,",
-                "which means it cannot be obtained and applied on survival mode and it won't function.",
-                "It is because hybrid server are changing forge's event hook and it does cause serious bugs sometimes.",
-                "We are not responsible to fixing bug caused hybrid server, but here we still offer a temporary solution.").define("HYBRID_SERVER_USER", false);
         builder.pop();
 
         builder.comment("Enchantment Acquirable Setting",
