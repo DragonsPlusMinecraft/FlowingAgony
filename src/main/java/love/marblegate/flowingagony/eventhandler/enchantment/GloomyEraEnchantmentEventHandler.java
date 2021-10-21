@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Witch;
@@ -259,38 +260,20 @@ public class GloomyEraEnchantmentEventHandler {
     }
 
     @SubscribeEvent
-    public static void doNimbleFingerEnchantmentEvent(AnvilUpdateEvent event) {
-        if (!Configuration.CompatibilitySetting.HYBRID_SERVER_USER.get()) {
-            if (!event.getPlayer().level.isClientSide()) {
-                if (EnchantmentUtil.isItemEnchanted(event.getLeft(), EnchantmentRegistry.NIMBLE_FINGER.get()) == 1
-                        && event.getLeft().getDamageValue() == 0) {
-                    if (isSameCategory(event.getLeft().getItem(), event.getRight().getItem())) {
-                        ItemStack result = event.getLeft().copy();
-                        Map<Enchantment, Integer> left = EnchantmentHelper.getEnchantments(result);
-                        Map<Enchantment, Integer> right = EnchantmentHelper.getEnchantments(event.getRight());
-                        Map<Enchantment, Integer> output = Maps.newLinkedHashMap();
-                        for (Enchantment lEnchantment : left.keySet()) {
-                            if (lEnchantment != EnchantmentRegistry.NIMBLE_FINGER.get())
-                                output.put(lEnchantment, left.get(lEnchantment));
-                        }
-                        for (Enchantment rEnchantment : right.keySet()) {
-                            boolean compatible = true;
-                            for (Enchantment lEnchantment : left.keySet()) {
-                                if (!rEnchantment.isCompatibleWith(lEnchantment))
-                                    compatible = false;
-                                if (rEnchantment == lEnchantment) {
-                                    if (right.get(rEnchantment) > left.get(lEnchantment)) {
-                                        output.replace(rEnchantment, right.get(rEnchantment));
-                                    }
-                                }
-                            }
-                            if (compatible)
-                                output.put(rEnchantment, right.get(rEnchantment));
-                        }
-                        EnchantmentHelper.setEnchantments(output, result);
-                        event.setCost(event.getLeft().getBaseRepairCost() + event.getRight().getBaseRepairCost() + 1);
-                        event.setOutput(result);
+    public static void doNimbleFingerEnchantmentEvent(LivingDeathEvent event) {
+        if (!event.getEntityLiving().level.isClientSide() && !event.isCanceled() && event.getEntityLiving() instanceof Mob
+                && !(event.getEntityLiving() instanceof Player) && event.getSource().getDirectEntity() instanceof Player) {
+            int enchantLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getSource().getDirectEntity(),EnchantmentRegistry.NIMBLE_FINGER.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
+            if (enchantLvl!=0){
+                List<ItemStack> equipments = new ArrayList<>();
+                for(ItemStack itemStack:event.getEntityLiving().getArmorSlots()){
+                    if(!itemStack.isEmpty()){
+                        equipments.add(itemStack);
                     }
+                }
+                for(ItemStack itemStack:equipments){
+                    if(event.getEntityLiving().getRandom().nextDouble() < 0.05D + 0.1D * enchantLvl)
+                        Containers.dropItemStack(event.getEntityLiving().level, event.getEntityLiving().getX(), event.getEntityLiving().getY(), event.getEntityLiving().getZ(), itemStack);
                 }
             }
         }
