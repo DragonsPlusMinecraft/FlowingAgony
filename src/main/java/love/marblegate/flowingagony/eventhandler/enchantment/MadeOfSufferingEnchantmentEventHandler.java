@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
 import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.damagesource.CustomDamageSource;
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
@@ -144,7 +144,7 @@ public class MadeOfSufferingEnchantmentEventHandler {
     }
 
     private static void grandAbnormalJoyPoint(LivingDamageEvent event, int enchantLvl) {
-        LazyOptional<AbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
+        LazyOptional<AbnormalJoyCapability> pointCap = event.getEntityLiving().getCapability(ModCapManager.ABNORMALJOY_CAPABILITY);
         pointCap.ifPresent(
                 cap -> {
                     cap.add(event.getAmount() * (0.25F * (1 + enchantLvl)));

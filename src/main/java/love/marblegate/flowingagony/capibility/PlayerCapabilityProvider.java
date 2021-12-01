@@ -37,10 +37,10 @@ public class PlayerCapabilityProvider implements ICapabilitySerializable<Compoun
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
-        if (cap == CapabilityManager.ABNORMALJOY_CAPABILITY) return abnormalJoyCapabilityOptional.cast();
-        if (cap == CapabilityManager.COOL_DOWN_CAPABILITY) return coolDownOptional.cast();
-        if (cap == CapabilityManager.LAST_SWEET_DREAM_CAPABILITY) return lastSweetDreamCapabilityOptional.cast();
-        if (cap == CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY)
+        if (cap == ModCapManager.ABNORMALJOY_CAPABILITY) return abnormalJoyCapabilityOptional.cast();
+        if (cap == ModCapManager.COOL_DOWN_CAPABILITY) return coolDownOptional.cast();
+        if (cap == ModCapManager.LAST_SWEET_DREAM_CAPABILITY) return lastSweetDreamCapabilityOptional.cast();
+        if (cap == ModCapManager.HATRED_BLOODLINE_STATUS_CAPABILITY)
             return hatredBloodlineStatusCapabilityOptional.cast();
         else return LazyOptional.empty();
     }
@@ -48,18 +48,18 @@ public class PlayerCapabilityProvider implements ICapabilitySerializable<Compoun
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag compoundNBT = new CompoundTag();
-        if (CapabilityManager.ABNORMALJOY_CAPABILITY != null) {
+        if (ModCapManager.ABNORMALJOY_CAPABILITY != null) {
             compoundNBT.putFloat("abnormal_joy", abnormalJoyCapability.get());
         }
-        if (CapabilityManager.COOL_DOWN_CAPABILITY != null) {
+        if (ModCapManager.COOL_DOWN_CAPABILITY != null) {
             for (CoolDown.CoolDownType coolDownType : CoolDown.CoolDownType.values()) {
                 compoundNBT.putInt(coolDownType.name(), coolDown.get(coolDownType));
             }
         }
-        if (CapabilityManager.LAST_SWEET_DREAM_CAPABILITY != null) {
+        if (ModCapManager.LAST_SWEET_DREAM_CAPABILITY != null) {
             compoundNBT.put("last_sweet_dream_itemstack", lastSweetDreamCapability.getItemStack().serializeNBT());
         }
-        if (CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY != null) {
+        if (ModCapManager.HATRED_BLOODLINE_STATUS_CAPABILITY != null) {
             compoundNBT.putInt("hatred_bloodline_level", hatredBloodlineStatusCapability.getActiveLevel());
         }
         return compoundNBT;
@@ -67,22 +67,22 @@ public class PlayerCapabilityProvider implements ICapabilitySerializable<Compoun
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        if (CapabilityManager.ABNORMALJOY_CAPABILITY != null) {
+        if (ModCapManager.ABNORMALJOY_CAPABILITY != null) {
             abnormalJoyCapability.set(((CompoundTag) nbt).getFloat("abnormal_joy"));
         }
-        if (CapabilityManager.COOL_DOWN_CAPABILITY != null) {
+        if (ModCapManager.COOL_DOWN_CAPABILITY != null) {
             for (CoolDown.CoolDownType coolDownType : CoolDown.CoolDownType.values()) {
                 coolDown.set(coolDownType, ((CompoundTag) nbt).getInt(coolDownType.name()));
             }
         }
-        if (CapabilityManager.LAST_SWEET_DREAM_CAPABILITY != null) {
+        if (ModCapManager.LAST_SWEET_DREAM_CAPABILITY != null) {
             Tag NBTedItem = ((CompoundTag) nbt).get("last_sweet_dream_itemstack");
             if (NBTedItem != null) {
                 lastSweetDreamCapability.saveItemStack(ItemStack.of((CompoundTag) NBTedItem));
             } else
                 lastSweetDreamCapability.clear();
         }
-        if (CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY != null) {
+        if (ModCapManager.HATRED_BLOODLINE_STATUS_CAPABILITY != null) {
             hatredBloodlineStatusCapability.setActiveLevel(((CompoundTag) nbt).getInt("hatred_bloodline_level"));
         }
     }

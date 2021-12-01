@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.capibility.CoolDown;
 import love.marblegate.flowingagony.capibility.LastSweetDreamCapability;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
@@ -54,7 +54,7 @@ public class LastWishEnchantmentEventHandler {
                 if (event.getEntityLiving() instanceof Player) {
                     List<ItemStack> items = EnchantmentUtil.getItemStackWithEnchantment((Player) event.getEntityLiving(), EnchantmentRegistry.MORIRS_DEATHWISH.get());
                     if (!items.isEmpty()) {
-                        LazyOptional<CoolDown> coolDownCap = event.getEntityLiving().getCapability(CapabilityManager.COOL_DOWN_CAPABILITY);
+                        LazyOptional<CoolDown> coolDownCap = event.getEntityLiving().getCapability(ModCapManager.COOL_DOWN_CAPABILITY);
                         coolDownCap.ifPresent(
                                 cap -> {
                                     if (cap.isReady(CoolDown.CoolDownType.MORIRS_DEATHWISH_DEATHMENDING)) {
@@ -130,7 +130,7 @@ public class LastWishEnchantmentEventHandler {
             if (!event.isCanceled()) {
                 if (EnchantmentUtil.isItemEnchanted(event.getEntityItem().getItem(), EnchantmentRegistry.LAST_SWEET_DREAM.get()) == 1 && event.getEntityItem().getItem().isDamageableItem()) {
                     if ((float) event.getEntityItem().getItem().getDamageValue() / event.getEntityItem().getItem().getMaxDamage() > 0.9F) {
-                        LazyOptional<LastSweetDreamCapability> itemCap = event.getPlayer().getCapability(CapabilityManager.LAST_SWEET_DREAM_CAPABILITY);
+                        LazyOptional<LastSweetDreamCapability> itemCap = event.getPlayer().getCapability(ModCapManager.LAST_SWEET_DREAM_CAPABILITY);
                         itemCap.ifPresent(
                                 cap -> {
                                     if (cap.isEmpty()) {
@@ -153,7 +153,7 @@ public class LastWishEnchantmentEventHandler {
     @SubscribeEvent
     public static void doLastSweetDreamEnchantmentEvent_retrieveItem(PlayerWakeUpEvent event) {
         if (!event.getPlayer().level.isClientSide()) {
-            LazyOptional<LastSweetDreamCapability> itemCap = event.getPlayer().getCapability(CapabilityManager.LAST_SWEET_DREAM_CAPABILITY);
+            LazyOptional<LastSweetDreamCapability> itemCap = event.getPlayer().getCapability(ModCapManager.LAST_SWEET_DREAM_CAPABILITY);
             itemCap.ifPresent(
                     cap -> {
                         if (!cap.isEmpty()) {

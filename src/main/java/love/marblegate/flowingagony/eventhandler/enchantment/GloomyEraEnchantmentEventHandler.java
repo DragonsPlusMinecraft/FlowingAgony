@@ -190,14 +190,16 @@ public class GloomyEraEnchantmentEventHandler {
     @SubscribeEvent
     public static void doCarefullyIdentifiedEnchantmentEvent(BlockEvent.BreakEvent event) {
         if (!event.getWorld().isClientSide() && !event.isCanceled()) {
-            if (event.getState().getBlock() == Blocks.STONE) {
+            boolean stone = event.getState().getBlock() == Blocks.STONE;
+            if (stone || event.getState().getBlock() == Blocks.DEEPSLATE) {
                 int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), EnchantmentRegistry.CAREFULLY_IDENTIFIED.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
                 int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH, EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.BLOCK_FORTUNE, EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 if (enchantmentLvl != 0) {
                     if (enchantmentLvl < 2) {
                         if (Math.random() < 0.01) {
-                            ItemStack coal = silkTouchEnchantmentLvl == 1 ? Items.COAL_ORE.getDefaultInstance() : Items.COAL.getDefaultInstance();
+                            ItemStack coal = silkTouchEnchantmentLvl == 1 ? Items.COAL_ORE.getDefaultInstance() :
+                                    stone ? Items.COAL.getDefaultInstance() : Items.DEEPSLATE_COAL_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) coal.grow(1);
                             }
@@ -206,23 +208,34 @@ public class GloomyEraEnchantmentEventHandler {
                     }
                     if (enchantmentLvl < 3) {
                         if (Math.random() < 0.005) {
-                            ItemStack iron = Items.IRON_ORE.getDefaultInstance();
+                            ItemStack iron = silkTouchEnchantmentLvl == 1 ? Items.RAW_IRON.getDefaultInstance() :
+                                    stone ? Items.IRON_ORE.getDefaultInstance() : Items.DEEPSLATE_IRON_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) iron.grow(1);
                             }
                             Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), iron);
                         }
+                        if (Math.random() < 0.005) {
+                            ItemStack copper = silkTouchEnchantmentLvl == 1 ? Items.RAW_COPPER.getDefaultInstance() :
+                                    stone ? Items.COPPER_ORE.getDefaultInstance() : Items.DEEPSLATE_COPPER_ORE.getDefaultInstance();
+                            if (fortuneEnchantmentLvl == 1) {
+                                if (Math.random() < 0.5) copper.grow(1);
+                            }
+                            Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), copper);
+                        }
                     }
                     if (enchantmentLvl < 4) {
                         if (Math.random() < 0.001) {
-                            ItemStack gold = Items.GOLD_ORE.getDefaultInstance();
+                            ItemStack gold = silkTouchEnchantmentLvl == 1 ? Items.RAW_GOLD.getDefaultInstance() :
+                                    stone ? Items.GOLD_ORE.getDefaultInstance() : Items.DEEPSLATE_GOLD_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) gold.grow(1);
                             }
                             Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), gold);
                         }
                         if (Math.random() < 0.002) {
-                            ItemStack redstone = silkTouchEnchantmentLvl == 1 ? Items.REDSTONE_ORE.getDefaultInstance() : Items.REDSTONE.getDefaultInstance();
+                            ItemStack redstone = silkTouchEnchantmentLvl == 1 ? Items.REDSTONE.getDefaultInstance() :
+                                    stone ? Items.REDSTONE_ORE.getDefaultInstance() : Items.DEEPSLATE_REDSTONE_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) redstone.grow(1);
                             }
@@ -231,7 +244,8 @@ public class GloomyEraEnchantmentEventHandler {
                     }
                     if (enchantmentLvl < 5) {
                         if (Math.random() < 0.001) {
-                            ItemStack lapis = silkTouchEnchantmentLvl == 1 ? Items.LAPIS_ORE.getDefaultInstance() : Items.LAPIS_LAZULI.getDefaultInstance();
+                            ItemStack lapis = silkTouchEnchantmentLvl == 1 ? Items.LAPIS_LAZULI.getDefaultInstance() :
+                                    stone ? Items.LAPIS_ORE.getDefaultInstance() : Items.DEEPSLATE_LAPIS_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) lapis.grow(1);
                             }
@@ -240,14 +254,16 @@ public class GloomyEraEnchantmentEventHandler {
                     }
                     if (enchantmentLvl < 6) {
                         if (Math.random() < 0.001) {
-                            ItemStack emerald = silkTouchEnchantmentLvl == 1 ? Items.EMERALD_ORE.getDefaultInstance() : Items.EMERALD.getDefaultInstance();
+                            ItemStack emerald = silkTouchEnchantmentLvl == 1 ? Items.EMERALD.getDefaultInstance() :
+                                    stone ? Items.EMERALD_ORE.getDefaultInstance() : Items.DEEPSLATE_EMERALD_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) emerald.grow(1);
                             }
                             Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), emerald);
                         }
                         if (Math.random() < 0.001) {
-                            ItemStack diamond = silkTouchEnchantmentLvl == 1 ? Items.DIAMOND_ORE.getDefaultInstance() : Items.DIAMOND.getDefaultInstance();
+                            ItemStack diamond = silkTouchEnchantmentLvl == 1 ? Items.DIAMOND.getDefaultInstance() :
+                                    stone ? Items.DIAMOND_ORE.getDefaultInstance() : Items.DEEPSLATE_DIAMOND_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
                                 if (Math.random() < 0.5) diamond.grow(1);
                             }

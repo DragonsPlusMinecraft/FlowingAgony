@@ -2,7 +2,7 @@ package love.marblegate.flowingagony.eventhandler;
 
 
 import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +22,7 @@ public class CapabilityEventHandler {
     public static void AbnormalJoyCapEvent(LivingDamageEvent event) {
         if (!event.getEntityLiving().level.isClientSide()) {
             if (event.getSource().getEntity() instanceof Player) {
-                LazyOptional<AbnormalJoyCapability> pointCap = event.getSource().getEntity().getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
+                LazyOptional<AbnormalJoyCapability> pointCap = event.getSource().getEntity().getCapability(ModCapManager.ABNORMALJOY_CAPABILITY);
                 pointCap.ifPresent(
                         cap -> {
                             if (cap.get() >= 1) {

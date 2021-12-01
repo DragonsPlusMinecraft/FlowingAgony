@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.eventhandler.sync;
 
 import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.network.Networking;
 import love.marblegate.flowingagony.network.packet.AbnormalJoySyncPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,7 +34,7 @@ public class DataSyncEventHandler {
     }
 
     private static void syncAbnormalJoyCapability(Player player) {
-        LazyOptional<AbnormalJoyCapability> pointCap = player.getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
+        LazyOptional<AbnormalJoyCapability> pointCap = player.getCapability(ModCapManager.ABNORMALJOY_CAPABILITY);
         pointCap.ifPresent(
                 cap -> Networking.INSTANCE.send(
                         PacketDistributor.PLAYER.with(

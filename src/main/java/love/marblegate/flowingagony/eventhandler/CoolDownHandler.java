@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler;
 
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.capibility.CoolDown;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
@@ -14,7 +14,7 @@ public class CoolDownHandler {
     public static void handle(TickEvent.PlayerTickEvent event) {
         if (!event.player.level.isClientSide()) {
             if (event.phase == TickEvent.Phase.START) {
-                LazyOptional<CoolDown> coolDownCap = event.player.getCapability(CapabilityManager.COOL_DOWN_CAPABILITY);
+                LazyOptional<CoolDown> coolDownCap = event.player.getCapability(ModCapManager.COOL_DOWN_CAPABILITY);
                 coolDownCap.ifPresent(cap -> {
                     for (CoolDown.CoolDownType coolDownType : CoolDown.CoolDownType.values()) {
                         if (!cap.isReady(coolDownType)) {

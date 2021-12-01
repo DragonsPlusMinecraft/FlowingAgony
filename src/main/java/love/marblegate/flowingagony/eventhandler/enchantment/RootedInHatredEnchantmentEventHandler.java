@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.capibility.HatredBloodlineStatusCapability;
 import love.marblegate.flowingagony.effect.EffectRegistry;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
@@ -120,7 +120,7 @@ public class RootedInHatredEnchantmentEventHandler {
             if (event.getEntityLiving() instanceof Player) {
                 int enchantLvl = EnchantmentUtil.isPlayerArmorEnchanted((Player) event.getEntityLiving(), EnchantmentRegistry.HATRED_BLOODLINE.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_LEVEL);
                 if (enchantLvl != 0) {
-                    LazyOptional<HatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY);
+                    LazyOptional<HatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(ModCapManager.HATRED_BLOODLINE_STATUS_CAPABILITY);
                     statusCap.ifPresent(
                             cap -> cap.setActiveLevel(enchantLvl)
                     );
@@ -133,7 +133,7 @@ public class RootedInHatredEnchantmentEventHandler {
     public static void doHatredBloodlikeEnchantmentEvent_activeEnchantmentEffectWhenRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (!event.getPlayer().level.isClientSide()) {
             if (event.getEntityLiving() instanceof Player) {
-                LazyOptional<HatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(CapabilityManager.HATRED_BLOODLINE_STATUS_CAPABILITY);
+                LazyOptional<HatredBloodlineStatusCapability> statusCap = event.getEntityLiving().getCapability(ModCapManager.HATRED_BLOODLINE_STATUS_CAPABILITY);
                 statusCap.ifPresent(
                         cap -> {
                             if (cap.getActiveLevel() != 0) {

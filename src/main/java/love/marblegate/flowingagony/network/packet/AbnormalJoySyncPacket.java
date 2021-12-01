@@ -1,7 +1,7 @@
 package love.marblegate.flowingagony.network.packet;
 
 import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +30,7 @@ public class AbnormalJoySyncPacket {
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ctx.get().enqueueWork(() -> {
-                LazyOptional<AbnormalJoyCapability> pointCap = Minecraft.getInstance().player.getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
+                LazyOptional<AbnormalJoyCapability> pointCap = Minecraft.getInstance().player.getCapability(ModCapManager.ABNORMALJOY_CAPABILITY);
                 pointCap.ifPresent(
                         cap -> cap.set(value)
                 );

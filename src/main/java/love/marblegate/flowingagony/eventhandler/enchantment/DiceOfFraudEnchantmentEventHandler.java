@@ -1,6 +1,6 @@
 package love.marblegate.flowingagony.eventhandler.enchantment;
 
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import love.marblegate.flowingagony.capibility.CoolDown;
 import love.marblegate.flowingagony.enchantment.EnchantmentRegistry;
 import love.marblegate.flowingagony.util.EnchantmentUtil;
@@ -75,7 +75,7 @@ public class DiceOfFraudEnchantmentEventHandler {
         if (!event.getPlayer().level.isClientSide()) {
             int enchantNum = EnchantmentUtil.isPlayerArmorEnchanted(event.getPlayer(), EnchantmentRegistry.AN_ENCHANTED_GOLDEN_APPLE_A_DAY.get(), EnchantmentUtil.ArmorEncCalOp.TOTAL_PIECE);
             if (enchantNum != 0) {
-                LazyOptional<CoolDown> coolDownCap = event.getEntityLiving().getCapability(CapabilityManager.COOL_DOWN_CAPABILITY);
+                LazyOptional<CoolDown> coolDownCap = event.getEntityLiving().getCapability(ModCapManager.COOL_DOWN_CAPABILITY);
                 coolDownCap.ifPresent(
                         cap -> {
                             if (cap.isReady(CoolDown.CoolDownType.AN_ENCHANTED_GOLDEN_APPLE_A_DAY)) {

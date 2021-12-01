@@ -3,7 +3,7 @@ package love.marblegate.flowingagony.render.hud;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import love.marblegate.flowingagony.capibility.AbnormalJoyCapability;
-import love.marblegate.flowingagony.capibility.CapabilityManager;
+import love.marblegate.flowingagony.capibility.ModCapManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +29,7 @@ public class AbnormalJoyHUD extends GuiComponent {
 
         if (!minecraft.options.hideGui && minecraft.gameMode.hasExperience()) {
             AtomicInteger abnormalJoyPoint = new AtomicInteger();
-            LazyOptional<AbnormalJoyCapability> pointCap = minecraft.player.getCapability(CapabilityManager.ABNORMALJOY_CAPABILITY);
+            LazyOptional<AbnormalJoyCapability> pointCap = minecraft.player.getCapability(ModCapManager.ABNORMALJOY_CAPABILITY);
             pointCap.ifPresent(
                     cap -> abnormalJoyPoint.set((int) Math.floor(cap.get()))
             );
