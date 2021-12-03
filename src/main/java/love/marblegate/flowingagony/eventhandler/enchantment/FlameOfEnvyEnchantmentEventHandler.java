@@ -90,7 +90,7 @@ public class FlameOfEnvyEnchantmentEventHandler {
                                         ((EnderMan) ((EntityHitResult) event.getRayTraceResult()).getEntity()).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200));
                                     }
                                     if (event.getProjectile() instanceof Arrow) {
-                                        Potion potion = ObfuscationReflectionHelper.getPrivateValue(Arrow.class, (Arrow) event.getProjectile(), "potion");
+                                        Potion potion = ObfuscationReflectionHelper.getPrivateValue(Arrow.class, (Arrow) event.getProjectile(), "f_36855_");
                                         if (potion != Potions.EMPTY) {
                                             List<MobEffectInstance> effectsOnArrow = potion.getEffects();
                                             for (MobEffectInstance effect : effectsOnArrow) {
@@ -107,40 +107,6 @@ public class FlameOfEnvyEnchantmentEventHandler {
             }
         }
     }
-    /*public static void doCovertKnifeEnchantmentEvent(ProjectileImpactEvent.Arrow event) {
-        if (!event.getEntity().level.isClientSide()) {
-            if (event.getRayTraceResult() instanceof EntityHitResult) {
-                if (((EntityHitResult) event.getRayTraceResult()).getEntity() instanceof EnderMan) {
-                    if (event.getArrow().getOwner() != null) {
-                        if (event.getArrow().getOwner() instanceof Player) {
-                            int enchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted((Player) event.getArrow().getOwner(), EnchantmentRegistry.COVERT_KNIFE.get(), EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.TOTAL_LEVEL);
-                            if (enchantmentLvl != 0) {
-                                if (enchantmentLvl == 3 || (enchantmentLvl == 2 ? (Math.random() < 0.75) : (Math.random() < 0.5))) {
-                                    ((EntityHitResult) event.getRayTraceResult()).getEntity().hurt(DamageSource.playerAttack((Player) event.getArrow().getOwner()), 9f);
-                                    if (EnchantmentUtil.isPlayerItemEnchanted((Player) event.getArrow().getOwner(), Enchantments.FLAMING_ARROWS, EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL) == 1) {
-                                        ((EntityHitResult) event.getRayTraceResult()).getEntity().setSecondsOnFire(5);
-                                    }
-                                    if (event.getArrow() instanceof SpectralArrow) {
-                                        ((EnderMan) ((EntityHitResult) event.getRayTraceResult()).getEntity()).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200));
-                                    }
-                                    if (event.getArrow() instanceof Arrow) {
-                                        Potion potion = ObfuscationReflectionHelper.getPrivateValue(Arrow.class, (Arrow) event.getArrow(), "potion");
-                                        if (potion != Potions.EMPTY) {
-                                            List<MobEffectInstance> effectsOnArrow = potion.getEffects();
-                                            for (MobEffectInstance effect : effectsOnArrow) {
-                                                int duration = Mth.ceil(effect.getDuration() * 0.125f);
-                                                ((EnderMan) ((EntityHitResult) event.getRayTraceResult()).getEntity()).addEffect(new MobEffectInstance(effect.getEffect(), duration, effect.getAmplifier()));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
 
     @SubscribeEvent
     public static void doSourceOfEnvyEnchantmentEvent(LivingDamageEvent event) {
