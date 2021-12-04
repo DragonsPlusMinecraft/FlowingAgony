@@ -25,7 +25,7 @@ public class CursedAntipathyParticle extends TextureSheetParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class Factory implements ParticleProvider<CursedAntipathyParticleData> {
+    public static class Factory implements ParticleProvider<CursedAntipathyParticleOption> {
         private final SpriteSet spriteSet;
 
         public Factory(SpriteSet spriteSet) {
@@ -33,7 +33,7 @@ public class CursedAntipathyParticle extends TextureSheetParticle {
         }
 
         @Override
-        public Particle createParticle(CursedAntipathyParticleData typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(CursedAntipathyParticleOption typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             CursedAntipathyParticle cursedHatredParticle = new CursedAntipathyParticle(worldIn, x, y, z, typeIn.getDiameter());
             cursedHatredParticle.pickSprite(spriteSet);
             return cursedHatredParticle;

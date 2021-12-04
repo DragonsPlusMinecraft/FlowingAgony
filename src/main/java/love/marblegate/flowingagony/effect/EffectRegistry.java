@@ -3,9 +3,10 @@ package love.marblegate.flowingagony.effect;
 import love.marblegate.flowingagony.effect.explicit.*;
 import love.marblegate.flowingagony.effect.implicit.*;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -14,10 +15,10 @@ public class EffectRegistry {
     public static final RegistryObject<MobEffect> CURSED_HATRED = EFFECT.register("cursed_hatred", CursedHatredEffect::new);
     public static final RegistryObject<MobEffect> CURSED_ANTIPATHY = EFFECT.register("cursed_antipathy", CursedAntipathyEffect::new);
     public static final RegistryObject<MobEffect> EXTREME_HATRED = EFFECT.register("extreme_hatred", ExtremeHatredEffect::new);
-    public static final RegistryObject<MobEffect> AGONY_RESONANCE = EFFECT.register("agony_resonance", AgonyResonanceEffect::new);
-    public static final RegistryObject<MobEffect> BEEN_RESONATED = EFFECT.register("been_resonated", BeenResonatedEffect::new);
+    public static final RegistryObject<MobEffect> AGONY_RESONANCE = EFFECT.register("agony_resonance", ()->new SimpleEffect(MobEffectCategory.NEUTRAL, 57344));
+    public static final RegistryObject<MobEffect> BEEN_RESONATED = EFFECT.register("been_resonated",()->new SimpleEffect(MobEffectCategory.NEUTRAL, 57344));
     public static final RegistryObject<MobEffect> CURSE_OF_UNDEAD = EFFECT.register("curse_of_undead", CurseOfUndeadEffect::new);
-    public static final RegistryObject<MobEffect> LET_ME_SAVOR_IT = EFFECT.register("let_me_savor_it", LetMeSavorItEffect::new);
+    public static final RegistryObject<MobEffect> LET_ME_SAVOR_IT = EFFECT.register("let_me_savor_it", ()->new SimpleEffect(MobEffectCategory.BENEFICIAL, 11420160));
     public static final RegistryObject<MobEffect> LISTEN_TO_ME_SINGING = EFFECT.register("listen_to_me_singing", ListenToMeSingingEffect::new);
     public static final RegistryObject<MobEffect> LIGHTBURN_FUNGAL_INFECTION = EFFECT.register("lightburn_fungal_infection", LightburnFungalInfectionEffect::new);
     public static final RegistryObject<MobEffect> ENVIOUS_BEING = EFFECT.register("envious_being", () -> new EnviousBeingEffect()

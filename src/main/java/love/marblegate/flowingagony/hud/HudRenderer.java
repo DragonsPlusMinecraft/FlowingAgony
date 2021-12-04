@@ -1,6 +1,5 @@
-package love.marblegate.flowingagony.render.renderer;
+package love.marblegate.flowingagony.hud;
 
-import love.marblegate.flowingagony.render.hud.AbnormalJoyHUD;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

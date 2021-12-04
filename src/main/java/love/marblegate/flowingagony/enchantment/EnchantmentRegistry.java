@@ -18,7 +18,7 @@ import love.marblegate.flowingagony.enchantment.survivaltricks.SurvivalShortcutE
 import love.marblegate.flowingagony.enchantment.themistakens.*;
 import love.marblegate.flowingagony.enchantment.themistakens.curse.BurialObjectCurse;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

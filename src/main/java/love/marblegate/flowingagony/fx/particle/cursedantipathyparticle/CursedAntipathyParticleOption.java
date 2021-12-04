@@ -9,23 +9,23 @@ import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Locale;
 
-public class CursedAntipathyParticleData implements ParticleOptions {
+public class CursedAntipathyParticleOption implements ParticleOptions {
     private final float diameter;
 
-    public static final Deserializer<CursedAntipathyParticleData> DESERIALIZER = new Deserializer<CursedAntipathyParticleData>() {
+    public static final Deserializer<CursedAntipathyParticleOption> DESERIALIZER = new Deserializer<CursedAntipathyParticleOption>() {
         @Override
-        public CursedAntipathyParticleData fromCommand(ParticleType<CursedAntipathyParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public CursedAntipathyParticleOption fromCommand(ParticleType<CursedAntipathyParticleOption> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             reader.expect(' ');
-            return new CursedAntipathyParticleData(reader.readFloat());
+            return new CursedAntipathyParticleOption(reader.readFloat());
         }
 
         @Override
-        public CursedAntipathyParticleData fromNetwork(ParticleType<CursedAntipathyParticleData> particleTypeIn, FriendlyByteBuf buffer) {
-            return new CursedAntipathyParticleData(buffer.readFloat());
+        public CursedAntipathyParticleOption fromNetwork(ParticleType<CursedAntipathyParticleOption> particleTypeIn, FriendlyByteBuf buffer) {
+            return new CursedAntipathyParticleOption(buffer.readFloat());
         }
     };
 
-    public CursedAntipathyParticleData(float diameter) {
+    public CursedAntipathyParticleOption(float diameter) {
         this.diameter = diameter;
     }
 

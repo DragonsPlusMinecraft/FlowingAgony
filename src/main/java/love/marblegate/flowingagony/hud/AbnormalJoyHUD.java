@@ -1,4 +1,4 @@
-package love.marblegate.flowingagony.render.hud;
+package love.marblegate.flowingagony.hud;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;

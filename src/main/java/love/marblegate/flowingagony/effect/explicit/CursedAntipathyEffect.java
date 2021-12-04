@@ -7,7 +7,7 @@ import love.marblegate.flowingagony.network.packet.ParticleEffectPacket;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
 
 public class CursedAntipathyEffect extends MobEffect {
     public CursedAntipathyEffect() {
