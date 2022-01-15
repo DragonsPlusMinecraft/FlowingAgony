@@ -78,7 +78,7 @@ public class ExplicitEffectEventHandler {
                     if (event.player.world.getDayTime() % 24000 < 12000) {
                         if (!event.player.world.isThundering() && !event.player.world.isRaining()) {
                             if (event.player.world.canSeeSky(event.player.getPosition())) {
-                                if (PlayerUtil.hasHelmet(event.player))
+                                if (!PlayerUtil.hasHelmet(event.player))
                                     event.player.setFire(5);
                             }
                         }
