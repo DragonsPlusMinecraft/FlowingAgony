@@ -195,16 +195,14 @@ public class GloomyEraEnchantmentEventHandler {
                 int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH, EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.FORTUNE, EquipmentSlotType.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 if (enchantmentLvl != 0) {
-                    if (enchantmentLvl < 2) {
-                        if (Math.random() < 0.01) {
-                            ItemStack coal = silkTouchEnchantmentLvl == 1 ? Items.COAL_ORE.getDefaultInstance() : Items.COAL.getDefaultInstance();
-                            if (fortuneEnchantmentLvl == 1) {
-                                if (Math.random() < 0.5) coal.grow(1);
-                            }
-                            InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), coal);
+                    if (Math.random() < 0.01) {
+                        ItemStack coal = silkTouchEnchantmentLvl == 1 ? Items.COAL_ORE.getDefaultInstance() : Items.COAL.getDefaultInstance();
+                        if (fortuneEnchantmentLvl == 1) {
+                            if (Math.random() < 0.5) coal.grow(1);
                         }
+                        InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), coal);
                     }
-                    if (enchantmentLvl < 3) {
+                    if (enchantmentLvl > 1) {
                         if (Math.random() < 0.005) {
                             ItemStack iron = Items.IRON_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
@@ -213,7 +211,7 @@ public class GloomyEraEnchantmentEventHandler {
                             InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), iron);
                         }
                     }
-                    if (enchantmentLvl < 4) {
+                    if (enchantmentLvl > 2) {
                         if (Math.random() < 0.001) {
                             ItemStack gold = Items.GOLD_ORE.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
@@ -229,7 +227,7 @@ public class GloomyEraEnchantmentEventHandler {
                             InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), redstone);
                         }
                     }
-                    if (enchantmentLvl < 5) {
+                    if (enchantmentLvl > 3) {
                         if (Math.random() < 0.001) {
                             ItemStack lapis = silkTouchEnchantmentLvl == 1 ? Items.LAPIS_ORE.getDefaultInstance() : Items.LAPIS_LAZULI.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
@@ -238,7 +236,7 @@ public class GloomyEraEnchantmentEventHandler {
                             InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), lapis);
                         }
                     }
-                    if (enchantmentLvl < 6) {
+                    if (enchantmentLvl > 4) {
                         if (Math.random() < 0.001) {
                             ItemStack emerald = silkTouchEnchantmentLvl == 1 ? Items.EMERALD_ORE.getDefaultInstance() : Items.EMERALD.getDefaultInstance();
                             if (fortuneEnchantmentLvl == 1) {
