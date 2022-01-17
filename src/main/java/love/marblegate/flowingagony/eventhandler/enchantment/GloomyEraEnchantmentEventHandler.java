@@ -196,17 +196,15 @@ public class GloomyEraEnchantmentEventHandler {
                 int silkTouchEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.SILK_TOUCH, EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 int fortuneEnchantmentLvl = EnchantmentUtil.isPlayerItemEnchanted(event.getPlayer(), Enchantments.BLOCK_FORTUNE, EquipmentSlot.MAINHAND, EnchantmentUtil.ItemEncCalOp.GENERAL);
                 if (enchantmentLvl != 0) {
-                    if (enchantmentLvl < 2) {
-                        if (Math.random() < 0.01) {
-                            ItemStack coal = silkTouchEnchantmentLvl == 1 ? Items.COAL_ORE.getDefaultInstance() :
-                                    stone ? Items.COAL.getDefaultInstance() : Items.DEEPSLATE_COAL_ORE.getDefaultInstance();
-                            if (fortuneEnchantmentLvl == 1) {
-                                if (Math.random() < 0.5) coal.grow(1);
-                            }
-                            Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), coal);
+                    if (Math.random() < 0.01) {
+                        ItemStack coal = silkTouchEnchantmentLvl == 1 ? Items.COAL_ORE.getDefaultInstance() :
+                                stone ? Items.COAL.getDefaultInstance() : Items.DEEPSLATE_COAL_ORE.getDefaultInstance();
+                        if (fortuneEnchantmentLvl == 1) {
+                            if (Math.random() < 0.5) coal.grow(1);
                         }
+                        Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), coal);
                     }
-                    if (enchantmentLvl < 3) {
+                    if (enchantmentLvl > 1) {
                         if (Math.random() < 0.005) {
                             ItemStack iron = silkTouchEnchantmentLvl == 1 ? Items.RAW_IRON.getDefaultInstance() :
                                     stone ? Items.IRON_ORE.getDefaultInstance() : Items.DEEPSLATE_IRON_ORE.getDefaultInstance();
@@ -224,7 +222,7 @@ public class GloomyEraEnchantmentEventHandler {
                             Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), copper);
                         }
                     }
-                    if (enchantmentLvl < 4) {
+                    if (enchantmentLvl > 2) {
                         if (Math.random() < 0.001) {
                             ItemStack gold = silkTouchEnchantmentLvl == 1 ? Items.RAW_GOLD.getDefaultInstance() :
                                     stone ? Items.GOLD_ORE.getDefaultInstance() : Items.DEEPSLATE_GOLD_ORE.getDefaultInstance();
@@ -242,7 +240,7 @@ public class GloomyEraEnchantmentEventHandler {
                             Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), redstone);
                         }
                     }
-                    if (enchantmentLvl < 5) {
+                    if (enchantmentLvl > 3) {
                         if (Math.random() < 0.001) {
                             ItemStack lapis = silkTouchEnchantmentLvl == 1 ? Items.LAPIS_LAZULI.getDefaultInstance() :
                                     stone ? Items.LAPIS_ORE.getDefaultInstance() : Items.DEEPSLATE_LAPIS_ORE.getDefaultInstance();
@@ -252,7 +250,7 @@ public class GloomyEraEnchantmentEventHandler {
                             Containers.dropItemStack((Level) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), lapis);
                         }
                     }
-                    if (enchantmentLvl < 6) {
+                    if (enchantmentLvl > 4) {
                         if (Math.random() < 0.001) {
                             ItemStack emerald = silkTouchEnchantmentLvl == 1 ? Items.EMERALD.getDefaultInstance() :
                                     stone ? Items.EMERALD_ORE.getDefaultInstance() : Items.DEEPSLATE_EMERALD_ORE.getDefaultInstance();
