@@ -135,11 +135,15 @@ public class ExplicitEffectEventHandler {
             if (event.getPotionEffect().getEffect().equals(EffectRegistry.AGONY_RESONANCE.get())) {
                 if (event.getEntityLiving().hasEffect(EffectRegistry.BEEN_RESONATED.get())) {
                     event.getEntityLiving().removeEffect(EffectRegistry.BEEN_RESONATED.get());
-                    //Do not Sync to Client
-                    //It is due to I did not write packet to handle remove mob's effect
                 }
                 List<LivingEntity> entities = EntityUtil.getTargetsExceptOneself(event.getEntityLiving(), 8, 2, x -> true);
                 entities.forEach(LivingEntity -> LivingEntity.addEffect(new MobEffectInstance(EffectRegistry.BEEN_RESONATED.get(), event.getPotionEffect().getDuration(), event.getPotionEffect().getAmplifier())));
+            }
+        } else {
+            if (event.getPotionEffect().getEffect().equals(EffectRegistry.AGONY_RESONANCE.get())) {
+                if (event.getEntityLiving().hasEffect(EffectRegistry.BEEN_RESONATED.get())) {
+                    event.getEntityLiving().removeEffect(EffectRegistry.BEEN_RESONATED.get());
+                }
             }
         }
     }
