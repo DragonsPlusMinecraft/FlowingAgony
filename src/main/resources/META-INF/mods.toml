@@ -15,15 +15,15 @@ version="${file.jarVersion}" #mandatory
 displayName="MarbleGate's Exotic Enchantment: Flowing Agony" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-displayURL="https://marblegate.love/" #optional
+displayURL="https://github.com/MarbleGateKeeper" #optional
 logoFile="flowingagony.png" #optional
-credits="MarbleGateKeeper 白门守望者 & KadokawaR 鹿角烈" #optional
-authors="MarbleGate 纯白之门" #optional
+#credits="" #optional
+authors="MarbleGateKeeper 白门守望者 & KadokawaR 鹿角烈" #optional
 description='''
 Among the countless arts of the endless world, the art born from agony and suffering has always come from the darkest times.
 Now the Marble Gate brings this art from an unknown dimension to the present world. There is no end to the suffering in this world, and no one can turn back from walking in the long flowing river of agony.
 '''
-[[dependencies.examplemod]] #optional
+[[dependencies.flowingagony]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -35,7 +35,7 @@ Now the Marble Gate brings this art from an unknown dimension to the present wor
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.examplemod]]
+[[dependencies.flowingagony]]
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
