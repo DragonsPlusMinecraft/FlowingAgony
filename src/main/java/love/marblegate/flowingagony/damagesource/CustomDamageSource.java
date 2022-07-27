@@ -2,6 +2,7 @@ package love.marblegate.flowingagony.damagesource;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Guardian;
 
 public class CustomDamageSource {
     public static final DamageSource CURSED_HATRED = new FlowingAgonySimpleDeathMessageDamageSource("flowingagony.curse_hatred");
@@ -23,7 +24,10 @@ public class CustomDamageSource {
     }
 
     public static DamageSource causePhobiaDamage(LivingEntity livingEntity) {
-        return new FlowingAgonyMobtoMobDamageSource("flowingagony.phobia", livingEntity);
+        // see https://github.com/MarbleGateKeeper/FlowingAgony/issues/9
+        if(livingEntity instanceof Guardian)
+            return new FlowingAgonyMobtoMobDamageSource("flowingagony.phobia", livingEntity).setMagic();
+        else return new FlowingAgonyMobtoMobDamageSource("flowingagony.phobia", livingEntity);
 
     }
 }
