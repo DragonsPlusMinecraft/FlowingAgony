@@ -14,7 +14,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod("flowingagony")
 public class FlowingAgony {
 
-
     public FlowingAgony() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Configuration.ACT_CONFIG);
 
