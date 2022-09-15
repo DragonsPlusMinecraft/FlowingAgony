@@ -97,7 +97,6 @@ public class TheMistakensEnchantmentEventHandler {
                         } else {
                             ((Player) event.getEntityLiving()).addEffect(EffectUtil.genImplicitEffect(EffectRegistry.PROTOTYPE_CHAOTIC_ENCHANTMENT_ACTIVE.get(), 1200, enchantLvl - 1));
                         }
-                        ((Player) event.getEntityLiving()).heal(enchantLvl);
                     }
                 }
             }
